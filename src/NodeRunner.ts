@@ -30,8 +30,11 @@ export default class NodeRunner {
     private nodeConfig: NodeConfig,
   ) {
     this.version = getVersionFromPackageJSON();
-    this.arService = new ArweaveService(
-      this.arweave, this.nodeConfig.minimumArBalance);
+    const minimumArBalance = this.nodeConfig.minimumArBalance;
+    if (this.nodeConfig.minimumArBalance === undefined || typeof(minimumArBalance) !== "number") {
+      throw new Error("minimumArBalance not defined in config file");
+    }
+    this.arService = new ArweaveService(this.arweave, minimumArBalance);
     this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
 

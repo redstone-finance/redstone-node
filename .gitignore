@@ -18,3 +18,5 @@ node_modules/
 lib
 
 dist
+
+Dockerfile.redstone-dev

@@ -159,6 +159,22 @@ describe("NodeRunner", () => {
     return expect(sut.run()).rejects.toThrowError("No timeout configured for");
   });
 
+  it("should throw if minimumArBalance not defined in config file", async () => {
+    await expect(async () => {
+      await NodeRunner.create(
+        manifest,
+        jwk,
+        JSON.parse(`{
+      "arweaveKeysFile": "",
+      "credentials": {
+        "infuraProjectId": "ipid",
+        "covalentApiKey": "ckey"
+      },
+      "manifestFile": ""
+    }`));
+    }).rejects.toThrow("minimumArBalance not defined in config file");
+  });
+
   it("should throw if Arweave balance too low on initial check", async () => {
     //given
     mockArProxy.getBalance.mockResolvedValue(0.1);
