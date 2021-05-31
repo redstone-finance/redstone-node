@@ -48,7 +48,7 @@ function main() {
 }
 
 function readManifests() {
-  const manifestsDir = "./sample-manifests/";
+  const manifestsDir = "./manifests/";
   const configs = [];
   const files = fs.readdirSync(manifestsDir);
   for (const fileName of files) {

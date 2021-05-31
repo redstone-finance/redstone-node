@@ -2,7 +2,7 @@ const axios = require("axios");
 const _ = require("lodash");
 
 const allSupportedConfig =
-  require("../../sample-manifests/all-supported-tokens.json");
+  require("../../manifests/all-supported-tokens.json");
 
 const symbolsToSkip = ["LEND", "HOT", "PAX", "NPXS"];
 

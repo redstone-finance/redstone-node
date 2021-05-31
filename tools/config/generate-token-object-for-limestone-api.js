@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const allSupportedConfig =
-  require("../../sample-manifests/all-supported-tokens.json");
+  require("../../manifests/all-supported-tokens.json");
 const coingeckoTokens =
   require("../../src/fetchers/coingecko/coingecko-symbol-to-details.json");
 

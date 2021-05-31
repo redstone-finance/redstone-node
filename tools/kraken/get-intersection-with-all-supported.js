@@ -3,7 +3,7 @@ const _ = require("lodash");
 const pairsSupportedByKraken =
   require("../../src/fetchers/kraken/kraken-supported-pairs.json");
 const allSupportedConfig =
-  require("../../sample-manifests/all-supported-tokens.json");
+  require("../../manifests/all-supported-tokens.json");
 
 main();
 

@@ -1,5 +1,5 @@
 const allSupportedConfig =
-  require("../../sample-manifests/all-supported-tokens.json");
+  require("../../manifests/all-supported-tokens.json");
 
 main();
 

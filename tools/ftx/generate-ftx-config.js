@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const allTokensConfig =
-  require("../../sample-manifests/all-supported-tokens.json");
+  require("../../manifests/all-supported-tokens.json");
 const ftxSupportedTokens =
   require("../../src/fetchers/ftx/fts-supported-tokens.json");
 

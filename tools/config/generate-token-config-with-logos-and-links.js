@@ -1,6 +1,6 @@
 const axios = require("axios");
 const Coingecko = require("coingecko-api");
-const { tokens } = require("../../sample-manifests/all-supported-tokens.json");
+const { tokens } = require("../../manifests/all-supported-tokens.json");
 
 const DEFAULT_TOKEN_LOGO_URI = "";
 const DEFAULT_TOKEN_URL = "";
