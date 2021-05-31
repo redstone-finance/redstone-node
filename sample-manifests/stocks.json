@@ -1,0 +1,25 @@
+{
+  "interval": 15000,
+  "priceAggregator": "median",
+  "defaultSource": ["yahoo-finance"],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "TSLA": {},
+    "AAPL": {},
+    "IBM": {},
+    "AMZN": {},
+    "GOOG": {},
+    "COST": {},
+    "DIS": {},
+    "FB": {},
+    "MA": {},
+    "MSFT": {},
+    "NFLX": {},
+    "NKE": {},
+    "PINS": {},
+    "SHOP": {},
+    "SPOT": {},
+    "TDOC": {}
+  }
+}

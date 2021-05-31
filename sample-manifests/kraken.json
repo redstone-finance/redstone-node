@@ -1,0 +1,41 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "kraken"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "AAVE": {},
+    "ADA": {},
+    "ALGO": {},
+    "ATOM": {},
+    "AUD": {},
+    "BAT": {},
+    "BCH": {},
+    "COMP": {},
+    "CRV": {},
+    "DAI": {},
+    "DASH": {},
+    "DOT": {},
+    "EOS": {},
+    "FIL": {},
+    "GRT": {},
+    "ICX": {},
+    "KSM": {},
+    "LINK": {},
+    "NANO": {},
+    "OCEAN": {},
+    "OMG": {},
+    "QTUM": {},
+    "SC": {},
+    "SNX": {},
+    "TRX": {},
+    "UNI": {},
+    "USDC": {},
+    "WAVES": {},
+    "XTZ": {},
+    "YFI": {}
+  }
+}

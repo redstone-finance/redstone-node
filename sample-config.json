@@ -1,0 +1,9 @@
+{
+  "arweaveKeysFile": "./.secrets/arweave.json",
+  "manifestFile": "./sample-manifests/stocks.json",
+  "minimumArBalance": 0.1,
+  "credentials": {
+    "covalentApiKey": "XXX",
+    "infuraProjectId": "XXX"
+  }
+}

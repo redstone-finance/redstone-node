@@ -1,0 +1,3 @@
+node_modules
+.experiments
+.secrets/aws.json

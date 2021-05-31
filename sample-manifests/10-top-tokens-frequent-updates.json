@@ -1,0 +1,91 @@
+{
+  "interval": 10000,
+  "priceAggregator": "median",
+  "defaultSource": ["coingecko"],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "BTC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "huobi"
+      ]
+    },
+    "ETH": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "huobi"
+      ]
+    },
+    "USDT": {
+      "source": [
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "BNB": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "DOGE": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "XRP": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "ADA": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "DOT": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "XLM": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko"
+      ]
+    },
+    "AR": {
+      "source": [
+        "bitmart",
+        "coingecko",
+        "huobi"
+      ]
+    }
+  }
+}

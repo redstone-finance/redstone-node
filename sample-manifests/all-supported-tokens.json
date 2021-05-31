@@ -1,0 +1,1004 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "SNX": {
+      "source": [
+        "balancer",
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "BAT": {
+      "source": [
+        "balancer",
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "MKR": {
+      "source": [
+        "balancer",
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "DAI": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "YFI": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "UNI": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "USDC": {
+      "source": [
+        "balancer",
+        "binance",
+        "coinbase",
+        "coingecko",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "LINK": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "COMP": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "AAVE": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "REN": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "LRC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "uniswap"
+      ]
+    },
+    "BTC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "huobi"
+      ]
+    },
+    "ETH": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "huobi"
+      ]
+    },
+    "BAND": {
+      "source": [
+        "binance",
+        "coinbase",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "SUSHI": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "WBTC": {
+      "source": [
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "LTC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "EOS": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "TRX": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "OMG": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "BCH": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "OCEAN": {
+      "source": [
+        "binance",
+        "kraken",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "UMA": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "1INCH": {
+      "source": [
+        "binance",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "USDT": {
+      "source": [
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "ADA": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "XRP": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "XLM": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko"
+      ]
+    },
+    "WAVES": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "ZRX": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "ENJ": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "MATIC": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx",
+        "uniswap"
+      ]
+    },
+    "ATOM": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "XTZ": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "BNT": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "SOL": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "AUD": {
+      "source": [
+        "binance",
+        "ecb",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "CRV": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "DOT": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "RSR": {
+      "source": [
+        "binance",
+        "ftx",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "BZRX": {
+      "source": [
+        "binance",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "KSM": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "FIL": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "TRU": {
+      "source": [
+        "binance",
+        "ftx",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "PERP": {
+      "source": [
+        "binance",
+        "ftx",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "UST": {
+      "source": [
+        "bitfinex",
+        "coingecko",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "CREAM": {
+      "source": [
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "BNB": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "NEO": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "QTUM": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "ETC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "ICX": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "VET": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "BTT": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "ZIL": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "XMR": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "ZEC": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "DASH": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "NANO": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "FTM": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "ALGO": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "DOGE": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "FTT": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "ftx"
+      ]
+    },
+    "EUR": {
+      "source": [
+        "binance",
+        "ecb",
+        "ftx"
+      ]
+    },
+    "SC": {
+      "source": [
+        "binance",
+        "coingecko",
+        "kraken"
+      ]
+    },
+    "DGB": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "GBP": {
+      "source": [
+        "binance",
+        "ecb",
+        "ftx"
+      ]
+    },
+    "SAND": {
+      "source": [
+        "binance",
+        "ftx",
+        "uniswap"
+      ]
+    },
+    "YFII": {
+      "source": [
+        "binance",
+        "ftx"
+      ]
+    },
+    "DIA": {
+      "source": [
+        "binance",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "RUNE": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "GRT": {
+      "source": [
+        "binance",
+        "ftx",
+        "kraken"
+      ]
+    },
+    "BTG": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "CEL": {
+      "source": [
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "LEO": {
+      "source": [
+        "bitfinex",
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "AR": {
+      "source": [
+        "bitmart",
+        "coingecko",
+        "huobi"
+      ]
+    },
+    "BAO": {
+      "source": [
+        "ftx",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "MTA": {
+      "source": [
+        "ftx",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "ONT": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "IOST": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "THETA": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "BUSD": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "RVN": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "HBAR": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "ZEN": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "DCR": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "LUNA": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "EGLD": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "AVAX": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "XVS": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "NEAR": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "XEM": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "CAKE": {
+      "source": [
+        "binance",
+        "coingecko"
+      ]
+    },
+    "BSV": {
+      "source": [
+        "bitfinex",
+        "coingecko"
+      ]
+    },
+    "OKB": {
+      "source": [
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "CRO": {
+      "source": [
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "HT": {
+      "source": [
+        "coingecko",
+        "ftx"
+      ]
+    },
+    "BTMX": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "UBT": {
+      "source": [
+        "kyber",
+        "uniswap"
+      ]
+    },
+    "QNT": {
+      "source": [
+        "kyber",
+        "uniswap"
+      ]
+    },
+    "BASE": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "STAKE": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "API3": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "wNXM": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "DAO": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "DPI": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "KP3R": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "FXS": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "ESD": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "PICKLE": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "sUSD": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "TORN": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "MPH": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "FARM": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "SFI": {
+      "source": [
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "STX": {
+      "source": [
+        "binance"
+      ]
+    },
+    "MIOTA": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "VGX": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "NEXO": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "CHSB": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "PAX": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "ZKS": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "HOT": {
+      "source": [
+        "coingecko"
+      ]
+    },
+    "JPY": {
+      "source": [
+        "ecb"
+      ]
+    },
+    "CHF": {
+      "source": [
+        "ecb"
+      ]
+    },
+    "YFV": {
+      "source": [
+        "kyber"
+      ]
+    },
+    "SWRV": {
+      "source": [
+        "kyber"
+      ]
+    },
+    "YAM": {
+      "source": [
+        "sushiswap"
+      ]
+    },
+    "KIMCHI": {
+      "source": [
+        "sushiswap"
+      ]
+    },
+    "BAC": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "XOR": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "WHITE": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "CORE": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "FRAX": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "APY": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "SPI": {
+      "source": [
+        "uniswap"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "message": "OK",
+  "code": 1000,
+  "trace": "b24d5152-796a-40e3-b8ba-68ec2786cbc9",
+  "data": {
+    "tickers": [
+      {
+        "symbol": "AR_USDT",
+        "last_price": "13.1826",
+        "quote_volume_24h": "7960171.121186",
+        "base_volume_24h": "552099.8200000000",
+        "high_24h": "15.7519",
+        "low_24h": "12.7481",
+        "open_24h": "13.9122",
+        "close_24h": "13.1826",
+        "best_ask": "13.3201",
+        "best_ask_size": "1.49",
+        "best_bid": "12.9990",
+        "best_bid_size": "1.56",
+        "fluctuation": "-0.0524",
+        "url": "https://www.bitmart.com/trade?symbol=AR_USDT"
+      }
+    ]
+  }
+}

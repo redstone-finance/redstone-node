@@ -1,0 +1,20 @@
+{
+  "interval": 15000,
+  "priceAggregator": "median",
+  "defaultSource": ["coingecko"],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "BTC": {
+      "source": ["coingecko", "coinbase"]
+    },
+    "USDT": {
+      "source": ["coingecko", "uniswap", "sushiswap"]
+    },
+    "ETH": {},
+    "BNB": {},
+    "AR": {
+      "source": ["coingecko", "bitmart"]
+    }
+  }
+}

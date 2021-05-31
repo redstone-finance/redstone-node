@@ -1,0 +1,301 @@
+{
+  "data": {
+    "address": "0x701902858a6a9b6f36603244622732d9ec57a82a",
+    "updated_at": "2021-03-10T22:35:54.876618128Z",
+    "next_update_at": "2021-03-10T22:40:54.876618604Z",
+    "quote_currency": "USD",
+    "chain_id": 1,
+    "balancer": {
+      "balances": [
+        {
+          "pool": {
+            "balance": "20648371763182932519",
+            "contract_address": "0x59a19d8c652fa0284f44113d0ff9aba70bd46fb4",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 25193.701,
+            "quote_rate": 402.34647,
+            "total_supply": "178650544339821391999830",
+            "swap_fee": 0.0015
+          },
+          "assets": [
+            {
+              "balance": "3725893183682578131494777",
+              "contract_address": "0xba100000625a3754423978a60c9317c58a424e3d",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xba100000625a3754423978a60c9317c58a424e3d.png",
+              "contract_ticker_symbol": "BAL",
+              "contract_decimals": 18,
+              "quote": 20145.926,
+              "quote_rate": 46.78163,
+              "weight": 0.8
+            },
+            {
+              "balance": "23935886718129369791179",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 5047.776,
+              "quote_rate": 1824.6058,
+              "weight": 0.2
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0x29f55de880d4dcae40ba3e63f16407a31b4d44ee",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 730.332,
+            "total_supply": "97119221458825212394",
+            "swap_fee": 0.008
+          },
+          "assets": [
+            {
+              "balance": "80234668843873998056",
+              "contract_address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xe41d2489571d322189246dafa5ebde1f4699f498.png",
+              "contract_ticker_symbol": "ZRX",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1.397862,
+              "weight": 0.15
+            },
+            {
+              "balance": "227283844137781072061",
+              "contract_address": "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x0d8775f648430679a709e98d2b0cb6250d2887ef.png",
+              "contract_ticker_symbol": "BAT",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 0.86523515,
+              "weight": 0.15
+            },
+            {
+              "balance": "2130051456129500825",
+              "contract_address": "0x1985365e9f78359a9b6ad760e32412f4a445e862",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x1985365e9f78359a9b6ad760e32412f4a445e862.png",
+              "contract_ticker_symbol": "REP",
+              "contract_decimals": 18,
+              "quote": null,
+              "quote_rate": null,
+              "weight": 0.15
+            },
+            {
+              "balance": "96452237250922969161",
+              "contract_address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x6b175474e89094c44da98b954eedeac495271d0f.png",
+              "contract_ticker_symbol": "DAI",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1.001225,
+              "weight": 0.15
+            },
+            {
+              "balance": "164701782749611911",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1824.6058,
+              "weight": 0.4
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0xe5d1fab0c5596ef846dcc0958d6d0b20e1ec4498",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 1371.6696,
+            "total_supply": "339940327236484494465177",
+            "swap_fee": 0.002
+          },
+          "assets": [
+            {
+              "balance": "98363112150257182175",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1824.6058,
+              "weight": 0.33333334
+            },
+            {
+              "balance": "80765643468823755300",
+              "contract_address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png",
+              "contract_ticker_symbol": "MKR",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 2289.4016,
+              "weight": 0.33333334
+            },
+            {
+              "balance": "179430207986020856167880",
+              "contract_address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x6b175474e89094c44da98b954eedeac495271d0f.png",
+              "contract_ticker_symbol": "DAI",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1.001225,
+              "weight": 0.33333334
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0x987d7cc04652710b74fff380403f5c02f82e290a",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 2173.2026,
+            "total_supply": "1104686029415811040231174",
+            "swap_fee": 0.002
+          },
+          "assets": [
+            {
+              "balance": "1289326178609721219338",
+              "contract_address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png",
+              "contract_ticker_symbol": "MKR",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 2289.4016,
+              "weight": 0.75
+            },
+            {
+              "balance": "536390327756823560065",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1824.6058,
+              "weight": 0.25
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0xd262e43273ca96214bb02b4036a1f24ad9806739",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 1940.8047,
+            "total_supply": "132531419908757430511",
+            "swap_fee": 0.002
+          },
+          "assets": [
+            {
+              "balance": "767205286476489581",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1824.6058,
+              "weight": 0.75
+            },
+            {
+              "balance": "167765111103360137",
+              "contract_address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png",
+              "contract_ticker_symbol": "MKR",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 2289.4016,
+              "weight": 0.25
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0x815f8ef4863451f4faf34fbc860034812e7377d9",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 19.75269,
+            "total_supply": "674347880403029964879",
+            "swap_fee": 0.0005
+          },
+          "assets": [
+            {
+              "balance": "4860119346784556047439",
+              "contract_address": "0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f.png",
+              "contract_ticker_symbol": "SNX",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 21.835997,
+              "weight": 0.9
+            },
+            {
+              "balance": "11944839386",
+              "contract_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+              "contract_ticker_symbol": "USDC",
+              "contract_decimals": 6,
+              "quote": 0,
+              "quote_rate": 1.0029249,
+              "weight": 0.1
+            }
+          ]
+        },
+        {
+          "pool": {
+            "balance": "0",
+            "contract_address": "0x4304ae5fd14cec2299caee4e9a4afbedd046d612",
+            "logo_url": null,
+            "contract_ticker_symbol": "BAL",
+            "contract_decimals": 18,
+            "quote": 0,
+            "quote_rate": 914.3623,
+            "total_supply": "8130413244047494774",
+            "swap_fee": 0.0015
+          },
+          "assets": [
+            {
+              "balance": "640742712655064370992",
+              "contract_address": "0x80fb784b7ed66730e8b1dbd9820afd29931aab03",
+              "logo_url": "https://logos.covalenthq.com/tokens/0x80fb784b7ed66730e8b1dbd9820afd29931aab03.png",
+              "contract_ticker_symbol": "LEND",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 4.1187916,
+              "weight": 0.5
+            },
+            {
+              "balance": "1494703519905434846",
+              "contract_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+              "logo_url": "https://logos.covalenthq.com/tokens/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+              "contract_ticker_symbol": "WETH",
+              "contract_decimals": 18,
+              "quote": 0,
+              "quote_rate": 1824.6058,
+              "weight": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "error": false,
+  "error_message": null,
+  "error_code": null
+}
