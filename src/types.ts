@@ -5,6 +5,7 @@ export interface Manifest {
   sourceTimeout: number;
   maxPriceDeviationPercent: number,
   evmChainId: number,
+  developmentMode?: boolean // in developmentMode we're not saving any prices (both on Arweave and Mongo cache)
   tokens: { [symbol: string]: TokenConfig };
 };
 
@@ -93,6 +94,7 @@ export interface ArweaveTransactionTags {
 
 export interface NodeConfig {
   arweaveKeysFile: string;
+  useManifestFromSmartContract?: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;

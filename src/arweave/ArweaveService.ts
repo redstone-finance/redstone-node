@@ -1,11 +1,19 @@
 import {Consola} from "consola";
-import {ArweaveTransactionTags, PriceDataAfterAggregation, PriceDataBeforeSigning, PriceDataSigned} from "../types";
+import {
+  ArweaveTransactionTags,
+  Manifest,
+  PriceDataAfterAggregation,
+  PriceDataBeforeSigning,
+  PriceDataSigned
+} from "../types";
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
 import Transaction from "arweave/node/lib/transaction";
+import {interactRead} from "smartweave";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
+const providersRegistry = require("redstone-smartweave-contracts/src/tools/providers-registry.api");
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
 
@@ -86,6 +94,12 @@ export default class ArweaveService {
     trackEnd(signingTrackingId);
 
     return signedPrices;
+  }
+
+  async getCurrentManifest(): Promise<Manifest> {
+    const jwkAddress = await this.arweave.getAddress();
+    const result = await providersRegistry.currentManifest(jwkAddress, false, this.arweave.jwk);
+    return result.manifest.activeManifestContent;
   }
 
   private async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {

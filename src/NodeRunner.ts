@@ -11,35 +11,37 @@ import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
-import {mergeObjects} from "./utils/objects";
-import _ from "lodash";
+import {mergeObjects, readJSON, sleep} from "./utils/objects";
+import ManifestConfigError from "./manifest/ManifestConfigError";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
+export const MANIFEST_REFRESH_INTERVAL = 30000;
 
 export default class NodeRunner {
-  private version: string;
-  private arService: ArweaveService;
-  private pricesService: PricesService;
-  private tokensBySource: TokensBySource;
-  private evmSigner: EvmPriceSigner;
+  private readonly version: string;
+
+  // note: all '?' class fields have to be re-initialized after reading
+  // new manifest in this.useNewManifest(manifest); - as they depend on the current manifest.
+  private manifest?: Manifest;
+  private pricesService?: PricesService;
+  private tokensBySource?: TokensBySource;
+  private evmSigner?: EvmPriceSigner;
+  private lastManifestLoadTimestamp?: number;
 
   private constructor(
-    private manifest: Manifest,
-    private arweave: ArweaveProxy,
-    private providerAddress: string,
-    private nodeConfig: NodeConfig,
+    private readonly arweaveService: ArweaveService,
+    private readonly providerAddress: string,
+    private readonly nodeConfig: NodeConfig,
+    initialManifest: Manifest,
   ) {
     this.version = getVersionFromPackageJSON();
     const minimumArBalance = this.nodeConfig.minimumArBalance;
-    if (this.nodeConfig.minimumArBalance === undefined || typeof(minimumArBalance) !== "number") {
+    if (this.nodeConfig.minimumArBalance === undefined || typeof (minimumArBalance) !== "number") {
       throw new Error("minimumArBalance not defined in config file");
     }
-    this.arService = new ArweaveService(this.arweave, minimumArBalance);
-    this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
-    this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
-    this.evmSigner = new EvmPriceSigner(this.version, this.manifest.evmChainId);
+    this.useNewManifest(initialManifest);
 
     //note: setInterval binds "this" to a new context
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
@@ -48,18 +50,37 @@ export default class NodeRunner {
   }
 
   static async create(
-    manifest: Manifest,
     jwk: JWKInterface,
     nodeConfig: NodeConfig,
   ): Promise<NodeRunner> {
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
+    const arweaveService = new ArweaveService(arweave, nodeConfig.minimumArBalance);
+
+    let manifestData = null;
+    if (nodeConfig.useManifestFromSmartContract) {
+      while (true) {
+        logger.info("Fetching manifest data.");
+        try {
+          manifestData = await arweaveService.getCurrentManifest();
+        } catch (e) {
+          logger.error("Initial manifest read failed.", e.stack || e);
+        }
+        if (manifestData !== null) {
+          logger.info("Fetched manifest", manifestData)
+          break;
+        }
+        await sleep(2000);
+      }
+    } else {
+      manifestData = readJSON(nodeConfig.manifestFile!);
+    }
 
     return new NodeRunner(
-      manifest,
-      arweave,
+      arweaveService,
       providerAddress,
-      nodeConfig
+      nodeConfig,
+      manifestData
     );
   }
 
@@ -75,14 +96,14 @@ export default class NodeRunner {
 
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
-      setInterval(this.runIteration, this.manifest.interval);
+      setInterval(this.runIteration, this.manifest!.interval);
     } catch (e) {
-      this.reThrowIfManifestConfigError(e);
+      NodeRunner.reThrowIfManifestConfigError(e);
     }
   }
 
   private async exitIfBalanceTooLow() {
-    const {balance, isBalanceLow} = await this.arService.checkBalance();
+    const {balance, isBalanceLow} = await this.arweaveService.checkBalance();
     if (isBalanceLow) {
       logger.fatal(
         `You should have at least ${this.nodeConfig.minimumArBalance}
@@ -92,8 +113,14 @@ export default class NodeRunner {
   }
 
   private async runIteration() {
+    logger.info("Running new iteration.", this.nodeConfig.useManifestFromSmartContract);
+    if (this.nodeConfig.useManifestFromSmartContract) {
+      await this.maybeLoadManifestFromSmartContract();
+    }
+
     await this.safeProcessManifestTokens();
     await this.warnIfARBalanceLow();
+
     printTrackingState();
   };
 
@@ -102,7 +129,7 @@ export default class NodeRunner {
     try {
       await this.doProcessTokens();
     } catch (e) {
-      this.reThrowIfManifestConfigError(e);
+      NodeRunner.reThrowIfManifestConfigError(e);
     } finally {
       trackEnd(processingAllTrackingId);
     }
@@ -111,7 +138,7 @@ export default class NodeRunner {
   private async warnIfARBalanceLow() {
     const balanceCheckingTrackingId = trackStart("balance-checking");
     try {
-      const {balance, isBalanceLow} = await this.arService.checkBalance();
+      const {balance, isBalanceLow} = await this.arweaveService.checkBalance();
       if (isBalanceLow) {
         logger.warn(`AR balance is quite low: ${balance}`);
       }
@@ -126,45 +153,45 @@ export default class NodeRunner {
     logger.info("Processing tokens");
 
     const aggregatedPrices: PriceDataAfterAggregation[] = await this.fetchPrices();
-
-    const arTransaction: Transaction = await this.arService.prepareArweaveTransaction(aggregatedPrices, this.version);
-
-    const signedPrices: PriceDataSigned[] = await this.arService.signPrices(
+    const arTransaction: Transaction = await this.arweaveService.prepareArweaveTransaction(aggregatedPrices, this.version);
+    const signedPrices: PriceDataSigned[] = await this.arweaveService.signPrices(
       aggregatedPrices, arTransaction.id, this.providerAddress);
 
-    await this.broadcastPrices(signedPrices)
+    if (!this.manifest!.developmentMode) {
+      await NodeRunner.broadcastPrices(signedPrices);
+      await this.broadcastEvmPricePackage(signedPrices);
 
-    await this.broadcastEvmPricePackage(signedPrices);
-
-    if (mode.isProd) {
-      await this.arService.storePricesOnArweave(arTransaction);
+      if (mode.isProd) {
+        await this.arweaveService.storePricesOnArweave(arTransaction);
+      } else {
+        logger.info(
+          `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
+      }
     } else {
-      logger.info(
-        `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
+      logger.info("Broadcasting and storing on Arweave skipped in developmentMode");
     }
+
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {
     const fetchingAllTrackingId = trackStart("fetching-all");
 
     const fetchTimestamp = Date.now();
-    const fetchedPrices = await this.pricesService.fetchInParallel(this.tokensBySource)
+    const fetchedPrices = await this.pricesService!.fetchInParallel(this.tokensBySource!)
     const pricesData: PricesDataFetched = mergeObjects(fetchedPrices);
     const pricesBeforeAggregation: PricesBeforeAggregation =
       PricesService.groupPricesByToken(fetchTimestamp, pricesData, this.version);
 
-    const aggregatedPrices: PriceDataAfterAggregation[] = this.pricesService.calculateAggregatedValues(
+    const aggregatedPrices: PriceDataAfterAggregation[] = this.pricesService!.calculateAggregatedValues(
       Object.values(pricesBeforeAggregation), //what is the advantage of using lodash.values?
-      aggregators[this.manifest.priceAggregator]
+      aggregators[this.manifest!.priceAggregator]
     );
-    this.printAggregatedPrices(aggregatedPrices);
-
+    NodeRunner.printAggregatedPrices(aggregatedPrices);
     trackEnd(fetchingAllTrackingId);
-
     return aggregatedPrices;
   }
 
-  private async broadcastPrices(signedPrices: PriceDataSigned[]) {
+  private static async broadcastPrices(signedPrices: PriceDataSigned[]) {
     logger.info("Broadcasting prices");
     const broadcastingTrackingId = trackStart("broadcasting");
     try {
@@ -181,11 +208,19 @@ export default class NodeRunner {
     }
   }
 
+  private static printAggregatedPrices(prices: PriceDataAfterAggregation[]): void {
+    for (const price of prices) {
+      const sourcesData = JSON.stringify(price.source);
+      logger.info(
+        `Fetched price : ${price.symbol} : ${price.value} | ${sourcesData}`);
+    }
+  }
+
   private async broadcastEvmPricePackage(signedPrices: PriceDataSigned[]) {
     logger.info("Broadcasting price package");
     const packageBroadcastingTrackingId = trackStart("package-broadcasting");
     try {
-      const signedPackage = this.evmSigner.getSignedPackage(
+      const signedPackage = this.evmSigner!.getSignedPackage(
         signedPrices,
         this.nodeConfig.credentials.ethereumPrivateKey);
       await this.broadcastSignedPricePackage(signedPackage);
@@ -217,21 +252,47 @@ export default class NodeRunner {
     }
   }
 
-  private printAggregatedPrices(prices: PriceDataAfterAggregation[]): void {
-    for (const price of prices) {
-      const sourcesData = JSON.stringify(price.source);
-      logger.info(
-        `Fetched price : ${price.symbol} : ${price.value} | ${sourcesData}`);
-    }
-  }
-
-  private reThrowIfManifestConfigError(e: Error) {
+  private static reThrowIfManifestConfigError(e: Error) {
     if (e.name == "ManifestConfigError") {
       throw e;
     } else {
       logger.error(e.stack);
     }
   }
+
+  private async maybeLoadManifestFromSmartContract() {
+    logger.info("Checking for new manifest version...");
+    const now = Date.now();
+    const timeDiff = now - this.lastManifestLoadTimestamp!;
+
+    logger.info("Time since last check:", {timeDiff, "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL})
+
+    if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
+      logger.info("Trying to fetch new manifest version.");
+      const manifestFetchTrackingId = trackStart("Fetching manifest");
+      try {
+        const manifest = await this.arweaveService.getCurrentManifest();
+        if (manifest !== null) {
+          this.useNewManifest(manifest);
+        }
+      } catch (e) {
+        logger.error("Fetching new manifest failed: ", e.stack || e);
+      } finally {
+        trackEnd(manifestFetchTrackingId);
+      }
+    } else {
+      logger.info("Skipping manifest download in this run.")
+    }
+  }
+
+  private useNewManifest(manifest: Manifest) {
+    this.manifest = manifest;
+    this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
+    this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
+    this.evmSigner = new EvmPriceSigner(this.version, this.manifest.evmChainId);
+    this.lastManifestLoadTimestamp = Date.now();
+  }
+
 };
 
 function getVersionFromPackageJSON() {
