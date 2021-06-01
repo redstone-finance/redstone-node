@@ -49,16 +49,17 @@ export default class ArweaveService {
   async storePricesOnArweave(arTransaction: Transaction) {
     logger.info(
       `Keeping prices on arweave blockchain - posting transaction
-       arTransaction.id`);
+       ${arTransaction.id}`);
     trackStart("keeping");
     //TODO: Handle errors in a more sensible way ;-) https://app.clickup.com/t/k38r91
     try {
       await this.arweave.postTransaction(arTransaction);
+      logger.info(`Transaction posted: ${arTransaction.id}`);
     } catch (e) {
       logger.error("Error while storing prices on Arweave", e.stack);
+    } finally {
+      trackEnd("keeping");
     }
-    trackEnd("keeping");
-    logger.info(`Transaction posted: ${arTransaction.id}`);
   }
 
   async signPrices(

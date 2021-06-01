@@ -27,7 +27,7 @@ export function trackEnd(label: string): void {
 
   if (tasks[label] === undefined) {
     logger.warn(
-      "Cannot execute trackEnd without trackStart calling");
+      `Cannot execute trackEnd for ${label} without trackStart calling`);
     return;
   }
 
