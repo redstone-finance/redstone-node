@@ -7,9 +7,14 @@ const logger = require("./logger")("utils/performance-tracker") as Consola;
 const URL = "https://api.redstone.finance/metrics";
 const tasks: { [label: string]: number } = {};
 
-export function trackStart(label: string): void {
+export function trackStart(label: string, idLabel?: string): void {
   if (label === "") {
     throw new Error("Label cannot be empty");
+  }
+
+  // For debugging
+  if (idLabel) {
+    logger.info(`trackStart for id label: "${idLabel}", label: "${label}"`);
   }
 
   if (tasks[label] !== undefined) {
@@ -20,9 +25,14 @@ export function trackStart(label: string): void {
   tasks[label] = performance.now();
 }
 
-export function trackEnd(label: string): void {
+export function trackEnd(label: string, idLabel?: string): void {
   if (label === "") {
     throw new Error("Label cannot be empty");
+  }
+
+  // For debugging
+  if (idLabel) {
+    logger.info(`trackEnd for id label: "${idLabel}", label: "${label}"`);
   }
 
   if (tasks[label] === undefined) {
