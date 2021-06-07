@@ -75,23 +75,9 @@ export default class PricesService {
         `${source} fetcher received an empty array of symbols`);
     }
 
-    // For debugging. TODO: remove later
-    const fetchingIdLabel = String(Date.now());
-
-    const fetchPromise = (async () => {
-      try {
-        trackStart(`fetching-${source}`, fetchingIdLabel);
-        const prices = await fetchers[source].fetchAll(tokens, {
-          credentials: this.credentials,
-        });
-        logger.info(
-          `Fetched prices in USD for ${prices.length} `
-          + `currencies from source: "${source}"`);
-        return prices;
-      } finally {
-        trackEnd(`fetching-${source}`, fetchingIdLabel);
-      }
-    })();
+    const fetchPromise = fetchers[source].fetchAll(tokens, {
+      credentials: this.credentials,
+    });
 
     const sourceTimeout = ManifestHelper.getTimeoutForSource(source, this.manifest);
     if (sourceTimeout === null) {
@@ -99,8 +85,20 @@ export default class PricesService {
     }
     logger.info(`Call to ${source} will timeout after ${sourceTimeout}ms`);
 
-    // Fail if there is no response after given timeout
-    return timeout(fetchPromise, sourceTimeout);
+    // For debugging. TODO: remove later
+    const fetchingIdLabel = String(Date.now());
+
+    try {
+      trackStart(`fetching-${source}`, fetchingIdLabel);
+      // Fail if there is no response after given timeout
+      const prices = await timeout(fetchPromise, sourceTimeout);
+      logger.info(
+        `Fetched prices in USD for ${prices.length} `
+        + `currencies from source: "${source}"`);
+      return prices;
+    } finally {
+      trackEnd(`fetching-${source}`, fetchingIdLabel);
+    }
   }
 
   static groupPricesByToken(
