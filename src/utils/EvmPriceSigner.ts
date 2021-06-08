@@ -1,6 +1,6 @@
 import { toBuffer } from "ethereumjs-util";
 import { signTypedMessage, recoverTypedMessage } from "eth-sig-util";
-import { ethers } from "hardhat";
+import { ethers } from "ethers";
 import sortDeepObjectArrays from "sort-deep-object-arrays";
 
 export interface ShortSinglePriceDataType {
@@ -33,7 +33,7 @@ const EIP712Domain = [
 
 const serializeBN = (value: any) => value.toString();
 
-export class EvmPriceSigner {
+export default class EvmPriceSigner {
   private _domainData: object;
 
   constructor(version: string = "0.4", chainId: number = 1) {
@@ -48,8 +48,10 @@ export class EvmPriceSigner {
     const sortedPrices = sortDeepObjectArrays(pricesBatch.prices);
 
     return {
-      symbols: sortedPrices.map((p: any) => p.symbol),
-      values: sortedPrices.map((p: any) => serializeBN(p.value)),
+      symbols: sortedPrices.map((p: ShortSinglePriceDataType) =>
+        ethers.utils.formatBytes32String(p.symbol)),
+      values: sortedPrices.map((p: ShortSinglePriceDataType) =>
+        serializeBN(p.value)),
       timestamp: serializeBN(pricesBatch.timestamp),
     };
   }
