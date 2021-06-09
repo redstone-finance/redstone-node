@@ -32,4 +32,8 @@ describe('evmSignPricesAndVerify', () => {
     //then
     expect(evmSigner.verifySignature(signedPricesData)).toEqual(true);
   });
+
+  // TODO add a test case to check if incorrect signature doesn't work
+
+  // TODO: add a test case to check if disordered price batch will be verified correctly
 });
