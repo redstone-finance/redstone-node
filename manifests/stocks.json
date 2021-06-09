@@ -2,7 +2,7 @@
   "interval": 15000,
   "priceAggregator": "median",
   "defaultSource": ["barchart"],
-  "sourceTimeout": 50000,
+  "sourceTimeout": 12000,
   "maxPriceDeviationPercent": 25,
   "tokens": {
     "TSLA": {},
@@ -20,6 +20,53 @@
     "PINS": {},
     "SHOP": {},
     "SPOT": {},
-    "TDOC": {}
+    "TDOC": {},
+
+    "SPY": {},
+    "QQQ": {},
+    "ONEQ": {},
+    "DIA": {},
+    "IWM": {},
+    "EFA": {},
+    "VGK": {},
+    "INDA": {},
+    "RSX": {},
+
+    "ZCN21": {},
+    "ZSX21": {},
+    "ZMN21": {},
+    "ZWN21": {},
+    "KEN21": {},
+    "MWU21": {},
+    "ZON21": {},
+    "ZRN21": {},
+
+    "CLN21": {},
+    "RBN21": {},
+    "NGN21": {},
+    "QAQ21": {},
+    "ZKN21": {},
+
+    "GCQ21": {},
+    "SIN21": {},
+    "HGN21": {},
+    "PLN21": {},
+    "PAU21": {},
+
+    "LEQ21": {},
+    "GFQ21": {},
+    "HEQ21": {},
+    "KMM21": {},
+    "DLM21": {},
+    "DFQ21": {},
+    "BDU21": {},
+    "BJN21": {},
+
+    "CTZ21": {},
+    "KCU21": {},
+    "SBN21": {},
+    "CCU21": {},
+    "LSN21": {},
+    "OJN21": {}
   }
 }

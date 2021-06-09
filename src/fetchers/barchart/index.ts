@@ -5,7 +5,7 @@ import {Fetcher, PriceDataFetched} from "../../types";
 const logger =
   require("../../utils/logger")("fetchers/barchart") as Consola;
 
-const URL = "http://ondemand.websol.barchart.com/getQuote.json";
+const URL = "https://ondemand.websol.barchart.com/getQuote.json";
 
 const barchartFetcher: Fetcher = {
   async fetchAll(symbols: string[], credentials): Promise<PriceDataFetched[]> {
@@ -16,6 +16,8 @@ const barchartFetcher: Fetcher = {
         symbols: symbols.map(convertSymbol).join(","),
       },
     });
+    // TODO: remove after debugging
+    logger.info("Barchart response: " + JSON.stringify(response.data));
 
     // Response validation and unpacking
     if (response.data.status.code !== 200) {
@@ -49,7 +51,11 @@ const barchartFetcher: Fetcher = {
 };
 
 function convertSymbol(symbol: string) {
-  return symbol + ".BZ";
+  if (symbol.endsWith("21")) {
+    return symbol;
+  } else {
+    return symbol + ".BZ";
+  }
 }
 
 export default barchartFetcher;
