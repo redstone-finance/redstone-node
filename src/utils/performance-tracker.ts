@@ -5,60 +5,67 @@ import mode from "../../mode";
 
 const logger = require("./logger")("utils/performance-tracker") as Consola;
 const URL = "https://api.redstone.finance/metrics";
-const tasks: { [label: string]: number } = {};
+const tasks: { [trackingId: string]: {
+  label: string;
+  start: number;
+} } = {};
 
-export function trackStart(label: string, idLabel?: string): void {
+export function trackStart(label: string): string {
   if (label === "") {
     throw new Error("Label cannot be empty");
   }
 
-  // For debugging
-  if (idLabel) {
-    logger.info(`trackStart for id label: "${idLabel}", label: "${label}"`);
+  const trackingId = `${label}-${String(performance.now())}`;
+
+  if (tasks[trackingId] !== undefined) {
+    logger.warn(
+      `Tracking id "${trackingId} is already being used."`);
+  } else {
+    tasks[trackingId] = {
+      label,
+      start: performance.now(),
+    };
   }
 
-  if (tasks[label] !== undefined) {
-    logger.info(
-      `Label "${label} is already being tracked. Updating start time"`);
-  }
-
-  tasks[label] = performance.now();
+  return trackingId;
 }
 
-export function trackEnd(label: string, idLabel?: string): void {
-  if (label === "") {
-    throw new Error("Label cannot be empty");
+export function trackEnd(trackingId: string): void {
+  if (trackingId === "") {
+    throw new Error("Tracking id cannot be empty");
   }
 
-  // For debugging
-  if (idLabel) {
-    logger.info(`trackEnd for id label: "${idLabel}", label: "${label}"`);
-  }
-
-  if (tasks[label] === undefined) {
+  if (tasks[trackingId] === undefined) {
     logger.warn(
-      `Cannot execute trackEnd for ${label} without trackStart calling`);
+      `Cannot execute trackEnd for ${trackingId} without trackStart calling`);
     return;
   }
 
   // Calculating time elapsed from the task trackStart
   // execution for the same label
-  const value = performance.now() - tasks[label];
+  const value = performance.now() - tasks[trackingId].start;
+  const label = tasks[trackingId].label;
 
   // Clear the start value
-  delete tasks[label];
+  delete tasks[trackingId];
 
   // Saving metric using Redstone HTTP endpoint
   saveMetric(label, value);
 }
 
 async function saveMetric(label: string, value: number): Promise<void> {
+  let labelWithPrefix = label;
+  if (process.env.PERFORMANCE_TRACKING_LABEL_PREFIX) {
+    labelWithPrefix =
+      `${process.env.PERFORMANCE_TRACKING_LABEL_PREFIX}-${label}`;
+  }
+
   if (mode.isProd) {
     await axios.post(URL, {
-      label,
+      label: labelWithPrefix,
       value,
     });
   } else {
-    logger.info(`Metric: ${label}. Value: ${value}`);
+    logger.info(`Metric: ${labelWithPrefix}. Value: ${value}`);
   }
 }

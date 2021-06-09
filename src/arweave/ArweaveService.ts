@@ -20,7 +20,7 @@ export default class ArweaveService {
 
   async prepareArweaveTransaction(prices: PriceDataAfterAggregation[], nodeVersion: string)
     : Promise<Transaction> {
-    trackStart("transaction-preparing");
+    const transactionPreparingTrackingId = trackStart("transaction-preparing");
 
     logger.info("Keeping prices on arweave blockchain - preparing transaction");
     this.checkAllPricesHaveSameTimestamp(prices);
@@ -28,7 +28,7 @@ export default class ArweaveService {
     const tags = this.prepareTransactionTags(nodeVersion, prices);
 
     const transaction = await this.arweave.prepareUploadTransaction(tags, prices);
-    trackEnd("transaction-preparing");
+    trackEnd(transactionPreparingTrackingId);
 
     return transaction;
   }
@@ -50,7 +50,7 @@ export default class ArweaveService {
     logger.info(
       `Keeping prices on arweave blockchain - posting transaction
        ${arTransaction.id}`);
-    trackStart("keeping");
+    const keepingTrackingId = trackStart("keeping");
     //TODO: Handle errors in a more sensible way ;-) https://app.clickup.com/t/k38r91
     try {
       await this.arweave.postTransaction(arTransaction);
@@ -58,7 +58,7 @@ export default class ArweaveService {
     } catch (e) {
       logger.error("Error while storing prices on Arweave", e.stack);
     } finally {
-      trackEnd("keeping");
+      trackEnd(keepingTrackingId);
     }
   }
 
@@ -67,7 +67,7 @@ export default class ArweaveService {
     idArTransaction: string,
     providerAddress: string
   ): Promise<PriceDataSigned[]> {
-    trackStart("signing");
+    const signingTrackingId = trackStart("signing");
 
     const signedPrices: PriceDataSigned[] = [];
 
@@ -83,7 +83,7 @@ export default class ArweaveService {
 
       signedPrices.push(signed);
     }
-    trackEnd("signing");
+    trackEnd(signingTrackingId);
 
     return signedPrices;
   }

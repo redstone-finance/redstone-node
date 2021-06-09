@@ -85,11 +85,8 @@ export default class PricesService {
     }
     logger.info(`Call to ${source} will timeout after ${sourceTimeout}ms`);
 
-    // For debugging. TODO: remove later
-    const fetchingIdLabel = String(Date.now());
-
+    const trackingId = trackStart(`fetching-${source}`);
     try {
-      trackStart(`fetching-${source}`, fetchingIdLabel);
       // Fail if there is no response after given timeout
       const prices = await timeout(fetchPromise, sourceTimeout);
       logger.info(
@@ -97,7 +94,7 @@ export default class PricesService {
         + `currencies from source: "${source}"`);
       return prices;
     } finally {
-      trackEnd(`fetching-${source}`, fetchingIdLabel);
+      trackEnd(trackingId);
     }
   }
 

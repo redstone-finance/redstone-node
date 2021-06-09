@@ -17,6 +17,7 @@ RUN yarn build
 # Setting production env variables
 ENV MODE=PROD
 ENV ENABLE_JSON_LOGS=true
+ENV PERFORMANCE_TRACKING_LABEL_PREFIX=rapid
 
 # Running redstone node
 CMD yarn start:prod --config ./.secrets/config-redstone-rapid.json

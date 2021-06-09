@@ -15,9 +15,9 @@ const huobiFetcher: Fetcher = {
   async fetchAll(tokenSymbols: string[]): Promise<PriceDataFetched[]> {
     const prices: PriceDataFetched[] = [];
 
-    trackStart("huobi-fetcher-usdt-price-fetching");
+    const trackingId = trackStart("huobi-fetcher-usdt-price-fetching");
     const usdtPrice = await getUsdtPriceInUSD();
-    trackEnd("huobi-fetcher-usdt-price-fetching");
+    trackEnd(trackingId);
 
     const response: any = await axios.get(URL);
     if (response.data === undefined) {
