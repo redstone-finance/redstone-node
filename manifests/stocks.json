@@ -1,7 +1,7 @@
 {
   "interval": 15000,
   "priceAggregator": "median",
-  "defaultSource": ["yahoo-finance"],
+  "defaultSource": ["barchart"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "tokens": {
