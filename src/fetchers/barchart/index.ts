@@ -16,7 +16,8 @@ const barchartFetcher: Fetcher = {
         symbols: symbols.map(convertSymbol).join(","),
       },
     });
-    // TODO: remove after debugging
+
+    // TODO: remove later when barchart fetcher will be 100% stable
     logger.info("Barchart response: " + JSON.stringify(response.data));
 
     // Response validation and unpacking
@@ -25,6 +26,9 @@ const barchartFetcher: Fetcher = {
     }
     if (response.data.results.length === 0) {
       throw new Error("Empty array received from barchart API");
+    }
+    if (response.data.results[0].lastPrice === null) {
+      throw new Error("Barchart response contains invalid price");
     }
     const pricesObj: { [symbol: string]: number } = {};
     for (const price of response.data.results) {
