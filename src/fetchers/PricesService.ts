@@ -61,7 +61,10 @@ export default class PricesService {
         // We don't throw an error because we want to continue with
         // other fetchers even if some fetchers failed
         const resData = e.response ? e.response.data : "";
-        logger.error(
+
+        // We use warn level instead of error because
+        // price fetching errors occur quite often
+        logger.warn(
           `Fetching failed for source: ${source}: ${resData}`, e.stack);
         return {};
       }
@@ -141,7 +144,9 @@ export default class PricesService {
         }
         aggregatedPrices.push(priceAfterAggregation);
       } catch (e) {
-        logger.error(e.stack);
+        // We use warn level instead of error because
+        // price aggregation errors occur quite often
+        logger.warn(e.stack);
       }
     }
     return aggregatedPrices;
