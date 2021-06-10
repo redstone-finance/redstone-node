@@ -14,6 +14,7 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
+  barchartApiKey?: string;
 };
 
 export interface TokenConfig {

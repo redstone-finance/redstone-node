@@ -4,6 +4,7 @@ import coingecko from "./coingecko";
 import sushiswap from "./sushiswap";
 import coinbase from "./coinbase";
 import bitfinex from "./bitfinex";
+import barchart from "./barchart";
 import uniswap from "./uniswap";
 import bitmart from "./bitmart";
 import binance from "./binance";
@@ -19,6 +20,7 @@ export default {
   sushiswap,
   coinbase,
   bitfinex,
+  barchart,
   uniswap,
   bitmart,
   binance,
