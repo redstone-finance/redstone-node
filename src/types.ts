@@ -14,7 +14,6 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
-  covalentApiKey?: string;
   barchartApiKey?: string;
 };
 

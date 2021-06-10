@@ -4,23 +4,8 @@
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "tokens": {
-    "SNX": {
-      "source": [
-        "balancer",
-        "binance",
-        "bitfinex",
-        "coinbase",
-        "coingecko",
-        "ftx",
-        "kraken",
-        "kyber",
-        "sushiswap",
-        "uniswap"
-      ]
-    },
     "BAT": {
       "source": [
-        "balancer",
         "binance",
         "bitfinex",
         "coinbase",
@@ -32,14 +17,14 @@
         "uniswap"
       ]
     },
-    "MKR": {
+    "SNX": {
       "source": [
-        "balancer",
         "binance",
         "bitfinex",
         "coinbase",
         "coingecko",
         "ftx",
+        "kraken",
         "kyber",
         "sushiswap",
         "uniswap"
@@ -84,18 +69,6 @@
         "uniswap"
       ]
     },
-    "USDC": {
-      "source": [
-        "balancer",
-        "binance",
-        "coinbase",
-        "coingecko",
-        "kraken",
-        "kyber",
-        "sushiswap",
-        "uniswap"
-      ]
-    },
     "LINK": {
       "source": [
         "binance",
@@ -120,12 +93,35 @@
         "uniswap"
       ]
     },
+    "MKR": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
     "AAVE": {
       "source": [
         "binance",
         "coinbase",
         "coingecko",
         "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
+    "USDC": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
         "kraken",
         "kyber",
         "sushiswap",
@@ -247,14 +243,6 @@
         "coingecko",
         "ftx",
         "kraken"
-      ]
-    },
-    "OCEAN": {
-      "source": [
-        "binance",
-        "kraken",
-        "sushiswap",
-        "uniswap"
       ]
     },
     "UMA": {
@@ -386,6 +374,14 @@
         "coingecko",
         "ftx",
         "kraken"
+      ]
+    },
+    "OCEAN": {
+      "source": [
+        "binance",
+        "kraken",
+        "sushiswap",
+        "uniswap"
       ]
     },
     "DOT": {
@@ -607,12 +603,6 @@
         "uniswap"
       ]
     },
-    "YFII": {
-      "source": [
-        "binance",
-        "ftx"
-      ]
-    },
     "DIA": {
       "source": [
         "binance",
@@ -730,6 +720,12 @@
         "coingecko"
       ]
     },
+    "YFII": {
+      "source": [
+        "binance",
+        "ftx"
+      ]
+    },
     "EGLD": {
       "source": [
         "binance",
@@ -790,11 +786,6 @@
         "ftx"
       ]
     },
-    "BTMX": {
-      "source": [
-        "coingecko"
-      ]
-    },
     "UBT": {
       "source": [
         "kyber",
@@ -807,11 +798,6 @@
         "uniswap"
       ]
     },
-    "BASE": {
-      "source": [
-        "uniswap"
-      ]
-    },
     "STAKE": {
       "source": [
         "sushiswap",
@@ -821,11 +807,6 @@
     "API3": {
       "source": [
         "sushiswap",
-        "uniswap"
-      ]
-    },
-    "wNXM": {
-      "source": [
         "uniswap"
       ]
     },
@@ -935,6 +916,11 @@
         "coingecko"
       ]
     },
+    "BTMX": {
+      "source": [
+        "coingecko"
+      ]
+    },
     "JPY": {
       "source": [
         "ecb"
@@ -963,6 +949,16 @@
     "KIMCHI": {
       "source": [
         "sushiswap"
+      ]
+    },
+    "BASE": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "wNXM": {
+      "source": [
+        "uniswap"
       ]
     },
     "BAC": {

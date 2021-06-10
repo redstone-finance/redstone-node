@@ -3,7 +3,6 @@ import yahooFinance from "./yahoo-finance";
 import coingecko from "./coingecko";
 import sushiswap from "./sushiswap";
 import coinbase from "./coinbase";
-import balancer from "./balancer";
 import bitfinex from "./bitfinex";
 import barchart from "./barchart";
 import uniswap from "./uniswap";
@@ -20,7 +19,6 @@ export default {
   coingecko,
   sushiswap,
   coinbase,
-  balancer,
   bitfinex,
   barchart,
   uniswap,
