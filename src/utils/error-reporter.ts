@@ -34,7 +34,7 @@ export async function reportError(args: {
   }
   const errorId = uuidv4();
   try {
-    console.log(`Reporting an error ${errorId}`, args);
+    console.log(`Reporting an error ${errorId}`, JSON.stringify(args));
     await axios.post(URL, args);
     console.log(`Error reported ${errorId}`);
   } catch (e) {

@@ -61,7 +61,10 @@ export default class PricesService {
         // We don't throw an error because we want to continue with
         // other fetchers even if some fetchers failed
         const resData = e.response ? e.response.data : "";
-        logger.error(
+
+        // We use warn level instead of error because
+        // price fetching errors occur quite often
+        logger.warn(
           `Fetching failed for source: ${source}: ${resData}`, e.stack);
         return {};
       }
@@ -75,16 +78,8 @@ export default class PricesService {
         `${source} fetcher received an empty array of symbols`);
     }
 
-    trackStart(`fetching-${source}`);
     const fetchPromise = fetchers[source].fetchAll(tokens, {
       credentials: this.credentials,
-    }).then((prices) => {
-      logger.info(
-        `Fetched prices in USD for ${prices.length} `
-        + `currencies from source: "${source}"`);
-      return prices;
-    }).finally(() => {
-      trackEnd(`fetching-${source}`);
     });
 
     const sourceTimeout = ManifestHelper.getTimeoutForSource(source, this.manifest);
@@ -93,8 +88,17 @@ export default class PricesService {
     }
     logger.info(`Call to ${source} will timeout after ${sourceTimeout}ms`);
 
-    // Fail if there is no response after given timeout
-    return timeout(fetchPromise, sourceTimeout);
+    const trackingId = trackStart(`fetching-${source}`);
+    try {
+      // Fail if there is no response after given timeout
+      const prices = await timeout(fetchPromise, sourceTimeout);
+      logger.info(
+        `Fetched prices in USD for ${prices.length} `
+        + `currencies from source: "${source}"`);
+      return prices;
+    } finally {
+      trackEnd(trackingId);
+    }
   }
 
   static groupPricesByToken(
@@ -140,7 +144,9 @@ export default class PricesService {
         }
         aggregatedPrices.push(priceAfterAggregation);
       } catch (e) {
-        logger.error(e.stack);
+        // We use warn level instead of error because
+        // price aggregation errors occur quite often
+        logger.warn(e.stack);
       }
     }
     return aggregatedPrices;

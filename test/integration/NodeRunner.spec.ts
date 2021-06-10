@@ -70,7 +70,6 @@ describe("NodeRunner", () => {
   const nodeConfig: NodeConfig = {
     arweaveKeysFile: "", credentials: {
       infuraProjectId: "ipid",
-      covalentApiKey: "ckey"
     },
     manifestFile: "",
     minimumArBalance: 0.2
