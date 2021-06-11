@@ -3,6 +3,7 @@
   "manifestFile": "./manifests/stocks.json",
   "minimumArBalance": 0.1,
   "credentials": {
-    "infuraProjectId": "XXX"
+    "infuraProjectId": "XXX",
+    "ethereumPrivateKey": "0x0"
   }
 }

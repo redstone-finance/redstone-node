@@ -15,6 +15,7 @@ export interface SourceTimeout {
 export interface Credentials {
   infuraProjectId?: string;
   barchartApiKey?: string;
+  ethereumPrivateKey: string;
 };
 
 export interface TokenConfig {
@@ -37,6 +38,9 @@ export interface Aggregator {
 
 export interface Broadcaster {
   broadcast: (prices: PriceDataSigned[]) => Promise<void>;
+  broadcastPricePackage: (
+    pricePackage: SignedPricePackage,
+    providerAddress: string) => Promise<void>;
 };
 
 export interface PriceDataFetched {
@@ -65,13 +69,30 @@ export interface PriceDataSigned extends PriceDataBeforeSigning {
   signature: string;
 };
 
+export interface ShortSinglePrice {
+  symbol: string;
+  value: number;
+};
+
+export interface PricePackage {
+  prices: ShortSinglePrice[];
+  timestamp: number;
+};
+
+export type SignedPricePackage = {
+  pricePackage: PricePackage;
+  signer: string;
+  signature: string;
+};
+
+
 export interface ArweaveTransactionTags {
   [tag: string]: string,
 };
 
 export interface NodeConfig {
-  arweaveKeysFile: string,
-  manifestFile: string,
-  minimumArBalance: number,
-  credentials: Credentials
+  arweaveKeysFile: string;
+  manifestFile: string;
+  minimumArBalance: number;
+  credentials: Credentials;
 }

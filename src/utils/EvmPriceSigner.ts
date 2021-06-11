@@ -2,22 +2,13 @@ import { toBuffer } from "ethereumjs-util";
 import { signTypedMessage, recoverTypedMessage } from "eth-sig-util";
 import { ethers } from "ethers";
 import sortDeepObjectArrays from "sort-deep-object-arrays";
-
-export interface ShortSinglePriceDataType {
-  symbol: string;
-  value: number;
-};
-
-export interface PricesBatchType {
-  prices: ShortSinglePriceDataType[];
-  timestamp: number;
-};
-
-export type SignedPriceDataType = {
-  pricesBatch: PricesBatchType;
-  signer: string;
-  signature: string;
-};
+import {
+  PricePackage,
+  ShortSinglePrice,
+  SignedPricePackage,
+  PriceDataSigned,
+} from "../types";
+import _ from "lodash";
 
 const PriceData = [
   {name: "symbols", type: "bytes32[]"},
@@ -31,7 +22,7 @@ const EIP712Domain = [
   {name: "chainId", type: "uint256"}
 ];
 
-const serializeBN = (value: any) => value.toString();
+const serializePriceValue = (value: any) => Math.round(value * (10 ** 8));
 
 export default class EvmPriceSigner {
   private _domainData: object;
@@ -44,19 +35,38 @@ export default class EvmPriceSigner {
     };
   }
 
-  private serializeToMessage(pricesBatch: PricesBatchType): object {
-    const sortedPrices = sortDeepObjectArrays(pricesBatch.prices);
+  private serializeToMessage(pricePackage: PricePackage): object {
+    // We clean and sort prices to be sure that prices
+    // always have the same format
+    const cleanPricesData = pricePackage.prices.map(
+      (p) => _.pick(p, ["symbol", "value"]));
+    const sortedPrices = sortDeepObjectArrays(cleanPricesData);
 
     return {
-      symbols: sortedPrices.map((p: ShortSinglePriceDataType) =>
+      symbols: sortedPrices.map((p: ShortSinglePrice) =>
         ethers.utils.formatBytes32String(p.symbol)),
-      values: sortedPrices.map((p: ShortSinglePriceDataType) =>
-        serializeBN(p.value)),
-      timestamp: serializeBN(pricesBatch.timestamp),
+      values: sortedPrices.map((p: ShortSinglePrice) =>
+        serializePriceValue(p.value)),
+      timestamp: pricePackage.timestamp,
     };
   }
 
-  signPriceData(pricesBatch: PricesBatchType, privateKey: string): SignedPriceDataType {
+  getSignedPackage(prices: PriceDataSigned[], privateKey: string) {
+    if (prices.length === 0) {
+      throw new Error("Price package should contain at least one price");
+    }
+
+    const pricePackage = {
+      timestamp: prices[0].timestamp,
+      prices: prices.map(p => _.pick(p, ["symbol", "value"])),
+    };
+
+    return this.signPricePackage(
+      pricePackage,
+      privateKey);
+  }
+
+  signPricePackage(pricePackage: PricePackage, privateKey: string): SignedPricePackage {
     const data: any = {
       types: {
         EIP712Domain,
@@ -64,17 +74,17 @@ export default class EvmPriceSigner {
       },
       domain: this._domainData,
       primaryType: "PriceData",
-      message: this.serializeToMessage(pricesBatch),
+      message: this.serializeToMessage(pricePackage),
     };
 
     return {
-      pricesBatch,
+      pricePackage,
       signer: (new ethers.Wallet(privateKey)).address,
       signature: signTypedMessage(toBuffer(privateKey), {data}, "V4"),
     };
   }
 
-  verifySignature(signedPriceData: SignedPriceDataType): boolean {
+  verifySignature(signedPriceData: SignedPricePackage): boolean {
     const data: any = {
       types: {
         EIP712Domain,
@@ -82,7 +92,7 @@ export default class EvmPriceSigner {
       },
       domain: this._domainData,
       primaryType: "PriceData",
-      message: this.serializeToMessage(signedPriceData.pricesBatch),
+      message: this.serializeToMessage(signedPriceData.pricePackage),
     };
 
     const signer = recoverTypedMessage({data: data, sig: signedPriceData.signature});

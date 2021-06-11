@@ -6,13 +6,13 @@ const evmSigner = new EvmPriceSigner();
 const ethereumPrivateKey = ethers.Wallet.createRandom().privateKey;
 
 describe('evmSignPricesAndVerify', () => {
-  it('should sign prices package', () => {
+  it('should sign price package', () => {
     // given
     const pricePackage: PricePackage = {
       "prices": [
         {
           "symbol": "XXX",
-          "value": 10,
+          "value": 0.0054,
         },
         {
           "symbol": "YYY",
@@ -27,7 +27,7 @@ describe('evmSignPricesAndVerify', () => {
     };
 
     // when
-    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+    const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage,
       ethereumPrivateKey);
 
@@ -52,7 +52,7 @@ describe('evmSignPricesAndVerify', () => {
     };
 
     // when
-    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+    const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage,
       ethereumPrivateKey);
 
@@ -94,7 +94,7 @@ describe('evmSignPricesAndVerify', () => {
     };
 
     // when
-    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+    const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage1,
       ethereumPrivateKey);
 
