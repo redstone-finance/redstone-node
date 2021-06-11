@@ -29,7 +29,7 @@ jest.mock("../../src/fetchers/kraken");
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockImplementation((url) => {
-  if (url == mode.broadcasterUrl || url == "https://api.redstone.finance/metrics") {
+  if (url.startsWith(mode.broadcasterUrl) || url == "https://api.redstone.finance/metrics") {
     return Promise.resolve();
   }
   return Promise.reject(`mock for ${url} not available and should not be called`);
@@ -271,7 +271,7 @@ describe("NodeRunner", () => {
 
     await sut.run();
     expect(axios.post).toHaveBeenCalledWith(
-      mode.broadcasterUrl,
+      mode.broadcasterUrl + "/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",
