@@ -4,7 +4,7 @@ import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import broadcaster from "./broadcasters/lambda-broadcaster";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import {trackEnd, trackStart} from "./utils/performance-tracker";
+import {trackEnd, trackStart, printTrackingState} from "./utils/performance-tracker";
 import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned} from "./types";
 import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
@@ -91,22 +91,23 @@ export default class NodeRunner {
   private async runIteration() {
     await this.safeProcessManifestTokens();
     await this.warnIfARBalanceLow();
+    printTrackingState();
   };
 
   private async safeProcessManifestTokens() {
+    const processingAllTrackingId = trackStart("processing-all");
     try {
-      trackStart("processing-all");
       await this.doProcessTokens();
     } catch (e) {
       this.reThrowIfManifestConfigError(e);
     } finally {
-      trackEnd("processing-all");
+      trackEnd(processingAllTrackingId);
     }
   }
 
   private async warnIfARBalanceLow() {
+    const balanceCheckingTrackingId = trackStart("balance-checking");
     try {
-      trackStart("balance-checking");
       const {balance, isBalanceLow} = await this.arService.checkBalance();
       if (isBalanceLow) {
         logger.warn(`AR balance is quite low: ${balance}`);
@@ -114,7 +115,7 @@ export default class NodeRunner {
     } catch (e) {
       logger.error("Balance checking failed", e.stack);
     } finally {
-      trackEnd("balance-checking");
+      trackEnd(balanceCheckingTrackingId);
     }
   }
 
@@ -139,7 +140,7 @@ export default class NodeRunner {
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {
-    trackStart("fetching-all");
+    const fetchingAllTrackingId = trackStart("fetching-all");
 
     const fetchTimestamp = Date.now();
     const fetchedPrices = await this.pricesService.fetchInParallel(this.tokensBySource)
@@ -153,15 +154,15 @@ export default class NodeRunner {
     );
     this.printAggregatedPrices(aggregatedPrices);
 
-    trackEnd("fetching-all");
+    trackEnd(fetchingAllTrackingId);
 
     return aggregatedPrices;
   }
 
   private async broadcastPrices(signedPrices: PriceDataSigned[]) {
     logger.info("Broadcasting prices");
+    const broadcastingTrackingId = trackStart("broadcasting");
     try {
-      trackStart("broadcasting");
       await broadcaster.broadcast(signedPrices);
       logger.info("Broadcasting completed");
     } catch (e) {
@@ -171,18 +172,16 @@ export default class NodeRunner {
         logger.error("Broadcasting failed", e.stack);
       }
     } finally {
-      trackEnd("broadcasting");
+      trackEnd(broadcastingTrackingId);
     }
   }
 
   private printAggregatedPrices(prices: PriceDataAfterAggregation[]): void {
-    trackStart("fetched-prices-printing");
     for (const price of prices) {
       const sourcesData = JSON.stringify(price.source);
       logger.info(
         `Fetched price : ${price.symbol} : ${price.value} | ${sourcesData}`);
     }
-    trackEnd("fetched-prices-printing");
   }
 
   private reThrowIfManifestConfigError(e: Error) {

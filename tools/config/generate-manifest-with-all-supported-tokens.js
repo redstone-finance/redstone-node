@@ -41,6 +41,8 @@ function main() {
   const manifest = {
     interval: 60000,
     priceAggregator: "median",
+    sourceTimeout: 50000,
+    maxPriceDeviationPercent: 25,
     tokens: tokensWithSortedKeys,
   };
 
