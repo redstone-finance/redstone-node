@@ -220,7 +220,7 @@ describe("NodeRunner", () => {
       "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"permawebTx\":\"mockArTransactionId\",\"provider\":\"mockArAddress\",\"source\":{\"coinbase\":444,\"kraken\":445},\"symbol\":\"BTC\",\"timestamp\":111111111,\"value\":444.5,\"version\":\"0.4\"}"
     );
     expect(axios.post).toHaveBeenCalledWith(
-      "http://broadcast.test",
+      "http://broadcast.test/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",

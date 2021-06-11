@@ -1,9 +1,14 @@
-import EvmPriceSigner, { PricesBatchType, SignedPriceDataType } from "../src/utils/EvmPriceSigner";
+import { ethers } from "ethers";
+import { SignedPricePackage, PricePackage } from "../src/types";
+import EvmPriceSigner from "../src/utils/EvmPriceSigner";
+
+const evmSigner = new EvmPriceSigner();
+const ethereumPrivateKey = ethers.Wallet.createRandom().privateKey;
 
 describe('evmSignPricesAndVerify', () => {
-  it('should sign prices batch', () => {
-    //given
-    const pricesBatch: PricesBatchType = {
+  it('should sign prices package', () => {
+    // given
+    const pricePackage: PricePackage = {
       "prices": [
         {
           "symbol": "XXX",
@@ -20,20 +25,84 @@ describe('evmSignPricesAndVerify', () => {
       ],
       "timestamp": Date.now(),
     };
-    const evmSigner = new EvmPriceSigner();
-    // TODO: replace it with random eth private key later
-    const ethereumPrivateKey = "0x898eec9762b37889ddd6c8d4be7ba2902fec49ae80d47f39170ab30bf17e65a1";
 
-    //when
-    const signedPricesData: SignedPriceDataType = evmSigner.signPriceData(
-      pricesBatch,
+    // when
+    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+      pricePackage,
       ethereumPrivateKey);
 
-    //then
+    // then
     expect(evmSigner.verifySignature(signedPricesData)).toEqual(true);
   });
 
-  // TODO add a test case to check if incorrect signature doesn't work
+  it("should fail verifyung wrong signature", () => {
+    // given
+    const pricePackage: PricePackage = {
+      "prices": [
+        {
+          "symbol": "XXX",
+          "value": 10,
+        },
+      ],
+      "timestamp": Date.now(),
+    };
+    const anotherPricesPackage = {
+      ...pricePackage,
+      timestamp: pricePackage.timestamp + 1,
+    };
 
-  // TODO: add a test case to check if disordered price batch will be verified correctly
+    // when
+    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+      pricePackage,
+      ethereumPrivateKey);
+
+    // then
+    expect(evmSigner.verifySignature({
+      ...signedPricesData,
+      pricePackage: anotherPricesPackage,
+    })).toEqual(false);
+  });
+
+  it("should sign and verify even packages with different price order", () => {
+    // given
+    const pricePackage1: PricePackage = {
+      "prices": [
+        {
+          "symbol": "FIRST",
+          "value": 1,
+        },
+        {
+          "symbol": "SECOND",
+          "value": 2,
+        },
+      ],
+      "timestamp": Date.now(),
+    };
+
+    const pricePackageWithDifferentOrder: PricePackage = {
+      "prices": [
+        {
+          "symbol": "SECOND",
+          "value": 2,
+        },
+        {
+          "symbol": "FIRST",
+          "value": 1,
+        },
+      ],
+      "timestamp": Date.now(),
+    };
+
+    // when
+    const signedPricesData: SignedPricePackage = evmSigner.signPriceData(
+      pricePackage1,
+      ethereumPrivateKey);
+
+    // then
+    expect(evmSigner.verifySignature({
+      ...signedPricesData,
+      pricePackage: pricePackageWithDifferentOrder,
+    })).toEqual(true);
+  });
+
 });
