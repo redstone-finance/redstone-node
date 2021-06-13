@@ -19,11 +19,7 @@ const lambdaBroadcaster: Broadcaster = {
         provider: providerAddress,
       };
 
-      // TODO: remove
-      console.log("Sending price package with body: " + JSON.stringify(body));
-
-      // TODO: uncomment and send an axios request
-      // await axios.post(mode.broadcasterUrl + '/packages', body);
+      await axios.post(mode.broadcasterUrl + '/packages', body);
     },
 };
 

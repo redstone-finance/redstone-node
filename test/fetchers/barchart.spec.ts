@@ -13,7 +13,10 @@ describe("barchart fetcher", () => {
 
   it('should properly fetch data', async () => {
     //given
-    const credentials: Credentials = { barchartApiKey: "someKey" };
+    const credentials: Credentials = {
+      barchartApiKey: "someKey",
+      ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111",
+    };
 
     //when
     const result = await sut.fetchAll(

@@ -4,6 +4,6 @@
   "minimumArBalance": 0.1,
   "credentials": {
     "infuraProjectId": "XXX",
-    "ethereumPrivateKey": "0x0"
+    "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111"
   }
 }

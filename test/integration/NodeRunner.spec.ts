@@ -70,6 +70,7 @@ describe("NodeRunner", () => {
   const nodeConfig: NodeConfig = {
     arweaveKeysFile: "", credentials: {
       infuraProjectId: "ipid",
+      ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
     },
     manifestFile: "",
     minimumArBalance: 0.2
@@ -166,6 +167,7 @@ describe("NodeRunner", () => {
         JSON.parse(`{
       "arweaveKeysFile": "",
       "credentials": {
+        "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111",
         "infuraProjectId": "ipid",
         "covalentApiKey": "ckey"
       },
@@ -234,6 +236,15 @@ describe("NodeRunner", () => {
           "version": "0.4"
         }
       ]
+    );
+    expect(axios.post).toHaveBeenCalledWith(
+      "http://broadcast.test/packages",
+      {
+        timestamp: 111111111,
+        signature: "0x5b2dd26ee75261b8a9c25b4f3eb8bd44292f4e1aeae9867b6f9a9a61a0b98e397be8b1eb1c972a58ac1baec3d2caefe273a39ee0606a66b6bd3c2d1b8db471471c",
+        signer: "0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A",
+        provider: "mockArAddress"
+      }
     );
     expect(mockArProxy.postTransaction).not.toHaveBeenCalled();
     expect(setInterval).toHaveBeenCalledWith(anything(), manifest.interval);
