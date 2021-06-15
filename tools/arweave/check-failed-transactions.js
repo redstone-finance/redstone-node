@@ -6,7 +6,7 @@ const SKIP = 5;
 const LIMIT = 24 * 60;
 
 const arweave = Arweave.init({
-  host: "arweave.dev", // Hostname or IP address for a Arweave host
+  host: "arweave.net", // Hostname or IP address for a Arweave host
   port: 443,           // Port
   protocol: "https",   // Network protocol http or https
   timeout: 60000,      // Network request timeouts in milliseconds
