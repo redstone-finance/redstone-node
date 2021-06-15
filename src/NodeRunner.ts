@@ -39,7 +39,7 @@ export default class NodeRunner {
     this.arService = new ArweaveService(this.arweave, minimumArBalance);
     this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
-    this.evmSigner = new EvmPriceSigner(this.version, 1);
+    this.evmSigner = new EvmPriceSigner(this.version, this.manifest.evmChainId);
 
     //note: setInterval binds "this" to a new context
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
@@ -134,7 +134,7 @@ export default class NodeRunner {
 
     await this.broadcastPrices(signedPrices)
 
-    await this.savePricePackage(signedPrices);
+    await this.broadcastEvmPricePackage(signedPrices);
 
     if (mode.isProd) {
       await this.arService.storePricesOnArweave(arTransaction);
@@ -181,36 +181,39 @@ export default class NodeRunner {
     }
   }
 
-  private async savePricePackage(signedPrices: PriceDataSigned[]) {
-    logger.info("Saving price package");
-    const packageSavingTrackingId = trackStart("package-saving");
+  private async broadcastEvmPricePackage(signedPrices: PriceDataSigned[]) {
+    logger.info("Broadcasting price package");
+    const packageBroadcastingTrackingId = trackStart("package-broadcasting");
     try {
       const signedPackage = this.evmSigner.getSignedPackage(
         signedPrices,
         this.nodeConfig.credentials.ethereumPrivateKey);
-      await this.broadcastPricePackage(signedPackage);
-      logger.info("Package saving completed");
+      await this.broadcastSignedPricePackage(signedPackage);
+      logger.info("Package broadcasting completed");
     } catch (e) {
-      logger.error("Package saving failed", e.stack);
+      logger.error("Package broadcasting failed", e.stack);
     } finally {
-      trackEnd(packageSavingTrackingId);
+      trackEnd(packageBroadcastingTrackingId);
     }
   }
 
-  private async broadcastPricePackage(signedPackage: SignedPricePackage) {
-    const packageBroadcastingTrackingId = trackStart("package-broadcasting");
+  private async broadcastSignedPricePackage(signedPackage: SignedPricePackage) {
+    const signedPackageBroadcastingTrackingId =
+      trackStart("signed-package-broadcasting");
     try {
       await broadcaster.broadcastPricePackage(
         signedPackage,
         this.providerAddress);
     } catch (e) {
       if (e.response !== undefined) {
-        logger.error("Package broadcasting failed: " + e.response.data, e.stack);
+        logger.error(
+          "Signed package broadcasting failed: " + e.response.data,
+          e.stack);
       } else {
-        logger.error("Package broadcasting failed", e.stack);
+        logger.error("Signed package broadcasting failed", e.stack);
       }
     } finally {
-      trackEnd(packageBroadcastingTrackingId);
+      trackEnd(signedPackageBroadcastingTrackingId);
     }
   }
 

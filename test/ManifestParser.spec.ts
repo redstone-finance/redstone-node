@@ -6,8 +6,9 @@ describe("groupTokenBySource", () => {
     interval: 2000,
     priceAggregator: "median",
     sourceTimeout: 3000,
-    maxPriceDeviationPercent: 25
-  }
+    maxPriceDeviationPercent: 25,
+    evmChainId: 1,
+  };
 
   it("should properly assign tokens to sources", () => {
     //given
@@ -137,6 +138,7 @@ describe("getTimeoutForSource", () => {
     interval: 2000,
     priceAggregator: "median",
     maxPriceDeviationPercent: 25,
+    evmChainId: 1,
     tokens: {
       "BTC": {
         "source": [
@@ -195,6 +197,7 @@ describe("getMaxDeviationForSymbol", () => {
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
+      evmChainId: 1,
       tokens: {
         "BTC": {},
         "ETH": {},
@@ -215,6 +218,7 @@ describe("getMaxDeviationForSymbol", () => {
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
+      evmChainId: 1,
       tokens: {
         "BTC": {
           maxPriceDeviationPercent: 34
@@ -239,6 +243,7 @@ describe("getMaxDeviationForSymbol", () => {
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
+      evmChainId: 1,
       tokens: {
         "BTC": {
           maxPriceDeviationPercent: 34
@@ -265,6 +270,7 @@ describe("getMaxDeviationForSymbol", () => {
       "priceAggregator": "median",
       "sourceTimeout": 5000,
       "maxPriceDeviationPercent": "5m",
+      "evmChainId": 1,
       "tokens": {
         "BTC": {
           "maxPriceDeviationPercent": 34

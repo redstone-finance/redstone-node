@@ -4,6 +4,7 @@
   "defaultSource": ["barchart"],
   "sourceTimeout": 12000,
   "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
   "tokens": {
     "TSLA": {},
     "AAPL": {},

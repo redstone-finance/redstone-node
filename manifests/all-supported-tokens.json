@@ -3,6 +3,7 @@
   "priceAggregator": "median",
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
   "tokens": {
     "BAT": {
       "source": [

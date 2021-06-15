@@ -84,7 +84,7 @@ export default class EvmPriceSigner {
     };
   }
 
-  verifySignature(signedPriceData: SignedPricePackage): boolean {
+  verifySignature(signedPricePackage: SignedPricePackage): boolean {
     const data: any = {
       types: {
         EIP712Domain,
@@ -92,11 +92,14 @@ export default class EvmPriceSigner {
       },
       domain: this._domainData,
       primaryType: "PriceData",
-      message: this.serializeToMessage(signedPriceData.pricePackage),
+      message: this.serializeToMessage(signedPricePackage.pricePackage),
     };
 
-    const signer = recoverTypedMessage({data: data, sig: signedPriceData.signature});
+    const signer = recoverTypedMessage({
+      data,
+      sig: signedPricePackage.signature,
+    });
 
-    return signer.toUpperCase() === signedPriceData.signer.toUpperCase();
+    return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
   }
 }

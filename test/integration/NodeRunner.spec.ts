@@ -54,6 +54,7 @@ describe("NodeRunner", () => {
     interval: 1000,
     maxPriceDeviationPercent: 25,
     priceAggregator: "median",
+    evmChainId: 1,
     sourceTimeout: 2000,
     tokens: {
       "BTC": {
@@ -145,6 +146,7 @@ describe("NodeRunner", () => {
         "interval": 0,
         "priceAggregator": "median",
         "maxPriceDeviationPercent": 25,
+        "evmChainId": 1,
         "tokens": {
           "BTC": {
            "source": ["coinbase"]
@@ -257,7 +259,8 @@ describe("NodeRunner", () => {
     const sut = await NodeRunner.create(
       {
         ...manifest,
-        maxPriceDeviationPercent: 0
+        maxPriceDeviationPercent: 0,
+        evmChainId: 1,
       },
       jwk,
       nodeConfig

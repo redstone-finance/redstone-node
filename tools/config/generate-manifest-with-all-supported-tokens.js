@@ -43,6 +43,7 @@ function main() {
     priceAggregator: "median",
     sourceTimeout: 50000,
     maxPriceDeviationPercent: 25,
+    evmChainId: 1,
     tokens: tokensWithSortedKeys,
   };
 

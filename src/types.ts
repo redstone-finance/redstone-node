@@ -4,6 +4,7 @@ export interface Manifest {
   defaultSource?: string[];
   sourceTimeout: number;
   maxPriceDeviationPercent: number,
+  evmChainId: number,
   tokens: { [symbol: string]: TokenConfig };
 };
 

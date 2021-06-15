@@ -35,7 +35,7 @@ describe('evmSignPricesAndVerify', () => {
     expect(evmSigner.verifySignature(signedPricesData)).toEqual(true);
   });
 
-  it("should fail verifyung wrong signature", () => {
+  it("should fail verifying wrong signature", () => {
     // given
     const pricePackage: PricePackage = {
       "prices": [
@@ -60,6 +60,30 @@ describe('evmSignPricesAndVerify', () => {
     expect(evmSigner.verifySignature({
       ...signedPricesData,
       pricePackage: anotherPricesPackage,
+    })).toEqual(false);
+  });
+
+  it("should fail verifying signature for wrong eth address", () => {
+    // given
+    const pricePackage: PricePackage = {
+      "prices": [
+        {
+          "symbol": "XXX",
+          "value": 10,
+        },
+      ],
+      "timestamp": Date.now(),
+    };
+
+    // when
+    const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
+      pricePackage,
+      ethereumPrivateKey);
+
+    // then
+    expect(evmSigner.verifySignature({
+      ...signedPricesData,
+      signer: "0x0000000000000000000000000000000000000000",
     })).toEqual(false);
   });
 
