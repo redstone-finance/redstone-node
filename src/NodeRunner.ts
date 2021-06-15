@@ -4,14 +4,15 @@ import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import broadcaster from "./broadcasters/lambda-broadcaster";
 import ArweaveProxy from "./arweave/ArweaveProxy";
+import EvmPriceSigner from "./utils/EvmPriceSigner";
 import {trackEnd, trackStart, printTrackingState} from "./utils/performance-tracker";
-import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned} from "./types";
+import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned, SignedPricePackage} from "./types";
 import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
 import {mergeObjects} from "./utils/objects";
-import ManifestConfigError from "./manifest/ManifestConfigError";
+import _ from "lodash";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -22,6 +23,7 @@ export default class NodeRunner {
   private arService: ArweaveService;
   private pricesService: PricesService;
   private tokensBySource: TokensBySource;
+  private evmSigner: EvmPriceSigner;
 
   private constructor(
     private manifest: Manifest,
@@ -37,6 +39,7 @@ export default class NodeRunner {
     this.arService = new ArweaveService(this.arweave, minimumArBalance);
     this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
+    this.evmSigner = new EvmPriceSigner(this.version, this.manifest.evmChainId);
 
     //note: setInterval binds "this" to a new context
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
@@ -131,6 +134,8 @@ export default class NodeRunner {
 
     await this.broadcastPrices(signedPrices)
 
+    await this.broadcastEvmPricePackage(signedPrices);
+
     if (mode.isProd) {
       await this.arService.storePricesOnArweave(arTransaction);
     } else {
@@ -173,6 +178,42 @@ export default class NodeRunner {
       }
     } finally {
       trackEnd(broadcastingTrackingId);
+    }
+  }
+
+  private async broadcastEvmPricePackage(signedPrices: PriceDataSigned[]) {
+    logger.info("Broadcasting price package");
+    const packageBroadcastingTrackingId = trackStart("package-broadcasting");
+    try {
+      const signedPackage = this.evmSigner.getSignedPackage(
+        signedPrices,
+        this.nodeConfig.credentials.ethereumPrivateKey);
+      await this.broadcastSignedPricePackage(signedPackage);
+      logger.info("Package broadcasting completed");
+    } catch (e) {
+      logger.error("Package broadcasting failed", e.stack);
+    } finally {
+      trackEnd(packageBroadcastingTrackingId);
+    }
+  }
+
+  private async broadcastSignedPricePackage(signedPackage: SignedPricePackage) {
+    const signedPackageBroadcastingTrackingId =
+      trackStart("signed-package-broadcasting");
+    try {
+      await broadcaster.broadcastPricePackage(
+        signedPackage,
+        this.providerAddress);
+    } catch (e) {
+      if (e.response !== undefined) {
+        logger.error(
+          "Signed package broadcasting failed: " + e.response.data,
+          e.stack);
+      } else {
+        logger.error("Signed package broadcasting failed", e.stack);
+      }
+    } finally {
+      trackEnd(signedPackageBroadcastingTrackingId);
     }
   }
 

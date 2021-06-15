@@ -29,7 +29,7 @@ jest.mock("../../src/fetchers/kraken");
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockImplementation((url) => {
-  if (url == mode.broadcasterUrl || url == "https://api.redstone.finance/metrics") {
+  if (url.startsWith(mode.broadcasterUrl) || url == "https://api.redstone.finance/metrics") {
     return Promise.resolve();
   }
   return Promise.reject(`mock for ${url} not available and should not be called`);
@@ -54,6 +54,7 @@ describe("NodeRunner", () => {
     interval: 1000,
     maxPriceDeviationPercent: 25,
     priceAggregator: "median",
+    evmChainId: 1,
     sourceTimeout: 2000,
     tokens: {
       "BTC": {
@@ -70,6 +71,7 @@ describe("NodeRunner", () => {
   const nodeConfig: NodeConfig = {
     arweaveKeysFile: "", credentials: {
       infuraProjectId: "ipid",
+      ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
     },
     manifestFile: "",
     minimumArBalance: 0.2
@@ -144,6 +146,7 @@ describe("NodeRunner", () => {
         "interval": 0,
         "priceAggregator": "median",
         "maxPriceDeviationPercent": 25,
+        "evmChainId": 1,
         "tokens": {
           "BTC": {
            "source": ["coinbase"]
@@ -166,6 +169,7 @@ describe("NodeRunner", () => {
         JSON.parse(`{
       "arweaveKeysFile": "",
       "credentials": {
+        "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111",
         "infuraProjectId": "ipid",
         "covalentApiKey": "ckey"
       },
@@ -220,7 +224,7 @@ describe("NodeRunner", () => {
       "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"permawebTx\":\"mockArTransactionId\",\"provider\":\"mockArAddress\",\"source\":{\"coinbase\":444,\"kraken\":445},\"symbol\":\"BTC\",\"timestamp\":111111111,\"value\":444.5,\"version\":\"0.4\"}"
     );
     expect(axios.post).toHaveBeenCalledWith(
-      "http://broadcast.test",
+      "http://broadcast.test/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",
@@ -235,6 +239,15 @@ describe("NodeRunner", () => {
         }
       ]
     );
+    expect(axios.post).toHaveBeenCalledWith(
+      "http://broadcast.test/packages",
+      {
+        timestamp: 111111111,
+        signature: "0x5b2dd26ee75261b8a9c25b4f3eb8bd44292f4e1aeae9867b6f9a9a61a0b98e397be8b1eb1c972a58ac1baec3d2caefe273a39ee0606a66b6bd3c2d1b8db471471c",
+        signer: "0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A",
+        provider: "mockArAddress"
+      }
+    );
     expect(mockArProxy.postTransaction).not.toHaveBeenCalled();
     expect(setInterval).toHaveBeenCalledWith(anything(), manifest.interval);
   });
@@ -246,7 +259,8 @@ describe("NodeRunner", () => {
     const sut = await NodeRunner.create(
       {
         ...manifest,
-        maxPriceDeviationPercent: 0
+        maxPriceDeviationPercent: 0,
+        evmChainId: 1,
       },
       jwk,
       nodeConfig
@@ -271,7 +285,7 @@ describe("NodeRunner", () => {
 
     await sut.run();
     expect(axios.post).toHaveBeenCalledWith(
-      mode.broadcasterUrl,
+      mode.broadcasterUrl + "/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",
