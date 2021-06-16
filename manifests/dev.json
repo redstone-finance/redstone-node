@@ -6,8 +6,8 @@
   ],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
-  "developmentMode": true,
   "tokens": {
-    "COMP": {}
+    "COMP": {},
+    "AAVE": {}
   }
 }

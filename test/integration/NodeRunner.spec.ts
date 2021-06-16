@@ -8,6 +8,7 @@ import mode from "../../mode";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import {any} from "jest-mock-extended";
+import {sleep} from "../../src/utils/objects";
 
 
 /****** MOCKS START ******/
@@ -346,14 +347,17 @@ describe("NodeRunner", () => {
       //given
       jest.useRealTimers();
       let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
-        .mockImplementation(() => Promise.reject("no way!"));
+        .mockImplementation(async () => {
+          await sleep(200);
+          return Promise.reject("no way!");
+        })
 
-      // this effectively makes manifest available after one second - so
+      // this effectively makes manifest available after 100ms - so
       // we expect that second manifest fetching trial will succeed.
       setTimeout(() => {
         arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
           .mockImplementation(() => Promise.resolve(manifest));
-      }, 500);
+      }, 100);
       const sut = await NodeRunner.create(
         jwk,
         nodeConfigManifestFromAr

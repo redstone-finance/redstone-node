@@ -17,18 +17,19 @@ import ManifestConfigError from "./manifest/ManifestConfigError";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-export const MANIFEST_REFRESH_INTERVAL = 30000;
+export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
 
 export default class NodeRunner {
   private readonly version: string;
 
-  // note: all '?' class fields have to be re-initialized after reading
+  private lastManifestLoadTimestamp?: number;
+  // note: all below '?' class fields have to be re-initialized after reading
   // new manifest in this.useNewManifest(manifest); - as they depend on the current manifest.
-  private manifest?: Manifest;
+  private currentManifest?: Manifest;
   private pricesService?: PricesService;
   private tokensBySource?: TokensBySource;
   private evmSigner?: EvmPriceSigner;
-  private lastManifestLoadTimestamp?: number;
+  private newManifest?: Manifest;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -42,11 +43,12 @@ export default class NodeRunner {
       throw new Error("minimumArBalance not defined in config file");
     }
     this.useNewManifest(initialManifest);
+    this.lastManifestLoadTimestamp = Date.now();
 
-    //note: setInterval binds "this" to a new context
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     //alternatively use arrow functions...
     this.runIteration = this.runIteration.bind(this);
+    this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
 
   static async create(
@@ -70,7 +72,6 @@ export default class NodeRunner {
           logger.info("Fetched manifest", manifestData)
           break;
         }
-        await sleep(2000);
       }
     } else {
       manifestData = readJSON(nodeConfig.manifestFile!);
@@ -87,7 +88,7 @@ export default class NodeRunner {
   async run(): Promise<void> {
     logger.info(
       `Running redstone-node with manifest:
-      ${JSON.stringify(this.manifest)}
+      ${JSON.stringify(this.currentManifest)}
       Version: ${this.version}
       Address: ${this.providerAddress}
     `);
@@ -96,7 +97,7 @@ export default class NodeRunner {
 
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
-      setInterval(this.runIteration, this.manifest!.interval);
+      setInterval(this.runIteration, this.currentManifest!.interval);
     } catch (e) {
       NodeRunner.reThrowIfManifestConfigError(e);
     }
@@ -113,11 +114,14 @@ export default class NodeRunner {
   }
 
   private async runIteration() {
-    logger.info("Running new iteration.", this.nodeConfig.useManifestFromSmartContract);
-    if (this.nodeConfig.useManifestFromSmartContract) {
-      await this.maybeLoadManifestFromSmartContract();
+    logger.info("Running new iteration.");
+
+    if (this.newManifest !== undefined) {
+      logger.info("Using new manifest: ", this.newManifest.txId);
+      this.useNewManifest(this.newManifest)
     }
 
+    this.maybeLoadManifestFromSmartContract();
     await this.safeProcessManifestTokens();
     await this.warnIfARBalanceLow();
 
@@ -157,18 +161,14 @@ export default class NodeRunner {
     const signedPrices: PriceDataSigned[] = await this.arweaveService.signPrices(
       aggregatedPrices, arTransaction.id, this.providerAddress);
 
-    if (!this.manifest!.developmentMode) {
-      await NodeRunner.broadcastPrices(signedPrices);
-      await this.broadcastEvmPricePackage(signedPrices);
+    await NodeRunner.broadcastPrices(signedPrices);
+    await this.broadcastEvmPricePackage(signedPrices);
 
-      if (mode.isProd) {
-        await this.arweaveService.storePricesOnArweave(arTransaction);
-      } else {
-        logger.info(
-          `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
-      }
+    if (mode.isProd) {
+      await this.arweaveService.storePricesOnArweave(arTransaction);
     } else {
-      logger.info("Broadcasting and storing on Arweave skipped in developmentMode");
+      logger.info(
+        `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
     }
 
   }
@@ -184,7 +184,7 @@ export default class NodeRunner {
 
     const aggregatedPrices: PriceDataAfterAggregation[] = this.pricesService!.calculateAggregatedValues(
       Object.values(pricesBeforeAggregation), //what is the advantage of using lodash.values?
-      aggregators[this.manifest!.priceAggregator]
+      aggregators[this.currentManifest!.priceAggregator]
     );
     NodeRunner.printAggregatedPrices(aggregatedPrices);
     trackEnd(fetchingAllTrackingId);
@@ -260,37 +260,64 @@ export default class NodeRunner {
     }
   }
 
-  private async maybeLoadManifestFromSmartContract() {
-    logger.info("Checking for new manifest version...");
+  // TODO: refactor to a separate service?
+  private maybeLoadManifestFromSmartContract() {
+    if (!this.nodeConfig.useManifestFromSmartContract) {
+      return;
+    }
+
     const now = Date.now();
     const timeDiff = now - this.lastManifestLoadTimestamp!;
-
-    logger.info("Time since last check:", {timeDiff, "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL})
+    logger.info("Checking time since last manifest load", {timeDiff, "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL})
 
     if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
+      this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
-      const manifestFetchTrackingId = trackStart("Fetching manifest");
+      const manifestFetchTrackingId = trackStart("Fetching manifest.");
       try {
-        const manifest = await this.arweaveService.getCurrentManifest();
-        if (manifest !== null) {
-          this.useNewManifest(manifest);
-        }
+        // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
+        // block standard node processing for so long (especially for nodes with low "interval" value)
+        this.arweaveService.getCurrentManifest()
+          .then(this.handleLoadedManifest)
+          .catch((reason) => {
+            logger.error("Error while loading manifest", reason);
+          })
+          .finally(() => {
+            trackEnd(manifestFetchTrackingId);
+          });
       } catch (e) {
-        logger.error("Fetching new manifest failed: ", e.stack || e);
-      } finally {
-        trackEnd(manifestFetchTrackingId);
+        logger.info("Error while calling manifest load function.")
       }
     } else {
-      logger.info("Skipping manifest download in this run.")
+      logger.info("Skipping manifest download in this iteration run.")
     }
   }
 
-  private useNewManifest(manifest: Manifest) {
-    this.manifest = manifest;
-    this.pricesService = new PricesService(manifest, this.nodeConfig.credentials);
-    this.tokensBySource = ManifestHelper.groupTokensBySource(manifest);
-    this.evmSigner = new EvmPriceSigner(this.version, this.manifest.evmChainId);
-    this.lastManifestLoadTimestamp = Date.now();
+  private handleLoadedManifest(loadedManifest: Manifest) {
+    if (!loadedManifest) {
+      return;
+    }
+    logger.info("Manifest successfully loaded", {
+      "loadedManifestTxId": loadedManifest.txId,
+      "currentTxId": this.currentManifest?.txId
+    });
+    if (loadedManifest.txId != this.currentManifest?.txId) {
+      logger.info("Loaded and current manifest differ, updating on next runIteration call.");
+      // we're temporarily saving loaded manifest on a separate "newManifest" field
+      // - calling "this.useNewManifest(this.newManifest)" here could cause that
+      // that different manifests would be used by different services during given "runIteration" execution.
+      this.newManifest = loadedManifest;
+    } else {
+      logger.info("Loaded manifest same as current, not updating.");
+    }
+  }
+
+  private useNewManifest(newManifest: Manifest) {
+    this.currentManifest = newManifest;
+    this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
+    this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
+    this.evmSigner = new EvmPriceSigner(this.version, this.currentManifest.evmChainId);
+    this.newManifest = undefined;
   }
 
 };

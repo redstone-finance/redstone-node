@@ -1,11 +1,11 @@
 export interface Manifest {
+  txId?: string; // note: this fiels is set by smart contract while downloading active manifest content
   interval: number;
   priceAggregator: string;
   defaultSource?: string[];
   sourceTimeout: number;
   maxPriceDeviationPercent: number,
   evmChainId: number,
-  developmentMode?: boolean // in developmentMode we're not saving any prices (both on Arweave and Mongo cache)
   tokens: { [symbol: string]: TokenConfig };
 };
 
