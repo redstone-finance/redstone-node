@@ -20,3 +20,4 @@ lib
 dist
 
 Dockerfile.redstone-dev
+yarn-error.log

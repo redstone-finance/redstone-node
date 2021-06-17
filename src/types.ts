@@ -1,4 +1,5 @@
 export interface Manifest {
+  txId?: string; // note: this fiels is set by smart contract while downloading active manifest content
   interval: number;
   priceAggregator: string;
   defaultSource?: string[];
@@ -93,6 +94,7 @@ export interface ArweaveTransactionTags {
 
 export interface NodeConfig {
   arweaveKeysFile: string;
+  useManifestFromSmartContract?: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;

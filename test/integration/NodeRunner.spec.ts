@@ -1,4 +1,4 @@
-import {Manifest, NodeConfig} from "../../src/types";
+import {NodeConfig} from "../../src/types";
 import NodeRunner from "../../src/NodeRunner";
 import {JWKInterface} from "arweave/node/lib/wallet";
 import {mocked} from "ts-jest/utils";
@@ -6,7 +6,9 @@ import ArweaveProxy from "../../src/arweave/ArweaveProxy";
 import fetchers from "../../src/fetchers";
 import mode from "../../mode";
 import axios from "axios";
-import anything = jasmine.anything;
+import ArweaveService from "../../src/arweave/ArweaveService";
+import {any} from "jest-mock-extended";
+import {sleep} from "../../src/utils/objects";
 
 
 /****** MOCKS START ******/
@@ -41,28 +43,22 @@ jest.mock("../../mode", () => ({
   broadcasterUrl: "http://broadcast.test"
 }));
 
+let manifest: any = null;
+
+jest.mock('../../src/utils/objects', () => ({
+  // @ts-ignore
+  ...(jest.requireActual('../../src/utils/objects')),
+  readJSON: () => {
+    return manifest;
+  }
+}));
+
 jest.mock("uuid",
   () => ({v4: () => "00000000-0000-0000-0000-000000000000"}));
-global.Date.now = jest.fn(() => 111111111);
 /****** MOCKS END ******/
 
 
 describe("NodeRunner", () => {
-
-  const manifest: Manifest = {
-    defaultSource: ["kraken"],
-    interval: 1000,
-    maxPriceDeviationPercent: 25,
-    priceAggregator: "median",
-    evmChainId: 1,
-    sourceTimeout: 2000,
-    tokens: {
-      "BTC": {
-        source: ["coinbase"]
-      },
-      "ETH": {}
-    }
-  }
 
   const jwk: JWKInterface = {
     e: "e", kty: "kty", n: "n"
@@ -79,11 +75,13 @@ describe("NodeRunner", () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
-
     mockArProxy.getBalance.mockClear();
     mockArProxy.prepareUploadTransaction.mockClear();
     mockArProxy.sign.mockClear();
     mockedAxios.post.mockClear();
+
+    jest.spyOn(global.Date, 'now')
+      .mockImplementation(() => 111111111);
 
     fetchers["coinbase"] = {
       fetchAll: jest.fn().mockResolvedValue([
@@ -95,15 +93,32 @@ describe("NodeRunner", () => {
         {symbol: "BTC", value: 445}
       ])
     };
+
+    manifest = {
+      defaultSource: ["kraken"],
+      interval: 10000,
+      maxPriceDeviationPercent: 25,
+      priceAggregator: "median",
+      sourceTimeout: 2000,
+      evmChainId: 1,
+      tokens: {
+        "BTC": {
+          source: ["coinbase"]
+        },
+        "ETH": {}
+      }
+    }
   });
 
+  afterEach(() => {
+    jest.useRealTimers();
+  });
 
   it("should create node instance", async () => {
     //given
     const mockedArProxy = mocked(ArweaveProxy, true);
 
     const sut = await NodeRunner.create(
-      manifest,
       jwk,
       nodeConfig
     );
@@ -116,8 +131,7 @@ describe("NodeRunner", () => {
   it("should throw if no maxDeviationPercent configured for token", async () => {
     //given
     mockArProxy.getBalance.mockResolvedValue(0.2);
-
-    const sut = await NodeRunner.create(
+    manifest =
       JSON.parse(`{
         "defaultSource": ["kraken"],
         "interval": 0,
@@ -129,19 +143,19 @@ describe("NodeRunner", () => {
           },
           "ETH": {}
         }
-      }`),
+      }`)
+
+    const sut = await NodeRunner.create(
       jwk,
       nodeConfig
     );
 
-    return expect(sut.run()).rejects.toThrowError("Could not determine maxPriceDeviationPercent");
+    await expect(sut.run()).rejects.toThrowError("Could not determine maxPriceDeviationPercent");
   });
 
   it("should throw if no sourceTimeout", async () => {
     //given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
-    const sut = await NodeRunner.create(
-      JSON.parse(`{
+    manifest = JSON.parse(`{
         "defaultSource": ["kraken"],
         "interval": 0,
         "priceAggregator": "median",
@@ -153,18 +167,19 @@ describe("NodeRunner", () => {
           },
           "ETH": {}
         }
-      }`),
+      }`);
+    mockArProxy.getBalance.mockResolvedValue(0.2);
+    const sut = await NodeRunner.create(
       jwk,
       nodeConfig
     );
 
-    return expect(sut.run()).rejects.toThrowError("No timeout configured for");
+    await expect(sut.run()).rejects.toThrowError("No timeout configured for");
   });
 
   it("should throw if minimumArBalance not defined in config file", async () => {
     await expect(async () => {
       await NodeRunner.create(
-        manifest,
         jwk,
         JSON.parse(`{
       "arweaveKeysFile": "",
@@ -182,21 +197,18 @@ describe("NodeRunner", () => {
     //given
     mockArProxy.getBalance.mockResolvedValue(0.1);
     const sut = await NodeRunner.create(
-      manifest,
       jwk,
       nodeConfig
     );
 
-    return expect(sut.run()).rejects.toThrowError("AR balance too low");
+    await expect(sut.run()).rejects.toThrowError("AR balance too low");
   });
-
 
   it("should broadcast fetched and signed prices", async () => {
     //given
     mockArProxy.getBalance.mockResolvedValue(0.2);
 
     const sut = await NodeRunner.create(
-      manifest,
       jwk,
       nodeConfig
     );
@@ -249,28 +261,28 @@ describe("NodeRunner", () => {
       }
     );
     expect(mockArProxy.postTransaction).not.toHaveBeenCalled();
-    expect(setInterval).toHaveBeenCalledWith(anything(), manifest.interval);
+    // TODO: cannot spy on setInterval after upgrade to jest 27.
+    // expect(setInterval).toHaveBeenCalledWith(any(), manifest.interval);
   });
 
   it("should not broadcast fetched and signed prices if values deviates too much", async () => {
     //given
     mockArProxy.getBalance.mockResolvedValue(0.2);
 
+    manifest = {
+      ...manifest,
+      maxPriceDeviationPercent: 0
+    }
+
     const sut = await NodeRunner.create(
-      {
-        ...manifest,
-        maxPriceDeviationPercent: 0,
-        evmChainId: 1,
-      },
       jwk,
       nodeConfig
     );
 
     await sut.run();
     expect(mockArProxy.prepareUploadTransaction).not.toHaveBeenCalled();
-    expect(axios.post).not.toHaveBeenCalledWith(mode.broadcasterUrl, anything());
+    expect(axios.post).not.toHaveBeenCalledWith(mode.broadcasterUrl, any());
   });
-
 
   it("should save transaction on Arweave in mode=PROD", async () => {
     //given
@@ -278,7 +290,6 @@ describe("NodeRunner", () => {
     modeMock.isProd = true;
 
     const sut = await NodeRunner.create(
-      manifest,
       jwk,
       nodeConfig
     );
@@ -304,4 +315,59 @@ describe("NodeRunner", () => {
     });
 
   });
+
+  describe("when useManifestFromSmartContract flag is set", () => {
+    let nodeConfigManifestFromAr: any;
+    beforeEach(() => {
+      nodeConfigManifestFromAr = {
+        ...nodeConfig,
+        useManifestFromSmartContract: true
+      }
+    });
+
+    it("should download prices when manifest is available", async () => {
+      //given
+      const arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
+        .mockImplementation(() => Promise.resolve(manifest));
+
+      const sut = await NodeRunner.create(
+        jwk,
+        nodeConfigManifestFromAr
+      );
+
+      await sut.run();
+
+      expect(fetchers.kraken.fetchAll).toHaveBeenCalled();
+      expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalled();
+
+      arServiceSpy.mockClear();
+    });
+
+    it("should not create NodeRunner instance until manifest is available", async () => {
+      //given
+      jest.useRealTimers();
+      let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
+        .mockImplementation(async () => {
+          await sleep(200);
+          return Promise.reject("no way!");
+        })
+
+      // this effectively makes manifest available after 100ms - so
+      // we expect that second manifest fetching trial will succeed.
+      setTimeout(() => {
+        arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
+          .mockImplementation(() => Promise.resolve(manifest));
+      }, 100);
+      const sut = await NodeRunner.create(
+        jwk,
+        nodeConfigManifestFromAr
+      );
+      expect(sut).not.toBeNull();
+      expect(ArweaveService.prototype.getCurrentManifest).toHaveBeenCalledTimes(2);
+      arServiceSpy.mockClear();
+      jest.useFakeTimers();
+    });
+
+  });
+
 });

@@ -1,11 +1,11 @@
-import fs from "fs";
 import yargs from "yargs";
 import {Consola} from "consola"
 import NodeRunner from "./src/NodeRunner";
 import {NodeConfig} from "./src/types";
+import {readJSON} from "./src/utils/objects";
 
 const logger = require("./src/utils/logger")("index") as Consola;
-const { hideBin } = require("yargs/helpers") as any;
+const {hideBin} = require("yargs/helpers") as any;
 
 async function start() {
   try {
@@ -14,7 +14,7 @@ async function start() {
     logger.error(e.stack);
     logger.info(
       "USAGE: yarn start:prod --config <PATH_TO_CONFIG_FILE>");
-  };
+  }
 }
 
 async function main(): Promise<void> {
@@ -30,24 +30,13 @@ async function main(): Promise<void> {
   //TODO: validate config files and manifest files - use json schema? https://2ality.com/2020/06/validating-data-typescript.html
   const config: NodeConfig = readJSON(configFilePath);
   const jwk = readJSON(config.arweaveKeysFile);
-  const manifest = readJSON(config.manifestFile);
 
   // Running limestone-node with manifest
   const runner = await NodeRunner.create(
-    manifest,
     jwk,
     config
   );
   await runner.run();
-}
-
-function readJSON(path: string): any {
-  const content = fs.readFileSync(path, "utf-8");
-  try {
-    return JSON.parse(content);
-  } catch (e) {
-    throw new Error(`File "${path}" does not contain a valid JSON`);
-  }
 }
 
 start();
