@@ -5,12 +5,12 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
-    "BAT": {
+    "COMP": {
       "source": [
         "binance",
-        "bitfinex",
         "coinbase",
         "coingecko",
+        "kraken",
         "ftx",
         "kraken",
         "kyber",
@@ -70,6 +70,19 @@
         "uniswap"
       ]
     },
+    "AAVE": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "kraken",
+        "ftx",
+        "kraken",
+        "kyber",
+        "sushiswap",
+        "uniswap"
+      ]
+    },
     "LINK": {
       "source": [
         "binance",
@@ -82,15 +95,15 @@
         "uniswap"
       ]
     },
-    "COMP": {
+    "BAT": {
       "source": [
         "binance",
+        "bitfinex",
         "coinbase",
         "coingecko",
         "ftx",
         "kraken",
         "kyber",
-        "sushiswap",
         "uniswap"
       ]
     },
@@ -101,18 +114,6 @@
         "coinbase",
         "coingecko",
         "ftx",
-        "kyber",
-        "sushiswap",
-        "uniswap"
-      ]
-    },
-    "AAVE": {
-      "source": [
-        "binance",
-        "coinbase",
-        "coingecko",
-        "ftx",
-        "kraken",
         "kyber",
         "sushiswap",
         "uniswap"
@@ -361,13 +362,6 @@
         "ftx"
       ]
     },
-    "AUD": {
-      "source": [
-        "binance",
-        "ecb",
-        "kraken"
-      ]
-    },
     "CRV": {
       "source": [
         "binance",
@@ -594,6 +588,13 @@
         "binance",
         "ecb",
         "ftx"
+      ]
+    },
+    "AUD": {
+      "source": [
+        "binance",
+        "ecb",
+        "kraken"
       ]
     },
     "SAND": {
