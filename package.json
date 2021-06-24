@@ -2,8 +2,8 @@
   "name": "redstone-node",
   "version": "0.4.6",
   "description": "A data provider module that fetches price information and serves it to end users.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/NodeRunner.js",
+  "types": "dist/src/NodeRunner.d.ts",
   "scripts": {
     "build": "tsc",
     "start:prod": "node dist/index.js",
@@ -13,7 +13,6 @@
     "test:watch": "NODE_ENV=test jest --watch",
     "test:ci": "NODE_ENV=test jest --ci --reporters='default' --reporters='./tools/GithubActionsReporter'",
     "prepare": "yarn build",
-    "prepublishOnly": "yarn test",
     "version": "git add -A src",
     "postversion": "git push && git push --tags"
   },
@@ -71,7 +70,6 @@
     "typescript": "^4.3.2"
   },
   "files": [
-    "dist/**/*",
-    "dist/src/utils/EvmPriceSigner.js"
+    "dist/**/*"
   ]
 }
