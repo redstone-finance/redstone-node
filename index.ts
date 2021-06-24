@@ -3,6 +3,7 @@ import {Consola} from "consola"
 import NodeRunner from "./src/NodeRunner";
 import {NodeConfig} from "./src/types";
 import {readJSON} from "./src/utils/objects";
+import EvmPriceSigner from "./src/utils/EvmPriceSigner";
 
 const logger = require("./src/utils/logger")("index") as Consola;
 const {hideBin} = require("yargs/helpers") as any;
@@ -41,4 +42,6 @@ async function main(): Promise<void> {
 
 start();
 
-export = {};
+export = {
+  EvmPriceSigner,
+};

@@ -7,8 +7,6 @@ node_modules/
 # Custom files and folders
 .experiments
 .secrets*
-.secrets
-.github
 
 .DS_Store
 
@@ -17,9 +15,13 @@ node_modules/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-lib
-src
-index.ts
-
 Dockerfile.redstone-dev
 yarn-error.log
+
+# Published on git but ignored on NPM
+lib
+src
+tools
+test
+manifests
+.github
