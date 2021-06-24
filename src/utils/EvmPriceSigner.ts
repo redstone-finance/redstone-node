@@ -35,7 +35,7 @@ export default class EvmPriceSigner {
     };
   }
 
-  private serializeToMessage(pricePackage: PricePackage): object {
+  serializeToMessage(pricePackage: PricePackage): object {
     // We clean and sort prices to be sure that prices
     // always have the same format
     const cleanPricesData = pricePackage.prices.map(

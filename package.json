@@ -1,5 +1,5 @@
 {
-  "name": "limestone-node",
+  "name": "redstone-node",
   "version": "0.4.0",
   "description": "A data provider module that fetches price information and serves it to end users. ",
   "main": "index.js",
