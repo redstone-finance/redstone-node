@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "tsc",
     "start:prod": "node dist/index.js",
     "start:prod:old": "ts-node index.ts",
     "start:dev": "MODE=LOCAL ts-node index.ts",
