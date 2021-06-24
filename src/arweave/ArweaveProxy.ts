@@ -5,6 +5,7 @@ import { Consola } from "consola";
 import util from "util";
 import { gzip } from "zlib";
 import _  from "lodash";
+import ArweaveMultihost from "arweave-multihost";
 
 const logger =
   require("../utils/logger")("utils/arweave-proxy") as Consola;
@@ -16,10 +17,7 @@ export default class ArweaveProxy  {
 
   constructor(jwk: JWKInterface) {
     this.jwk = jwk;
-    this.arweave = Arweave.init({
-      host: "arweave.net", // Hostname or IP address for a Arweave host
-      port: 443,           // Port
-      protocol: "https",   // Network protocol http or https
+    this.arweave = ArweaveMultihost.initWithDefaultHosts({
       timeout: 60000,      // Network request timeouts in milliseconds
       logging: false,      // Enable network request logging
     });
