@@ -1424,6 +1424,14 @@ articles@~0.2.1:
   resolved "https://registry.yarnpkg.com/articles/-/articles-0.2.2.tgz#cc6b429f8cfa811f41e7a08505abbb4e45503197"
   integrity sha512-S3Y4MPp+LD/l0HHm/4yrr6MoXhUkKT98ZdsV2tkTuBNywqUXEtvJT+NBO3KTSQEttc5EOwEJe2Xw8cZ9TI5Hrw==
 
+arweave-multihost@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/arweave-multihost/-/arweave-multihost-0.0.6.tgz#9e6fbcd79943bf0bf25247ef6038f8e4117d1abc"
+  integrity sha512-JGBO4kkwo4W83gTJqOKbrJB5F6qNvcsPLvLeIGcwv+XoI3+PK+Kk7eqhwDQ5nuE5MmBU/JseyJe01EbO69GDGg==
+  dependencies:
+    arweave "^1.10.14"
+    axios "^0.21.1"
+
 arweave@^1.10.11:
   version "1.10.11"
   resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.11.tgz#59dff46319e258d68f9b921a1f709be457fb7162"
@@ -3976,7 +3984,7 @@ redstone-smartweave-contracts@redstone-finance/redstone-smartweave-contracts:
   dependencies:
     arweave "^1.10.14"
     make-runnable "^1.3.9"
-    smartweave "0.4.31"
+    smartweave "^0.4.30"
     testweave-sdk "^0.2.2"
 
 request-promise-core@1.1.4:
@@ -4220,7 +4228,7 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smartweave@0.4.31, smartweave@^0.4.27, smartweave@^0.4.31:
+smartweave@^0.4.27, smartweave@^0.4.30, smartweave@^0.4.31:
   version "0.4.31"
   resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.31.tgz#d5647cdee11ca7a2ddaddd8384b8f46260d32727"
   integrity sha512-DOW0AimcxnWGdcCPZm9hpAmwJ79uywcyLxu1HXPlWHEbwaN2TqYf4OgYMZTlHXVXXGk+m7PutUufgkx+Hv+fUQ==
