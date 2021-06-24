@@ -13,6 +13,6 @@ export function readJSON(path: string): any {
   }
 }
 
-export function sleep(ms: number): Promise<any> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+export function timeout(ms: number): Promise<any> {
+  return new Promise(resolve => setTimeout(() => resolve('timeout'), ms));
 }

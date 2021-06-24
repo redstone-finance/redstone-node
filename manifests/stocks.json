@@ -67,6 +67,17 @@
     "SBN21": {},
     "CCU21": {},
     "LSN21": {},
-    "OJN21": {}
+    "OJN21": {},
+
+    "ETH": {
+      "source": [
+        "binance",
+        "bitfinex",
+        "coinbase",
+        "coingecko",
+        "ftx",
+        "huobi"
+      ]
+    }
   }
 }

@@ -11,13 +11,13 @@ import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
-import {mergeObjects, readJSON, sleep} from "./utils/objects";
+import {mergeObjects, readJSON, timeout} from "./utils/objects";
 import ManifestConfigError from "./manifest/ManifestConfigError";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
+export const MANIFEST_REFRESH_INTERVAL = 10 * 1000;
 
 export default class NodeRunner {
   private readonly version: string;
@@ -277,14 +277,17 @@ export default class NodeRunner {
       try {
         // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
         // block standard node processing for so long (especially for nodes with low "interval" value)
-        this.arweaveService.getCurrentManifest()
-          .then(this.handleLoadedManifest)
-          .catch((reason) => {
-            logger.error("Error while loading manifest", reason);
-          })
-          .finally(() => {
-            trackEnd(manifestFetchTrackingId);
-          });
+        Promise.race([
+          this.arweaveService.getCurrentManifest(),
+          timeout(1000)
+        ]).then((value) => {
+          if (value === "timeout") {
+            logger.warn("Manifest load promise timeout");
+          } else {
+            this.handleLoadedManifest(value);
+          }
+        });
+
       } catch (e) {
         logger.info("Error while calling manifest load function.")
       }
