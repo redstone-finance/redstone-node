@@ -17,7 +17,7 @@ import ManifestConfigError from "./manifest/ManifestConfigError";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-export const MANIFEST_REFRESH_INTERVAL = 10 * 1000;
+export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
 
 export default class NodeRunner {
   private readonly version: string;
@@ -29,7 +29,7 @@ export default class NodeRunner {
   private pricesService?: PricesService;
   private tokensBySource?: TokensBySource;
   private evmSigner?: EvmPriceSigner;
-  private newManifest?: Manifest;
+  private newManifest: Manifest | null = null;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -116,7 +116,7 @@ export default class NodeRunner {
   private async runIteration() {
     logger.info("Running new iteration.");
 
-    if (this.newManifest !== undefined) {
+    if (this.newManifest !== null) {
       logger.info("Using new manifest: ", this.newManifest.txId);
       this.useNewManifest(this.newManifest)
     }
@@ -279,13 +279,14 @@ export default class NodeRunner {
         // block standard node processing for so long (especially for nodes with low "interval" value)
         Promise.race([
           this.arweaveService.getCurrentManifest(),
-          timeout(1000)
+          timeout(10000)
         ]).then((value) => {
           if (value === "timeout") {
             logger.warn("Manifest load promise timeout");
           } else {
             this.handleLoadedManifest(value);
           }
+          trackEnd(manifestFetchTrackingId);
         });
 
       } catch (e) {
@@ -296,7 +297,7 @@ export default class NodeRunner {
     }
   }
 
-  private handleLoadedManifest(loadedManifest: Manifest) {
+  private handleLoadedManifest(loadedManifest: Manifest | null) {
     if (!loadedManifest) {
       return;
     }
@@ -310,6 +311,7 @@ export default class NodeRunner {
       // - calling "this.useNewManifest(this.newManifest)" here could cause that
       // that different manifests would be used by different services during given "runIteration" execution.
       this.newManifest = loadedManifest;
+      loadedManifest = null;
     } else {
       logger.info("Loaded manifest same as current, not updating.");
     }
@@ -320,7 +322,7 @@ export default class NodeRunner {
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
     this.evmSigner = new EvmPriceSigner(this.version, this.currentManifest.evmChainId);
-    this.newManifest = undefined;
+    this.newManifest = null;
   }
 
 };
