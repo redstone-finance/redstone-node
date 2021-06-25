@@ -31,7 +31,7 @@ function timeout(timer) {
   });
 }
 
-function read() {
+async function read() {
   console.log("\n\n\nCalling SWC... ", Date.now());
 
   const arweave = Arweave.init({
@@ -44,10 +44,13 @@ function read() {
 
   const jwk = readJSON("./.secrets/arweave-keyfile-33F0QHcb22W7LwWR1iRC8Az1ntZG09XQ03YWuw2ABqA.json");
 
+  // "CbGCxBJn6jLeezqDl1w3o8oCSeRCb-MmtZNKPodla-0" - contract version with logging
+  // "OrO8n453N6bx921wtsEs-0OCImBLCItNU5oSbFKlFuU" - contract version without logging
+
   return smartweave.interactRead(
     arweave,
     jwk,
-    "OrO8n453N6bx921wtsEs-0OCImBLCItNU5oSbFKlFuU",
+    "CbGCxBJn6jLeezqDl1w3o8oCSeRCb-MmtZNKPodla-0",
     {
       function: "activeManifest",
       data: {
