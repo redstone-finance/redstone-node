@@ -19,7 +19,11 @@ export default class ArweaveProxy  {
     this.jwk = jwk;
     this.arweave = ArweaveMultihost.initWithDefaultHosts({
       timeout: 60000,      // Network request timeouts in milliseconds
-      logging: false,      // Enable network request logging
+      logging: true,      // Enable network request logging
+      logger: logger.info,
+      onError: (...args: any) => {
+        logger.warn("Arweave request failed", ...args);
+      },
     });
   }
 
@@ -27,7 +31,7 @@ export default class ArweaveProxy  {
     // TODO: check alternative methods
     // crypto module is marked as deprecated
     const dataToSign: Uint8Array = new TextEncoder().encode(strToSign);
-    const signature = await this.arweave.crypto.sign(this.jwk, dataToSign);
+    const signature = await Arweave.crypto.sign(this.jwk, dataToSign);
     const buffer = Buffer.from(signature);
 
     return buffer.toString("base64");
