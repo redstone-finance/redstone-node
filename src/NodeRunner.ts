@@ -4,13 +4,13 @@ import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import broadcaster from "./broadcasters/lambda-broadcaster";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import {trackEnd, trackStart, printTrackingState} from "./utils/performance-tracker";
+import {printTrackingState, trackEnd, trackStart} from "./utils/performance-tracker";
 import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned, SignedPricePackage} from "./types";
 import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
-import {mergeObjects, readJSON, sleep} from "./utils/objects";
+import {mergeObjects, readJSON, timeout} from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 
 const logger = require("./utils/logger")("runner") as Consola;
@@ -27,7 +27,7 @@ export default class NodeRunner {
   private currentManifest?: Manifest;
   private pricesService?: PricesService;
   private tokensBySource?: TokensBySource;
-  private newManifest?: Manifest;
+  private newManifest: Manifest | null = null;
   private priceSignerService?: PriceSignerService;
 
   private constructor(
@@ -115,7 +115,7 @@ export default class NodeRunner {
   private async runIteration() {
     logger.info("Running new iteration.");
 
-    if (this.newManifest !== undefined) {
+    if (this.newManifest !== null) {
       logger.info("Using new manifest: ", this.newManifest.txId);
       this.useNewManifest(this.newManifest)
     }
@@ -274,7 +274,10 @@ export default class NodeRunner {
 
     const now = Date.now();
     const timeDiff = now - this.lastManifestLoadTimestamp!;
-    logger.info("Checking time since last manifest load", {timeDiff, "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL})
+    logger.info("Checking time since last manifest load", {
+      timeDiff,
+      "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL
+    })
 
     if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
       this.lastManifestLoadTimestamp = now;
@@ -283,14 +286,18 @@ export default class NodeRunner {
       try {
         // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
         // block standard node processing for so long (especially for nodes with low "interval" value)
-        this.arweaveService.getCurrentManifest()
-          .then(this.handleLoadedManifest)
-          .catch((reason) => {
-            logger.error("Error while loading manifest", reason);
-          })
-          .finally(() => {
-            trackEnd(manifestFetchTrackingId);
-          });
+        Promise.race([
+          this.arweaveService.getCurrentManifest(),
+          timeout(10000)
+        ]).then((value) => {
+          if (value === "timeout") {
+            logger.warn("Manifest load promise timeout");
+          } else {
+            this.handleLoadedManifest(value);
+          }
+          trackEnd(manifestFetchTrackingId);
+        });
+
       } catch (e) {
         logger.info("Error while calling manifest load function.")
       }
@@ -299,7 +306,7 @@ export default class NodeRunner {
     }
   }
 
-  private handleLoadedManifest(loadedManifest: Manifest) {
+  private handleLoadedManifest(loadedManifest: Manifest | null) {
     if (!loadedManifest) {
       return;
     }
@@ -313,6 +320,7 @@ export default class NodeRunner {
       // - calling "this.useNewManifest(this.newManifest)" here could cause that
       // that different manifests would be used by different services during given "runIteration" execution.
       this.newManifest = loadedManifest;
+      loadedManifest = null;
     } else {
       logger.info("Loaded manifest same as current, not updating.");
     }
@@ -329,7 +337,7 @@ export default class NodeRunner {
       version: this.version,
       addEvmSignature: Boolean(this.nodeConfig.addEvmSignature),
     });
-    this.newManifest = undefined;
+    this.newManifest = null;
   }
 
 };

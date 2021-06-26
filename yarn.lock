@@ -1072,13 +1072,6 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.1.tgz#a6ca6a9a0ff366af433f42f5f0e124794ff6b8f1"
   integrity sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==
 
-"@types/axios@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
-  integrity sha1-7CMA++fX3d1+udOr+HmZlkyvzkY=
-  dependencies:
-    axios "*"
-
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.14":
   version "7.1.14"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.14.tgz#faaeefc4185ec71c389f4501ee5ec84b170cc402"
@@ -1424,28 +1417,29 @@ articles@~0.2.1:
   resolved "https://registry.yarnpkg.com/articles/-/articles-0.2.2.tgz#cc6b429f8cfa811f41e7a08505abbb4e45503197"
   integrity sha512-S3Y4MPp+LD/l0HHm/4yrr6MoXhUkKT98ZdsV2tkTuBNywqUXEtvJT+NBO3KTSQEttc5EOwEJe2Xw8cZ9TI5Hrw==
 
-arweave-multihost@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/arweave-multihost/-/arweave-multihost-0.0.7.tgz#357349cffba5958fc6480e470f19c154f6bc7dc5"
-  integrity sha512-Wc0jP+mM5E3/1s0CoFdHV2mdDkAgZL6erVSEK3QIU5cuckDYbjwBPe1B/qkwfhouuB6qi34E1YH7ctcPfmgCAw==
+arweave-multihost@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/arweave-multihost/-/arweave-multihost-0.0.8.tgz#3c4409ce511dfb6669889c8bdbfb7347b25397e4"
+  integrity sha512-WoM610lrlZTwmxNjrSFX5p+04wHIJy5O9yxoma/KaKjCynWNgBGi0iJ/akkh/OV1LybqK8vu9Cyxw67sppajZA==
   dependencies:
-    arweave "^1.10.14"
+    arweave "^1.10.15"
     axios "^0.21.1"
-
-arweave@^1.10.11:
-  version "1.10.11"
-  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.11.tgz#59dff46319e258d68f9b921a1f709be457fb7162"
-  integrity sha512-rh3Yhc7Zjf476Lvg4zjvURg1HvdrRej/2528QqQrlej/EocEfHt1/TEM35r3ghDzRBvHLUcMkqIDUwLotS5sUA==
-  dependencies:
-    asn1.js "^5.4.1"
-    axios "^0.21.1"
-    base64-js "^1.3.1"
-    bignumber.js "^9.0.1"
 
 arweave@^1.10.13, arweave@^1.10.14:
   version "1.10.14"
   resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.14.tgz#9d34bc92aeb9e974639be51198b697d783bc7927"
   integrity sha512-0xEjsrhSqqQNa6bDGztO+PhFOn5JkUiC5B/WSu+2KszdGXMuekos3XVkirIgrH4VKqLq84kLmN1ckXuiLkIWgQ==
+  dependencies:
+    arconnect "^0.2.8"
+    asn1.js "^5.4.1"
+    axios "^0.21.1"
+    base64-js "^1.3.1"
+    bignumber.js "^9.0.1"
+
+arweave@^1.10.15:
+  version "1.10.15"
+  resolved "https://registry.yarnpkg.com/arweave/-/arweave-1.10.15.tgz#c55d0c6f4eef60a4b89056976af411dcdffa83c8"
+  integrity sha512-dzct71xkkuGIqb3Cp0HI6X9V+5AvhpCLO70MGawPZ5sZ7n1QUrTKeGuOfWOGGMZx4r4vXRxQg33PUiJScDmNhA==
   dependencies:
     arconnect "^0.2.8"
     asn1.js "^5.4.1"
@@ -1490,19 +1484,19 @@ aws4@^1.6.0, aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@*, axios@^0.21.1:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
-  dependencies:
-    follow-redirects "^1.10.0"
-
 axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 babel-jest@^27.0.2:
   version "27.0.2"
@@ -3508,14 +3502,6 @@ make-error@1.x, make-error@^1.1.1:
   resolved "https://registry.yarnpkg.com/make-error/-/make-error-1.3.6.tgz#2eb2e37ea9b67c4891f684a1394799af484cf7a2"
   integrity sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
 
-make-runnable@^1.3.9:
-  version "1.3.10"
-  resolved "https://registry.yarnpkg.com/make-runnable/-/make-runnable-1.3.10.tgz#c89f89e35ffd2dd88fd0ec1b06650e8357577c87"
-  integrity sha512-ec9hxTJip4ncG3TqZrkoR69oKdxFyJDq40A4sGNwGYVtl4Q10V4BhqnTGLUyJxQIxobhTqwxkgEFbGh77RmV7A==
-  dependencies:
-    bluebird "^3.5.0"
-    yargs "^16.2.0"
-
 makeerror@1.0.x:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/makeerror/-/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
@@ -3978,15 +3964,6 @@ redstone-api@^0.4.2:
     lodash "^4.17.21"
     pako "^2.0.3"
 
-redstone-smartweave-contracts@redstone-finance/redstone-smartweave-contracts:
-  version "0.4.0"
-  resolved "https://codeload.github.com/redstone-finance/redstone-smartweave-contracts/tar.gz/ab63bf7b5d4213e1e24a68396bfa9c61c9644044"
-  dependencies:
-    arweave "^1.10.14"
-    make-runnable "^1.3.9"
-    smartweave "0.4.31"
-    testweave-sdk "^0.2.2"
-
 request-promise-core@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/request-promise-core/-/request-promise-core-1.1.4.tgz#3eedd4223208d419867b78ce815167d10593a22f"
@@ -4228,15 +4205,15 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-smartweave@0.4.31, smartweave@^0.4.27, smartweave@^0.4.31:
-  version "0.4.31"
-  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.31.tgz#d5647cdee11ca7a2ddaddd8384b8f46260d32727"
-  integrity sha512-DOW0AimcxnWGdcCPZm9hpAmwJ79uywcyLxu1HXPlWHEbwaN2TqYf4OgYMZTlHXVXXGk+m7PutUufgkx+Hv+fUQ==
+smartweave@^0.4.34:
+  version "0.4.34"
+  resolved "https://registry.yarnpkg.com/smartweave/-/smartweave-0.4.34.tgz#5ffaa7f92ce8188d4fa9212bf08179c29b7627ba"
+  integrity sha512-aU/NTgS3ieRQPXJoUunIEyBtB59VPIgZ0/wXm3F4mqMpFgik/3tOYnUOcJITXmUiv0mA6dkVRx95cfuvJ10yZg==
   dependencies:
     "@types/clui" "^0.3.0"
     "@types/inquirer" "^7.3.1"
     "@weavery/clarity" "^0.1.5"
-    arweave "^1.10.11"
+    arweave "^1.10.15"
     bignumber.js "^9.0.1"
     chalk "^4.1.0"
     clui "^0.3.6"
@@ -4432,16 +4409,6 @@ test-exclude@^6.0.0:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
     minimatch "^3.0.4"
-
-testweave-sdk@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/testweave-sdk/-/testweave-sdk-0.2.2.tgz#e0539bd24f01726cc405990eab2981f921d242c4"
-  integrity sha512-W1xOpzwFASENctuTcu+j0BCwGS193qkylsUE0KiMbxatbxXTutY78DUQrTJ18AYnWx/zqsaiegHh1gmojA0PCQ==
-  dependencies:
-    "@types/axios" "^0.14.0"
-    arweave "^1.10.11"
-    axios "^0.21.1"
-    smartweave "^0.4.27"
 
 throat@^6.0.1:
   version "6.0.1"
