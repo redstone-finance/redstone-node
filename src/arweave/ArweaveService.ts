@@ -69,43 +69,6 @@ export default class ArweaveService {
     }
   }
 
-  // async signPrices(prices: PriceDataBeforeSigning[]) {
-  //   const signingTrackingId = trackStart("arweave-signing");
-
-  //   for (const price of prices) {
-  //     logger.info(`Signing price with arweve signer: ${price.id}`);
-  //     const signed: PriceDataSigned = await this.signPrice({
-  //   }
-
-  //   trackEnd(signingTrackingId);
-  // }
-
-  // async signPrices(
-  //   prices: PriceDataAfterAggregation[],
-  //   idArTransaction: string,
-  //   providerAddress: string
-  // ): Promise<PriceDataSigned[]> {
-
-
-  //   const signedPrices: PriceDataSigned[] = [];
-
-  //   for (const price of prices) {
-  //     logger.info(`Signing price: ${price.id}`);
-
-  //     //TODO: check if signing in parallel would improve performance -  https://app.clickup.com/t/k391rf
-
-  //       ...price,
-  //       permawebTx: idArTransaction,
-  //       provider: providerAddress,
-  //     });
-
-  //     signedPrices.push(signed);
-  //   }
-  //   trackEnd(signingTrackingId);
-
-  //   return signedPrices;
-  // }
-
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweave.getAddress();
     const result = await providersRegistry.currentManifest(jwkAddress, false, this.arweave.jwk);
