@@ -67,12 +67,9 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
   provider: string;
 };
 
-export interface PriceDataSignedByArweaveSigner extends PriceDataBeforeSigning {
+export interface PriceDataSigned extends PriceDataBeforeSigning {
   signature: string;
-};
-
-export interface PriceDataSigned extends PriceDataSignedByArweaveSigner {
-  evmSignature: string;
+  evmSignature?: string;
 };
 
 export interface ShortSinglePrice {
@@ -99,6 +96,7 @@ export interface ArweaveTransactionTags {
 export interface NodeConfig {
   arweaveKeysFile: string;
   useManifestFromSmartContract?: boolean;
+  addEvmSignature?: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;

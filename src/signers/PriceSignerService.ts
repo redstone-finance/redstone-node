@@ -12,6 +12,7 @@ interface PriceSignerConfig {
   evmChainId: number;
   ethereumPrivateKey: string;
   arweaveService: ArweaveService;
+  addEvmSignature: boolean;
 };
 
 // Business service that supplies signing operations required by Redstone-Node
@@ -19,11 +20,13 @@ export default class PriceSignerService {
   private arweaveService: ArweaveService;
   private evmSigner: EvmPriceSigner;
   private ethereumPrivateKey: string;
+  private addEvmSignature: boolean;
 
   constructor(config: PriceSignerConfig) {
     this.evmSigner = new EvmPriceSigner(config.version, config.evmChainId);
     this.arweaveService = config.arweaveService;
     this.ethereumPrivateKey = config.ethereumPrivateKey;
+    this.addEvmSignature = config.addEvmSignature;
   }
 
   async signPrices(prices: PriceDataBeforeSigning[], ): Promise<PriceDataSigned[]> {
@@ -44,19 +47,19 @@ export default class PriceSignerService {
 
   async signSinglePrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
     logger.info(`Signing price with arweave signer: ${price.id}`);
-    const signedWithArweave = await this.arweaveService.signPrice(price);
+    const signedPrice = await this.arweaveService.signPrice(price);
 
-    // Signing with evm signer
-    logger.info(`Signing price with evm signer: ${price.id}`);
-    const packageWithSinglePrice = this.evmSigner.signPricePackage({
-      prices: [_.pick(price, ["symbol", "value"])],
-      timestamp: price.timestamp,
-    }, this.ethereumPrivateKey);
+    if (this.addEvmSignature) {
+      logger.info(`Signing price with evm signer: ${price.id}`);
+      const packageWithSinglePrice = this.evmSigner.signPricePackage({
+        prices: [_.pick(price, ["symbol", "value"])],
+        timestamp: price.timestamp,
+      }, this.ethereumPrivateKey);
+      signedPrice.evmSignature = packageWithSinglePrice.signature;
+    }
 
-    return {
-      ...signedWithArweave,
-      evmSignature: packageWithSinglePrice.signature,
-    };
+
+    return signedPrice;
   }
 
   signPricePackage(prices: PriceDataSigned[]): SignedPricePackage {

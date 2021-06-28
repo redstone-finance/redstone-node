@@ -4,7 +4,7 @@ import {
   Manifest,
   PriceDataAfterAggregation,
   PriceDataBeforeSigning,
-  PriceDataSignedByArweaveSigner,
+  PriceDataSigned,
 } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
@@ -75,7 +75,7 @@ export default class ArweaveService {
     return result.manifest.activeManifestContent;
   }
 
-  async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSignedByArweaveSigner> {
+  async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
     const priceWithSortedProps = deepSortObject(price);
     const priceStringified = JSON.stringify(priceWithSortedProps);
     const signature = await this.arweave.sign(priceStringified);

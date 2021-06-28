@@ -327,6 +327,7 @@ export default class NodeRunner {
       ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
       evmChainId: newManifest.evmChainId,
       version: this.version,
+      addEvmSignature: Boolean(this.nodeConfig.addEvmSignature),
     });
     this.newManifest = undefined;
   }
