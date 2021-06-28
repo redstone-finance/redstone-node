@@ -4,7 +4,7 @@ import {
   Manifest,
   PriceDataAfterAggregation,
   PriceDataBeforeSigning,
-  PriceDataSigned
+  PriceDataSignedByArweaveSigner,
 } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
@@ -69,31 +69,42 @@ export default class ArweaveService {
     }
   }
 
-  async signPrices(
-    prices: PriceDataAfterAggregation[],
-    idArTransaction: string,
-    providerAddress: string
-  ): Promise<PriceDataSigned[]> {
-    const signingTrackingId = trackStart("signing");
+  // async signPrices(prices: PriceDataBeforeSigning[]) {
+  //   const signingTrackingId = trackStart("arweave-signing");
 
-    const signedPrices: PriceDataSigned[] = [];
+  //   for (const price of prices) {
+  //     logger.info(`Signing price with arweve signer: ${price.id}`);
+  //     const signed: PriceDataSigned = await this.signPrice({
+  //   }
 
-    for (const price of prices) {
-      logger.info(`Signing price: ${price.id}`);
+  //   trackEnd(signingTrackingId);
+  // }
 
-      //TODO: check if signing in parallel would improve performance -  https://app.clickup.com/t/k391rf
-      const signed: PriceDataSigned = await this.signPrice({
-        ...price,
-        permawebTx: idArTransaction,
-        provider: providerAddress,
-      });
+  // async signPrices(
+  //   prices: PriceDataAfterAggregation[],
+  //   idArTransaction: string,
+  //   providerAddress: string
+  // ): Promise<PriceDataSigned[]> {
 
-      signedPrices.push(signed);
-    }
-    trackEnd(signingTrackingId);
 
-    return signedPrices;
-  }
+  //   const signedPrices: PriceDataSigned[] = [];
+
+  //   for (const price of prices) {
+  //     logger.info(`Signing price: ${price.id}`);
+
+  //     //TODO: check if signing in parallel would improve performance -  https://app.clickup.com/t/k391rf
+
+  //       ...price,
+  //       permawebTx: idArTransaction,
+  //       provider: providerAddress,
+  //     });
+
+  //     signedPrices.push(signed);
+  //   }
+  //   trackEnd(signingTrackingId);
+
+  //   return signedPrices;
+  // }
 
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweave.getAddress();
@@ -101,7 +112,7 @@ export default class ArweaveService {
     return result.manifest.activeManifestContent;
   }
 
-  private async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
+  async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSignedByArweaveSigner> {
     const priceWithSortedProps = deepSortObject(price);
     const priceStringified = JSON.stringify(priceWithSortedProps);
     const signature = await this.arweave.sign(priceStringified);

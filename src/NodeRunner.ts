@@ -4,7 +4,6 @@ import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import broadcaster from "./broadcasters/lambda-broadcaster";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import EvmPriceSigner from "./utils/EvmPriceSigner";
 import {trackEnd, trackStart, printTrackingState} from "./utils/performance-tracker";
 import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned, SignedPricePackage} from "./types";
 import mode from "../mode";
@@ -12,6 +11,7 @@ import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
 import {mergeObjects, readJSON, sleep} from "./utils/objects";
+import PriceSignerService from "./signers/PriceSignerService";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -27,8 +27,8 @@ export default class NodeRunner {
   private currentManifest?: Manifest;
   private pricesService?: PricesService;
   private tokensBySource?: TokensBySource;
-  private evmSigner?: EvmPriceSigner;
   private newManifest?: Manifest;
+  private priceSignerService?: PriceSignerService;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -155,11 +155,21 @@ export default class NodeRunner {
   private async doProcessTokens(): Promise<void> {
     logger.info("Processing tokens");
 
+    // Fetching and aggregating
     const aggregatedPrices: PriceDataAfterAggregation[] = await this.fetchPrices();
-    const arTransaction: Transaction = await this.arweaveService.prepareArweaveTransaction(aggregatedPrices, this.version);
-    const signedPrices: PriceDataSigned[] = await this.arweaveService.signPrices(
-      aggregatedPrices, arTransaction.id, this.providerAddress);
+    const arTransaction: Transaction = await this.arweaveService.prepareArweaveTransaction(
+      aggregatedPrices,
+      this.version);
+    const pricesReadyForSigning = this.pricesService!.preparePricesForSigning(
+      aggregatedPrices,
+      arTransaction.id,
+      this.providerAddress);
 
+    // Signing
+    const signedPrices: PriceDataSigned[] =
+      await this.priceSignerService!.signPrices(pricesReadyForSigning);
+
+    // Broadcasting
     await NodeRunner.broadcastPrices(signedPrices);
     await this.broadcastEvmPricePackage(signedPrices);
 
@@ -169,7 +179,6 @@ export default class NodeRunner {
       logger.info(
         `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
     }
-
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {
@@ -219,9 +228,7 @@ export default class NodeRunner {
     logger.info("Broadcasting price package");
     const packageBroadcastingTrackingId = trackStart("package-broadcasting");
     try {
-      const signedPackage = this.evmSigner!.getSignedPackage(
-        signedPrices,
-        this.nodeConfig.credentials.ethereumPrivateKey);
+      const signedPackage = this.priceSignerService!.signPricePackage(signedPrices);
       await this.broadcastSignedPricePackage(signedPackage);
       logger.info("Package broadcasting completed");
     } catch (e) {
@@ -315,7 +322,12 @@ export default class NodeRunner {
     this.currentManifest = newManifest;
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
-    this.evmSigner = new EvmPriceSigner(this.version, this.currentManifest.evmChainId);
+    this.priceSignerService = new PriceSignerService({
+      arweaveService: this.arweaveService,
+      ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
+      evmChainId: newManifest.evmChainId,
+      version: this.version,
+    });
     this.newManifest = undefined;
   }
 
