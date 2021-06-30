@@ -256,15 +256,6 @@
         "uniswap"
       ]
     },
-    "1INCH": {
-      "source": [
-        "binance",
-        "ftx",
-        "kyber",
-        "sushiswap",
-        "uniswap"
-      ]
-    },
     "USDT": {
       "source": [
         "coingecko",
@@ -416,6 +407,14 @@
         "bitfinex",
         "coingecko",
         "kraken"
+      ]
+    },
+    "1INCH": {
+      "source": [
+        "binance",
+        "ftx",
+        "kyber",
+        "uniswap"
       ]
     },
     "TRU": {
@@ -829,12 +828,6 @@
         "uniswap"
       ]
     },
-    "FXS": {
-      "source": [
-        "sushiswap",
-        "uniswap"
-      ]
-    },
     "ESD": {
       "source": [
         "sushiswap",
@@ -958,6 +951,11 @@
       ]
     },
     "wNXM": {
+      "source": [
+        "uniswap"
+      ]
+    },
+    "FXS": {
       "source": [
         "uniswap"
       ]
