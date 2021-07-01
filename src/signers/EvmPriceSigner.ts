@@ -6,7 +6,6 @@ import {
   PricePackage,
   ShortSinglePrice,
   SignedPricePackage,
-  PriceDataSigned,
 } from "../types";
 import _ from "lodash";
 
@@ -49,21 +48,6 @@ export default class EvmPriceSigner {
         serializePriceValue(p.value)),
       timestamp: pricePackage.timestamp,
     };
-  }
-
-  getSignedPackage(prices: PriceDataSigned[], privateKey: string) {
-    if (prices.length === 0) {
-      throw new Error("Price package should contain at least one price");
-    }
-
-    const pricePackage = {
-      timestamp: prices[0].timestamp,
-      prices: prices.map(p => _.pick(p, ["symbol", "value"])),
-    };
-
-    return this.signPricePackage(
-      pricePackage,
-      privateKey);
   }
 
   signPricePackage(pricePackage: PricePackage, privateKey: string): SignedPricePackage {
