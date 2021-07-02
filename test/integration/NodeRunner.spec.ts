@@ -8,7 +8,7 @@ import mode from "../../mode";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import {any} from "jest-mock-extended";
-import {sleep} from "../../src/utils/objects";
+import {timeout} from "../../src/utils/objects";
 
 
 /****** MOCKS START ******/
@@ -401,7 +401,7 @@ describe("NodeRunner", () => {
       jest.useRealTimers();
       let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
         .mockImplementation(async () => {
-          await sleep(200);
+          await timeout(200);
           return Promise.reject("no way!");
         })
 

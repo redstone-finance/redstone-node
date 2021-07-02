@@ -21,3 +21,4 @@ dist
 
 Dockerfile.redstone-dev
 yarn-error.log
+.clinic/
