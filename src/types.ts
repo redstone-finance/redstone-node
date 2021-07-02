@@ -16,8 +16,10 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
-  barchartApiKey?: string;
   ethereumPrivateKey: string;
+  barchartApiKey?: string;
+  barchartUsername?: string;
+  barchartPassword?: string;
 };
 
 export interface TokenConfig {
