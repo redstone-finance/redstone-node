@@ -1,7 +1,7 @@
 {
   "interval": 15000,
   "priceAggregator": "median",
-  "defaultSource": ["barchart"],
+  "defaultSource": ["barchart", "barchart-test"],
   "sourceTimeout": 12000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,

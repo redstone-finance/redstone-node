@@ -1,5 +1,6 @@
 import { Fetcher } from "../types";
 import yahooFinance from "./yahoo-finance";
+import barchartTest from "./barchart-test";
 import coingecko from "./coingecko";
 import sushiswap from "./sushiswap";
 import coinbase from "./coinbase";
@@ -16,6 +17,7 @@ import ecb from "./ecb";
 
 export default {
   "yahoo-finance": yahooFinance,
+  "barchart-test": barchartTest,
   coingecko,
   sushiswap,
   coinbase,
