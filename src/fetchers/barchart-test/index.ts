@@ -33,7 +33,14 @@ const barchartTestFetcher: Fetcher = {
 
     const pricesObj: { [symbol: string]: number } = {};
     for (const symbol in response.data.data) {
-      const lastPrice = response.data.data[symbol].last;
+      const details = response.data.data[symbol];
+      // Hmm, I don't know why, but they have these fields in their reponse
+      // And somtimes last and last2 is empty but last3 has some value ¯\_(ツ)_/¯
+      let lastPrice = details.last || details.last2 || details.last3;
+      if (!lastPrice && details.previous_session && details.previous_session.last) {
+        lastPrice = details.previous_session.last;
+      }
+
       pricesObj[symbol] = lastPrice;
       if (!lastPrice) {
         badPricesReturned = true;
