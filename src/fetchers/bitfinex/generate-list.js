@@ -19,12 +19,10 @@ async function fetchTokenList() {
         }
     )
 
-    var json = JSON.stringify(list);
+    return list;
 
-    fs.writeFileSync('token-list.json', json);
+    // fs.writeFileSync('token-list.json', json);
 }
 
-fetchTokenList().then(
-    () => {}
-)
+exports.fetchTokenList = fetchTokenList;
 

@@ -18,12 +18,12 @@ async function fetchTokenList() {
         }
     )
 
-    var json = JSON.stringify(list); 
+    return list;
 
-    fs.writeFileSync('token-list.json', json);
+    // var json = JSON.stringify(list); 
+
+    // fs.writeFileSync('token-list.json', json);
 }
 
-fetchTokenList().then(
-    () => {}
-)
+exports.fetchTokenList = fetchTokenList;
 

@@ -2,24 +2,21 @@ const fs = require('fs');
 const axios = require('axios'); 
 
 async function fetchTokenList() {
-    let URL = "https://api.binance.com/api/v3/exchangeInfo";
+    let URL = "https://api.kraken.com/0/public/AssetPairs";
 
     let response = await axios.get(URL); 
 
-
-    let usdtSymbols = response.data.symbols.filter(
+    let zusdSymbols = Object.values(response.data.result).filter(
         symbol => {
-            return symbol.quoteAsset === "USDT"
+            return symbol.quote === "ZUSD"
+        }
+    ).map(
+        symbol => {
+            return symbol.base
         }
     )
 
-    let list = usdtSymbols.map(
-        symbol => {
-            return symbol.baseAsset
-        }
-    )
-
-    return list;
+    return zusdSymbols;
 
     // fs.writeFileSync('token-list.json', json);
 }
