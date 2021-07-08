@@ -1,7 +1,7 @@
 const fs = require('fs');
+const supportedTokens = require('./supported-tokens.json');
 
 async function generateTokenConfig() {
-    let tokens = {};
     
     const fetchers = fs.readdirSync('../fetchers', { withFileTypes: true })
         .filter(
@@ -20,28 +20,26 @@ async function generateTokenConfig() {
             const generateList = require('../fetchers/' + fetcher + '/generate-list.js');
             if (generateList) {
                 console.log('Fetching list for: ' + fetcher)
-                let fetchedList = await generateList.fetchTokenList();
+                let fetchedList = await generateList.getTokenList();
                 fetchedList.forEach(
                     token => {
-                        if (token in tokens) {
-                            tokens[token].source.push(fetcher)
-                        } else {
-                            tokens[token] = { source: [fetcher] }
+                        if (token in supportedTokens) {
+                            if (!supportedTokens[token].source) {
+                                supportedTokens[token].source = []; 
+                            }
+                            supportedTokens[token].source.push(fetcher)
                         }
                     });
                 }
             } catch (err) {
-            //   console.log(err)
-            console.log('No token list for: ' + fetcher)
+            console.log('Error when getting a token list for: ' + fetcher)
         }
     }
-
 
     const standard = require('./standard-lists');
     const standardLists = await standard.getStandardList();
 
-
-    for (const symbol in tokens) {
+    for (const symbol in supportedTokens) {
         let standarizedInfo;
         let index = 0;
         while (index < standardLists.length && !standarizedInfo) {
@@ -54,34 +52,14 @@ async function generateTokenConfig() {
         }
 
         if (standarizedInfo) {
-            console.log(standarizedInfo)
-            tokens[symbol] = {
-                source: tokens[symbol].source,
-                ...standarizedInfo
-            }
+            supportedTokens[symbol].data = standarizedInfo
         }
     }
 
-    var json = JSON.stringify(tokens); 
+    var json = JSON.stringify(supportedTokens); 
 
     fs.writeFileSync('token-config.json', json);
 
 }
 
-generateTokenConfig().then(
-    () => {}
-)
-
-
-/*
-               const fetcherTokens = JSON.parse(fs.readFileSync('../fetchers/' + dir + '/token-list.json', "utf-8"));
-                fetcherTokens.forEach(
-                    token => {
-                        if (token in tokens) {
-                            tokens[token].source.push(dir)
-                        } else {
-                            tokens[token] = { source: [dir] }
-                        }
-                    }
-                )
-                */
+generateTokenConfig();

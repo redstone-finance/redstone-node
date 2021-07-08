@@ -1,7 +1,6 @@
-const fs = require('fs');
 const axios = require('axios'); 
 
-async function fetchTokenList() {
+async function getTokenList() {
     let URL = "https://api.binance.com/api/v3/exchangeInfo";
 
     let response = await axios.get(URL); 
@@ -20,10 +19,8 @@ async function fetchTokenList() {
     )
 
     return list;
-
-    // fs.writeFileSync('token-list.json', json);
 }
 
-exports.fetchTokenList = fetchTokenList;
+exports.getTokenList = getTokenList;
 
 

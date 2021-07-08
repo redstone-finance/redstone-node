@@ -1,26 +1,21 @@
-const fs = require('fs');
-const axios = require('axios'); 
+const supportedPairs = require('./kraken-supported-pairs.json'); 
 
-async function fetchTokenList() {
-    let URL = "https://api.kraken.com/0/public/AssetPairs";
+async function getTokenList() {
+    // let URL = "https://api.kraken.com/0/public/AssetPairs";
 
-    let response = await axios.get(URL); 
-
-    let zusdSymbols = Object.values(response.data.result).filter(
-        symbol => {
-            return symbol.quote === "ZUSD"
+    let list = Object.keys(supportedPairs).filter(
+        pair => {
+            return pair.endsWith("USD")
         }
     ).map(
-        symbol => {
-            return symbol.base
+        pair => {
+            return pair.replace("USD", "")
         }
     )
 
-    return zusdSymbols;
-
-    // fs.writeFileSync('token-list.json', json);
+    return list;
 }
 
-exports.fetchTokenList = fetchTokenList;
+exports.getTokenList = getTokenList;
 
 
