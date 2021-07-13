@@ -26,7 +26,7 @@
   "dependencies": {
     "arql-ops": "^1.0.0",
     "arweave": "^1.10.15",
-    "arweave-multihost": "^0.0.8",
+    "arweave-multihost": "^0.1.0",
     "axios": "^0.21.1",
     "coinbase": "^2.0.8",
     "coingecko-api": "^1.0.10",

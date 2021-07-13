@@ -1417,10 +1417,10 @@ articles@~0.2.1:
   resolved "https://registry.yarnpkg.com/articles/-/articles-0.2.2.tgz#cc6b429f8cfa811f41e7a08505abbb4e45503197"
   integrity sha512-S3Y4MPp+LD/l0HHm/4yrr6MoXhUkKT98ZdsV2tkTuBNywqUXEtvJT+NBO3KTSQEttc5EOwEJe2Xw8cZ9TI5Hrw==
 
-arweave-multihost@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/arweave-multihost/-/arweave-multihost-0.0.8.tgz#3c4409ce511dfb6669889c8bdbfb7347b25397e4"
-  integrity sha512-WoM610lrlZTwmxNjrSFX5p+04wHIJy5O9yxoma/KaKjCynWNgBGi0iJ/akkh/OV1LybqK8vu9Cyxw67sppajZA==
+arweave-multihost@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/arweave-multihost/-/arweave-multihost-0.1.0.tgz#6f5dd1f42638dad8414cb20c0a19fee0a6a59844"
+  integrity sha512-biIkzQ3oc4RLV1MORQnqWz51IazP++K/8SsYMjUokK0cUfBLqom4pufKFCjTkGQIZMWWanXxnZqL66hHPgTCgA==
   dependencies:
     arweave "^1.10.15"
     axios "^0.21.1"
