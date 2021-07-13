@@ -1,4 +1,4 @@
-const axios = require('axios'); 
+const axios = require("axios"); 
 
 async function getTokenList() {
     let URL = "https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange";
@@ -8,15 +8,15 @@ async function getTokenList() {
 
     let pairs = response.data[0].filter(
         pair => {
-            return pair.startsWith('t') && pair.endsWith('USD')
+            return pair.startsWith("t") && pair.endsWith("USD");
         }
-    )
+    );
 
     let list = pairs.map(
         pair => {
-            return pair.replace(':USD','USD', '');
+            return pair.replace(":USD","USD", "");
         }
-    )
+    );
 
     return list;
 }

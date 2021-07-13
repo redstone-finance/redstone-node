@@ -1,9 +1,9 @@
-const fs = require('fs');
-const supportedTokens = require('./supported-tokens.json');
+const fs = require("fs");
+const supportedTokens = require("./supported-tokens.json");
 
 async function generateTokenConfig() {
     
-    const fetchers = fs.readdirSync('../fetchers', { withFileTypes: true })
+    const fetchers = fs.readdirSync("../../src/fetchers", { withFileTypes: true })
         .filter(
             dirent => {
                 return dirent.isDirectory();
@@ -13,13 +13,13 @@ async function generateTokenConfig() {
             dirent => {
                 return dirent.name;
             }
-        )
+        );
         
     for (const fetcher of fetchers) {
         try {
-            const generateList = require('../fetchers/' + fetcher + '/generate-list.js');
+            const generateList = require("../../src/fetchers/" + fetcher + "/generate-list.js");
             if (generateList) {
-                console.log('Fetching list for: ' + fetcher)
+                console.log("Fetching list for: " + fetcher);
                 let fetchedList = await generateList.getTokenList();
                 fetchedList.forEach(
                     token => {
@@ -27,16 +27,16 @@ async function generateTokenConfig() {
                             if (!supportedTokens[token].source) {
                                 supportedTokens[token].source = []; 
                             }
-                            supportedTokens[token].source.push(fetcher)
+                            supportedTokens[token].source.push(fetcher);
                         }
                     });
                 }
             } catch (err) {
-            console.log('Error when getting a token list for: ' + fetcher)
+            console.log("Error when getting a token list for: " + fetcher);
         }
     }
 
-    const standard = require('./standard-lists');
+    const standard = require("./standard-lists");
     const standardLists = await standard.getStandardList();
 
     for (const symbol in supportedTokens) {
@@ -52,13 +52,13 @@ async function generateTokenConfig() {
         }
 
         if (standarizedInfo) {
-            supportedTokens[symbol].data = standarizedInfo
+            supportedTokens[symbol].data = standarizedInfo;
         }
     }
 
-    var json = JSON.stringify(supportedTokens); 
+    const json = JSON.stringify(supportedTokens, null, 2);
 
-    fs.writeFileSync('token-config.json', json);
+    fs.writeFileSync("token-config.json", json);
 
 }
 

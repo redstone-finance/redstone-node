@@ -1,4 +1,4 @@
-const axios = require('axios'); 
+const axios = require("axios"); 
 
 async function getTokenList() {
     let URL = "https://api.kyber.network/api/tokens/pairs";
@@ -9,7 +9,7 @@ async function getTokenList() {
         pair => {
             return pair.symbol;
         }
-    )
+    );
 
     return list;
 }

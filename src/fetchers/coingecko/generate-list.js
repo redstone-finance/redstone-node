@@ -1,4 +1,4 @@
-const supportedTokens = require('./coingecko-symbol-to-id.json'); 
+const supportedTokens = require("./coingecko-symbol-to-id.json"); 
 
 
 async function getTokenList() {
@@ -8,4 +8,3 @@ async function getTokenList() {
 }
 
 exports.getTokenList = getTokenList;
-

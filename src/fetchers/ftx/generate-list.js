@@ -1,4 +1,4 @@
-const supportedTokens = require('./fts-supported-tokens.json'); 
+const supportedTokens = require("./fts-supported-tokens.json"); 
 
 
 async function getTokenList() {
@@ -8,4 +8,3 @@ async function getTokenList() {
 }
 
 exports.getTokenList = getTokenList;
-
