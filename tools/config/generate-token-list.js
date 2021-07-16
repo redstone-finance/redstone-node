@@ -3,7 +3,7 @@ const supportedTokens = require("./supported-tokens.json");
 
 async function generateTokenConfig() {
     
-    const fetchers = fs.readdirSync("../../src/fetchers", { withFileTypes: true })
+    const fetchers = fs.readdirSync("src/fetchers", { withFileTypes: true })
         .filter(
             dirent => {
                 return dirent.isDirectory();
@@ -33,6 +33,7 @@ async function generateTokenConfig() {
                 }
             } catch (err) {
             console.log("Error when getting a token list for: " + fetcher);
+            console.log(err)
         }
     }
 
@@ -58,7 +59,7 @@ async function generateTokenConfig() {
 
     const json = JSON.stringify(supportedTokens, null, 2);
 
-    fs.writeFileSync("token-config.json", json);
+    fs.writeFileSync("src/config/token-config.json", json);
 
 }
 
