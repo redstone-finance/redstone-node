@@ -58,7 +58,7 @@ async function generateTokenConfig() {
 
     const json = JSON.stringify(supportedTokens, null, 2);
 
-    fs.writeFileSync("token-config.json", json);
+    fs.writeFileSync("../../src/config/token-config.json", json);
 
 }
 
