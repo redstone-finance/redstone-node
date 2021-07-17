@@ -75,6 +75,7 @@ export default class ArweaveService {
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweaveProxy.getAddress();
 
+    const registryContractInteractionTrackingId = trackStart("registryContractInteraction");
     const registryInteraction = await interactRead(
       this.arweaveProxy.arweave,
       this.arweaveProxy.jwk,
@@ -85,9 +86,11 @@ export default class ArweaveService {
           contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
         }
       });
+    trackEnd(registryContractInteractionTrackingId);
 
     const providersRegistryContractTxId = registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
 
+    const providersContractInteractionTrackingId = trackStart("providersContractInteractionTrackingId");
     const result = await interactRead(
       this.arweaveProxy.arweave,
       this.arweaveProxy.jwk,
@@ -99,6 +102,8 @@ export default class ArweaveService {
           eagerManifestLoad: true
         }
       });
+    trackEnd(providersContractInteractionTrackingId);
+
 
     return result.manifest.activeManifestContent;
   }

@@ -10,8 +10,9 @@ import mode from "../mode";
 import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
-import {mergeObjects, readJSON, timeout} from "./utils/objects";
+import {mergeObjects, readJSON} from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
+import {fork} from "child_process";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -34,6 +35,7 @@ export default class NodeRunner {
     private readonly arweaveService: ArweaveService,
     private readonly providerAddress: string,
     private readonly nodeConfig: NodeConfig,
+    private readonly jwk: JWKInterface,
     initialManifest: Manifest,
   ) {
     this.version = getVersionFromPackageJSON();
@@ -47,7 +49,6 @@ export default class NodeRunner {
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     //alternatively use arrow functions...
     this.runIteration = this.runIteration.bind(this);
-    this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
 
   static async create(
@@ -80,6 +81,7 @@ export default class NodeRunner {
       arweaveService,
       providerAddress,
       nodeConfig,
+      jwk,
       manifestData
     );
   }
@@ -91,6 +93,7 @@ export default class NodeRunner {
       Version: ${this.version}
       Address: ${this.providerAddress}
     `);
+
 
     await this.exitIfBalanceTooLow();
 
@@ -280,50 +283,32 @@ export default class NodeRunner {
     })
 
     if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
-      this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
-      const manifestFetchTrackingId = trackStart("Fetching manifest.");
-      try {
-        // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
-        // block standard node processing for so long (especially for nodes with low "interval" value)
-        Promise.race([
-          this.arweaveService.getCurrentManifest(),
-          timeout(10000)
-        ]).then((value) => {
-          if (value === "timeout") {
-            logger.warn("Manifest load promise timeout");
-          } else {
-            this.handleLoadedManifest(value);
-          }
-          trackEnd(manifestFetchTrackingId);
-        });
-
-      } catch (e) {
-        logger.info("Error while calling manifest load function.")
-      }
+      this.lastManifestLoadTimestamp = now;
+      this.loadManifest();
     } else {
-      logger.info("Skipping manifest download in this iteration run.")
+      logger.info("Skipping manifest download in this iteration run.");
     }
   }
 
-  private handleLoadedManifest(loadedManifest: Manifest | null) {
-    if (!loadedManifest) {
-      return;
-    }
-    logger.info("Manifest successfully loaded", {
-      "loadedManifestTxId": loadedManifest.txId,
-      "currentTxId": this.currentManifest?.txId
+  private loadManifest() {
+    const child = fork("./dist/src/manifest-load.js");
+    process.on("exit", () => child.kill());
+
+    child.send({
+      currentManifestTxId: this.currentManifest?.txId,
+      jwk: this.jwk,
+      minArBalance: this.nodeConfig.minimumArBalance
     });
-    if (loadedManifest.txId != this.currentManifest?.txId) {
-      logger.info("Loaded and current manifest differ, updating on next runIteration call.");
+
+    child.on("message", (manifest: Manifest) => {
+      logger.info("Setting manifest from forked process");
       // we're temporarily saving loaded manifest on a separate "newManifest" field
       // - calling "this.useNewManifest(this.newManifest)" here could cause that
       // that different manifests would be used by different services during given "runIteration" execution.
-      this.newManifest = loadedManifest;
-      loadedManifest = null;
-    } else {
-      logger.info("Loaded manifest same as current, not updating.");
-    }
+      this.newManifest = manifest;
+      child.disconnect();
+    });
   }
 
   private useNewManifest(newManifest: Manifest) {

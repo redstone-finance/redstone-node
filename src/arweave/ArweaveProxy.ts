@@ -20,7 +20,7 @@ export default class ArweaveProxy  {
     this.arweave = ArweaveMultihost.initWithDefaultHosts({
       timeout: 60000,      // Network request timeouts in milliseconds
       logging: true,      // Enable network request logging
-      logger: logger.info,
+      logger: logger.debug,
       onError: (...args: any) => {
         logger.warn("Arweave request failed", ...args);
       },
