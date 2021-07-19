@@ -1,10 +1,10 @@
 import axios from "axios";
 import fetchers from "../../src/fetchers/index"
-import {mockFetcherResponse, mockLimestoneApiPrice} from "./_helpers";
+import {mockFetcherResponse, mockRedstoneApiPrice} from "./_helpers";
 
 jest.mock('axios');
 
-mockLimestoneApiPrice(2500, "ETH");
+mockRedstoneApiPrice(2500, "ETH");
 
 describe("kyber fetcher", () => {
   const sut = fetchers["kyber"];

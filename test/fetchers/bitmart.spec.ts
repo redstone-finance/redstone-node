@@ -1,9 +1,9 @@
 import fetchers from "../../src/fetchers/index"
-import {mockFetcherResponse, mockLimestoneApiPrice} from "./_helpers";
+import {mockFetcherResponse, mockRedstoneApiPrice} from "./_helpers";
 
 jest.mock('axios');
 
-mockLimestoneApiPrice(1.002);
+mockRedstoneApiPrice(1.002);
 
 describe("bitmart fetcher", () => {
   const sut = fetchers["bitmart"];

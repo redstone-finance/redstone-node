@@ -1,6 +1,6 @@
 import yahooFinance from "yahoo-finance";
-import {Consola} from "consola";
-import {Fetcher, PriceDataFetched} from "../../types";
+import { Consola } from "consola";
+import { Fetcher, PriceDataFetched } from "../../types";
 import YahooFinanceProxy from "./YahooFinanceProxy";
 
 const logger =
