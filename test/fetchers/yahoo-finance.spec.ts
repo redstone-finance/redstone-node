@@ -2,11 +2,11 @@ import axios from "axios";
 import fetchers from "../../src/fetchers/index"
 import {mockFetcherResponse, mockLimestoneApiPrice} from "./_helpers";
 
-jest.mock("../../src/fetchers/yahoo-finance/YahooFinanceProxy", () => {
+jest.mock("../../src/fetchers/yahoo-finance-free/YahooFinanceProxy", () => {
   return jest.fn().mockImplementation(() => {
     return {
       getExchangeRates: () => {
-        const exampleResponse = require("../../src/fetchers/yahoo-finance/example-response.json");
+        const exampleResponse = require("../../src/fetchers/yahoo-finance-free/example-response.json");
 
         return Promise.resolve(exampleResponse);
       }
@@ -14,8 +14,8 @@ jest.mock("../../src/fetchers/yahoo-finance/YahooFinanceProxy", () => {
   });
 });
 
-describe("yahoo-finance fetcher", () => {
-  const sut = fetchers["yahoo-finance"];
+describe("yahoo-finance-free fetcher", () => {
+  const sut = fetchers["yahoo-finance-free"];
 
 
   it('should properly fetch data', async () => {
