@@ -1,7 +1,7 @@
 import consola from "consola";
 import { ConsolaErrorReporter } from "./error-reporter";
 
-module.exports = (moduleName: string) => {
+export = (moduleName: string) => {
 
   let mainReporter = new (consola as any).FancyReporter();
 

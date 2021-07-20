@@ -1,5 +1,6 @@
 import { Fetcher } from "../types";
-import yahooFinance from "./yahoo-finance";
+import apiDojoRapid from "./api-dojo-rapid";
+import yfUnofficial from "./yf-unofficial";
 import barchartTest from "./barchart-test";
 import coingecko from "./coingecko";
 import sushiswap from "./sushiswap";
@@ -16,7 +17,8 @@ import ftx from "./ftx";
 import ecb from "./ecb";
 
 export default {
-  "yahoo-finance": yahooFinance,
+  "api-dojo-rapid": apiDojoRapid,
+  "yf-unofficial": yfUnofficial,
   "barchart-test": barchartTest,
   coingecko,
   sushiswap,
