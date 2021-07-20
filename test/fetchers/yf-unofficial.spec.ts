@@ -1,12 +1,10 @@
-import axios from "axios";
 import fetchers from "../../src/fetchers/index"
-import {mockFetcherResponse, mockLimestoneApiPrice} from "./_helpers";
 
-jest.mock("../../src/fetchers/yahoo-finance-free/YahooFinanceProxy", () => {
+jest.mock("../../src/fetchers/yf-unofficial/YahooFinanceProxy", () => {
   return jest.fn().mockImplementation(() => {
     return {
       getExchangeRates: () => {
-        const exampleResponse = require("../../src/fetchers/yahoo-finance-free/example-response.json");
+        const exampleResponse = require("../../src/fetchers/yf-unofficial/example-response.json");
 
         return Promise.resolve(exampleResponse);
       }
@@ -14,17 +12,17 @@ jest.mock("../../src/fetchers/yahoo-finance-free/YahooFinanceProxy", () => {
   });
 });
 
-describe("yahoo-finance-free fetcher", () => {
-  const sut = fetchers["yahoo-finance-free"];
+describe("yf-unofficial fetcher", () => {
+  const sut = fetchers["yf-unofficial"];
 
 
   it('should properly fetch data', async () => {
-    //given
+    // Given
 
-    //when
+    // When
     const result = await sut.fetchAll(["TSLA", "AMZN", "GOOG", "IBM", "AAPL"]);
 
-    //then
+    // Then
     expect(result).toEqual([
       {
         "symbol": "TSLA",

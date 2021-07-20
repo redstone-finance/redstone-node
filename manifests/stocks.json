@@ -1,8 +1,8 @@
 {
-  "interval": 15000,
+  "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": ["barchart", "barchart-test"],
-  "sourceTimeout": 12000,
+  "defaultSource": ["api-dojo-rapid", "yf-unofficial"],
+  "sourceTimeout": 20000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
@@ -32,52 +32,33 @@
     "INDA": {},
     "RSX": {},
 
-    "ZCZ21": {},
-    "ZSX21": {},
-    "ZMZ21": {},
-    "ZWU21": {},
-    "KEU21": {},
-    "MWU21": {},
-    "ZOZ21": {},
-    "ZRU21": {},
+    "ZC=F": {},
+    "ZS=F": {},
+    "ZM=F": {},
+    "ZW=F": {},
+    "KE=F": {},
+    "ZO=F": {},
+    "ZR=F": {},
 
-    "CLQ21": {},
-    "RBQ21": {},
-    "NGQ21": {},
-    "QAU21": {},
-    "ZKQ21": {},
+    "CL=F": {},
+    "RB=F": {},
+    "NG=F": {},
+    "QA=F": {},
+    "EH=F": {},
 
-    "GCQ21": {},
-    "SIU21": {},
-    "HGU21": {},
-    "PLV21": {},
-    "PAU21": {},
+    "GC=F": {},
+    "SI=F": {},
+    "HG=F": {},
+    "PL=F": {},
+    "PA=F": {},
 
-    "LEQ21": {},
-    "GFQ21": {},
-    "HEQ21": {},
-    "KMN21": {},
-    "DLN21": {},
-    "DFQ21": {},
-    "BDU21": {},
-    "BJQ21": {},
-
-    "CTZ21": {},
-    "KCU21": {},
-    "SBV21": {},
-    "CCU21": {},
-    "LSU21": {},
-    "OJU21": {},
-
-    "ETH": {
-      "source": [
-        "binance",
-        "bitfinex",
-        "coinbase",
-        "coingecko",
-        "ftx",
-        "huobi"
-      ]
-    }
+    "LE=F": {},
+    "GF=F": {},
+    "HE=F": {},
+    "PRK=F": {},
+    "DC=F": {},
+    "GNF=F": {},
+    "CB=F": {},
+    "CSC=F": {}
   }
 }
