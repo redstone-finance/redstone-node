@@ -6,9 +6,9 @@ const URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quote
 const RAPID_API_HOST = "apidojo-yahoo-finance-v1.p.rapidapi.com";
 const DEFAULT_REGION = "US";
 
-export class YahooFinanceRapidFetcher extends BaseFetcher {
+export class ApiDojoRapidFetcher extends BaseFetcher {
   constructor() {
-    super("yahoo-finance-rapid");
+    super("api-dojo-rapid");
   };
 
   // API docs: https://rapidapi.com/apidojo/api/yahoo-finance1/
@@ -35,4 +35,4 @@ export class YahooFinanceRapidFetcher extends BaseFetcher {
   };
 };
 
-export default new YahooFinanceRapidFetcher();
+export default new ApiDojoRapidFetcher();

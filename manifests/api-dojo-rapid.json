@@ -1,7 +1,7 @@
 {
   "interval": 15000,
   "priceAggregator": "median",
-  "defaultSource": ["yahoo-finance-rapid"],
+  "defaultSource": ["api-dojo-rapid"],
   "sourceTimeout": 12000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,

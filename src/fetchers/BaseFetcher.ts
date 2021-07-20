@@ -21,7 +21,7 @@ export abstract class BaseFetcher implements Fetcher {
   abstract fetchData(symbols: string[], opts?: FetcherOpts): Promise<any>;
   abstract extractPrices(response: any): PricesObj;
 
-  // This method may be overriden to extend validation
+  // This method may be overridden to extend validation
   validateResponse(response: any): boolean {
     return this.isSuccessfulResponse(response);
   };
