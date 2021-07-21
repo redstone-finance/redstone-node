@@ -24,7 +24,7 @@ export abstract class BaseFetcher implements Fetcher {
   // This method may be overridden to extend validation
   validateResponse(response: any): boolean {
     return this.isSuccessfulResponse(response);
-  };
+  }
 
   async fetchAll(
     symbols: string[],
@@ -37,13 +37,13 @@ export abstract class BaseFetcher implements Fetcher {
       }
       const pricesObj = this.extractPrices(response);
       return this.convertPricesObjToPriceArray(pricesObj, symbols);
-    };
+    }
 
   isSuccessfulResponse(response: any) {
     return response.status < 400;
-  };
+  }
 
-  convertPricesObjToPriceArray(
+  private convertPricesObjToPriceArray(
     pricesObj: PricesObj,
     requiredSymbols: string[]): PriceDataFetched[] {
       const prices = [];

@@ -9,7 +9,7 @@ const DEFAULT_REGION = "US";
 export class ApiDojoRapidFetcher extends BaseFetcher {
   constructor() {
     super("api-dojo-rapid");
-  };
+  }
 
   // API docs: https://rapidapi.com/apidojo/api/yahoo-finance1/
   async fetchData(tokens: string[], opts?: FetcherOpts): Promise<any> {
@@ -23,7 +23,7 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
         "x-rapidapi-host": RAPID_API_HOST,
       },
     });
-  };
+  }
 
   extractPrices(response: any): PricesObj {
     const pricesObj: { [symbol: string]: number } = {};
@@ -32,7 +32,7 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
       pricesObj[quote.symbol] = quote.regularMarketPrice;
     }
     return pricesObj;
-  };
+  }
 };
 
 export default new ApiDojoRapidFetcher();

@@ -1,4 +1,5 @@
 import { Fetcher } from "../types";
+import ccxtFetchers from "./ccxt/all-ccxt-fetchers";
 import apiDojoRapid from "./api-dojo-rapid";
 import yfUnofficial from "./yf-unofficial";
 import barchartTest from "./barchart-test";
@@ -33,4 +34,6 @@ export default {
   huobi,
   ftx,
   ecb,
+
+  ...ccxtFetchers,
 } as { [name: string]: Fetcher };
