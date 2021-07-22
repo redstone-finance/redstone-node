@@ -8,6 +8,7 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "REN": {},
     "SAND": {},
     "XRP": {},
     "USDC": {},
@@ -21,11 +22,9 @@
     "CEL": {},
     "ETH": {},
     "BTC": {},
-    "COMP": {},
     "MKR": {},
     "SNX": {},
     "DASH": {},
-    "REN": {},
     "DIA": {},
     "ATOM": {},
     "EGLD": {},
@@ -51,21 +50,7 @@
     "VIDY": {},
     "LIKE": {},
     "LTX": {},
-    "SGR": {},
-    "VI": {},
-    "QBZ": {},
-    "SPDR": {},
-    "BFC": {},
     "MARX": {},
-    "XNO": {},
-    "MVL": {},
-    "GATE": {},
-    "CLRX": {},
-    "HOT Token": {},
-    "MNR": {},
-    "TFT": {},
-    "BTCSHORT": {},
-    "ANCT": {},
-    "XPT": {}
+    "MVL": {}
   }
 }

@@ -8,6 +8,8 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "REN": {},
+    "LPT": {},
     "SAND": {},
     "ZRX": {},
     "XRP": {},
@@ -48,7 +50,6 @@
     "OMG": {},
     "DASH": {},
     "XMR": {},
-    "REN": {},
     "ALGO": {},
     "ICX": {},
     "STORJ": {},
@@ -59,7 +60,6 @@
     "GRT": {},
     "OXT": {},
     "FLOW": {},
-    "LPT": {},
     "MINA": {},
     "KEEP": {},
     "MLN": {},
@@ -85,8 +85,6 @@
     "GNO": {},
     "EWT": {},
     "CQT": {},
-    "KAR": {},
-    "TBTC": {},
-    "REPV1": {}
+    "KAR": {}
   }
 }

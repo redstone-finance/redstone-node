@@ -7,6 +7,7 @@ import sushiswap from "./sushiswap";
 import coinbase from "./coinbase";
 import uniswap from "./uniswap";
 import kyber from "./kyber";
+import verto from "./verto";
 import ecb from "./ecb";
 
 export default {
@@ -17,6 +18,7 @@ export default {
   coinbase,
   uniswap,
   kyber,
+  verto,
   ecb,
 
   ...ccxtFetchers,

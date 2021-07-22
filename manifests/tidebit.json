@@ -9,7 +9,6 @@
   "evmChainId": 1,
   "tokens": {
     "ETH": {},
-    "BTC": {},
-    "USX": {}
+    "BTC": {}
   }
 }

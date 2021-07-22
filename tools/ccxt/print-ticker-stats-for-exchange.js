@@ -12,6 +12,7 @@ async function main() {
     allTickersCount: tickers.length,
     tickersWithUsdt: tickers.filter(tickerHasUsdt).length,
     tickersWithUsd: tickers.filter(tickerHasUsd).length,
+    other: exchange,
   });
 }
 

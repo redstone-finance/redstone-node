@@ -8,6 +8,8 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "REN": {},
+    "LRC": {},
     "SAND": {},
     "ZRX": {},
     "XRP": {},
@@ -32,6 +34,7 @@
     "KSM": {},
     "MANA": {},
     "VET": {},
+    "ZEN": {},
     "YFI": {},
     "DOT": {},
     "BCH": {},
@@ -58,10 +61,8 @@
     "ONT": {},
     "IOST": {},
     "XEM": {},
-    "REN": {},
     "ALGO": {},
     "ICX": {},
-    "LRC": {},
     "YFII": {},
     "STORJ": {},
     "SUSHI": {},
@@ -71,7 +72,6 @@
     "AVAX": {},
     "FLM": {},
     "NEAR": {},
-    "ZEN": {},
     "GRT": {},
     "1INCH": {},
     "DODO": {},
@@ -121,8 +121,6 @@
     "CTK": {},
     "SKL": {},
     "LIT": {},
-    "SFP": {},
-    "BTCDOM": {},
-    "1000SHIB": {}
+    "SFP": {}
   }
 }

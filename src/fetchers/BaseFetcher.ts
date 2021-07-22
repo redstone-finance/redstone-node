@@ -23,7 +23,7 @@ export abstract class BaseFetcher implements Fetcher {
 
   // This method may be overridden to extend validation
   validateResponse(response: any): boolean {
-    return this.isSuccessfulResponse(response);
+    return response !== undefined;
   }
 
   async fetchAll(
@@ -33,7 +33,7 @@ export abstract class BaseFetcher implements Fetcher {
       const response = await this.fetchData(symbols, opts);
       const isValid = this.validateResponse(response);
       if (!isValid) {
-        this.logger.warn(`Response is invalid: ` + JSON.stringify(response.data));
+        this.logger.warn(`Response is invalid: ` + JSON.stringify(response));
       }
       const pricesObj = this.extractPrices(response);
       return this.convertPricesObjToPriceArray(pricesObj, symbols);

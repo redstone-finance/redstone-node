@@ -8,6 +8,7 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "REN": {},
     "SAND": {},
     "XRP": {},
     "TRX": {},
@@ -46,7 +47,6 @@
     "SNX": {},
     "XMR": {},
     "XEM": {},
-    "REN": {},
     "ALGO": {},
     "SUSHI": {},
     "CRV": {},

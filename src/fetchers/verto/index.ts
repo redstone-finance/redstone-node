@@ -1,58 +1,35 @@
-import { Consola } from "consola";
-import axios, { AxiosResponse } from "axios";
-import { PriceDataFetched, Fetcher } from "../../types";
+import axios from "axios";
+import { BaseFetcher } from "../BaseFetcher";
+import { PricesObj } from "../../types";
 
-const logger =
-  require("../../utils/logger")("fetchers/verto") as Consola;
+const vertoSymbolToId = require("./verto-symbol-to-id.json");
 
-const URL = "https://v2.cache.verto.exchange/";
+const BASE_URL = "https://v2.cache.verto.exchange";
 
-interface VertoTokenInfo {
-  id: string,
-  ticker: string
-}
+export class VertoFetcher extends BaseFetcher {
+  constructor() {
+    super("verto");
+  }
 
-const vertoFetcher: Fetcher = {
-  async fetchAll(tokenSymbols: string[]): Promise<PriceDataFetched[]> {
-    // Fetching available tokens from Verto API
-    const tokens = await axios.get(URL + 'tokens');
-    if (tokens.data === undefined) {
-      throw new Error(
-        "Response tokens data is undefined: " + JSON.stringify(tokens));
-    }
+  async fetchData(symbols: string[]): Promise<any> {
+    const tokenPromises = symbols.map(s =>
+      axios.get(`${BASE_URL}/token/${vertoSymbolToId[s]}/price`));
 
-    const tokenPromises = tokens.data
-      .filter(
-        (token: VertoTokenInfo) => tokenSymbols.includes(token.ticker)
-      )   
-      .map(
-        (token: VertoTokenInfo) => axios.get(URL + 'token/' + token.id + '/price')
-      )
+    return await Promise.all(tokenPromises);
+  }
 
-    // Fetching token prices from Verto API
-    const quotes = (await Promise.all<AxiosResponse>(tokenPromises)).map(
-      (response: AxiosResponse) => response.data
-    )
+  extractPrices(responses: any): PricesObj {
+    const pricesObj: { [symbol: string]: number } = {};
 
-    // Building prices
-    const prices: PriceDataFetched[] = [];
-    for (const symbol of tokenSymbols) {
-      const details = quotes.find(quote => quote.ticker === symbol);
-      if (details !== undefined) {
-        prices.push({
-          symbol,
-          value: details.price,
-        });
-      } else {
-        logger.warn(
-          `Token is not supported with Verto source: ${symbol}`);
+    for (const response of responses) {
+      if (response && response.data) {
+        const quote = response.data;
+        pricesObj[quote.ticker] = quote.price;
       }
     }
 
-    console.log(prices)
-
-    return prices;
+    return pricesObj;
   }
 };
 
-export default vertoFetcher;
+export default new VertoFetcher();
