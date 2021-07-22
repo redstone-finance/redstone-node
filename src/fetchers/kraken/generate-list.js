@@ -1,4 +1,4 @@
-const supportedPairs = require("./kraken-supported-pairs.json"); 
+const supportedPairs = require("./kraken-supported-pairs.json");
 
 async function getTokenList() {
 
@@ -16,4 +16,3 @@ async function getTokenList() {
 }
 
 exports.getTokenList = getTokenList;
-

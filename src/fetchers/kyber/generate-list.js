@@ -1,4 +1,4 @@
-const supportedTokens = require("./tokens-supported-by-kyber.json"); 
+const supportedTokens = require("./tokens-supported-by-kyber.json");
 
 async function getTokenList() {
 

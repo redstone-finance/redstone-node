@@ -5,7 +5,7 @@ import axios from "axios";
 
 export type GetSinglePrice = (symbol: string, opts?: GetPriceOptions) => Promise<PriceData>;
 
-export function mockLimestoneApiPrice(value: number, symbol: string = "USDT", ) {
+export function mockRedstoneApiPrice(value: number, symbol: string = "USDT", ) {
   jest.mock('redstone-api');
   const mockedApi = RedstoneApi as MockProxy<typeof RedstoneApi>
 

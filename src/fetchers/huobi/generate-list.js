@@ -1,4 +1,4 @@
-const supportedCurrencies = require("./huobi-all-supported-currencies.json"); 
+const supportedCurrencies = require("./huobi-all-supported-currencies.json");
 
 async function getTokenList() {
 

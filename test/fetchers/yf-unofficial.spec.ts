@@ -1,4 +1,4 @@
-import fetchers from "../../src/fetchers/index"
+import fetchers from "../../src/fetchers/index";
 
 jest.mock("../../src/fetchers/yf-unofficial/YahooFinanceProxy", () => {
   return jest.fn().mockImplementation(() => {
