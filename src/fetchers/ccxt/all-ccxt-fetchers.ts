@@ -1,14 +1,10 @@
 import { CcxtFetcher } from "./CcxtFetcher";
-
-const allFetcherNames = [
-  "aax",
-  "aofex",
-  "ascendex",
-  "bibox",
-];
+import exchanges from "./all-supported-exchanges.json";
 
 const fetchersObj: { [name: string]: CcxtFetcher } = {};
-for (const fetcherName of allFetcherNames) {
+
+// Fetcher names must be the same as their exchange names
+for (const fetcherName of exchanges) {
   fetchersObj[fetcherName] = new CcxtFetcher(fetcherName);
 }
 

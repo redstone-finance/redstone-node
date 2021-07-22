@@ -1,0 +1,43 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "btcturk"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "XRP": {},
+    "USDC": {},
+    "TRX": {},
+    "XLM": {},
+    "UNI": {},
+    "FIL": {},
+    "MATIC": {},
+    "DOGE": {},
+    "LINK": {},
+    "ENJ": {},
+    "EOS": {},
+    "BAT": {},
+    "MANA": {},
+    "DOT": {},
+    "ETH": {},
+    "NEO": {},
+    "CHZ": {},
+    "ADA": {},
+    "BTC": {},
+    "SOL": {},
+    "COMP": {},
+    "LTC": {},
+    "MKR": {},
+    "SNX": {},
+    "OMG": {},
+    "DASH": {},
+    "AVAX": {},
+    "GRT": {},
+    "ATOM": {},
+    "XTZ": {},
+    "ANKR": {}
+  }
+}

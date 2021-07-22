@@ -9331,6 +9331,12 @@
         "zb"
       ]
     },
+    "KIMCHI": {
+      "source": [
+        "exx",
+        "sushiswap"
+      ]
+    },
     "ADABEAR": {
       "source": [
         "ftx",
@@ -17202,11 +17208,6 @@
       ]
     },
     "HOPE": {
-      "source": [
-        "exx"
-      ]
-    },
-    "KIMCHI": {
       "source": [
         "exx"
       ]

@@ -38,7 +38,7 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
 });
 
 jest.mock("../../src/fetchers/coinbase");
-jest.mock("../../src/fetchers/kraken");
+jest.mock("../../src/fetchers/uniswap");
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -101,14 +101,14 @@ describe("NodeRunner", () => {
         {symbol: "BTC", value: 444}
       ])
     };
-    fetchers["kraken"] = {
+    fetchers["uniswap"] = {
       fetchAll: jest.fn().mockResolvedValue([
         {symbol: "BTC", value: 445}
       ])
     };
 
     manifest = {
-      defaultSource: ["kraken"],
+      defaultSource: ["uniswap"],
       interval: 10000,
       maxPriceDeviationPercent: 25,
       priceAggregator: "median",
@@ -146,7 +146,7 @@ describe("NodeRunner", () => {
     mockArProxy.getBalance.mockResolvedValue(0.2);
     manifest =
       JSON.parse(`{
-        "defaultSource": ["kraken"],
+        "defaultSource": ["uniswap"],
         "interval": 0,
         "priceAggregator": "median",
         "sourceTimeout": 2000,
@@ -169,7 +169,7 @@ describe("NodeRunner", () => {
   it("should throw if no sourceTimeout", async () => {
     //given
     manifest = JSON.parse(`{
-        "defaultSource": ["kraken"],
+        "defaultSource": ["uniswap"],
         "interval": 0,
         "priceAggregator": "median",
         "maxPriceDeviationPercent": 25,
@@ -238,7 +238,7 @@ describe("NodeRunner", () => {
       },
       [{
         "id": "00000000-0000-0000-0000-000000000000",
-        "source": {"coinbase": 444, "kraken": 445},
+        "source": {"coinbase": 444, "uniswap": 445},
         "symbol": "BTC",
         "timestamp": 111111111,
         "value": 444.5,
@@ -246,7 +246,7 @@ describe("NodeRunner", () => {
       }],
     );
     expect(mockArProxy.sign).toHaveBeenCalledWith(
-      "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"permawebTx\":\"mockArTransactionId\",\"provider\":\"mockArAddress\",\"source\":{\"coinbase\":444,\"kraken\":445},\"symbol\":\"BTC\",\"timestamp\":111111111,\"value\":444.5,\"version\":\"0.4\"}"
+      "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"permawebTx\":\"mockArTransactionId\",\"provider\":\"mockArAddress\",\"source\":{\"coinbase\":444,\"uniswap\":445},\"symbol\":\"BTC\",\"timestamp\":111111111,\"value\":444.5,\"version\":\"0.4\"}"
     );
     expect(axios.post).toHaveBeenCalledWith(
       "http://broadcast.test/prices",
@@ -257,7 +257,7 @@ describe("NodeRunner", () => {
           "permawebTx": "mockArTransactionId",
           "provider": "mockArAddress",
           "signature": "mock_signed",
-          "source": {"coinbase": 444, "kraken": 445},
+          "source": {"coinbase": 444, "uniswap": 445},
           "symbol": "BTC",
           "timestamp": 111111111,
           "value": 444.5,
@@ -317,7 +317,7 @@ describe("NodeRunner", () => {
           "id": "00000000-0000-0000-0000-000000000000",
           "source": {
             "coinbase": 444,
-            "kraken": 445
+            "uniswap": 445
           },
           "symbol": "BTC",
           "timestamp": 111111111,
@@ -355,7 +355,7 @@ describe("NodeRunner", () => {
           "id": "00000000-0000-0000-0000-000000000000",
           "source": {
             "coinbase": 444,
-            "kraken": 445
+            "uniswap": 445
           },
           "symbol": "BTC",
           "timestamp": 111111111,
@@ -390,7 +390,7 @@ describe("NodeRunner", () => {
 
       await sut.run();
 
-      expect(fetchers.kraken.fetchAll).toHaveBeenCalled();
+      expect(fetchers.uniswap.fetchAll).toHaveBeenCalled();
       expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalled();
 
       arServiceSpy.mockClear();

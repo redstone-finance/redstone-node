@@ -1,0 +1,34 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "bitmex"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "XRP": {},
+    "TRX": {},
+    "XLM": {},
+    "UNI": {},
+    "FIL": {},
+    "MATIC": {},
+    "DOGE": {},
+    "LINK": {},
+    "EOS": {},
+    "AAVE": {},
+    "VET": {},
+    "DOT": {},
+    "BCH": {},
+    "BNB": {},
+    "ETH": {},
+    "ADA": {},
+    "BTC": {},
+    "SOL": {},
+    "LTC": {},
+    "SUSHI": {},
+    "ALTMEX": {},
+    "DEFIMEX": {}
+  }
+}

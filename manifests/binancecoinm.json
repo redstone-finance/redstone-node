@@ -1,0 +1,30 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "binancecoinm"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "XRP": {},
+    "TRX": {},
+    "THETA": {},
+    "ETC": {},
+    "XLM": {},
+    "UNI": {},
+    "FIL": {},
+    "DOGE": {},
+    "LINK": {},
+    "EOS": {},
+    "DOT": {},
+    "BCH": {},
+    "BNB": {},
+    "ETH": {},
+    "ADA": {},
+    "BTC": {},
+    "LTC": {},
+    "EGLD": {}
+  }
+}

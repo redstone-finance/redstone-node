@@ -15,7 +15,7 @@ export abstract class BaseFetcher implements Fetcher {
   // fetching the main data. For example it can be used to fetch
   // the latest USDT price from trusted source (e.g. redstone-api)
   // for exchanges that don't offer USD support
-  async prepareForFetching() {};
+  async prepareForFetching() {}
 
   // All the abstract methods below must be implemented in fetchers
   abstract fetchData(symbols: string[], opts?: FetcherOpts): Promise<any>;

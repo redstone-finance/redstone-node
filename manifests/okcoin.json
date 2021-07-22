@@ -1,0 +1,39 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "okcoin"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "USDC": {},
+    "TRX": {},
+    "UNI": {},
+    "DOGE": {},
+    "LINK": {},
+    "EOS": {},
+    "AAVE": {},
+    "YFI": {},
+    "DOT": {},
+    "ETH": {},
+    "ADA": {},
+    "BTC": {},
+    "COMP": {},
+    "LTC": {},
+    "MKR": {},
+    "SNX": {},
+    "ALGO": {},
+    "YFII": {},
+    "DAI": {},
+    "AVAX": {},
+    "NEAR": {},
+    "STX": {},
+    "HBAR": {},
+    "CELO": {},
+    "USDT": {},
+    "CUSD": {},
+    "USDK": {}
+  }
+}
