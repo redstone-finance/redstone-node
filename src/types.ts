@@ -20,6 +20,7 @@ export interface Credentials {
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
+  yahooFinanceRapidApiKey?: string;
 };
 
 export interface TokenConfig {
@@ -27,12 +28,14 @@ export interface TokenConfig {
   maxPriceDeviationPercent?: number;
 };
 
+export interface FetcherOpts {
+  credentials: Credentials;
+};
+
 export interface Fetcher {
   fetchAll: (
     tokens: string[],
-    opts?: {
-      credentials: Credentials;
-    }) => Promise<PriceDataFetched[]>;
+    opts?: FetcherOpts) => Promise<PriceDataFetched[]>;
 };
 
 export interface Aggregator {
@@ -45,6 +48,10 @@ export interface Broadcaster {
   broadcastPricePackage: (
     pricePackage: SignedPricePackage,
     providerAddress: string) => Promise<void>;
+};
+
+export interface PricesObj {
+  [symbol: string]: number;
 };
 
 export interface PriceDataFetched {

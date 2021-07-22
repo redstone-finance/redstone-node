@@ -1,10 +1,9 @@
-import yahooFinance from "yahoo-finance";
 import { Consola } from "consola";
 import { Fetcher, PriceDataFetched } from "../../types";
 import YahooFinanceProxy from "./YahooFinanceProxy";
 
 const logger =
-  require("../../utils/logger")("fetchers/yahoo-finance") as Consola;
+  require("../../utils/logger")("fetchers/yf-unofficial") as Consola;
 
 const yahooFinanceProxy = new YahooFinanceProxy();
 
@@ -24,7 +23,7 @@ const yahooFinanceFetcher: Fetcher = {
         });
       } else {
         logger.warn(
-          `Token is not supported with yahoo-finance source: ${symbol}`);
+          `Token is not supported with yf-unofficial source: ${symbol}`);
       }
     }
 
