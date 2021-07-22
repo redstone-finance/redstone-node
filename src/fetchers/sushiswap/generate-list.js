@@ -1,4 +1,4 @@
-const symbolToPairList = require("./sushiswap-symbol-to-pair-id.json"); 
+const symbolToPairList = require("./sushiswap-symbol-to-pair-id.json");
 
 
 async function getTokenList() {

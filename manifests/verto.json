@@ -1,0 +1,31 @@
+{
+  "interval": 3000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "verto"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "ALC": {},
+    "ARDRIVE": {},
+    "ARGO": {},
+    "ARP": {},
+    "ARVERIFY": {},
+    "CONSENSUS": {},
+    "DLT": {},
+    "EDST": {},
+    "EMD_PST_TOKEN": {},
+    "FQR": {},
+    "OPENBITS": {},
+    "PBT": {},
+    "QUAD": {},
+    "SAM": {},
+    "SLB": {},
+    "SUNNY": {},
+    "TE$T": {},
+    "VRT": {},
+    "XYZ": {}
+  }
+}
