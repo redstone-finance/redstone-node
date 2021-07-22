@@ -40,3 +40,5 @@ async function main(): Promise<void> {
 }
 
 start();
+
+export = {};

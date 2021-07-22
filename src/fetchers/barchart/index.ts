@@ -39,7 +39,7 @@ const barchartFetcher: Fetcher = {
     const prices: PriceDataFetched[] = [];
     for (const symbol of symbols) {
       const value = pricesObj[convertSymbol(symbol)];
-      if (value !== undefined) {
+      if (value) {
         prices.push({
           symbol,
           value,

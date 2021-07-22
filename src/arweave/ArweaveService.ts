@@ -4,7 +4,7 @@ import {
   Manifest,
   PriceDataAfterAggregation,
   PriceDataBeforeSigning,
-  PriceDataSigned
+  PriceDataSigned,
 } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
@@ -13,16 +13,18 @@ import {interactRead} from "smartweave";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
-const providersRegistry = require("redstone-smartweave-contracts/src/tools/providers-registry.api");
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
 
 // Business service that supplies operations required by Redstone-Node.
 export default class ArweaveService {
 
+  private static readonly CONTRACT_REGISTRY_TX_ID: string = "XQkGzXG6YknJyy-YbakEZvQKAWkW2_aPRhc3ShC8lyA";
+  private static readonly PROVIDERS_REGISTRY_CONTRACT: string = "providers-registry";
+
   constructor(
-    private arweave: ArweaveProxy,
-    private minBalance: number
+    private readonly arweaveProxy: ArweaveProxy,
+    private readonly minBalance: number
   ) {
   }
 
@@ -35,7 +37,7 @@ export default class ArweaveService {
 
     const tags = this.prepareTransactionTags(nodeVersion, prices);
 
-    const transaction = await this.arweave.prepareUploadTransaction(tags, prices);
+    const transaction = await this.arweaveProxy.prepareUploadTransaction(tags, prices);
     trackEnd(transactionPreparingTrackingId);
 
     return transaction;
@@ -43,7 +45,7 @@ export default class ArweaveService {
 
   async checkBalance(): Promise<BalanceCheckResult> {
     try {
-      const balance = await this.arweave.getBalance();
+      const balance = await this.arweaveProxy.getBalance();
       const isBalanceLow = balance < this.minBalance;
       logger.info(`Balance: ${balance}`);
       return {balance, isBalanceLow};
@@ -61,7 +63,7 @@ export default class ArweaveService {
     const keepingTrackingId = trackStart("keeping");
     //TODO: Handle errors in a more sensible way ;-) https://app.clickup.com/t/k38r91
     try {
-      await this.arweave.postTransaction(arTransaction);
+      await this.arweaveProxy.postTransaction(arTransaction);
       logger.info(`Transaction posted: ${arTransaction.id}`);
     } catch (e) {
       logger.error("Error while storing prices on Arweave", e.stack);
@@ -70,42 +72,41 @@ export default class ArweaveService {
     }
   }
 
-  async signPrices(
-    prices: PriceDataAfterAggregation[],
-    idArTransaction: string,
-    providerAddress: string
-  ): Promise<PriceDataSigned[]> {
-    const signingTrackingId = trackStart("signing");
+  async getCurrentManifest(): Promise<Manifest> {
+    const jwkAddress = await this.arweaveProxy.getAddress();
 
-    const signedPrices: PriceDataSigned[] = [];
-
-    for (const price of prices) {
-      logger.info(`Signing price: ${price.id}`);
-
-      //TODO: check if signing in parallel would improve performance -  https://app.clickup.com/t/k391rf
-      const signed: PriceDataSigned = await this.signPrice({
-        ...price,
-        permawebTx: idArTransaction,
-        provider: providerAddress,
+    const registryInteraction = await interactRead(
+      this.arweaveProxy.arweave,
+      this.arweaveProxy.jwk,
+      ArweaveService.CONTRACT_REGISTRY_TX_ID,
+      {
+        function: "contractsCurrentTxId",
+        data: {
+          contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
+        }
       });
 
-      signedPrices.push(signed);
-    }
-    trackEnd(signingTrackingId);
+    const providersRegistryContractTxId = registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
 
-    return signedPrices;
-  }
+    const result = await interactRead(
+      this.arweaveProxy.arweave,
+      this.arweaveProxy.jwk,
+      providersRegistryContractTxId,
+      {
+        function: "activeManifest",
+        data: {
+          providerId: jwkAddress,
+          eagerManifestLoad: true
+        }
+      });
 
-  async getCurrentManifest(): Promise<Manifest> {
-    const jwkAddress = await this.arweave.getAddress();
-    const result = await providersRegistry.currentManifest(jwkAddress, false, this.arweave.jwk);
     return result.manifest.activeManifestContent;
   }
 
-  private async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
+  async signPrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
     const priceWithSortedProps = deepSortObject(price);
     const priceStringified = JSON.stringify(priceWithSortedProps);
-    const signature = await this.arweave.sign(priceStringified);
+    const signature = await this.arweaveProxy.sign(priceStringified);
 
     return {
       ...price,

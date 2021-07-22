@@ -8,7 +8,7 @@ import mode from "../../mode";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import {any} from "jest-mock-extended";
-import {sleep} from "../../src/utils/objects";
+import {timeout} from "../../src/utils/objects";
 
 
 /****** MOCKS START ******/
@@ -23,6 +23,18 @@ const mockArProxy = {
 }
 jest.mock("../../src/arweave/ArweaveProxy", () => {
   return jest.fn().mockImplementation(() => mockArProxy);
+});
+
+jest.mock("../../src/signers/EvmPriceSigner", () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      signPricePackage: (pricePackage: any) => ({
+        signature: "mock_evm_signed",
+        signer: "mock_evm_signer",
+        pricePackage,
+      }),
+    };
+  })
 });
 
 jest.mock("../../src/fetchers/coinbase");
@@ -69,6 +81,7 @@ describe("NodeRunner", () => {
       infuraProjectId: "ipid",
       ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
     },
+    addEvmSignature: true,
     manifestFile: "",
     minimumArBalance: 0.2
   }
@@ -239,6 +252,7 @@ describe("NodeRunner", () => {
       "http://broadcast.test/prices",
       [
         {
+          "evmSignature": "mock_evm_signed",
           "id": "00000000-0000-0000-0000-000000000000",
           "permawebTx": "mockArTransactionId",
           "provider": "mockArAddress",
@@ -255,8 +269,8 @@ describe("NodeRunner", () => {
       "http://broadcast.test/packages",
       {
         timestamp: 111111111,
-        signature: "0x5b2dd26ee75261b8a9c25b4f3eb8bd44292f4e1aeae9867b6f9a9a61a0b98e397be8b1eb1c972a58ac1baec3d2caefe273a39ee0606a66b6bd3c2d1b8db471471c",
-        signer: "0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A",
+        signature: "mock_evm_signed",
+        signer: "mock_evm_signer",
         provider: "mockArAddress"
       }
     );
@@ -295,25 +309,64 @@ describe("NodeRunner", () => {
     );
 
     await sut.run();
+
     expect(axios.post).toHaveBeenCalledWith(
       mode.broadcasterUrl + "/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",
+          "source": {
+            "coinbase": 444,
+            "kraken": 445
+          },
+          "symbol": "BTC",
+          "timestamp": 111111111,
+          "version": "0.4",
+          "value": 444.5,
           "permawebTx": "mockArTransactionId",
           "provider": "mockArAddress",
           "signature": "mock_signed",
-          "source": {"coinbase": 444, "kraken": 445},
-          "symbol": "BTC",
-          "timestamp": 111111111,
-          "value": 444.5,
-          "version": "0.4"
+          "evmSignature": "mock_evm_signed"
         }
-      ]);
+      ]
+    );
+
     expect(mockArProxy.postTransaction).toHaveBeenCalledWith({
       "id": "mockArTransactionId"
     });
 
+  });
+
+  it("should broadcast prices without evm signature when addEvmSignature is not set", async () => {
+    const sut = await NodeRunner.create(
+      jwk,
+      {
+        ...nodeConfig,
+        addEvmSignature: false,
+      }
+    );
+
+    await sut.run();
+
+    expect(axios.post).toHaveBeenCalledWith(
+      mode.broadcasterUrl + "/prices",
+      [
+        {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "source": {
+            "coinbase": 444,
+            "kraken": 445
+          },
+          "symbol": "BTC",
+          "timestamp": 111111111,
+          "version": "0.4",
+          "value": 444.5,
+          "permawebTx": "mockArTransactionId",
+          "provider": "mockArAddress",
+          "signature": "mock_signed"
+        }
+      ]
+    );
   });
 
   describe("when useManifestFromSmartContract flag is set", () => {
@@ -348,7 +401,7 @@ describe("NodeRunner", () => {
       jest.useRealTimers();
       let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
         .mockImplementation(async () => {
-          await sleep(200);
+          await timeout(200);
           return Promise.reject("no way!");
         })
 

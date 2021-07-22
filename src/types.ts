@@ -16,8 +16,10 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
-  barchartApiKey?: string;
   ethereumPrivateKey: string;
+  barchartApiKey?: string;
+  barchartUsername?: string;
+  barchartPassword?: string;
 };
 
 export interface TokenConfig {
@@ -69,6 +71,7 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
 
 export interface PriceDataSigned extends PriceDataBeforeSigning {
   signature: string;
+  evmSignature?: string;
 };
 
 export interface ShortSinglePrice {
@@ -81,7 +84,7 @@ export interface PricePackage {
   timestamp: number;
 };
 
-export type SignedPricePackage = {
+export interface SignedPricePackage {
   pricePackage: PricePackage;
   signer: string;
   signature: string;
@@ -95,6 +98,7 @@ export interface ArweaveTransactionTags {
 export interface NodeConfig {
   arweaveKeysFile: string;
   useManifestFromSmartContract?: boolean;
+  addEvmSignature?: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;

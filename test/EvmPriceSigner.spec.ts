@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { SignedPricePackage, PricePackage } from "../src/types";
-import EvmPriceSigner from "../src/utils/EvmPriceSigner";
+import EvmPriceSigner from "../src/signers/EvmPriceSigner";
 
 const evmSigner = new EvmPriceSigner();
 const ethereumPrivateKey = ethers.Wallet.createRandom().privateKey;

@@ -1,6 +1,6 @@
 import axios from "axios";
 import fetchers from "../../src/fetchers/index"
-import {mockFetcherResponse, mockLimestoneApiPrice} from "./_helpers";
+import {mockFetcherResponse, mockRedstoneApiPrice} from "./_helpers";
 
 jest.mock("../../src/fetchers/yahoo-finance/YahooFinanceProxy", () => {
   return jest.fn().mockImplementation(() => {
