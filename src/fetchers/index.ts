@@ -7,12 +7,6 @@ import sushiswap from "./sushiswap";
 import coinbase from "./coinbase";
 import uniswap from "./uniswap";
 import kyber from "./kyber";
-<<<<<<< HEAD
-=======
-import huobi from "./huobi";
-import verto from "./verto";
-import ftx from "./ftx";
->>>>>>> main
 import ecb from "./ecb";
 
 export default {
@@ -22,13 +16,6 @@ export default {
   sushiswap,
   coinbase,
   uniswap,
-<<<<<<< HEAD
-=======
-  bitmart,
-  binance,
-  kraken,
-  verto,
->>>>>>> main
   kyber,
   ecb,
 
