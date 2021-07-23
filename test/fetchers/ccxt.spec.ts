@@ -1,10 +1,17 @@
 import fetchers from "../../src/fetchers/index";
 
-class MockCcxtExchange {
-  async fetchTickers() {
-    return require("../../src/fetchers/ccxt/example-response.json");
+jest.mock("redstone-api", () => {
+  return {
+    async getPrice(symbol: string) {
+      if (symbol === "USDT") {
+        return { value: 1 };
+      } else {
+        throw new Error(
+          "Mock redstone-api can only beused to fetch USDT price");
+      }
+    }
   }
-};
+})
 
 jest.mock("ccxt", () => {
   const mockExchanges: any = {};
@@ -23,7 +30,6 @@ jest.mock("ccxt", () => {
   return {
     __esModule: true,
     default: mockExchanges,
-    Exchange: MockCcxtExchange,
   };
 });
 
