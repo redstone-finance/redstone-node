@@ -2,6 +2,8 @@ import * as exchangeRates from "ecb-euro-exchange-rates";
 import { Consola } from "consola";
 import { PriceDataFetched, Fetcher } from "../../types";
 
+// TODO: refactor using BaseFetcher
+
 const logger =
   require("../../utils/logger")("fetchers/ecb") as Consola;
 

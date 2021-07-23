@@ -1,17 +1,10 @@
 const axios = require("axios");
 
+const URL = "https://api.kyber.network/api/tokens/pairs";
+
 async function getTokenList() {
-    let URL = "https://api.kyber.network/api/tokens/pairs";
-
-    let response = await axios.get(URL);
-
-    let list = Object.values(response.data).map(
-        pair => {
-            return pair.symbol;
-        }
-    );
-
-    return list;
+  const response = await axios.get(URL);
+  return Object.values(response.data).map(pair => pair.symbol);
 }
 
 exports.getTokenList = getTokenList;

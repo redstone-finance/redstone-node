@@ -1,36 +1,32 @@
-import {Consola} from "consola";
-import {Fetcher, PriceDataFetched} from "../../types";
+import _ from "lodash";
+import { BaseFetcher } from "../BaseFetcher";
+import { PricesObj } from "../../types";
 import CoinbaseProxy from "./CoinbaseProxy";
 
-const logger =
-  require("../../utils/logger")("fetchers/coinbase") as Consola;
 
-const coinbaseProxy = new CoinbaseProxy();
+class CoinbaseFetcher extends BaseFetcher {
+  coinbaseProxy: CoinbaseProxy;
 
-const coinbaseFetcher: Fetcher = {
-  async fetchAll(tokenSymbols: string[]): Promise<PriceDataFetched[]> {
-    // Fetching prices
-    const exchangeRates = await coinbaseProxy.getExchangeRates();
-    const currencies: any = exchangeRates.data;
+  constructor() {
+    super("coinbase");
+    this.coinbaseProxy = new CoinbaseProxy();
+  }
 
-    // Building prices array
-    const prices = [];
-    for (const symbol of tokenSymbols) {
-      const rates = currencies.rates;
+  async fetchData(): Promise<any> {
+    return await this.coinbaseProxy.getExchangeRates();
+  }
+
+  extractPrices(response: any): PricesObj {
+    const pricesObj: { [symbol: string]: number } = {};
+
+    const rates = response.data.rates;
+    for (const symbol of _.keys(rates)) {
       const exchangeRate = rates[symbol];
-      if (exchangeRate !== undefined) {
-        prices.push({
-          symbol,
-          value: 1 / exchangeRate,
-        });
-      } else {
-        logger.warn(
-          `Token is not supported with coinbase source: ${symbol}`);
-      }
+      pricesObj[symbol] = 1 / exchangeRate;
     }
 
-    return prices;
-  },
-};
+    return pricesObj;
+  }
+}
 
-export default coinbaseFetcher;
+export default new CoinbaseFetcher();

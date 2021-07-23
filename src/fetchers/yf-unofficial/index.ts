@@ -2,6 +2,8 @@ import { Consola } from "consola";
 import { Fetcher, PriceDataFetched } from "../../types";
 import YahooFinanceProxy from "./YahooFinanceProxy";
 
+// TODO: refactor using BaseFetcher
+
 const logger =
   require("../../utils/logger")("fetchers/yf-unofficial") as Consola;
 

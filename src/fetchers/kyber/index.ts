@@ -3,6 +3,8 @@ import { Consola } from "consola";
 import RedstoneApi from "redstone-api";
 import { PriceDataFetched, Fetcher } from "../../types";
 
+// TODO: refactor using BaseFetcher
+
 const logger =
   require("../../utils/logger")("fetchers/kyber") as Consola;
 

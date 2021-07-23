@@ -6,6 +6,8 @@ const logger =
 const symbolToId: { [symbol: string]: string } =
   require("./coingecko-symbol-to-id.json") as any;
 
+// TODO: refactor using BaseFetcher
+
 const coingeckoProxy = new CoingeckoProxy();
 
 const coingeckoFetcher: Fetcher = {

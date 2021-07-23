@@ -1,5 +1,7 @@
 import anySwapFetcher from "../any-swap-fetcher";
 
+// TODO: refactor using AnySwapFetcher
+
 const symbolToPairIdObj: { [symbol: string]: string } =
   require("./uniswap-symbol-to-pair-id.json");
 

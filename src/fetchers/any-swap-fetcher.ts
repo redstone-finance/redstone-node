@@ -2,6 +2,8 @@ import {Consola} from "consola";
 import graphProxy from "../utils/graph-proxy";
 import {PriceDataFetched, Fetcher} from "../types";
 
+// TODO: refactor using BaseFetcher
+
 const RETRY_TIME_LIMIT = 2000; // ms
 
 const logger =
