@@ -4,7 +4,7 @@ import { PricesObj } from "../../types";
 import CoinbaseProxy from "./CoinbaseProxy";
 
 
-class CoinbaseFetcher extends BaseFetcher {
+export class CoinbaseFetcher extends BaseFetcher {
   coinbaseProxy: CoinbaseProxy;
 
   constructor() {
@@ -27,6 +27,6 @@ class CoinbaseFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-}
+};
 
 export default new CoinbaseFetcher();

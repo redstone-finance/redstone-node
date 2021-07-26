@@ -1,48 +1,49 @@
-import { Consola } from "consola";
-import { PriceDataFetched, Fetcher } from "../../types";
+import _ from "lodash";
+import { PricesObj } from "../../types";
+import { BaseFetcher } from "../BaseFetcher";
 import CoingeckoProxy from "./CoingeckoProxy";
-const logger =
-  require("../../utils/logger")("fetchers/coingecko") as Consola;
+
 const symbolToId: { [symbol: string]: string } =
   require("./coingecko-symbol-to-id.json") as any;
 
-// TODO: refactor using BaseFetcher
+export class CoingeckoFetcher extends BaseFetcher {
+  private coingeckoProxy: CoingeckoProxy;
+  private idToSymbol: { [id: string]: string } = {};
 
-const coingeckoProxy = new CoingeckoProxy();
-
-const coingeckoFetcher: Fetcher = {
-  async fetchAll(tokenSymbols: string[]): Promise<PriceDataFetched[]> {
-    const idToSymbol: { [id: string]: string } = idsToSymbols(tokenSymbols);
-
-    // Fetching prices data
-    const response = await coingeckoProxy.getExchangeRates(Object.keys(idToSymbol));
-
-    // Building prices array
-    const prices = [];
-    for (const id in response.data) {
-      prices.push({
-        symbol: idToSymbol[id],
-        value: response.data[id].usd,
-      });
-    }
-
-    return prices;
-  },
-};
-
-function idsToSymbols(tokenSymbols: string[]): { [id: string]: string } {
-  const idToSymbol: { [id: string]: string } = {};
-  for (const symbol of tokenSymbols) {
-    const id = symbolToId[symbol];
-    if (id !== undefined) {
-      idToSymbol[id] = symbol;
-    } else {
-      logger.warn(
-        `Token is not supported with coingecko source: ${symbol}`);
-    }
+  constructor() {
+    super("coingecko");
+    this.coingeckoProxy = new CoingeckoProxy();
   }
 
-  return idToSymbol;
-}
+  async fetchData(symbols: string[]): Promise<any> {
+    this.updateIdToSymbolMapping(symbols);
+    const ids = _.keys(this.idToSymbol);
+    return await this.coingeckoProxy.getExchangeRates(ids);
+  }
 
-export default coingeckoFetcher;
+  extractPrices(response: any): PricesObj {
+    const pricesObj: { [symbol: string]: number } = {};
+
+    const rates = response.data;
+    for (const id of _.keys(rates)) {
+      const symbol = this.idToSymbol[id];
+      pricesObj[symbol] = rates[id].usd;
+    }
+
+    return pricesObj;
+  }
+
+  updateIdToSymbolMapping(symbols: string[]): void {
+    for (const symbol of symbols) {
+      const id = symbolToId[symbol];
+      if (id !== undefined) {
+        this.idToSymbol[id] = symbol;
+      } else {
+        this.logger.warn(
+          `No mapping for "${symbol}" for ${this.name} source`);
+      }
+    }
+  }
+};
+
+export default new CoingeckoFetcher();
