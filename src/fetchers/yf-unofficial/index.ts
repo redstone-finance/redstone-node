@@ -1,45 +1,37 @@
-import { Consola } from "consola";
-import { Fetcher, PriceDataFetched } from "../../types";
+import _ from "lodash";
+import { PricesObj } from "../../types";
+import { BaseFetcher } from "../BaseFetcher";
 import YahooFinanceProxy from "./YahooFinanceProxy";
 
-// TODO: refactor using BaseFetcher
+export class YfUnofficialFetcher extends BaseFetcher {
+  private yahooFinanceProxy: YahooFinanceProxy;
 
-const logger =
-  require("../../utils/logger")("fetchers/yf-unofficial") as Consola;
+  constructor() {
+    super("yf-unofficial");
+    this.yahooFinanceProxy = new YahooFinanceProxy();
+  }
 
-const yahooFinanceProxy = new YahooFinanceProxy();
+  async fetchData(symbols: string[]) {
+    return await this.yahooFinanceProxy.getExchangeRates(symbols);
+  }
 
-const yahooFinanceFetcher: Fetcher = {
-  async fetchAll(symbols: string[]): Promise<PriceDataFetched[]> {
-    // Fetching prices from Yahoo Finance
-    const quotes: any = await yahooFinanceProxy.getExchangeRates(symbols);
+  extractPrices(response: any, symbols: string[]): PricesObj {
+    const pricesObj: { [symbol: string]: number } = {};
 
-    // Building prices
-    const prices: PriceDataFetched[] = [];
-    for (const symbol of symbols) {
-      const details = quotes[symbol];
-      if (details !== undefined) {
-        prices.push({
-          symbol,
-          value: getPriceValue(details),
-        });
-      } else {
-        logger.warn(
-          `Token is not supported with yf-unofficial source: ${symbol}`);
+    for (const symbol of _.keys(response)) {
+      const details = response[symbol];
+
+      let value: any = details.price.regularMarketPrice;
+      if (isNaN(value)) {
+        value = value.raw;
       }
+
+      pricesObj[symbol] = value;
     }
 
-    return prices;
+    return pricesObj;
   }
+
 };
 
-function getPriceValue(details: any) {
-  const value: any = details.price.regularMarketPrice;
-  if (isNaN(value)) {
-    return value.raw;
-  } else {
-    return value;
-  }
-}
-
-export default yahooFinanceFetcher;
+export default new YfUnofficialFetcher();
