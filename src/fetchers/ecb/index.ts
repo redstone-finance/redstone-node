@@ -1,39 +1,31 @@
 import * as exchangeRates from "ecb-euro-exchange-rates";
-import { Consola } from "consola";
-import { PriceDataFetched, Fetcher } from "../../types";
+import { PricesObj } from "../../types";
+import { BaseFetcher } from "../BaseFetcher";
 
-// TODO: refactor using BaseFetcher
+export class EcbFetcher extends BaseFetcher {
+  constructor() {
+    super("ecb");
+  }
 
-const logger =
-  require("../../utils/logger")("fetchers/ecb") as Consola;
+  async fetchData(): Promise<any> {
+    return await exchangeRates.fetch();
+  }
 
-const ecbFetcher: Fetcher = {
-  async fetchAll(symbols: string[]): Promise<PriceDataFetched[]> {
-    // Fetching prices
-    const { rates }: any = await exchangeRates.fetch();
+  extractPrices(response: any, symbols: string[]): PricesObj {
+    const pricesObj: { [symbol: string]: number } = {};
+
+    const { rates } = response;
     const usdRate = rates.USD;
-
-    // Building prices array
-    const prices = [];
     for (const symbol of symbols) {
       if (symbol === "EUR") {
-        prices.push({
-          symbol,
-          value: usdRate,
-        });
-      } else if (rates[symbol] !== undefined) {
-        prices.push({
-          symbol,
-          value: (1 / rates[symbol]) * usdRate as number,
-        });
+        pricesObj[symbol] = usdRate;
       } else {
-        logger.warn(
-          `Token is not supported with ecb source: ${symbol}`);
+        pricesObj[symbol] = (1 / rates[symbol]) * usdRate;
       }
     }
 
-    return prices;
-  },
-};
+    return pricesObj;
+  }
+}
 
-export default ecbFetcher;
+export default new EcbFetcher();
