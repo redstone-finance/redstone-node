@@ -1,17 +1,7 @@
 import fetchers from "../../src/fetchers/index";
+import { mockRedstoneApiPrice } from "./_helpers";
 
-jest.mock("redstone-api", () => {
-  return {
-    async getPrice(symbol: string) {
-      if (symbol === "USDT") {
-        return { value: 1 };
-      } else {
-        throw new Error(
-          "Mock redstone-api can only beused to fetch USDT price");
-      }
-    }
-  }
-})
+mockRedstoneApiPrice(1, "USDT");
 
 jest.mock("ccxt", () => {
   const mockExchanges: any = {};
