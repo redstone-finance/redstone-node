@@ -2,9 +2,12 @@ import { Consola } from "consola";
 import { Fetcher, PriceDataFetched, FetcherOpts, PricesObj } from "../types";
 import createLogger from "../utils/logger";
 
+const RETRY_TIME_LIMIT = 3000; // ms
+
 export abstract class BaseFetcher implements Fetcher {
   protected name: string;
   protected logger: Consola;
+  protected retryForInvalidResponse: boolean = false;
 
   constructor(name: string) {
     this.name = name;
@@ -29,12 +32,30 @@ export abstract class BaseFetcher implements Fetcher {
   async fetchAll(
     symbols: string[],
     opts?: FetcherOpts): Promise<PriceDataFetched[]> {
+      // Prepare for fetching
       await this.prepareForFetching();
-      const response = await this.fetchData(symbols, opts);
+
+      // Fetching data
+      const fetchStartTime = Date.now();
+      let response = await this.fetchData(symbols, opts);
+
+      // Retrying data fetching if needed
+      const shouldRetry =
+        !this.validateResponse(response)
+        && this.retryForInvalidResponse
+        && Date.now() - fetchStartTime <= RETRY_TIME_LIMIT;
+      if (shouldRetry) {
+        this.logger.info("Retrying to fetch data");
+        response = await this.fetchData(symbols, opts);
+      }
+
+      // Validating response
       const isValid = this.validateResponse(response);
       if (!isValid) {
-        this.logger.warn(`Response is invalid: ` + JSON.stringify(response));
+        throw new Error(`Response is invalid: ` + JSON.stringify(response));
       }
+
+      // Extracting prices from response
       const pricesObj = this.extractPrices(response, symbols);
       return this.convertPricesObjToPriceArray(pricesObj, symbols);
     }

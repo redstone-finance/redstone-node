@@ -1,7 +1,7 @@
 import fetchers from "../../src/fetchers/index"
 import { mockFetcherResponse, mockFetcherResponseWithFunction } from "./_helpers";
 
-const pathToExampleResponse = "../../src/fetchers/uniswap/example-response.json";
+const pathToExampleResponse = "../../src/fetchers/sushiswap/example-response.json";
 const expectedResult = [
   {
     "symbol": "CREAM",
@@ -11,31 +11,19 @@ const expectedResult = [
     "symbol": "SAND",
     "value": 0.3511882127904635
   },
-  {
-    "symbol": "YFI",
-    "value": 48717.71993117326
-  },
-  {
-    "symbol": "KP3R",
-    "value": 158.30070859099666
-  },
-  {
-    "symbol": "XOR",
-    "value": 426.7112290136115
-  },
 ];
 
 jest.mock("axios");
 
-describe("uniswap fetcher", () => {
-  const sut = fetchers["uniswap"];
+describe("sushiswap fetcher", () => {
+  const sut = fetchers["sushiswap"];
 
   it("should properly fetch data", async () => {
     // Given
     mockFetcherResponse(pathToExampleResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND", "YFI", "KP3R", "XOR"]);
+    const result = await sut.fetchAll(["CREAM", "SAND"]);
 
     // Then
     expect(result).toEqual(expectedResult);
@@ -56,7 +44,7 @@ describe("uniswap fetcher", () => {
     mockFetcherResponseWithFunction(getResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND", "YFI", "KP3R", "XOR"]);
+    const result = await sut.fetchAll(["CREAM", "SAND"]);
 
     // Then
     expect(result).toEqual(expectedResult);

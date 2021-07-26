@@ -33,7 +33,7 @@ export class CoingeckoFetcher extends BaseFetcher {
     return pricesObj;
   }
 
-  updateIdToSymbolMapping(symbols: string[]): void {
+  private updateIdToSymbolMapping(symbols: string[]): void {
     for (const symbol of symbols) {
       const id = symbolToId[symbol];
       if (id !== undefined) {
