@@ -4,6 +4,8 @@ import redstone from "redstone-api";
 import ccxt, { Exchange } from "ccxt";
 import _ from "lodash";
 
+const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
+
 export class CcxtFetcher extends BaseFetcher {
   exchange: Exchange;
   lastUsdtPrice?: number;
@@ -13,7 +15,9 @@ export class CcxtFetcher extends BaseFetcher {
   // List of ccxt exchanges: https://github.com/ccxt/ccxt/wiki/Exchange-Markets
   constructor(name: string) {
     super(name);
-    this.exchange = new (ccxt as any)[name] as Exchange;
+    this.exchange = new (ccxt as any)[name]({
+      timeout: CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS,
+    }) as Exchange;
   }
 
   async prepareForFetching() {
@@ -50,10 +54,4 @@ export class CcxtFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-
-  // TODO: implement
-  validateResponse(response: any): boolean {
-    return true;
-  }
-
 };

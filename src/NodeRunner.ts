@@ -191,7 +191,7 @@ export default class NodeRunner {
       PricesService.groupPricesByToken(fetchTimestamp, pricesData, this.version);
 
     const aggregatedPrices: PriceDataAfterAggregation[] = this.pricesService!.calculateAggregatedValues(
-      Object.values(pricesBeforeAggregation), //what is the advantage of using lodash.values?
+      Object.values(pricesBeforeAggregation), // what is the advantage of using lodash.values?
       aggregators[this.currentManifest!.priceAggregator]
     );
     NodeRunner.printAggregatedPrices(aggregatedPrices);
