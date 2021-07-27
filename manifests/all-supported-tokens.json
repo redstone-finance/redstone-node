@@ -5399,6 +5399,15 @@
         "huobipro"
       ]
     },
+    "PEARL": {
+      "source": [
+        "aofex",
+        "hitbtc",
+        "huobipro",
+        "lbank",
+        "poloniex"
+      ]
+    },
     "RING": {
       "source": [
         "aofex",
@@ -5595,6 +5604,15 @@
         "poloniex",
         "sushiswap",
         "uniswap"
+      ]
+    },
+    "FREE": {
+      "source": [
+        "bitcoincom",
+        "crex24",
+        "hitbtc",
+        "latoken",
+        "probit"
       ]
     },
     "SPI": {
@@ -5863,14 +5881,6 @@
         "bittrex",
         "bitz",
         "huobipro"
-      ]
-    },
-    "PEARL": {
-      "source": [
-        "aofex",
-        "hitbtc",
-        "huobipro",
-        "lbank"
       ]
     },
     "GOF": {
@@ -8000,12 +8010,6 @@
         "ftx"
       ]
     },
-    "MAHA": {
-      "source": [
-        "ascendex",
-        "kucoin"
-      ]
-    },
     "BNBBULL": {
       "source": [
         "ascendex",
@@ -8072,12 +8076,6 @@
         "kucoin"
       ]
     },
-    "DOG": {
-      "source": [
-        "bibox",
-        "hbtc"
-      ]
-    },
     "PEAK": {
       "source": [
         "bibox",
@@ -8142,12 +8140,6 @@
       "source": [
         "bibox",
         "bitmart"
-      ]
-    },
-    "BLAST": {
-      "source": [
-        "bibox",
-        "probit"
       ]
     },
     "BAAS": {
