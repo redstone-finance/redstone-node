@@ -132,6 +132,7 @@
     "ALPHA": {},
     "AVA": {},
     "BTCST": {},
+    "TRU": {},
     "DEGO": {},
     "EPS": {},
     "AUTO": {},
@@ -142,7 +143,6 @@
     "KLV": {},
     "RARI": {},
     "SENSO": {},
-    "GHST": {},
     "UST": {},
     "ADABEAR": {},
     "ADABULL": {},
@@ -153,6 +153,7 @@
     "USDJ": {},
     "ZKS": {},
     "YFX": {},
+    "BRG": {},
     "GLM": {},
     "CREAM": {},
     "ZAP": {},
@@ -162,6 +163,7 @@
     "HEGIC": {},
     "LQTY": {},
     "KTON": {},
+    "BAC": {},
     "PRQ": {},
     "CUSDT": {},
     "BCHBEAR": {},
@@ -181,8 +183,12 @@
     "TRADE": {},
     "WHALE": {},
     "MEME": {},
+    "MPH": {},
     "MVL": {},
     "TAI": {},
-    "BID": {}
+    "BID": {},
+    "ESD": {},
+    "SFI": {},
+    "XOR": {}
   }
 }
