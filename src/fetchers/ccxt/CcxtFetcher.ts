@@ -17,6 +17,7 @@ export class CcxtFetcher extends BaseFetcher {
     super(name);
     this.exchange = new (ccxt as any)[name]({
       timeout: CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS,
+      enableRateLimit: false, // This config option is required to avoid problems with requests timeout
     }) as Exchange;
   }
 
