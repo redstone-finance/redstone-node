@@ -17,6 +17,7 @@ const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
 export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
+const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 
 export default class NodeRunner {
   private readonly version: string;
@@ -288,7 +289,7 @@ export default class NodeRunner {
         // block standard node processing for so long (especially for nodes with low "interval" value)
         Promise.race([
           this.arweaveService.getCurrentManifest(),
-          timeout(10000)
+          timeout(MANIFEST_LOAD_TIMEOUT_MS)
         ]).then((value) => {
           if (value === "timeout") {
             logger.warn("Manifest load promise timeout");
