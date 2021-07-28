@@ -1,5 +1,6 @@
 const fs = require("fs");
 const _ = require("lodash");
+const { generateManifest } = require("./manifest-generator");
 
 const OUTPUT_FILE_PATH = "./manifests/all-supported-tokens.json";
 
@@ -8,7 +9,7 @@ const manifestsToExclude = [
   "all-supported-tokens.json",
   "api-dojo-rapid.json",
   "rapid.json",
-  "stocks.json"
+  "stocks.json",
 ];
 
 main();
@@ -41,14 +42,7 @@ function main() {
     tokensWithSortedKeys[symbol] = tokens[symbol];
   }
 
-  const manifest = {
-    interval: 60000,
-    priceAggregator: "median",
-    sourceTimeout: 50000,
-    maxPriceDeviationPercent: 25,
-    evmChainId: 1,
-    tokens: tokensWithSortedKeys,
-  };
+  const manifest = generateManifest({ tokens: tokensWithSortedKeys });
 
   console.log(`Saving manifest to: ${OUTPUT_FILE_PATH}`);
   fs.writeFileSync(OUTPUT_FILE_PATH, JSON.stringify(manifest, null, 2) + "\n");

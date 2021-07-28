@@ -5,7 +5,7 @@ const redstone = require("redstone-api");
 const exchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
 
 const OUTPUT_DIR = "./manifests";
-const MIN_SIMILAR_VALUES_PERCENTAGE = 60; // %
+const MIN_SIMILAR_VALUES_PERCENTAGE = 70; // %
 const MAX_DEVIATION_FOR_SIMILAR_PRICES = 25; // %
 const MIN_NUMBER_OF_SUPPORTED_EXCHANGES = 2;
 const VERBOSE_MODE = true;
