@@ -20,7 +20,7 @@ export class CoinbaseFetcher extends BaseFetcher {
     const pricesObj: { [symbol: string]: number } = {};
 
     const rates = response.data.rates;
-    for (const symbol of _.keys(rates)) {
+    for (const symbol of Object.keys(rates)) {
       const exchangeRate = rates[symbol];
       pricesObj[symbol] = 1 / exchangeRate;
     }

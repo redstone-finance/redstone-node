@@ -17,7 +17,7 @@ export class CoingeckoFetcher extends BaseFetcher {
 
   async fetchData(symbols: string[]): Promise<any> {
     this.updateIdToSymbolMapping(symbols);
-    const ids = _.keys(this.idToSymbol);
+    const ids = Object.keys(this.idToSymbol);
     return await this.coingeckoProxy.getExchangeRates(ids);
   }
 
@@ -25,7 +25,7 @@ export class CoingeckoFetcher extends BaseFetcher {
     const pricesObj: { [symbol: string]: number } = {};
 
     const rates = response.data;
-    for (const id of _.keys(rates)) {
+    for (const id of Object.keys(rates)) {
       const symbol = this.idToSymbol[id];
       pricesObj[symbol] = rates[id].usd;
     }

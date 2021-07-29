@@ -27,7 +27,7 @@ async function getAllTickers() {
 
   for (const exchangeName of exchanges) {
     const tickers = await getTickersForExchange(exchangeName);
-    log(`Loaded ${_.keys(tickers).length} tickers for: ${exchangeName}`);
+    log(`Loaded ${Object.keys(tickers).length} tickers for: ${exchangeName}`);
     result = mergeTickers(tickers, exchangeName, result);
   }
 
@@ -76,7 +76,7 @@ async function getRedstoneApiTickers() {
 
 function mergeTickers(newTickers, exchangeName, prevResult) {
   const newResult = { ...prevResult };
-  for (const symbol of _.keys(newTickers)) {
+  for (const symbol of Object.keys(newTickers)) {
     const priceValue = newTickers[symbol];
     if (newResult[symbol]) {
       newResult[symbol][exchangeName] = priceValue;
@@ -93,7 +93,7 @@ function mergeTickers(newTickers, exchangeName, prevResult) {
 // value is similar to majority of prices from other exchanges that
 // support this symbol
 function getSupportedTokensForExchange(exchange, aggregatedTickers) {
-  return _.keys(aggregatedTickers).filter(symbol => {
+  return Object.keys(aggregatedTickers).filter(symbol => {
     const pricesWithSources = aggregatedTickers[symbol];
     const priceValues = _.values(pricesWithSources);
     const price = pricesWithSources[exchange];

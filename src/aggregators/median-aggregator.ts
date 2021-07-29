@@ -19,7 +19,10 @@ const medianAggregator: Aggregator = {
       const deviation =
         (Math.abs(value - initialMedian) / initialMedian) * 100;
       if (deviation > maxPriceDeviationPercent) {
-        logger.warn(
+        // We've switched logging level from warn to info here
+        // because we've been receiving too many email notifications about price
+        // deviations
+        logger.info(
           `Value ${value} has too big deviation (${deviation}) from median. `
           + `Symbol: ${price.symbol}. Skipping...`,
           price);

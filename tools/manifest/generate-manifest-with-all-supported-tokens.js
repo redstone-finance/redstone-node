@@ -35,7 +35,7 @@ function main() {
 
   // Sort tokens by number of sources
   const tokensWithSortedKeys = {};
-  const sortedKeys = _.keys(tokens).sort((token1, token2) => {
+  const sortedKeys = Object.keys(tokens).sort((token1, token2) => {
     return tokens[token2].source.length - tokens[token1].source.length;
   });
   for (const symbol of sortedKeys) {

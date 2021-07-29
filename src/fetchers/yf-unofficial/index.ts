@@ -18,7 +18,7 @@ export class YfUnofficialFetcher extends BaseFetcher {
   extractPrices(response: any, symbols: string[]): PricesObj {
     const pricesObj: { [symbol: string]: number } = {};
 
-    for (const symbol of _.keys(response)) {
+    for (const symbol of Object.keys(response)) {
       const details = response[symbol];
 
       let value: any = details.price.regularMarketPrice;
