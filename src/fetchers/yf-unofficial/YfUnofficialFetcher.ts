@@ -15,7 +15,7 @@ export class YfUnofficialFetcher extends BaseFetcher {
     return await this.yahooFinanceProxy.getExchangeRates(symbols);
   }
 
-  extractPrices(response: any, symbols: string[]): PricesObj {
+  async extractPrices(response: any): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
     for (const symbol of Object.keys(response)) {

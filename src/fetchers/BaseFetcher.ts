@@ -14,15 +14,9 @@ export abstract class BaseFetcher implements Fetcher {
     this.logger = createLogger("fetchers/" + name);
   };
 
-  // This method may be used to load required data before
-  // fetching the main data. For example it can be used to fetch
-  // the latest USDT price from trusted source (e.g. redstone-api)
-  // for exchanges that don't offer USD support
-  async prepareForFetching() {}
-
   // All the abstract methods below must be implemented in fetchers
   abstract fetchData(symbols: string[], opts?: FetcherOpts): Promise<any>;
-  abstract extractPrices(response: any, symbols?: string[]): PricesObj;
+  abstract extractPrices(response: any, symbols?: string[]): Promise<PricesObj>;
 
   // This method may be overridden to extend validation
   validateResponse(response: any): boolean {
@@ -32,9 +26,6 @@ export abstract class BaseFetcher implements Fetcher {
   async fetchAll(
     symbols: string[],
     opts?: FetcherOpts): Promise<PriceDataFetched[]> {
-      // Prepare for fetching
-      await this.prepareForFetching();
-
       // Fetching data
       const fetchStartTime = Date.now();
       let response = await this.fetchData(symbols, opts);
@@ -56,7 +47,7 @@ export abstract class BaseFetcher implements Fetcher {
       }
 
       // Extracting prices from response
-      const pricesObj = this.extractPrices(response, symbols);
+      const pricesObj = await this.extractPrices(response, symbols);
       return this.convertPricesObjToPriceArray(pricesObj, symbols);
     }
 

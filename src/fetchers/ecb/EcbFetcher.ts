@@ -11,7 +11,7 @@ export class EcbFetcher extends BaseFetcher {
     return await exchangeRates.fetch();
   }
 
-  extractPrices(response: any, symbols: string[]): PricesObj {
+  async extractPrices(response: any, symbols: string[]): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
     const { rates } = response;

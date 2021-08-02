@@ -7,7 +7,6 @@ const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
 
 export class CcxtFetcher extends BaseFetcher {
   private readonly exchange: Exchange;
-  private lastUsdtPrice?: number;
 
   // CCXT-based fetchers must have names that are exactly equal to
   // the appropriate exchange id in CCXT
@@ -20,11 +19,6 @@ export class CcxtFetcher extends BaseFetcher {
     }) as Exchange;
   }
 
-  async prepareForFetching() {
-    const price = await redstone.getPrice("USDT");
-    this.lastUsdtPrice = price.value;
-  }
-
   async fetchData(): Promise<any> {
     if (!this.exchange.has["fetchTickers"]) {
       throw new Error(
@@ -34,8 +28,11 @@ export class CcxtFetcher extends BaseFetcher {
     return await this.exchange.fetchTickers();
   }
 
-  extractPrices(response: any): PricesObj {
+  async extractPrices(response: any): Promise<PricesObj> {
+    const lastUsdtPrice = (await redstone.getPrice("USDT")).value;
+
     const pricesObj: PricesObj = {};
+
     for (const ticker of Object.values(response) as Ticker[]) {
       const pairSymbol = ticker.symbol;
       const lastPrice = ticker.last as number;
@@ -46,7 +43,7 @@ export class CcxtFetcher extends BaseFetcher {
       } else if (pairSymbol.endsWith("/USDT")) {
         const symbol = pairSymbol.replace("/USDT", "");
         if (!pricesObj[symbol]) {
-          pricesObj[symbol] = lastPrice * this.lastUsdtPrice!;
+          pricesObj[symbol] = lastPrice * lastUsdtPrice;
         }
       }
     }

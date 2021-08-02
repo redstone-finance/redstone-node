@@ -18,7 +18,7 @@ export class VertoFetcher extends BaseFetcher {
     return await Promise.all(tokenPromises);
   }
 
-  extractPrices(responses: any): PricesObj {
+  async extractPrices(responses: any): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
     for (const response of responses) {

@@ -16,7 +16,7 @@ export class CoinbaseFetcher extends BaseFetcher {
     return await this.coinbaseProxy.getExchangeRates();
   }
 
-  extractPrices(response: any): PricesObj {
+  async extractPrices(response: any): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
     const rates = response.data.rates;

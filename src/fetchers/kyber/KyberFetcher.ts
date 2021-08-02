@@ -7,29 +7,24 @@ import { BaseFetcher } from "../BaseFetcher";
 const ETH_PAIRS_URL = "https://api.kyber.network/api/tokens/pairs";
 
 export class KyberFetcher extends BaseFetcher {
-  lastEthPrice?: number;
-
   constructor() {
     super("kyber");
-  }
-
-  async prepareForFetching() {
-    const price = await redstone.getPrice("ETH");
-    this.lastEthPrice = price.value;
   }
 
   async fetchData() {
     return await axios.get(ETH_PAIRS_URL);
   }
 
-  extractPrices(response: any, symbols: string[]): PricesObj {
+  async extractPrices(response: any, symbols: string[]): Promise<PricesObj> {
+    const lastEthPrice = (await redstone.getPrice("ETH")).value;
+
     const pricesObj: PricesObj = {};
 
     const pairs = response.data;
     for (const symbol of symbols) {
       const pair = pairs["ETH_" + symbol];
       if (pair !== undefined) {
-        pricesObj[symbol] = this.lastEthPrice! * pair.currentPrice;
+        pricesObj[symbol] = lastEthPrice * pair.currentPrice;
       }
     }
 

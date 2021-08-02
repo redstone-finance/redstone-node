@@ -40,7 +40,7 @@ export class UniOrSushiSwapFetcher extends BaseFetcher {
     return response !== undefined && response.data !== undefined;
   }
 
-  extractPrices(response: any): PricesObj {
+  async extractPrices(response: any): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
     for (const pair of response.data.pairs) {

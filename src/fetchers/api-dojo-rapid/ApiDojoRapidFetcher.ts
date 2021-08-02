@@ -25,7 +25,7 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
     });
   }
 
-  extractPrices(response: any): PricesObj {
+  async extractPrices(response: any): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
     const quotes = response.data.quoteResponse.result;
     for (const quote of quotes) {
