@@ -34,5 +34,3 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
     return pricesObj;
   }
 };
-
-export default new ApiDojoRapidFetcher();

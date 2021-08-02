@@ -31,5 +31,3 @@ export class VertoFetcher extends BaseFetcher {
     return pricesObj;
   }
 };
-
-export default new VertoFetcher();

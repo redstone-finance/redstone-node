@@ -26,6 +26,4 @@ export class EcbFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-}
-
-export default new EcbFetcher();
+};

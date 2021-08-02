@@ -28,5 +28,3 @@ export class CoinbaseFetcher extends BaseFetcher {
     return pricesObj;
   }
 };
-
-export default new CoinbaseFetcher();

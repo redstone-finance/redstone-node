@@ -45,5 +45,3 @@ export class CoingeckoFetcher extends BaseFetcher {
     }
   }
 };
-
-export default new CoingeckoFetcher();

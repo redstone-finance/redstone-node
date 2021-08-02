@@ -33,5 +33,3 @@ export class YfUnofficialFetcher extends BaseFetcher {
   }
 
 };
-
-export default new YfUnofficialFetcher();

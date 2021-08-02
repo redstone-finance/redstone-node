@@ -37,8 +37,8 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
   })
 });
 
-jest.mock("../../src/fetchers/coinbase");
-jest.mock("../../src/fetchers/uniswap");
+jest.mock("../../src/fetchers/coinbase/CoinbaseFetcher");
+jest.mock("../../src/fetchers/uniswap/UniswapFetcher");
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
