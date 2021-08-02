@@ -2,7 +2,7 @@ import { Consola } from "consola";
 import { Fetcher, PriceDataFetched, FetcherOpts, PricesObj } from "../types";
 import createLogger from "../utils/logger";
 
-const RETRY_TIME_LIMIT = 3000; // ms
+const MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS = 3000;
 
 export abstract class BaseFetcher implements Fetcher {
   protected name: string;
@@ -43,7 +43,7 @@ export abstract class BaseFetcher implements Fetcher {
       const shouldRetry =
         !this.validateResponse(response)
         && this.retryForInvalidResponse
-        && Date.now() - fetchStartTime <= RETRY_TIME_LIMIT;
+        && Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
       if (shouldRetry) {
         this.logger.info("Retrying to fetch data");
         response = await this.fetchData(symbols, opts);
