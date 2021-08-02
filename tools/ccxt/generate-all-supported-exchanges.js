@@ -1,6 +1,5 @@
 const ccxt = require("ccxt");
 const fs = require("fs");
-const _ = require("lodash");
 
 const MIN_SUPPORTED_TICKERS = 3;
 const OUTPUT_FILE_PATH = "./src/fetchers/ccxt/all-supported-exchanges.json";
@@ -24,7 +23,7 @@ async function shouldExchangeBeSupported(exchangeName) {
   const exchange = new ccxt[exchangeName]();
   if (exchange.has["fetchTickers"]) {
     try {
-      const tickers = _.values(await exchange.fetchTickers());
+      const tickers = Object.values(await exchange.fetchTickers());
       const tickersWithUsdt = tickers.filter(t => t.symbol.endsWith("/USDT"));
       const tickersWithUsd = tickers.filter(t => t.symbol.endsWith("/USD"));
       const supported =

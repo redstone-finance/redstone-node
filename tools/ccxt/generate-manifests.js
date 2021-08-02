@@ -1,6 +1,5 @@
 const fs = require("fs");
 const ccxt = require("ccxt");
-const _ = require("lodash");
 const redstone = require("redstone-api");
 const exchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
 
@@ -47,7 +46,7 @@ async function getTickersForExchange(exchangeName) {
   const tickers = await exchange.fetchTickers();
 
   // Parse response
-  for (const ticker of _.values(tickers)) {
+  for (const ticker of Object.values(tickers)) {
     const pairSymbol = ticker.symbol;
     if (pairSymbol) {
       if (pairSymbol.endsWith("/USD")) {
@@ -95,7 +94,7 @@ function mergeTickers(newTickers, exchangeName, prevResult) {
 function getSupportedTokensForExchange(exchange, aggregatedTickers) {
   return Object.keys(aggregatedTickers).filter(symbol => {
     const pricesWithSources = aggregatedTickers[symbol];
-    const priceValues = _.values(pricesWithSources);
+    const priceValues = Object.values(pricesWithSources);
     const price = pricesWithSources[exchange];
     const shouldBeIncluded = price > 0
       && priceValues.length >= MIN_NUMBER_OF_SUPPORTED_EXCHANGES
@@ -106,7 +105,7 @@ function getSupportedTokensForExchange(exchange, aggregatedTickers) {
 }
 
 function isPriceSimilarWithMajority(price, prices) {
-  const similarPrices = _.filter(prices, p => arePricesSimilar(p, price))
+  const similarPrices = prices.filter(p => arePricesSimilar(p, price))
   const similarPricesPercentage = (similarPrices.length / prices.length) * 100;
   return similarPricesPercentage >= MIN_SIMILAR_VALUES_PERCENTAGE;
 }

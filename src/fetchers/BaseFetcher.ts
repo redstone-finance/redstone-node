@@ -9,7 +9,7 @@ export abstract class BaseFetcher implements Fetcher {
   protected logger: Consola;
   protected retryForInvalidResponse: boolean = false;
 
-  constructor(name: string) {
+  protected constructor(name: string) {
     this.name = name;
     this.logger = createLogger("fetchers/" + name);
   };

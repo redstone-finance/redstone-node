@@ -1,8 +1,7 @@
 import { BaseFetcher } from "../BaseFetcher";
 import { PricesObj } from "../../types";
 import redstone from "redstone-api";
-import ccxt, { Exchange, ExchangeId } from "ccxt";
-import _ from "lodash";
+import ccxt, { Exchange, ExchangeId, Ticker } from "ccxt";
 
 const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
 
@@ -37,16 +36,17 @@ export class CcxtFetcher extends BaseFetcher {
 
   extractPrices(response: any): PricesObj {
     const pricesObj: PricesObj = {};
-    for (const ticker of _.values(response)) {
+    for (const ticker of Object.values(response) as Ticker[]) {
       const pairSymbol = ticker.symbol;
+      const lastPrice = ticker.last as number;
 
       if (pairSymbol.endsWith("/USD")) {
         const symbol = pairSymbol.replace("/USD", "");
-        pricesObj[symbol] = ticker.last;
+        pricesObj[symbol] = lastPrice;
       } else if (pairSymbol.endsWith("/USDT")) {
         const symbol = pairSymbol.replace("/USDT", "");
         if (!pricesObj[symbol]) {
-          pricesObj[symbol] = ticker.last * this.lastUsdtPrice!;
+          pricesObj[symbol] = lastPrice * this.lastUsdtPrice!;
         }
       }
     }
