@@ -2,12 +2,14 @@ const fs = require("fs");
 const ccxt = require("ccxt");
 const redstone = require("redstone-api");
 const exchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
+const allSupportedTokensManifest = require("../../manifests/all-supported-tokens.json");
 
 const OUTPUT_DIR = "./manifests";
 const MIN_SIMILAR_VALUES_PERCENTAGE = 70; // %
 const MAX_DEVIATION_FOR_SIMILAR_PRICES = 25; // %
 const MIN_NUMBER_OF_SUPPORTED_EXCHANGES = 2;
 const VERBOSE_MODE = true;
+const DONT_ADD_NEW_TOKENS = true; // If set to true, the script will not add tokens to sources that don't already support them in current main manifest
 
 main();
 
@@ -98,10 +100,16 @@ function getSupportedTokensForExchange(exchange, aggregatedTickers) {
     const price = pricesWithSources[exchange];
     const shouldBeIncluded = price > 0
       && priceValues.length >= MIN_NUMBER_OF_SUPPORTED_EXCHANGES
+      && (!DONT_ADD_NEW_TOKENS || isTokenIncludedInCurrentManifest({ exchange, symbol }))
       && isPriceSimilarWithMajority(price, priceValues);
 
     return shouldBeIncluded;
   });
+}
+
+function isTokenIncludedInCurrentManifest({ exchange, symbol }) {
+  const tokens = allSupportedTokensManifest.tokens;
+  return tokens[symbol] && tokens[symbol].source.includes(exchange);
 }
 
 function isPriceSimilarWithMajority(price, prices) {
