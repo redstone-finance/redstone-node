@@ -7,17 +7,13 @@ interface SymbolToPairId {
 };
 
 export class UniOrSushiSwapFetcher extends BaseFetcher {
-  subgraphUrl: string;
-  symbolToPairIdObj: SymbolToPairId;
-  retryForInvalidResponse: boolean = true;
+  protected retryForInvalidResponse: boolean = true;
 
   constructor(
     name: string,
-    subgraphUrl: string,
-    symbolToPairIdObj: SymbolToPairId) {
+    private readonly subgraphUrl: string,
+    private readonly symbolToPairIdObj: SymbolToPairId) {
       super(name);
-      this.subgraphUrl = subgraphUrl;
-      this.symbolToPairIdObj = symbolToPairIdObj;
     }
 
   async fetchData(symbols: string[]) {

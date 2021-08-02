@@ -60,10 +60,6 @@ export abstract class BaseFetcher implements Fetcher {
       return this.convertPricesObjToPriceArray(pricesObj, symbols);
     }
 
-  isSuccessfulResponse(response: any) {
-    return response.status < 400;
-  }
-
   private convertPricesObjToPriceArray(
     pricesObj: PricesObj,
     requiredSymbols: string[]): PriceDataFetched[] {

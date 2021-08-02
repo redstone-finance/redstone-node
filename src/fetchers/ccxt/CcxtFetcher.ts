@@ -6,8 +6,8 @@ import ccxt, { Exchange, ExchangeId, Ticker } from "ccxt";
 const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
 
 export class CcxtFetcher extends BaseFetcher {
-  exchange: Exchange;
-  lastUsdtPrice?: number;
+  private readonly exchange: Exchange;
+  private lastUsdtPrice?: number;
 
   // CCXT-based fetchers must have names that are exactly equal to
   // the appropriate exchange id in CCXT
