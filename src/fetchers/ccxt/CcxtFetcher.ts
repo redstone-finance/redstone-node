@@ -1,7 +1,7 @@
 import { BaseFetcher } from "../BaseFetcher";
 import { PricesObj } from "../../types";
 import redstone from "redstone-api";
-import ccxt, { Exchange } from "ccxt";
+import ccxt, { Exchange, ExchangeId } from "ccxt";
 import _ from "lodash";
 
 const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
@@ -13,7 +13,7 @@ export class CcxtFetcher extends BaseFetcher {
   // CCXT-based fetchers must have names that are exactly equal to
   // the appropriate exchange id in CCXT
   // List of ccxt exchanges: https://github.com/ccxt/ccxt/wiki/Exchange-Markets
-  constructor(name: string) {
+  constructor(name: ExchangeId) {
     super(name);
     this.exchange = new (ccxt as any)[name]({
       timeout: CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS,
@@ -46,8 +46,6 @@ export class CcxtFetcher extends BaseFetcher {
       } else if (pairSymbol.endsWith("/USDT")) {
         const symbol = pairSymbol.replace("/USDT", "");
         if (!pricesObj[symbol]) {
-          // TODO: discuss it with our team
-          // it can be unclear for external users
           pricesObj[symbol] = ticker.last * this.lastUsdtPrice!;
         }
       }
