@@ -1,32 +1,5 @@
-import {PriceDataAfterAggregation, PriceDataBeforeAggregation} from "../src/types";
-import medianAggregator, {getMedianValue, getNonZeroValues} from "../src/aggregators/median-aggregator";
-
-describe('getNonZeroValues', () => {
-  it('it should filter out non zero values', () => {
-    //given
-    const input: PriceDataBeforeAggregation = {
-      id: "",
-      source: {
-        "src1": 555,
-        "src2": 0,
-        "src3": 12312312.3,
-        "src4": 89.3334,
-        "src5": -1,
-        "src6": -0.0000000001,
-        "src7": 0.0000000001
-      },
-      symbol: "BTC",
-      timestamp: 0,
-      version: ""
-    };
-
-    //when
-    const result = getNonZeroValues(input);
-
-    //then
-    expect(result).toEqual([555, 12312312.3, 89.3334, 0.0000000001])
-  });
-});
+import { PriceDataAfterAggregation, PriceDataBeforeAggregation } from "../src/types";
+import medianAggregator, { getMedianValue } from "../src/aggregators/median-aggregator";
 
 describe('getMedianValue', () => {
   it('should throw for empty array', () => {
@@ -50,7 +23,7 @@ describe('getMedianValue', () => {
 
 describe('medianAggregator', () => {
   it('should properly aggregate prices from different sources', () => {
-    //given
+    // Given
     const input: PriceDataBeforeAggregation = {
       id: "",
       source: {
@@ -67,15 +40,15 @@ describe('medianAggregator', () => {
       version: ""
     };
 
-    //when
+    // When
     const result: PriceDataAfterAggregation = medianAggregator.getAggregatedValue(input, 25);
 
-    //then
+    // Then
     expect(result.value).toEqual(6);
   });
 
   it('should throw if all price values deviate too much from median', () => {
-    //given
+    // Given
     const input: PriceDataBeforeAggregation = {
       id: "",
       source: {
@@ -92,12 +65,12 @@ describe('medianAggregator', () => {
       version: ""
     };
 
-    //then
+    // Then
     expect(() => medianAggregator.getAggregatedValue(input, 25)).toThrow("Cannot get median value of an empty array");
   });
 
   it('should filter prices that deviate too much from the median value', () => {
-    //given
+    // Given
     const input: PriceDataBeforeAggregation = {
       id: "",
       source: {
@@ -114,10 +87,36 @@ describe('medianAggregator', () => {
       version: ""
     };
 
-    //when
+    // When
     const result: PriceDataAfterAggregation = medianAggregator.getAggregatedValue(input, 25);
 
-    //then
+    // Then
     expect(result.value).toEqual((100 + 110) / 2);
+  });
+
+  it('should keep all prices for all sources', () => {
+    // Given
+    const input: PriceDataBeforeAggregation = {
+      id: "",
+      source: {
+        "src1": 0,
+        "src2": null,
+        "src3": 110,
+        "src4": "error",
+        "src5": undefined,
+        "src6": 100,
+        "src7": 120,
+      },
+      symbol: "BTC",
+      timestamp: 0,
+      version: ""
+    };
+
+    // When
+    const result: PriceDataAfterAggregation = medianAggregator.getAggregatedValue(input, 25);
+
+    // Then
+    expect(result.value).toEqual(110);
+    expect(result.source).toEqual(input.source);
   });
 });

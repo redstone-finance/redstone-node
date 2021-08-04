@@ -207,7 +207,7 @@ describe("NodeRunner", () => {
   });
 
   it("should throw if Arweave balance too low on initial check", async () => {
-    //given
+    // Given
     mockArProxy.getBalance.mockResolvedValue(0.1);
     const sut = await NodeRunner.create(
       jwk,
@@ -215,6 +215,45 @@ describe("NodeRunner", () => {
     );
 
     await expect(sut.run()).rejects.toThrowError("AR balance too low");
+  });
+
+  it("should save 'error' value if fetcher fails", async () => {
+    // Given
+    mockArProxy.getBalance.mockResolvedValue(0.2);
+    const sut = await NodeRunner.create(
+      jwk,
+      nodeConfig
+    );
+    fetchers["coinbase"] = {
+      fetchAll: jest.fn(() => {
+        throw new Error("test-error-coinbase");
+      }),
+    };
+
+    // When
+    await sut.run();
+
+    // Then
+    expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalledWith({
+        "app": "Redstone",
+        "type": "data",
+        "version": "0.4",
+        "Content-Type": "application/json",
+        "Content-Encoding": "gzip",
+        "timestamp": "111111111",
+      },
+      [{
+        "id": "00000000-0000-0000-0000-000000000000",
+        "source": {
+          "coinbase": "error",
+          "uniswap": 445,
+        },
+        "symbol": "BTC",
+        "timestamp": 111111111,
+        "version": "0.4",
+        "value": 445,
+      }]
+    );
   });
 
   it("should broadcast fetched and signed prices", async () => {

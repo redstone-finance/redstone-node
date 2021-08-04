@@ -1,6 +1,9 @@
-import {Consola} from "consola";
-import {Aggregator, Manifest, PriceDataAfterAggregation, PriceDataBeforeAggregation,} from "../types";
-import ManifestHelper from "../manifest/ManifestParser";
+import { Consola } from "consola";
+import {
+  Aggregator,
+  PriceDataAfterAggregation,
+  PriceDataBeforeAggregation,
+} from "../types";
 
 const logger =
   require("../utils/logger")("aggregators/median-aggregator") as Consola;
@@ -10,50 +13,44 @@ const medianAggregator: Aggregator = {
     price: PriceDataBeforeAggregation,
     maxPriceDeviationPercent: number
   ): PriceDataAfterAggregation {
-    const initialValues = getNonZeroValues(price);
-    const initialMedian = getMedianValue(initialValues);
+    const validValues = Object.values(price.source).filter(v => !isNaN(v) && v > 0);
+    const initialMedian = getMedianValue(validValues);
 
     // Filtering out values based on deviation from the initial median
-    const finalValues = [];
-    for (const value of initialValues) {
+    const stableValues = [];
+    for (const sourceName of Object.keys(price.source)) {
+      const value = price.source[sourceName];
       const deviation =
         (Math.abs(value - initialMedian) / initialMedian) * 100;
-      if (deviation > maxPriceDeviationPercent) {
-        // We've switched logging level from warn to info here
-        // because we've been receiving too many email notifications about price
-        // deviations
+      if (isNaN(value)) {
+        // We don't log warnings for "error" values
+        // because these values represent fetching fails
+        // which should already be logged as warning
+        if (value !== "error") {
+          logger.warn(
+            `Incorrect price value (NaN) for source: ${sourceName}. `
+            + `Symbol: ${price.symbol}. Value: ${value}`, price);
+        }
+      } else if (value <= 0) {
+        logger.warn(
+          `Incorrect price value (<= 0) for source: ${sourceName}. `
+          + `Symbol: ${price.symbol}. Value: ${value}`, price);
+      } else if (deviation > maxPriceDeviationPercent) {
         logger.info(
-          `Value ${value} has too big deviation (${deviation}) from median. `
-          + `Symbol: ${price.symbol}. Skipping...`,
-          price);
+          `Value ${value} has too big deviation for symbol: ${price.symbol} `
+          + `and source: ${sourceName}. Deviation: (${deviation})%. `
+          + `Skipping...`, price);
       } else {
-        finalValues.push(value);
+        stableValues.push(value);
       }
     }
 
     return {
       ...price,
-      value: getMedianValue(finalValues),
+      value: getMedianValue(stableValues),
     };
   },
 };
-
-export function getNonZeroValues(price: PriceDataBeforeAggregation): number[] {
-  const values: number[] = [];
-
-  for (const source of Object.keys(price.source)) {
-    const value = price.source[source];
-    if (value <= 0) {
-      logger.warn(
-        `Incorrect price value (<= 0) for source: ${source}`,
-        price);
-    } else {
-      values.push(value);
-    }
-  }
-
-  return values;
-}
 
 export function getMedianValue(arr: number[]): number {
   if (arr.length === 0) {

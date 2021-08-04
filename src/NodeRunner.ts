@@ -1,17 +1,30 @@
-import {Consola} from "consola";
-import {JWKInterface} from "arweave/node/lib/wallet";
+import { Consola } from "consola";
+import { JWKInterface } from "arweave/node/lib/wallet";
 import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import broadcaster from "./broadcasters/lambda-broadcaster";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import {printTrackingState, trackEnd, trackStart} from "./utils/performance-tracker";
-import {Manifest, NodeConfig, PriceDataAfterAggregation, PriceDataSigned, SignedPricePackage} from "./types";
 import mode from "../mode";
-import ManifestHelper, {TokensBySource} from "./manifest/ManifestParser";
+import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
-import PricesService, {PricesBeforeAggregation, PricesDataFetched} from "./fetchers/PricesService";
-import {mergeObjects, readJSON, timeout} from "./utils/objects";
+import { mergeObjects, readJSON, timeout } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
+import {
+  printTrackingState,
+  trackEnd,
+  trackStart,
+} from "./utils/performance-tracker";
+import PricesService, {
+  PricesBeforeAggregation,
+  PricesDataFetched,
+} from "./fetchers/PricesService";
+import {
+  Manifest,
+  NodeConfig,
+  PriceDataAfterAggregation,
+  PriceDataSigned,
+  SignedPricePackage,
+} from "./types";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;

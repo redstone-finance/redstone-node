@@ -15,6 +15,8 @@ import {trackEnd, trackStart} from "../utils/performance-tracker";
 import {v4 as uuidv4} from 'uuid'
 import ManifestConfigError from "../manifest/ManifestConfigError";
 
+const VALUE_FOR_FAILED_FETCHER = "error";
+
 const logger = require("../utils/logger")("PricesFetcher") as Consola;
 
 export type PricesDataFetched = { [source: string]: PriceDataFetched[] };
@@ -67,12 +69,15 @@ export default class PricesService {
         // price fetching errors occur quite often
         logger.warn(
           `Fetching failed for source: ${source}: ${resData}`, e.stack);
-        return {};
+        return {
+          [source]: tokens.map(symbol =>
+            ({ symbol, value: VALUE_FOR_FAILED_FETCHER })),
+        };
       }
     }
   }
 
-  private async doFetchFromSource(source: string, tokens: string[])
+  async doFetchFromSource(source: string, tokens: string[])
   : Promise<PriceDataFetched[]> {
     if (tokens.length === 0) {
        throw new ManifestConfigError(
