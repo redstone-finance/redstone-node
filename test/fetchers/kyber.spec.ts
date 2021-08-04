@@ -1,9 +1,8 @@
 import axios from "axios";
 import fetchers from "../../src/fetchers/index"
-import {mockFetcherResponse, mockRedstoneApiPrice} from "./_helpers";
+import { mockFetcherResponse, mockRedstoneApiPrice } from "./_helpers";
 
-jest.mock('axios');
-
+jest.mock("axios");
 mockRedstoneApiPrice(2500, "ETH");
 
 describe("kyber fetcher", () => {
@@ -13,13 +12,13 @@ describe("kyber fetcher", () => {
     mockFetcherResponse("../../src/fetchers/kyber/example-response.json");
   });
 
-  it('should properly fetch data', async () => {
-    //given
+  it("should properly fetch data", async () => {
+    // Given
 
-    //when
+    // When
     const result = await sut.fetchAll(["MKR", "UNI", "SUSHI"]);
 
-    //then
+    // Then
     expect(result).toEqual([
       {
         "symbol": "MKR",

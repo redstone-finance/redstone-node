@@ -1,18 +1,11 @@
-const axios = require("axios"); 
+const axios = require("axios");
+
+const URL = "https://v2.cache.verto.exchange/tokens";
 
 async function getTokenList() {
-    let URL = "https://v2.cache.verto.exchange/tokens";
+  const response = await axios.get(URL);
 
-    let response = await axios.get(URL); 
-
-    let list = response.data.map(
-        token => {
-            return token.ticker
-        }
-    );
-
-    console.log(list)
-    return list;
+  return response.data.map(token => token.ticker);
 }
 
 exports.getTokenList = getTokenList;

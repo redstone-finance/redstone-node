@@ -56,13 +56,13 @@ export interface PricesObj {
 
 export interface PriceDataFetched {
   symbol: string;
-  value: number;
+  value: any; // usually it is a positive number, but it may also be 0, null, undefined or "error"
 };
 
 export interface PriceDataBeforeAggregation {
   id: string;
   symbol: string;
-  source: { [sourceName: string]: number };
+  source: { [sourceName: string]: any };
   timestamp: number;
   version: string;
 };
@@ -97,7 +97,6 @@ export interface SignedPricePackage {
   signature: string;
 };
 
-
 export interface ArweaveTransactionTags {
   [tag: string]: string,
 };
@@ -109,4 +108,4 @@ export interface NodeConfig {
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;
-}
+};

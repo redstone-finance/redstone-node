@@ -1,5 +1,4 @@
 const axios = require("axios");
-const _ = require("lodash");
 const compressions = require("./compressions");
 
 main();
@@ -51,5 +50,5 @@ async function getAllPrices() {
   const response = await axios.get("https://api.limestone.finance/prices", {
     params: { provider: "limestone" },
   });
-  return _.values(response.data);
+  return Object.values(response.data);
 }

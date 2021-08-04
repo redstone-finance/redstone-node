@@ -27,7 +27,7 @@ async function main(): Promise<void> {
     throw new Error("Path to the config file cannot be empty");
   }
 
-  //TODO: validate config files and manifest files - use json schema? https://2ality.com/2020/06/validating-data-typescript.html
+  // TODO: validate config files and manifest files - use json schema? https://2ality.com/2020/06/validating-data-typescript.html
   const config: NodeConfig = readJSON(configFilePath);
   const jwk = readJSON(config.arweaveKeysFile);
 

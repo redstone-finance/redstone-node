@@ -18,12 +18,12 @@ describe("coingecko fetcher", () => {
   const sut = fetchers["coingecko"];
 
   it('should properly fetch data', async () => {
-    //given
+    // Given
 
-    //when
-    const result = await sut.fetchAll(["AR", "ETH", "BTC"]);
+    // When
+    const result = await sut.fetchAll(["BTC", "ETH", "AR"]);
 
-    //then
+    // Then
     expect(result).toEqual([
       {
         "symbol": "BTC",

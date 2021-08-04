@@ -1,11 +1,7 @@
 const supportedTokens = require("./tokens-supported-by-kyber.json");
 
 async function getTokenList() {
-
-    let list = supportedTokens;
-
-    return list;
+  return supportedTokens;
 }
 
 exports.getTokenList = getTokenList;
-

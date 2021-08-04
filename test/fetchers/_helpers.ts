@@ -27,8 +27,13 @@ export function mockFetcherResponse(pathToResponseFile: string) {
   mockedAxios.post.mockResolvedValue({data: exampleResponse});
 }
 
+export function mockFetcherResponseWithFunction(getResponse: () => any) {
+  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  mockedAxios.get.mockResolvedValue({ data: getResponse() });
+  mockedAxios.post.mockResolvedValue({ data: getResponse() });
+}
 
-//TODO: find out why this does not work...
+// TODO: find out why this does not work...
 export function mockFetcherProxy(proxyModule: string, pathToResponseFile: string) {
   jest.mock(proxyModule, () => {
     return jest.fn().mockImplementation(() => {

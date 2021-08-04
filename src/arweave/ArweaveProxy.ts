@@ -61,7 +61,7 @@ export default class ArweaveProxy  {
       data: gzippedData,
     }, this.jwk);
 
-    _.keys(tags).forEach((key) => {
+    Object.keys(tags).forEach((key) => {
       uploadTx.addTag(key, tags[key]);
     });
 

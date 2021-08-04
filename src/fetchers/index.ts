@@ -1,38 +1,25 @@
 import { Fetcher } from "../types";
-import apiDojoRapid from "./api-dojo-rapid";
-import yfUnofficial from "./yf-unofficial";
-import barchartTest from "./barchart-test";
-import coingecko from "./coingecko";
-import sushiswap from "./sushiswap";
-import coinbase from "./coinbase";
-import bitfinex from "./bitfinex";
-import barchart from "./barchart";
-import uniswap from "./uniswap";
-import bitmart from "./bitmart";
-import binance from "./binance";
-import kraken from "./kraken";
-import kyber from "./kyber";
-import huobi from "./huobi";
-import verto from "./verto";
-import ftx from "./ftx";
-import ecb from "./ecb";
+import ccxtFetchers from "./ccxt/all-ccxt-fetchers";
+import { ApiDojoRapidFetcher } from "./api-dojo-rapid/ApiDojoRapidFetcher";
+import { YfUnofficialFetcher } from "./yf-unofficial/YfUnofficialFetcher";
+import { CoingeckoFetcher } from "./coingecko/CoingeckoFetcher";
+import { SushiswapFetcher } from "./sushiswap/SushiswapFetcher";
+import { CoinbaseFetcher } from "./coinbase/CoinbaseFetcher";
+import { UniswapFetcher } from "./uniswap/UniswapFetcher";
+import { KyberFetcher } from "./kyber/KyberFetcher";
+import { VertoFetcher } from "./verto/VertoFetcher";
+import { EcbFetcher } from "./ecb/EcbFetcher";
 
 export default {
-  "api-dojo-rapid": apiDojoRapid,
-  "yf-unofficial": yfUnofficial,
-  "barchart-test": barchartTest,
-  coingecko,
-  sushiswap,
-  coinbase,
-  bitfinex,
-  barchart,
-  uniswap,
-  bitmart,
-  binance,
-  kraken,
-  verto,
-  kyber,
-  huobi,
-  ftx,
-  ecb,
+  "api-dojo-rapid": new ApiDojoRapidFetcher(),
+  "yf-unofficial": new YfUnofficialFetcher(),
+  coingecko: new CoingeckoFetcher(),
+  sushiswap: new SushiswapFetcher(),
+  coinbase: new CoinbaseFetcher(),
+  uniswap: new UniswapFetcher(),
+  kyber: new KyberFetcher(),
+  verto: new VertoFetcher(),
+  ecb: new EcbFetcher(),
+
+  ...ccxtFetchers,
 } as { [name: string]: Fetcher };
