@@ -9,7 +9,14 @@ import {
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
 import Transaction from "arweave/node/lib/transaction";
-import {interactRead} from "smartweave";
+import HandlerBasedSwcClient from "smartweave/lib/v2/HandlerBasedSwcClient";
+import MemBlockHeightSwCache from "smartweave/lib/v2/cache/impl/MemBlockHeightCache";
+import ContractDefinitionLoader from "smartweave/lib/v2/core/impl/ContractDefinitionLoader";
+import {EvalStateResult} from "smartweave/lib/v2";
+import MemCache from "smartweave/lib/v2/cache/impl/MemCache";
+import ContractInteractionsLoader from "smartweave/lib/v2/core/impl/ContractInteractionsLoader";
+import SwcClient from "smartweave/lib/v2/SwcClient";
+import LexicographicalInteractionsSorter from "smartweave/lib/v2/core/impl/LexicographicalInteractionsSorter";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
@@ -21,11 +28,18 @@ export default class ArweaveService {
 
   private static readonly CONTRACT_REGISTRY_TX_ID: string = "XQkGzXG6YknJyy-YbakEZvQKAWkW2_aPRhc3ShC8lyA";
   private static readonly PROVIDERS_REGISTRY_CONTRACT: string = "providers-registry";
+  private readonly swcClient: SwcClient<any, any>;
 
   constructor(
     private readonly arweaveProxy: ArweaveProxy,
     private readonly minBalance: number
   ) {
+    this.swcClient = new HandlerBasedSwcClient<any>(
+      this.arweaveProxy.arweave,
+      new MemBlockHeightSwCache<EvalStateResult<any>>(),
+      new ContractDefinitionLoader<any>(this.arweaveProxy.arweave, new MemCache()),
+      new ContractInteractionsLoader(this.arweaveProxy.arweave),
+      new LexicographicalInteractionsSorter(this.arweaveProxy.arweave));
   }
 
   async prepareArweaveTransaction(prices: PriceDataAfterAggregation[], nodeVersion: string)
@@ -75,10 +89,9 @@ export default class ArweaveService {
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweaveProxy.getAddress();
 
-    const registryInteraction = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
+    const registryInteraction = await this.swcClient.viewState<any, any>(
       ArweaveService.CONTRACT_REGISTRY_TX_ID,
+      this.arweaveProxy.jwk,
       {
         function: "contractsCurrentTxId",
         data: {
@@ -86,12 +99,15 @@ export default class ArweaveService {
         }
       });
 
+    console.log('registryInteraction', registryInteraction);
+
     const providersRegistryContractTxId = registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
 
-    const result = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
+    console.log('providersRegistryContractTxId: ', providersRegistryContractTxId);
+
+    const result = await this.swcClient.viewState<any, any>(
       providersRegistryContractTxId,
+      this.arweaveProxy.jwk,
       {
         function: "activeManifest",
         data: {
@@ -99,6 +115,8 @@ export default class ArweaveService {
           eagerManifestLoad: true
         }
       });
+
+    console.log('result: ', result);
 
     return result.manifest.activeManifestContent;
   }
