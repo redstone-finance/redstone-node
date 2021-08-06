@@ -4,12 +4,16 @@ const ccxtSupportedExchanges = require("../../src/fetchers/ccxt/all-supported-ex
 const predefinedTokensConfig = require("./predefined-configs/tokens.json");
 const { getStandardLists } = require("./standard-lists");
 const { getCcxtTokenList } = require("../../src/fetchers/ccxt/generate-list-for-all-ccxt-sources");
+const providerToManifest = {
+  "redstone-rapid": require("../../manifests/rapid.json"),
+  "redstone-stocks": require("../../manifests/stocks.json"),
+  "redstone": require("../../manifests/all-supported-tokens.json"),
+};
 
 // Note: Before running this script you should generate sources.json config
 // You can do this using tools/config/generate-sources-config.js script
 
-// TODO: rename OUTPUT_FILE
-const OUTPUT_FILE = "./src/config/tokens-2.json";
+const OUTPUT_FILE = "./src/config/tokens.json";
 const tokensConfig = {};
 
 main();
@@ -57,24 +61,44 @@ function getAllDetailsForSymbol(symbol, standardLists) {
   };
 }
 
-// TODO: implement
 function getDetailsForSymbol(symbol, standardLists) {
-  return {
-    name: "todo",
-    logoURI: "https://todo.com",
-  };
+  // Checking if predefined config contains details for the symbol
+  const details = predefinedTokensConfig[symbol];
+  if (details) {
+    return details;
+  }
+
+  // Searching for token details in popular standard token lists
+  for (const standardList of standardLists) {
+    const symbolDetails = standardList.find(el => el.symbol === symbol);
+    if (symbolDetails) {
+      return symbolDetails;
+    }
+  }
+
+  // Returning empty details
+  return {};
 }
 
-// TODO: implement
+
 function getProvidersForSymbol(symbol) {
-  return ["redstone"];
+  return Object.keys(providerToManifest)
+    .filter(p => symbol in providerToManifest[p].tokens);
 }
 
-// TODO: implement
-// This function can work based on manifests and predefined Config
+// This function can work based on manifests and predefined config
 // Returning "crypto" as a default tag
 function getTagsForSymbol(symbol) {
-  return ["todo"];
+  let tags = [];
+  if (predefinedTokensConfig[symbol] && predefinedTokensConfig[symbol].tags) {
+    tags = predefinedTokensConfig[symbol].tags;
+  }
+
+  if (tags.length === 0 && !providerToManifest["redstone-stocks"][symbol]) {
+    tags.push("crypto");
+  }
+
+  return tags;
 }
 
 function isCcxtFetcher(fetcherName) {
@@ -82,6 +106,7 @@ function isCcxtFetcher(fetcherName) {
 }
 
 async function addAllTokensForCcxtSources() {
+  console.log("Fetching tokens for all ccxt feetchers");
   const ccxtFetchersWithTokens = await getCcxtTokenList();
   for (const ccxtFetcher in ccxtFetchersWithTokens) {
     addTokensToConfig(
