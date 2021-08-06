@@ -1,66 +1,122 @@
 const fs = require("fs");
-const supportedTokens = require("./supported-tokens.json");
+const fetchers = require("../../src/config/sources.json");
+const ccxtSupportedExchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
+const predefinedTokensConfig = require("./predefined-configs/tokens.json");
+const { getStandardLists } = require("./standard-lists");
+const { getCcxtTokenList } = require("../../src/fetchers/ccxt/generate-list-for-all-ccxt-sources");
 
-async function generateTokenConfig() {
+// Note: Before running this script you should generate sources.json config
+// You can do this using tools/config/generate-sources-config.js script
 
-  const fetchers = fs.readdirSync("src/fetchers", { withFileTypes: true })
-    .filter(
-      dirent => {
-        return dirent.isDirectory();
-      }
-    )
-    .map(
-      dirent => {
-        return dirent.name;
-      }
-    );
+// TODO: rename OUTPUT_FILE
+const OUTPUT_FILE = "./src/config/tokens-2.json";
+const tokensConfig = {};
 
-  for (const fetcher of fetchers) {
-    try {
-      const generateList = require("../../src/fetchers/" + fetcher + "/generate-list.js");
-      if (generateList) {
-        console.log("Fetching list for: " + fetcher);
-        let fetchedList = await generateList.getTokenList();
-        fetchedList.forEach(
-          token => {
-            if (token in supportedTokens) {
-              if (!supportedTokens[token].source) {
-                supportedTokens[token].source = [];
-              }
-              supportedTokens[token].source.push(fetcher);
-            }
-          });
-        }
-      } catch (err) {
-      console.log("Error when getting a token list for: " + fetcher);
-      console.log(err)
-    }
-  }
+main();
 
-  const standard = require("./standard-lists");
-  const standardLists = await standard.getStandardList();
-
-  for (const symbol in supportedTokens) {
-    let standarizedInfo;
-    let index = 0;
-    while (index < standardLists.length && !standarizedInfo) {
-      standarizedInfo = standardLists[index].find(
-        el => {
-          return el.symbol === symbol;
-        }
-      )
-      index++;
-    }
-
-    if (standarizedInfo) {
-      supportedTokens[symbol].data = standarizedInfo;
-    }
-  }
-
-  const json = JSON.stringify(supportedTokens, null, 2) + "\n";
-
-  fs.writeFileSync("src/config/token-config.json", json);
-
+async function main() {
+  await generateTokensConfig();
+  saveTokensConfigToFile();
 }
 
-generateTokenConfig();
+async function generateTokensConfig() {
+  // Adding tokens with sources
+  for (const fetcher of Object.keys(fetchers)) {
+    try {
+      if (!isCcxtFetcher(fetcher)) {
+        await addAllTokensForSource(fetcher);
+      }
+    } catch (err) {
+      console.log("Error when getting a token list for: " + fetcher);
+      console.log(err);
+    }
+  }
+  await addAllTokensForCcxtSources();
+
+  // Adding token details
+  const standardLists = await getStandardLists();
+  for (const token of Object.keys(tokensConfig)) {
+    console.log(`Loading details for token: ${token}`);
+    tokensConfig[token] = getAllDetailsForSymbol(token, standardLists);
+  }
+}
+
+// This function should handle
+// - getting details (imgURL, url, chainId...)
+// - getting providers
+// - getting tags
+function getAllDetailsForSymbol(symbol, standardLists) {
+  const providers = getProvidersForSymbol(symbol);
+  const tags = getTagsForSymbol(symbol);
+  const details = getDetailsForSymbol(symbol, standardLists);
+
+  return {
+    ...details,
+    tags,
+    providers,
+  };
+}
+
+// TODO: implement
+function getDetailsForSymbol(symbol, standardLists) {
+  return {
+    name: "todo",
+    logoURI: "https://todo.com",
+  };
+}
+
+// TODO: implement
+function getProvidersForSymbol(symbol) {
+  return ["redstone"];
+}
+
+// TODO: implement
+// This function can work based on manifests and predefined Config
+// Returning "crypto" as a default tag
+function getTagsForSymbol(symbol) {
+  return ["todo"];
+}
+
+function isCcxtFetcher(fetcherName) {
+  return ccxtSupportedExchanges.includes(fetcherName);
+}
+
+async function addAllTokensForCcxtSources() {
+  const ccxtFetchersWithTokens = await getCcxtTokenList();
+  for (const ccxtFetcher in ccxtFetchersWithTokens) {
+    addTokensToConfig(
+      ccxtFetchersWithTokens[ccxtFetcher],
+      ccxtFetcher);
+  }
+}
+
+async function addAllTokensForSource(source) {
+  console.log("Fetching supported tokens for: " + source);
+  const { getTokenList } = require(
+    `../../src/fetchers/${source}/generate-list`);
+  const tokens = await getTokenList();
+  addTokensToConfig(tokens, source);
+}
+
+function addTokensToConfig(tokens, source) {
+  for (const token of tokens) {
+    addTokenToConfig(token, source);
+  }
+}
+
+function addTokenToConfig(token, source) {
+  if (token in tokensConfig) {
+    if (Array.isArray(tokensConfig[token].source)) {
+      tokensConfig[token].source.push(source);
+    } else {
+      tokensConfig[token].source = [source];
+    }
+  } else {
+    tokensConfig[token] = { source: [source] };
+  }
+}
+
+function saveTokensConfigToFile() {
+  const json = JSON.stringify(tokensConfig, null, 2) + "\n";
+  fs.writeFileSync(OUTPUT_FILE, json);
+}

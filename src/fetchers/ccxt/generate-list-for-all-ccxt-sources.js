@@ -1,6 +1,6 @@
 const allSupportedExchanges = require("./all-supported-exchanges.json");
 
-function getTokenLists() {
+function getCcxtTokenList() {
   const result = {};
   for (const exchange of allSupportedExchanges) {
     result[exchange] = getSupportedTokensFromManifest(exchange);
@@ -13,4 +13,4 @@ function getSupportedTokensFromManifest(exchangeName) {
   return Object.keys(manifest.tokens);
 }
 
-module.exports.getTokenLists = getTokenLists();
+module.exports = { getCcxtTokenList };
