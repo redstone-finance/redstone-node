@@ -1,12 +1,12 @@
 const ccxt = require("ccxt");
 const fs = require("fs");
-const predefinedSourcesConfig = require("./predefined-sources-config.json");
+const predefinedSourcesConfig = require("./predefined-configs/sources.json");
 const fetchers = require("../../dist/src/fetchers/index");
 
 // NOTE! Before running this script you should build redstone-node source code
 // to dist folder (use `yarn build`)
 
-const OUTPUT_FILE = "./src/config/sources-list.json";
+const OUTPUT_FILE = "./src/config/sources.json";
 
 main();
 
