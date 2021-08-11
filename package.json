@@ -61,6 +61,7 @@
     "@types/yargs": "^16.0.0",
     "ar-gql": "^0.0.6",
     "dateformat": "^4.5.1",
+    "download": "^8.0.0",
     "jest": "^27.0.4",
     "jest-mock-extended": "^1.0.16",
     "open": "^8.0.4",

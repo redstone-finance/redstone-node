@@ -30,18 +30,22 @@ function getSourcesConfig() {
 }
 
 function getSourceDetails(sourceName) {
+  let details = {};
+
   if (predefinedSourcesConfig[sourceName]) {
-    return predefinedSourcesConfig[sourceName];
+    details = predefinedSourcesConfig[sourceName];
   } else {
-    return getSourceDetailsWithCcxt(sourceName);
+    details = getSourceDetailsWithCcxt(sourceName);
   }
+
+  return details;
 }
 
 function getSourceDetailsWithCcxt(sourceName) {
   const exchange = new ccxt[sourceName]();
 
   return {
-    imgURI: exchange.urls.logo,
+    logoURI: exchange.urls.logo,
     url: exchange.urls.www,
   };
 }
