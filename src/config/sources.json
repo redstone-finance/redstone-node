@@ -1,271 +1,271 @@
 {
   "api-dojo-rapid": {
-    "imgURI": "https://cdn.redstone.finance/sources/api-dojo-rapid.png",
+    "logoURI": "https://cdn.redstone.finance/sources/api-dojo-rapid.png",
     "url": "https://rapidapi.com/apidojo/api/yahoo-finance1",
     "color": "#4d9fd1"
   },
   "yf-unofficial": {
-    "imgURI": "https://cdn.redstone.finance/sources/yf-unofficial.png",
+    "logoURI": "https://cdn.redstone.finance/sources/yf-unofficial.png",
     "url": "https://www.npmjs.com/package/yahoo-finance",
     "color": "#531cc4"
   },
   "coingecko": {
-    "imgURI": "https://cdn.redstone.finance/sources/coingecko.png",
+    "logoURI": "https://cdn.redstone.finance/sources/coingecko.png",
     "url": "https://www.coingecko.com/",
     "color": "#98c355"
   },
   "sushiswap": {
-    "imgURI": "https://cdn.redstone.finance/sources/sushiswap.png",
+    "logoURI": "https://cdn.redstone.finance/sources/sushiswap.png",
     "url": "https://sushi.com/",
     "color": "#e45d9d"
   },
   "coinbase": {
-    "imgURI": "https://cdn.redstone.finance/sources/coinbase.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/coinbase.svg",
     "url": "https://www.coinbase.com/",
     "color": "#2a67d0"
   },
   "uniswap": {
-    "imgURI": "https://cdn.redstone.finance/sources/uniswap.png",
+    "logoURI": "https://cdn.redstone.finance/sources/uniswap.svg",
     "url": "https://uniswap.org/",
     "color": "#e23275"
   },
   "kyber": {
-    "imgURI": "https://cdn.redstone.finance/sources/kyber.png",
+    "logoURI": "https://cdn.redstone.finance/sources/kyber.png",
     "url": "https://kyber.network/",
     "color": "#62c19c"
   },
   "verto": {
-    "imgURI": "https://cdn.redstone.finance/sources/verto.png",
+    "logoURI": "https://cdn.redstone.finance/sources/verto.png",
     "url": "https://verto.exchange/",
     "color": "#a176c2"
   },
   "ecb": {
-    "imgURI": "https://cdn.redstone.finance/sources/ecb.png",
+    "logoURI": "https://cdn.redstone.finance/sources/ecb.svg",
     "url": "https://www.ecb.europa.eu/home/html/index.en.html",
     "color": "#10338e"
   },
   "aax": {
-    "imgURI": "https://cdn.redstone.finance/sources/aax.jpeg",
+    "logoURI": "https://cdn.redstone.finance/sources/aax.jpeg",
     "url": "https://www.aaxpro.com",
     "color": "#327aee"
   },
   "aofex": {
-    "imgURI": "https://cdn.redstone.finance/sources/aofex.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/aofex.jpg",
     "url": "https://aofex.com",
     "color": "#e4653d"
   },
   "ascendex": {
-    "imgURI": "https://cdn.redstone.finance/sources/ascendex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/ascendex.png",
     "url": "https://ascendex.com",
     "color": "#69cbe5"
   },
   "bequant": {
-    "imgURI": "https://cdn.redstone.finance/sources/bequant.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bequant.png",
     "url": "https://bequant.io",
     "color": "#e6e37f"
   },
   "bibox": {
-    "imgURI": "https://cdn.redstone.finance/sources/bibox.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bibox.png",
     "url": "https://www.bibox365.com",
     "color": "#7196db"
   },
   "binance": {
-    "imgURI": "https://cdn.redstone.finance/sources/binance.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/binance.svg",
     "url": "https://www.binance.com/",
     "color": "#d6ab3c"
   },
   "binancecoinm": {
-    "imgURI": "https://cdn.redstone.finance/sources/binancecoinm.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/binancecoinm.svg",
     "url": "https://www.binance.com",
     "color": "#d6ab3c"
   },
   "binanceus": {
-    "imgURI": "https://cdn.redstone.finance/sources/binanceus.png",
+    "logoURI": "https://cdn.redstone.finance/sources/binanceus.png",
     "url": "https://www.binance.us",
     "color": "#d6ab3c"
   },
   "binanceusdm": {
-    "imgURI": "https://cdn.redstone.finance/sources/binanceusdm.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/binanceusdm.svg",
     "url": "https://www.binance.com",
     "color": "#d6ab3c"
   },
   "bitcoincom": {
-    "imgURI": "https://cdn.redstone.finance/sources/bitcoincom.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bitcoincom.png",
     "url": "https://exchange.bitcoin.com",
     "color": "#56bb8a"
   },
   "bitfinex": {
-    "imgURI": "https://cdn.redstone.finance/sources/bitfinex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bitfinex.png",
     "url": "https://www.bitfinex.com/",
     "color": "#769340"
   },
   "bitfinex2": {
-    "imgURI": "https://cdn.redstone.finance/sources/bitfinex2.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bitfinex2.png",
     "url": "https://www.bitfinex.com",
     "color": "#769340"
   },
   "bitmex": {
-    "imgURI": "https://cdn.redstone.finance/sources/bitmex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bitmex.png",
     "url": "https://www.bitmex.com",
     "color": "#5759aa"
   },
   "bittrex": {
-    "imgURI": "https://cdn.redstone.finance/sources/bittrex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bittrex.png",
     "url": "https://bittrex.com",
     "color": "#55b4f1"
   },
   "bitz": {
-    "imgURI": "https://cdn.redstone.finance/sources/bitz.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bitz.png",
     "url": "https://www.bitz.com",
     "color": "#153086"
   },
   "btcturk": {
-    "imgURI": "https://cdn.redstone.finance/sources/btcturk.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/btcturk.jpg",
     "url": "https://www.btcturk.com",
     "color": "#1d54ed"
   },
   "bw": {
-    "imgURI": "https://cdn.redstone.finance/sources/bw.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bw.png",
     "url": "https://www.bw.com",
     "color": "#cc2c25"
   },
   "bybit": {
-    "imgURI": "https://cdn.redstone.finance/sources/bybit.png",
+    "logoURI": "https://cdn.redstone.finance/sources/bybit.png",
     "url": "https://www.bybit.com",
     "color": "#ecad42"
   },
   "cdax": {
-    "imgURI": "https://cdn.redstone.finance/sources/cdax.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/cdax.jpg",
     "url": "https://cdax.io",
     "color": "#5e94e2"
   },
   "cex": {
-    "imgURI": "https://cdn.redstone.finance/sources/cex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/cex.png",
     "url": "https://cex.io",
     "color": "#53b1b0"
   },
   "coinex": {
-    "imgURI": "https://cdn.redstone.finance/sources/coinex.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/coinex.svg",
     "url": "https://www.coinex.com",
     "color": "#68d9b6"
   },
   "crex24": {
-    "imgURI": "https://cdn.redstone.finance/sources/crex24.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/crex24.svg",
     "url": "https://crex24.com",
     "color": "#4a9b9a"
   },
   "currencycom": {
-    "imgURI": "https://cdn.redstone.finance/sources/currencycom.png",
+    "logoURI": "https://cdn.redstone.finance/sources/currencycom.png",
     "url": "https://www.currency.com",
     "color": "#55ba70"
   },
   "delta": {
-    "imgURI": "https://cdn.redstone.finance/sources/delta.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/delta.jpg",
     "url": "https://www.delta.exchange",
     "color": "#4eafe3"
   },
   "exx": {
-    "imgURI": "https://cdn.redstone.finance/sources/exx.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/exx.svg",
     "url": "https://www.exx.com/",
     "color": "#e5a740"
   },
   "ftx": {
-    "imgURI": "https://cdn.redstone.finance/sources/ftx.png",
+    "logoURI": "https://cdn.redstone.finance/sources/ftx.png",
     "url": "https://ftx.com/",
     "color": "#479eb9"
   },
   "hitbtc": {
-    "imgURI": "https://cdn.redstone.finance/sources/hitbtc.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/hitbtc.svg",
     "url": "https://hitbtc.com",
     "color": "#5fabd6"
   },
   "hollaex": {
-    "imgURI": "https://cdn.redstone.finance/sources/hollaex.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/hollaex.svg",
     "url": "https://hollaex.com",
     "color": "#000"
   },
   "huobipro": {
-    "imgURI": "https://cdn.redstone.finance/sources/huobipro.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/huobipro.jpg",
     "url": "https://www.huobi.com",
     "color": "#51a1d0"
   },
   "kraken": {
-    "imgURI": "https://cdn.redstone.finance/sources/kraken.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/kraken.svg",
     "url": "https://www.kraken.com/",
     "color": "#5044ca"
   },
   "kucoin": {
-    "imgURI": "https://cdn.redstone.finance/sources/kucoin.png",
+    "logoURI": "https://cdn.redstone.finance/sources/kucoin.png",
     "url": "https://www.kucoin.com",
     "color": "#3f91db"
   },
   "lbank": {
-    "imgURI": "https://cdn.redstone.finance/sources/lbank.png",
+    "logoURI": "https://cdn.redstone.finance/sources/lbank.png",
     "url": "https://www.lbank.info",
     "color": "#357cc0"
   },
   "liquid": {
-    "imgURI": "https://cdn.redstone.finance/sources/liquid.png",
+    "logoURI": "https://cdn.redstone.finance/sources/liquid.png",
     "url": "https://www.liquid.com",
     "color": "#2057ed"
   },
   "oceanex": {
-    "imgURI": "https://cdn.redstone.finance/sources/oceanex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/oceanex.png",
     "url": "https://www.oceanex.pro.com",
     "color": "#6bc2e4"
   },
   "okcoin": {
-    "imgURI": "https://cdn.redstone.finance/sources/okcoin.jpg",
+    "logoURI": "https://cdn.redstone.finance/sources/okcoin.jpg",
     "url": "https://www.okcoin.com",
     "color": "#305ddc"
   },
   "okex": {
-    "imgURI": "https://cdn.redstone.finance/sources/okex.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/okex.svg",
     "url": "https://www.okex.com",
     "color": "#4071df"
   },
   "okex3": {
-    "imgURI": "https://cdn.redstone.finance/sources/okex3.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/okex3.svg",
     "url": "https://www.okex.com",
     "color": "#4071df"
   },
   "okex5": {
-    "imgURI": "https://cdn.redstone.finance/sources/okex5.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/okex5.svg",
     "url": "https://www.okex.com",
     "color": "#4071df"
   },
   "poloniex": {
-    "imgURI": "https://cdn.redstone.finance/sources/poloniex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/poloniex.png",
     "url": "https://www.poloniex.com",
     "color": "#295c61"
   },
   "probit": {
-    "imgURI": "https://cdn.redstone.finance/sources/probit.png",
+    "logoURI": "https://cdn.redstone.finance/sources/probit.png",
     "url": "https://www.probit.com",
     "color": "#3c35ba"
   },
   "qtrade": {
-    "imgURI": "https://cdn.redstone.finance/sources/qtrade.png",
+    "logoURI": "https://cdn.redstone.finance/sources/qtrade.png",
     "url": "https://qtrade.io",
     "color": "#e37b40"
   },
   "stex": {
-    "imgURI": "https://cdn.redstone.finance/sources/stex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/stex.png",
     "url": "https://www.stex.com",
     "color": "#000"
   },
   "tidebit": {
-    "imgURI": "https://cdn.redstone.finance/sources/tidebit.svg",
+    "logoURI": "https://cdn.redstone.finance/sources/tidebit.svg",
     "url": "https://www.tidebit.com",
     "color": "#5892d5"
   },
   "timex": {
-    "imgURI": "https://cdn.redstone.finance/sources/timex.png",
+    "logoURI": "https://cdn.redstone.finance/sources/timex.png",
     "url": "https://timex.io",
     "color": "#6a5bcb"
   },
   "vcc": {
-    "imgURI": "https://cdn.redstone.finance/sources/vcc.png",
+    "logoURI": "https://cdn.redstone.finance/sources/vcc.png",
     "url": "https://vcc.exchange",
     "color": "#3b89e0"
   }

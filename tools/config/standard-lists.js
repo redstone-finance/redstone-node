@@ -2,11 +2,11 @@ const axios = require("axios");
 
 let standardListsURLs = [
   "https://zapper.fi/api/token-list",
+  "https://tokens.coingecko.com/uniswap/all.json",
   "https://wispy-bird-88a7.uniswap.workers.dev/?url=http://tokenlist.aave.eth.link",
   "https://wispy-bird-88a7.uniswap.workers.dev/?url=http://tokens.1inch.eth.link",
   "https://wispy-bird-88a7.uniswap.workers.dev/?url=http://t2crtokens.eth.link",
   "https://uniswap.mycryptoapi.com/",
-  "https://tokens.coingecko.com/uniswap/all.json"
 ];
 
 async function getList(url) {
