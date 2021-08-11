@@ -17,11 +17,10 @@ const providerToManifest = {
 // Note: Before running this script you should generate sources.json config
 // You can do this using tools/config/generate-sources-config.js script
 
-const OUTPUT_FILE = "./src/config/tokens-2.json"; // TODO: update output filename
+const OUTPUT_FILE = "./src/config/tokens.json";
 const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
 const URL_PREFIX_FOR_EMPTY_URL = "https://www.google.com/search?q=";
 const TRY_TO_LOAD_FROM_COINGECKO_API = true;
-const MAX_COINGECKO_FAILS_PER_SYMBOL = 10;
 
 const tokensConfig = {};
 const coingeckoClient = new CoinGecko();
@@ -47,6 +46,11 @@ async function generateTokensConfig() {
   }
   await addAllTokensForCcxtSources();
 
+  // Loading tokens from coingecko
+  console.log("Loading data from coingecko - started");
+  const coingeckoData = await getAllTokensFromCoingecko();
+  console.log("Loading data from coingecko - completed");
+
   // Adding token details
   const standardLists = await getStandardLists();
   let counter = 0;
@@ -55,7 +59,10 @@ async function generateTokensConfig() {
   for (const token of tokens) {
     counter++;
     console.log(`Loading details for token: ${token} (${counter}/${total})`);
-    tokensConfig[token] = await getAllDetailsForSymbol(token, standardLists);
+    tokensConfig[token] = await getAllDetailsForSymbol(
+      token,
+      standardLists,
+      coingeckoData);
   }
 }
 
@@ -63,16 +70,15 @@ async function generateTokensConfig() {
 // - getting details (imgURL, url, chainId...)
 // - getting providers
 // - getting tags
-async function getAllDetailsForSymbol(symbol, standardLists) {
+async function getAllDetailsForSymbol(symbol, standardLists, coingeckoData) {
   const providers = getProvidersForSymbol(symbol);
   const tags = getTagsForSymbol(symbol);
   const details = getDetailsForSymbol(symbol, standardLists);
 
   if (TRY_TO_LOAD_FROM_COINGECKO_API && !details.logoURI || !details.url) {
-    const coingeckoDetails = await getDetailsFromCoingecko(symbol);
+    const coingeckoDetails = getDetailsFromCoingecko(symbol, coingeckoData);
+    console.log({coingeckoDetails});
     if (coingeckoDetails) {
-      // TODO: remove console.log
-      console.log(_.pick(coingeckoDetails, ["image", "links", "name"]));
       if (coingeckoDetails.image && !details.logoURI) {
         details.logoURI = coingeckoDetails.image.large;
       }
@@ -164,37 +170,40 @@ async function addAllTokensForSource(source) {
   addTokensToConfig(tokens, source);
 }
 
-async function getDetailsFromCoingecko(symbol, failsCount = 0) {
+async function getAllTokensFromCoingecko() {
+  const pageSize = 250, allTokens = {};
+  let pageNr = 0, finished = false;
+  while (!finished) {
+    const response = await coingeckoClient.coins.all({
+      per_page: pageSize,
+      page: pageNr,
+    });
+
+    if (!response.data || response.data.length == 0) {
+      finished = true;
+    }
+
+    for (const token of response.data) {
+      allTokens[token.id] = _.pick(token, ["name", "image"]);
+    }
+
+    console.log(`Loading tokens from coingecko from page: ${pageNr}. Page size: ${response.data.length}`);
+
+    pageNr++;
+  }
+
+  console.log(JSON.stringify(allTokens, null, 2));
+
+  return allTokens;
+}
+
+function getDetailsFromCoingecko(symbol, coingeckoData) {
   const coinId = coingeckoSymbolToId[symbol];
   if (!coinId) {
     return null;
   } else {
-    if (failsCount > MAX_COINGECKO_FAILS_PER_SYMBOL - 2) {
-      await sleep(30000); // We sleep more time if many fails occured
-    }
-    await sleep(300); // We sleep for 300 ms to avoid bans from Coingecko
-    console.log({coinId}); // TODO: remove
-    try {
-      const response = await coingeckoClient.coins.fetch(coinId, {
-        developer_data: false,
-        community_data: false,
-        localization: false,
-        tickers: false,
-        market_data: false,
-        sparkline: false,
-      });
-      // const response = await axios.get("https://api.coingecko.com/api/v3/coins/" + coinId);
-
-      return response.data;
-    } catch (e) {
-      if (failsCount < MAX_COINGECKO_FAILS_PER_SYMBOL) {
-        console.error(`Coingecko request failed for ${symbol} (id: ${coinId}). Fails count: ${failsCount}. Retrying...`, e);
-        return await getDetailsFromCoingecko(symbol, failsCount + 1);
-      } else {
-        console.error(`Coingecko request failed for ${symbol} (id: ${coinId}). Fails count: ${failsCount}. Skipping symbol...`, e);
-        return null;
-      }
-    }
+    console.log({ symbol, coinId });
+    return coingeckoData[coinId];
   }
 }
 
