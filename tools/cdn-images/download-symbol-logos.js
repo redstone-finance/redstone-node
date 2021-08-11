@@ -3,10 +3,16 @@ const fs = require("fs");
 const _ = require("lodash");
 const cdnUtils = require("./cdn-utils");
 const tokens = require("../../src/config/tokens.json");
+const manifests = {
+  "redstone-rapid": require("../../manifests/rapid.json"),
+  "redstone-stocks": require("../../manifests/stocks.json"),
+  "redstone": require("../../manifests/all-supported-tokens.json"),
+};
 
 const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
-const TARGET_FOLDER = "./symbol-logos";
+const TARGET_FOLDER = "./symbol-logos-active";
 const DOWNLOAD_CHUNK_SIZE = 20;
+const ONLY_ACTIVE_SYMBOLS = false;
 
 let failsCount = 0;
 
@@ -15,7 +21,10 @@ main();
 async function main() {
   createTargetFolderIfNeeded();
 
-  for (const chunk of _.chunk(Object.keys(tokens), DOWNLOAD_CHUNK_SIZE)) {
+  const activeSymbols = getActiveSymbols();
+  const symbols = ONLY_ACTIVE_SYMBOLS ? activeSymbols : Object.keys(tokens);
+
+  for (const chunk of _.chunk(symbols, DOWNLOAD_CHUNK_SIZE)) {
     const promises = [];
     for (const symbol of chunk) {
       const logoURI = tokens[symbol].logoURI;
@@ -39,7 +48,7 @@ async function downloadImage(logoURI, symbol) {
   } catch (e) {
     console.error(
       `Downloading failed for ${symbol}. Downloading image for empty logo...`);
-    console.error(e);
+    console.error(JSON.stringify(e));
     failsCount++;
     return await downloadImage(IMG_URL_FOR_EMPTY_LOGO, symbol);
   }
@@ -55,3 +64,14 @@ function createTargetFolderIfNeeded() {
     fs.mkdirSync(TARGET_FOLDER);
   }
 }
+
+function getActiveSymbols() {
+  const symbols = {};
+  for (const manifest of Object.values(manifests)) {
+    for (const symbol of Object.keys(manifest.tokens)) {
+      symbols[symbol] = 1;
+    }
+  }
+  return Object.keys(symbols);
+}
+
