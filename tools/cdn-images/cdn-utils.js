@@ -21,7 +21,8 @@ function getFileName(id, externalUrl) {
   } else if (externalUrl.includes(".jpg")) {
     extension = "jpg";
   }
-  return `${id.toLowerCase()}.${extension}`;
+  const nameWithSafeSymbols = id.toLowerCase().replace("/", "-");
+  return `${nameWithSafeSymbols}.${extension}`;
 }
 
 module.exports = {

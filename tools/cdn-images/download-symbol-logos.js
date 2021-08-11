@@ -1,25 +1,33 @@
 const download = require("download");
 const fs = require("fs");
+const _ = require("lodash");
+const cdnUtils = require("./cdn-utils");
 const tokens = require("../../src/config/tokens.json");
 
+const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
 const TARGET_FOLDER = "./symbol-logos";
+const DOWNLOAD_CHUNK_SIZE = 20;
 
-// TODO: update this script, use cdn-utils
+let failsCount = 0;
 
 main();
 
 async function main() {
   createTargetFolderIfNeeded();
 
-  const promises = [];
-  for (const symbol of Object.keys(tokens)) {
-    const logoURI = tokens[symbol].logoURI;
-    if (logoURI) {
-      promises.push(downloadImage(logoURI, symbol));
+  for (const chunk of _.chunk(Object.keys(tokens), DOWNLOAD_CHUNK_SIZE)) {
+    const promises = [];
+    for (const symbol of chunk) {
+      const logoURI = tokens[symbol].logoURI;
+      if (logoURI) {
+        promises.push(downloadImage(logoURI, symbol));
+      }
     }
+    await Promise.all(promises);
   }
-  await Promise.all(promises);
+
   console.log("Downloading completed!");
+  console.log({ failsCount });
 }
 
 async function downloadImage(logoURI, symbol) {
@@ -29,7 +37,11 @@ async function downloadImage(logoURI, symbol) {
     const fileContent = await download(logoURI);
     fs.writeFileSync(filePath, fileContent);
   } catch (e) {
-    console.error(`Downloading failed for ${symbol}`, e);
+    console.error(
+      `Downloading failed for ${symbol}. Downloading image for empty logo...`);
+    console.error(e);
+    failsCount++;
+    return await downloadImage(IMG_URL_FOR_EMPTY_LOGO, symbol);
   }
 }
 
