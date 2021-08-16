@@ -58,7 +58,6 @@ export default class PriceSignerService {
       signedPrice.evmSignature = packageWithSinglePrice.signature;
     }
 
-
     return signedPrice;
   }
 
