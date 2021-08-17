@@ -15,6 +15,7 @@ const lambdaBroadcaster: Broadcaster = {
       const body = {
         timestamp: signedData.pricePackage.timestamp,
         signature: signedData.signature,
+        liteSignature: signedData.liteSignature,
         signer: signedData.signer,
         provider: providerAddress,
       };
