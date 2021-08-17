@@ -30,6 +30,7 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
     return {
       signPricePackage: (pricePackage: any) => ({
         signature: "mock_evm_signed",
+        liteSignature: "mock_evm_signed_lite",
         signer: "mock_evm_signer",
         pricePackage,
       }),
@@ -292,6 +293,7 @@ describe("NodeRunner", () => {
       [
         {
           "evmSignature": "mock_evm_signed",
+          "liteEvmSignature": "mock_evm_signed_lite",
           "id": "00000000-0000-0000-0000-000000000000",
           "permawebTx": "mockArTransactionId",
           "provider": "mockArAddress",
@@ -309,6 +311,7 @@ describe("NodeRunner", () => {
       {
         timestamp: 111111111,
         signature: "mock_evm_signed",
+        liteSignature: "mock_evm_signed_lite",
         signer: "mock_evm_signer",
         provider: "mockArAddress"
       }
@@ -365,7 +368,8 @@ describe("NodeRunner", () => {
           "permawebTx": "mockArTransactionId",
           "provider": "mockArAddress",
           "signature": "mock_signed",
-          "evmSignature": "mock_evm_signed"
+          "evmSignature": "mock_evm_signed",
+          "liteEvmSignature": "mock_evm_signed_lite"
         }
       ]
     );
