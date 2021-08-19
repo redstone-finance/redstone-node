@@ -40,7 +40,7 @@ export default class EvmPriceSigner {
     };
   }
 
-  private getDataToSign(priceData: SerializedPriceData): any {
+  getDataToSign(priceData: SerializedPriceData): any {
     return {
       types: {
         EIP712Domain,
@@ -52,7 +52,7 @@ export default class EvmPriceSigner {
     };
   }
 
-  private getLiteDataToSign(priceData: SerializedPriceData): any {
+  getLiteDataBytesString(priceData: SerializedPriceData): string {
     // Calculating lite price data bytes array
     let data = "";
     for (let i = 0; i < priceData.symbols.length; i++) {
@@ -64,9 +64,12 @@ export default class EvmPriceSigner {
       .toString(16)
       .padStart(64, "0");
 
-    // Hash calculation for price data
-    const hash = bufferToHex(keccak256(toBuffer("0x" + data)));
+    return data;
+  }
 
+  private getLiteDataToSign(priceData: SerializedPriceData): any {
+    const data = this.getLiteDataBytesString(priceData);
+    const hash = bufferToHex(keccak256(toBuffer("0x" + data)));
     return hash;
   }
 
