@@ -6,6 +6,8 @@ const vertoSymbolToId = require("./verto-symbol-to-id.json");
 
 const BASE_URL = "https://v2.cache.verto.exchange";
 
+// URL or fetching all tokens details: https://v2.cache.verto.exchange/tokens
+
 export class VertoFetcher extends BaseFetcher {
   constructor() {
     super("verto");
