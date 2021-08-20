@@ -4,6 +4,7 @@ import { ApiDojoRapidFetcher } from "./api-dojo-rapid/ApiDojoRapidFetcher";
 import { YfUnofficialFetcher } from "./yf-unofficial/YfUnofficialFetcher";
 import { CoingeckoFetcher } from "./coingecko/CoingeckoFetcher";
 import { SushiswapFetcher } from "./sushiswap/SushiswapFetcher";
+import { PangolinFetcher } from "./pangolin/PangolinFetcher";
 import { CoinbaseFetcher } from "./coinbase/CoinbaseFetcher";
 import { UniswapFetcher } from "./uniswap/UniswapFetcher";
 import { KyberFetcher } from "./kyber/KyberFetcher";
@@ -15,6 +16,7 @@ export default {
   "yf-unofficial": new YfUnofficialFetcher(),
   coingecko: new CoingeckoFetcher(),
   sushiswap: new SushiswapFetcher(),
+  pangolin: new PangolinFetcher(),
   coinbase: new CoinbaseFetcher(),
   uniswap: new UniswapFetcher(),
   kyber: new KyberFetcher(),

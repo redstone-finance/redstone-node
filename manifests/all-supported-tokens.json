@@ -10189,6 +10189,78 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "PNG": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "WAVAX": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "WETH.e": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "WBTC.e": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "USDT.e": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "LINK.e": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "XAVA": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SNOB": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SHERPA": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "DYP": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SPORE": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "AVME": {
+      "source": [
+        "pangolin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "CNS": {
       "source": [
         "probit"

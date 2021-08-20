@@ -6,7 +6,7 @@ interface SymbolToPairId {
   [symbol: string]: string;
 };
 
-export class UniOrSushiSwapFetcher extends BaseFetcher {
+export class DexFetcher extends BaseFetcher {
   protected retryForInvalidResponse: boolean = true;
 
   constructor(
