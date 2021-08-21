@@ -268,5 +268,10 @@
     "logoURI": "https://play-lh.googleusercontent.com/a-8r_reU9BcRojYNn9t0MDOZ1VK6cYfZItW2Gu7fpeEQJ83f6aGOiaktWf46g4Mg0pRB",
     "url": "https://vcc.exchange",
     "color": "#3b89e0"
+  },
+  "pangolin": {
+    "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#e87a35"
   }
 }

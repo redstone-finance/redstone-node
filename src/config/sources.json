@@ -19,6 +19,11 @@
     "url": "https://sushi.com/",
     "color": "#e45d9d"
   },
+  "pangolin": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#e87a35"
+  },
   "coinbase": {
     "logoURI": "https://cdn.redstone.finance/sources/coinbase.svg",
     "url": "https://www.coinbase.com/",
