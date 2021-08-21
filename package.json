@@ -1,6 +1,6 @@
 {
   "name": "redstone-node",
-  "version": "0.4.14",
+  "version": "0.4.15",
   "description": "A data provider module that fetches price information and serves it to end users.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
