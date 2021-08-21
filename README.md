@@ -23,7 +23,15 @@ yarn start:dev --config <PATH_TO_CONFIG>
   - Or you can run `node tools/cdn-images/download-source-logos.js`, but it will download logos for all sources
 - Upload the source logo to RedStone CDN (manually through AWS S3 web interface)
 - Run `node cdn-images/update-sources-config.js` to replace logo urls in sources config with redstone CDN urls
-- Update redstone-node dependency in redstone-app for being able to use the new source config file
+- Update `redstone-node` dependency in redstone-app for being able to use the new source config file
 
 ## Adding a new token to config
-- TODO
+If a token is not included in currecnt `src/config/tokens.json` file, you can add it in the following way:
+- Add token details to `tools/config/predefined-configs/tokens.json`
+- Run `node toosl/config/add-new-tokens-from-predefined-config.js`
+- Upload the token logo to RedStone CDN, so it is publicly accessible at `https://cdn.redstone.finance/symbols/<TOKEN_NAME_LOWER_CASE>.<IMG_EXTENSION></IMG_EXTENSION>`
+- Run `node cdn-images/update-tokens-config.js` to replace logo urls in tokens config with redstone CDN urls
+- Update `redstone-node` dependency in `redstone-api`, `redstone-app` and other packages where `tokens.json` is used.
+
+## Adding a new provider
+- TODO: add instruction
