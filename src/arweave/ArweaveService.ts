@@ -9,7 +9,11 @@ import {
 import ArweaveProxy from "./ArweaveProxy";
 import { trackEnd, trackStart } from "../utils/performance-tracker";
 import Transaction from "arweave/node/lib/transaction";
-import { SmartWeave, SmartWeaveNodeFactory } from "redstone-smartweave";
+import {
+  LoggerFactory,
+  SmartWeave,
+  SmartWeaveNodeFactory,
+} from "redstone-smartweave";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
@@ -30,6 +34,15 @@ export default class ArweaveService {
     private readonly minBalance: number
   ) {
     this.smartweave = SmartWeaveNodeFactory.memCached(arweaveProxy.arweave);
+    LoggerFactory.INST.setOptions(
+      {
+        type: "json",
+        displayFilePath: "hidden",
+        displayInstanceName: false,
+        minLevel: "info",
+      },
+      ""
+    );
   }
 
   async prepareArweaveTransaction(
@@ -88,7 +101,10 @@ export default class ArweaveService {
 
     registryContract.connect(this.arweaveProxy.jwk);
 
-    const { result: registryInteraction } = await registryContract.viewState<any, any>({
+    const { result: registryInteraction } = await registryContract.viewState<
+      any,
+      any
+    >({
       function: "contractsCurrentTxId",
       data: {
         contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT],
