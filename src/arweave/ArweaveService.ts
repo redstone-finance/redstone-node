@@ -1,4 +1,4 @@
-import {Consola} from "consola";
+import { Consola } from "consola";
 import {
   ArweaveTransactionTags,
   Manifest,
@@ -7,29 +7,35 @@ import {
   PriceDataSigned,
 } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
-import {trackEnd, trackStart} from "../utils/performance-tracker";
+import { trackEnd, trackStart } from "../utils/performance-tracker";
 import Transaction from "arweave/node/lib/transaction";
-import {interactRead} from "smartweave";
+import { SmartWeave, SmartWeaveNodeFactory } from "redstone-smartweave";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
 
-export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
+export type BalanceCheckResult = { balance: number; isBalanceLow: boolean };
 
 // Business service that supplies operations required by Redstone-Node.
 export default class ArweaveService {
+  private static readonly CONTRACT_REGISTRY_TX_ID: string =
+    "XQkGzXG6YknJyy-YbakEZvQKAWkW2_aPRhc3ShC8lyA";
+  private static readonly PROVIDERS_REGISTRY_CONTRACT: string =
+    "providers-registry";
 
-  private static readonly CONTRACT_REGISTRY_TX_ID: string = "XQkGzXG6YknJyy-YbakEZvQKAWkW2_aPRhc3ShC8lyA";
-  private static readonly PROVIDERS_REGISTRY_CONTRACT: string = "providers-registry";
+  private readonly smartweave: SmartWeave;
 
   constructor(
     private readonly arweaveProxy: ArweaveProxy,
     private readonly minBalance: number
   ) {
+    this.smartweave = SmartWeaveNodeFactory.memCached(arweaveProxy.arweave);
   }
 
-  async prepareArweaveTransaction(prices: PriceDataAfterAggregation[], nodeVersion: string)
-    : Promise<Transaction> {
+  async prepareArweaveTransaction(
+    prices: PriceDataAfterAggregation[],
+    nodeVersion: string
+  ): Promise<Transaction> {
     const transactionPreparingTrackingId = trackStart("transaction-preparing");
 
     logger.info("Keeping prices on arweave blockchain - preparing transaction");
@@ -37,7 +43,10 @@ export default class ArweaveService {
 
     const tags = this.prepareTransactionTags(nodeVersion, prices);
 
-    const transaction = await this.arweaveProxy.prepareUploadTransaction(tags, prices);
+    const transaction = await this.arweaveProxy.prepareUploadTransaction(
+      tags,
+      prices
+    );
     trackEnd(transactionPreparingTrackingId);
 
     return transaction;
@@ -48,18 +57,18 @@ export default class ArweaveService {
       const balance = await this.arweaveProxy.getBalance();
       const isBalanceLow = balance < this.minBalance;
       logger.info(`Balance: ${balance}`);
-      return {balance, isBalanceLow};
+      return { balance, isBalanceLow };
     } catch (e) {
       logger.error("Error while checking balance on Arweave", e.stack);
-      return {balance: 0, isBalanceLow: true};
+      return { balance: 0, isBalanceLow: true };
     }
-
   }
 
   async storePricesOnArweave(arTransaction: Transaction) {
     logger.info(
       `Keeping prices on arweave blockchain - posting transaction
-       ${arTransaction.id}`);
+       ${arTransaction.id}`
+    );
     const keepingTrackingId = trackStart("keeping");
     //TODO: Handle errors in a more sensible way ;-) https://app.clickup.com/t/k38r91
     try {
@@ -73,32 +82,34 @@ export default class ArweaveService {
   }
 
   async getCurrentManifest(): Promise<Manifest> {
+    const registryContract = this.smartweave.contract(
+      ArweaveService.CONTRACT_REGISTRY_TX_ID
+    );
+
+    registryContract.connect(this.arweaveProxy.jwk);
+
+    const { result: registryInteraction } = await registryContract.viewState<any, any>({
+      function: "contractsCurrentTxId",
+      data: {
+        contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT],
+      },
+    });
+
+    const providersRegistryContract = this.smartweave.contract(
+      registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
+    );
+
+    providersRegistryContract.connect(this.arweaveProxy.jwk);
+
     const jwkAddress = await this.arweaveProxy.getAddress();
 
-    const registryInteraction = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
-      ArweaveService.CONTRACT_REGISTRY_TX_ID,
-      {
-        function: "contractsCurrentTxId",
-        data: {
-          contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
-        }
-      });
-
-    const providersRegistryContractTxId = registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
-
-    const result = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
-      providersRegistryContractTxId,
-      {
-        function: "activeManifest",
-        data: {
-          providerId: jwkAddress,
-          eagerManifestLoad: true
-        }
-      });
+    const { result } = await providersRegistryContract.viewState<any, any>({
+      function: "activeManifest",
+      data: {
+        providerId: jwkAddress,
+        eagerManifestLoad: true,
+      },
+    });
 
     return result.manifest.activeManifestContent;
   }
@@ -119,14 +130,17 @@ export default class ArweaveService {
       throw new Error("Can not keep empty array of prices in Arweave");
     }
 
-    const differentTimestamps = new Set(prices.map(price => price.timestamp));
+    const differentTimestamps = new Set(prices.map((price) => price.timestamp));
     if (differentTimestamps.size !== 1) {
       throw new Error(`All prices should have same timestamps.
      Found ${differentTimestamps.size} different timestamps.`);
     }
   }
 
-  private prepareTransactionTags(nodeVersion: string, prices: PriceDataAfterAggregation[]) {
+  private prepareTransactionTags(
+    nodeVersion: string,
+    prices: PriceDataAfterAggregation[]
+  ) {
     const tags: ArweaveTransactionTags = {
       app: "Redstone",
       type: "data",
@@ -141,7 +155,7 @@ export default class ArweaveService {
     };
 
     // Adding AR price to tags if possible
-    const arPrice = prices.find(p => p.symbol === "AR");
+    const arPrice = prices.find((p) => p.symbol === "AR");
     if (arPrice !== undefined) {
       tags["AR"] = String(arPrice.value);
     }
