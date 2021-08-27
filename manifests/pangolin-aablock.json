@@ -2,7 +2,7 @@
   "interval": 60000,
   "priceAggregator": "median",
   "defaultSource": [
-    "pangolin-ablock"
+    "pangolin-aablock"
   ],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,

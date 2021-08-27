@@ -11,8 +11,8 @@
   "pangolin-wavax": {
     "baseToken": "WAVAX"
   },
-  "pangolin-ablock": {
-    "baseToken": "ABLOCK"
+  "pangolin-aablock": {
+    "baseToken": "aaBLOCK"
   },
   "pangolin-spore": {
     "baseToken": "SPORE"
