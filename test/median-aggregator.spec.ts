@@ -3,21 +3,21 @@ import medianAggregator, { getMedianValue } from "../src/aggregators/median-aggr
 
 describe('getMedianValue', () => {
   it('should throw for empty array', () => {
-    expect(() => getMedianValue([])).toThrow();
+    expect(() => getMedianValue([], "")).toThrow();
   });
 
   it('should properly calculate median for odd number of elements', () => {
-    expect(getMedianValue([3, 7, 2, 6, 5, 4, 9])).toEqual(5);
-    expect(getMedianValue([-3, 0, 3])).toEqual(0);
-    expect(getMedianValue([3, 0, -3])).toEqual(0);
-    expect(getMedianValue([-7, -5, -11, -4, -8])).toEqual(-7);
+    expect(getMedianValue([3, 7, 2, 6, 5, 4, 9], "")).toEqual(5);
+    expect(getMedianValue([-3, 0, 3], "")).toEqual(0);
+    expect(getMedianValue([3, 0, -3], "")).toEqual(0);
+    expect(getMedianValue([-7, -5, -11, -4, -8], "")).toEqual(-7);
   });
 
   it('should properly calculate median for even number of elements', () => {
-    expect(getMedianValue([3, 7, 2, 6, 5, 4])).toEqual(4.5);
-    expect(getMedianValue([-3, 0])).toEqual(-1.5);
-    expect(getMedianValue([0, -3])).toEqual(-1.5);
-    expect(getMedianValue([-7, -5, -4, -8])).toEqual(-6);
+    expect(getMedianValue([3, 7, 2, 6, 5, 4], "")).toEqual(4.5);
+    expect(getMedianValue([-3, 0], "")).toEqual(-1.5);
+    expect(getMedianValue([0, -3], "")).toEqual(-1.5);
+    expect(getMedianValue([-7, -5, -4, -8], "")).toEqual(-6);
   });
 });
 
