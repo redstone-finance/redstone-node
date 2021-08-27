@@ -1,0 +1,29 @@
+{
+  "pangolin-png": {
+    "baseToken": "PNG"
+  },
+  "pangolin-qi": {
+    "baseToken": "QI"
+  },
+  "pangolin-ave": {
+    "baseToken": "AVE"
+  },
+  "pangolin-wavax": {
+    "baseToken": "WAVAX"
+  },
+  "pangolin-ablock": {
+    "baseToken": "ABLOCK"
+  },
+  "pangolin-spore": {
+    "baseToken": "SPORE"
+  },
+  "pangolin-usdt": {
+    "baseToken": "USDT.e"
+  },
+  "pangolin-pefi": {
+    "baseToken": "PEFI"
+  },
+  "pangolin-snob": {
+    "baseToken": "SNOB"
+  }
+}
