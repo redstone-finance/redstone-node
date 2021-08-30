@@ -30,7 +30,7 @@ If a token is not included in currecnt `src/config/tokens.json` file, you can ad
 - Add token details to `tools/config/predefined-configs/tokens.json`
 - Run `node tools/config/add-new-tokens-from-predefined-config.js`
 - Upload the token logo to RedStone CDN, so it is publicly accessible at `https://cdn.redstone.finance/symbols/<TOKEN_NAME_LOWER_CASE>.<IMG_EXTENSION></IMG_EXTENSION>`
-- Run `node cdn-images/update-tokens-config.js` to replace logo urls in tokens config with redstone CDN urls
+- Run `node tools/cdn-images/update-tokens-config.js` to replace logo urls in tokens config with redstone CDN urls
 - Update `redstone-node` dependency in `redstone-api`, `redstone-app` and other packages where `tokens.json` is used.
 
 ## Adding a new provider

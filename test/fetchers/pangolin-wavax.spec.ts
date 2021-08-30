@@ -1,41 +1,45 @@
 import fetchers from "../../src/fetchers/index"
 import { mockFetcherResponse, mockFetcherResponseWithFunction } from "./_helpers";
 
-const pathToExampleResponse = "../../src/fetchers/uniswap/example-response.json";
+const pathToExampleResponse = "../../src/fetchers/pangolin/example-response.json";
 const expectedResult = [
   {
-    "symbol": "CREAM",
-    "value": 164.73043095163868
+    "symbol": "PNG",
+    "value": 1.932385477521399
   },
   {
-    "symbol": "SAND",
-    "value": 1.043162053163669
+    "symbol": "SNOB",
+    "value": 1.1545442496079128
   },
   {
-    "symbol": "YFI",
-    "value": 37730.70165985392
+    "symbol": "SPORE",
+    "value": 1.5535988940290127e-10
   },
   {
-    "symbol": "KP3R",
-    "value": 289.0442359730218
+    "symbol": "XAVA",
+    "value": 3.0086266440424607
   },
   {
-    "symbol": "XOR",
-    "value": 290.10178576836563
+    "symbol": "SHERPA",
+    "value": 2.531574131043456
+  },
+  {
+    "symbol": "JOE",
+    "value": 1.454891278286737
   }
 ];
 
 jest.mock("axios");
 
-describe("uniswap fetcher", () => {
-  const sut = fetchers["uniswap"];
+describe("pangolin-wavax fetcher", () => {
+  const sut = fetchers["pangolin-wavax"];
 
   it("should properly fetch data", async () => {
     // Given
     mockFetcherResponse(pathToExampleResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND", "YFI", "KP3R", "XOR"]);
+    const result = await sut.fetchAll(["PNG", "SNOB", "SPORE", "XAVA", "SHERPA", "JOE"]);
 
     // Then
     expect(result).toEqual(expectedResult);
@@ -56,7 +60,7 @@ describe("uniswap fetcher", () => {
     mockFetcherResponseWithFunction(getResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND", "YFI", "KP3R", "XOR"]);
+    const result = await sut.fetchAll(["PNG", "SNOB", "SPORE", "XAVA", "SHERPA", "JOE"]);
 
     // Then
     expect(result).toEqual(expectedResult);
