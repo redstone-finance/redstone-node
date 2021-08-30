@@ -23,10 +23,15 @@ export class DexFetcher extends BaseFetcher {
 
     const query = `{
       pairs(where: { id_in: ${JSON.stringify(ids)} }) {
+        id
         token0 {
           symbol
         }
+        token1 {
+          symbol
+        }
         reserve0
+        reserve1
         reserveUSD
       }
     }`;
@@ -40,13 +45,29 @@ export class DexFetcher extends BaseFetcher {
     return response !== undefined && response.data !== undefined;
   }
 
-  async extractPrices(response: any): Promise<PricesObj> {
+  async extractPrices(response: any, symbols: string[]): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
-    for (const pair of response.data.pairs) {
-      const value =
-        parseFloat(pair.reserveUSD) / (2 * parseFloat(pair.reserve0));
-      pricesObj[pair.token0.symbol] = value;
+    for (const currentSymbol of symbols) {
+      const pairId = this.symbolToPairIdObj[currentSymbol];
+      const pair = response.data.pairs.find((p: any) => p.id === pairId);
+
+      if (!pair) {
+        this.logger.warn(
+          `Pair is not in response. Id: ${pairId}. Symbol: ${currentSymbol}. Source: ${this.name}`);
+      } else {
+        const symbol0 = pair.token0.symbol;
+        const symbol1 = pair.token1.symbol;
+        const reserve0 = parseFloat(pair.reserve0);
+        const reserve1 = parseFloat(pair.reserve1);
+        const reserveUSD = parseFloat(pair.reserveUSD);
+
+        if (symbol0 === currentSymbol) {
+          pricesObj[currentSymbol] = reserveUSD / (2 * reserve0);
+        } else if (symbol1 === currentSymbol) {
+          pricesObj[currentSymbol] = reserveUSD / (2 * reserve1);
+        }
+      }
     }
 
     return pricesObj;

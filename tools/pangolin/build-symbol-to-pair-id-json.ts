@@ -1,5 +1,6 @@
 import graphProxy from "../../src/utils/graph-proxy";
 
+const SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
 const MIN_RESERVE_USD = 50;
 
 interface Pair {
@@ -29,7 +30,6 @@ async function main() {
 }
 
 async function get1KMostPopularPairs(): Promise<Pair[]> {
-  const url = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
   const query = `{
     pairs(first: 1000, orderBy: reserveUSD, orderDirection: desc) {
       id
@@ -55,7 +55,7 @@ async function get1KMostPopularPairs(): Promise<Pair[]> {
 
   let response;
   try {
-    response = await graphProxy.executeQuery(url, query);
+    response = await graphProxy.executeQuery(SUBGRAPH_URL, query);
   } catch (e) {
     console.log("Error occured", e);
     throw "stop";

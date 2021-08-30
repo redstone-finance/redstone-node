@@ -2,8 +2,8 @@ import fs from "fs";
 import _ from "lodash";
 import graphProxy from "../../src/utils/graph-proxy";
 
-const SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
-const OUTPUT_FILE = "./src/fetchers/pangolin/pangolin-pairs.json";
+const OUTPUT_FILE = "./src/fetchers/trader-joe/trader-joe-pairs.json";
+const SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange";
 const MIN_RESERVE_USD = 1;
 
 main();
