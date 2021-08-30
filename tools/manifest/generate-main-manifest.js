@@ -5,7 +5,6 @@ const { generateManifest } = require("./manifest-generator");
 const OUTPUT_FILE_PATH = "./manifests/main.json";
 
 const manifestsToExclude = [
-  "5-top-tokens.json",
   "main.json",
   "api-dojo-rapid.json",
   "rapid.json",
