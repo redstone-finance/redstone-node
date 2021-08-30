@@ -17,12 +17,12 @@ yarn start:dev --config <PATH_TO_CONFIG>
 ### Sources config
 - Add source details to the `tools/config/predefined-configs/sources.json` file
 - Run `yarn build`. It is required by `generate-sources-config.js` so it can work correctly
-- Run `/tools/config/generate-sources-config.js` to generate sources config. It will be saved to `src/config/sources.json`
+- Run `node tools/config/generate-sources-config.js` to generate sources config. It will be saved to `src/config/sources.json`
 - Download logo for the newly created source
   - You can simply download it in browser and save as `<SOURCE_NAME>.<IMG_EXTENSTION>`
   - Or you can run `node tools/cdn-images/download-source-logos.js`, but it will download logos for all sources
 - Upload the source logo to RedStone CDN (manually through AWS S3 web interface)
-- Run `node cdn-images/update-sources-config.js` to replace logo urls in sources config with redstone CDN urls
+- Run `node tools/cdn-images/update-sources-config.js` to replace logo urls in sources config with redstone CDN urls
 - Update `redstone-node` dependency in redstone-app for being able to use the new source config file
 
 ## Adding a new token to config

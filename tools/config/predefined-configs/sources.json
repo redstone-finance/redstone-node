@@ -273,5 +273,55 @@
     "logoURI": "https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png",
     "url": "https://pangolin.exchange/",
     "color": "#e87a35"
+  },
+  "pangolin-png": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#e87a35"
+  },
+  "pangolin-qi": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#4fb1e8"
+  },
+  "pangolin-ave": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#000000"
+  },
+  "pangolin-wavax": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#000000"
+  },
+  "pangolin-aablock": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-aablock.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#265fb0"
+  },
+  "pangolin-spore": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-spore.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#424a88"
+  },
+  "pangolin-usdt": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-usdt.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#48a07c"
+  },
+  "pangolin-pefi": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-pefi.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#e74342"
+  },
+  "pangolin-snob": {
+    "logoURI": "https://cdn.redstone.finance/sources/pangolin-snob.png",
+    "url": "https://pangolin.exchange/",
+    "color": "#4aa8f8"
+  },
+  "trader-joe": {
+    "logoURI": "https://avatars.githubusercontent.com/u/82165905?s=200&v=4",
+    "url": "https://www.traderjoexyz.com/",
+    "color": "#e2786f"
   }
 }
