@@ -2,7 +2,7 @@ const fs = require("fs");
 const ccxt = require("ccxt");
 const redstone = require("redstone-api");
 const exchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
-const allSupportedTokensManifest = require("../../manifests/all-supported-tokens.json");
+const allSupportedTokensManifest = require("../../manifests/main.json");
 
 const OUTPUT_DIR = "./manifests";
 const MIN_SIMILAR_VALUES_PERCENTAGE = 70; // %

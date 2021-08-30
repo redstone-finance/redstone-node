@@ -12,7 +12,7 @@ yarn start:dev --config <PATH_TO_CONFIG>
 
 ### Manifest(s)
 - Create a manifest with the name of the newly added source and place it in `manifests` folder
-- [Optional] If the soruce should be used in the main redstone provider, run `node tools/manifest/generate-manifest-with-all-supported-tokens.js`
+- [Optional] If the soruce should be used in the main redstone provider, run `node tools/manifest/generate-main-manifest.js`
 
 ### Sources config
 - Add source details to the `tools/config/predefined-configs/sources.json` file

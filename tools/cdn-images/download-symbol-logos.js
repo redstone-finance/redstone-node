@@ -6,7 +6,7 @@ const tokens = require("../../src/config/tokens.json");
 const manifests = {
   "redstone-rapid": require("../../manifests/rapid.json"),
   "redstone-stocks": require("../../manifests/stocks.json"),
-  "redstone": require("../../manifests/all-supported-tokens.json"),
+  "redstone": require("../../manifests/main.json"),
 };
 
 const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
