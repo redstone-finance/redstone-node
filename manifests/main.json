@@ -4136,6 +4136,30 @@
       ],
       "maxPriceDeviationPercent": 25
     },
+    "PNG": {
+      "source": [
+        "coingecko",
+        "pangolin-pefi",
+        "pangolin-snob",
+        "pangolin-spore",
+        "pangolin-usdt",
+        "pangolin-wavax",
+        "trader-joe"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SNOB": {
+      "source": [
+        "coingecko",
+        "pangolin-aablock",
+        "pangolin-pefi",
+        "pangolin-png",
+        "pangolin-spore",
+        "pangolin-wavax",
+        "trader-joe"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "WTC": {
       "source": [
         "aofex",
@@ -4463,28 +4487,6 @@
         "okex",
         "okex3",
         "okex5"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PNG": {
-      "source": [
-        "coingecko",
-        "pangolin-pefi",
-        "pangolin-snob",
-        "pangolin-spore",
-        "pangolin-usdt",
-        "pangolin-wavax"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SNOB": {
-      "source": [
-        "coingecko",
-        "pangolin-aablock",
-        "pangolin-pefi",
-        "pangolin-png",
-        "pangolin-spore",
-        "pangolin-wavax"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -4907,6 +4909,36 @@
         "okex",
         "okex3",
         "okex5"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "DYP": {
+      "source": [
+        "coingecko",
+        "kucoin",
+        "pangolin-png",
+        "pangolin-wavax",
+        "uniswap"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SPORE": {
+      "source": [
+        "coingecko",
+        "pangolin-png",
+        "pangolin-snob",
+        "pangolin-wavax",
+        "trader-joe"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "WAVAX": {
+      "source": [
+        "coingecko",
+        "pangolin-png",
+        "pangolin-qi",
+        "pangolin-usdt",
+        "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -5627,15 +5659,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "SPORE": {
-      "source": [
-        "coingecko",
-        "pangolin-png",
-        "pangolin-snob",
-        "pangolin-wavax"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "UBTC": {
       "source": [
         "exx",
@@ -5717,6 +5740,15 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "XAVA": {
+      "source": [
+        "kucoin",
+        "pangolin-png",
+        "pangolin-wavax",
+        "trader-joe"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "CVT": {
       "source": [
         "okex",
@@ -5747,9 +5779,9 @@
     "SHERPA": {
       "source": [
         "pangolin-ave",
-        "pangolin-pefi",
         "pangolin-png",
-        "pangolin-wavax"
+        "pangolin-wavax",
+        "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -6689,11 +6721,11 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "DYP": {
+    "JOE": {
       "source": [
         "coingecko",
-        "pangolin-png",
-        "pangolin-wavax"
+        "pangolin-wavax",
+        "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -7038,14 +7070,6 @@
         "okex",
         "okex3",
         "okex5"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "WAVAX": {
-      "source": [
-        "pangolin-png",
-        "pangolin-qi",
-        "pangolin-usdt"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -8874,13 +8898,6 @@
       "source": [
         "liquid",
         "poloniex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "XAVA": {
-      "source": [
-        "pangolin-png",
-        "pangolin-wavax"
       ],
       "maxPriceDeviationPercent": 80
     },
