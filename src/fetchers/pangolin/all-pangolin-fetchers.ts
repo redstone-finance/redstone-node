@@ -1,8 +1,7 @@
 import panfolinFetchersConfig from "./pangolin-fetchers-config.json";
 import { PangolinFetcher } from "./PangolinFetcher";
 
-// TODO: add types
-const pangolinFetchers: any = {};
+const pangolinFetchers: Record<string, PangolinFetcher> = {};
 
 for (const [fetcherName, details] of Object.entries(panfolinFetchersConfig)) {
   pangolinFetchers[fetcherName] =

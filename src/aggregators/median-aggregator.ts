@@ -15,7 +15,10 @@ const medianAggregator: Aggregator = {
   ): PriceDataAfterAggregation {
     const symbol = price.symbol;
     const validValues = Object.values(price.source).filter(v => !isNaN(v) && v > 0);
-    const initialMedian = getMedianValue(validValues, symbol);
+    if (validValues.length === 0) {
+      throw new Error(`No valid values for symbol: ${price.symbol}`);
+    }
+    const initialMedian = getMedianValue(validValues);
 
     // Filtering out values based on deviation from the initial median
     const stableValues = [];
@@ -46,17 +49,21 @@ const medianAggregator: Aggregator = {
       }
     }
 
+    if (stableValues.length === 0) {
+      throw new Error(
+        `All values have too big deviation for symbol: ${price.symbol}`);
+    }
+
     return {
       ...price,
-      value: getMedianValue(stableValues, symbol),
+      value: getMedianValue(stableValues),
     };
   },
 };
 
-export function getMedianValue(arr: number[], symbol: string): number {
+export function getMedianValue(arr: number[]): number {
   if (arr.length === 0) {
-    throw new Error(
-      `Cannot get median value of an empty array for symbol: ${symbol}`);
+    throw new Error("Cannot get median value of an empty array");
   }
 
   arr = arr.sort((a, b) => a - b);
