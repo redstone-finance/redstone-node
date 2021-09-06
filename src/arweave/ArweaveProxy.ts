@@ -6,6 +6,7 @@ import util from "util";
 import { gzip } from "zlib";
 import _  from "lodash";
 import ArweaveMultihost from "arweave-multihost";
+import { SmartWeave, SmartWeaveNodeFactory, LoggerFactory } from "redstone-smartweave";
 
 const logger =
   require("../utils/logger")("utils/arweave-proxy") as Consola;
@@ -14,6 +15,7 @@ const logger =
 export default class ArweaveProxy  {
   jwk: JWKInterface;
   arweave: Arweave;
+  smartweave: SmartWeave;
 
   constructor(jwk: JWKInterface) {
     this.jwk = jwk;
@@ -25,6 +27,17 @@ export default class ArweaveProxy  {
         logger.warn("Arweave request failed", ...args);
       },
     });
+
+    LoggerFactory.INST.setOptions({
+      type: "json",
+      displayFilePath: "hidden",
+      displayInstanceName: false,
+      minLevel: "info",
+    });
+
+    LoggerFactory.INST.logLevel("info");
+
+    this.smartweave = SmartWeaveNodeFactory.memCached(this.arweave);
   }
 
   async sign(strToSign: string): Promise<string> {
