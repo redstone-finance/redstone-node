@@ -66,7 +66,7 @@ describe('medianAggregator', () => {
     };
 
     // Then
-    expect(() => medianAggregator.getAggregatedValue(input, 25)).toThrow("Cannot get median value of an empty array");
+    expect(() => medianAggregator.getAggregatedValue(input, 25)).toThrow("All values have too big deviation for symbol: BTC");
   });
 
   it('should filter prices that deviate too much from the median value', () => {

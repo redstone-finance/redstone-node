@@ -24,7 +24,7 @@ jest.mock("ccxt", () => {
 });
 
 describe("ccxt fetcher", () => {
-  const sut = fetchers["aax"];
+  const sut = fetchers["binance"];
 
   it("should properly fetch data", async () => {
     // When

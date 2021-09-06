@@ -1,14 +1,15 @@
 {
   "interval": 10000,
   "priceAggregator": "median",
-  "defaultSource": ["coingecko"],
+  "defaultSource": [
+    "coingecko"
+  ],
   "sourceTimeout": 7000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
     "BTC": {
       "source": [
-        "aax",
         "ascendex",
         "bequant",
         "bibox",
@@ -41,7 +42,6 @@
         "kucoin",
         "lbank",
         "liquid",
-        "aax",
         "oceanex",
         "okcoin",
         "okex",
@@ -51,14 +51,12 @@
         "probit",
         "qtrade",
         "stex",
-        "timex",
-        "vcc"
+        "timex"
       ],
       "maxPriceDeviationPercent": 25
     },
     "ETH": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bequant",
@@ -93,7 +91,6 @@
         "kucoin",
         "lbank",
         "liquid",
-        "aax",
         "oceanex",
         "okcoin",
         "okex",
@@ -104,8 +101,7 @@
         "qtrade",
         "stex",
         "tidebit",
-        "timex",
-        "vcc"
+        "timex"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -129,7 +125,6 @@
     },
     "BNB": {
       "source": [
-        "aax",
         "ascendex",
         "bibox",
         "binance",
@@ -152,14 +147,12 @@
         "lbank",
         "oceanex",
         "poloniex",
-        "probit",
-        "vcc"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
     "DOGE": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bibox",
@@ -197,14 +190,12 @@
         "okex3",
         "okex5",
         "poloniex",
-        "probit",
-        "vcc"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
     "XRP": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bequant",
@@ -237,7 +228,6 @@
         "kucoin",
         "lbank",
         "liquid",
-        "aax",
         "oceanex",
         "okex",
         "okex3",
@@ -245,14 +235,12 @@
         "poloniex",
         "probit",
         "stex",
-        "timex",
-        "vcc"
+        "timex"
       ],
       "maxPriceDeviationPercent": 25
     },
     "ADA": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bequant",
@@ -284,14 +272,12 @@
         "okcoin",
         "okex",
         "okex3",
-        "okex5",
-        "vcc"
+        "okex5"
       ],
       "maxPriceDeviationPercent": 25
     },
     "DOT": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bibox",
@@ -327,14 +313,12 @@
         "okex3",
         "okex5",
         "poloniex",
-        "probit",
-        "vcc"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
     "XLM": {
       "source": [
-        "aax",
         "aofex",
         "ascendex",
         "bequant",
@@ -369,8 +353,7 @@
         "okex3",
         "okex5",
         "poloniex",
-        "probit",
-        "vcc"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -380,7 +363,6 @@
         "binance",
         "coinex",
         "coingecko",
-        "currencycom",
         "hitbtc",
         "huobipro"
       ],

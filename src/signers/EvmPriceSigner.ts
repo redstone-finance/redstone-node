@@ -5,7 +5,8 @@ import {
   signTypedMessage,
   recoverTypedMessage,
   personalSign,
-  recoverPersonalSignature
+  recoverPersonalSignature,
+  TypedMessage,
 } from "eth-sig-util";
 import {
   PricePackage,
@@ -14,6 +15,16 @@ import {
   SerializedPriceData,
 } from "../types";
 import _ from "lodash";
+
+interface MessageTypeProperty {
+  name: string;
+  type: string;
+};
+interface PriceDataMessageType {
+  EIP712Domain: MessageTypeProperty[];
+  PriceData: MessageTypeProperty[];
+  [additionalProperties: string]: MessageTypeProperty[];
+};
 
 const PriceData = [
   { name: "symbols", type: "bytes32[]" },
@@ -27,7 +38,7 @@ const EIP712Domain = [
   { name: "chainId", type: "uint256" }
 ];
 
-const serializePriceValue = (value: any) => Math.round(value * (10 ** 8));
+const serializePriceValue = (value: number) => Math.round(value * (10 ** 8));
 
 export default class EvmPriceSigner {
   private _domainData: object;
@@ -40,7 +51,7 @@ export default class EvmPriceSigner {
     };
   }
 
-  getDataToSign(priceData: SerializedPriceData): any {
+  getDataToSign(priceData: SerializedPriceData): TypedMessage<PriceDataMessageType> {
     return {
       types: {
         EIP712Domain,
@@ -48,7 +59,7 @@ export default class EvmPriceSigner {
       },
       domain: this._domainData,
       primaryType: "PriceData",
-      message: priceData,
+      message: priceData as Record<string, any>,
     };
   }
 
@@ -67,7 +78,7 @@ export default class EvmPriceSigner {
     return data;
   }
 
-  private getLiteDataToSign(priceData: SerializedPriceData): any {
+  private getLiteDataToSign(priceData: SerializedPriceData): string {
     const data = this.getLiteDataBytesString(priceData);
     const hash = bufferToHex(keccak256(toBuffer("0x" + data)));
     return hash;

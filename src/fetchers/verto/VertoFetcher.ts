@@ -1,4 +1,5 @@
 import axios from "axios";
+import redstone from "redstone-api";
 import { BaseFetcher } from "../BaseFetcher";
 import { PricesObj } from "../../types";
 
@@ -21,12 +22,14 @@ export class VertoFetcher extends BaseFetcher {
   }
 
   async extractPrices(responses: any): Promise<PricesObj> {
+    const lastArPrice = (await redstone.getPrice("AR")).value;
+
     const pricesObj: { [symbol: string]: number } = {};
 
     for (const response of responses) {
       if (response && response.data) {
         const quote = response.data;
-        pricesObj[quote.ticker] = quote.price;
+        pricesObj[quote.ticker] = quote.price * lastArPrice;
       }
     }
 

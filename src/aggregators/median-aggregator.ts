@@ -13,7 +13,11 @@ const medianAggregator: Aggregator = {
     price: PriceDataBeforeAggregation,
     maxPriceDeviationPercent: number
   ): PriceDataAfterAggregation {
+    const symbol = price.symbol;
     const validValues = Object.values(price.source).filter(v => !isNaN(v) && v > 0);
+    if (validValues.length === 0) {
+      throw new Error(`No valid values for symbol: ${price.symbol}`);
+    }
     const initialMedian = getMedianValue(validValues);
 
     // Filtering out values based on deviation from the initial median
@@ -29,20 +33,25 @@ const medianAggregator: Aggregator = {
         if (value !== "error") {
           logger.warn(
             `Incorrect price value (NaN) for source: ${sourceName}. `
-            + `Symbol: ${price.symbol}. Value: ${value}`, price);
+            + `Symbol: ${symbol}. Value: ${value}`, price);
         }
       } else if (value <= 0) {
         logger.warn(
           `Incorrect price value (<= 0) for source: ${sourceName}. `
-          + `Symbol: ${price.symbol}. Value: ${value}`, price);
+          + `Symbol: ${symbol}. Value: ${value}`, price);
       } else if (deviation > maxPriceDeviationPercent) {
         logger.info(
-          `Value ${value} has too big deviation for symbol: ${price.symbol} `
+          `Value ${value} has too big deviation for symbol: ${symbol} `
           + `and source: ${sourceName}. Deviation: (${deviation})%. `
           + `Skipping...`, price);
       } else {
         stableValues.push(value);
       }
+    }
+
+    if (stableValues.length === 0) {
+      throw new Error(
+        `All values have too big deviation for symbol: ${price.symbol}`);
     }
 
     return {

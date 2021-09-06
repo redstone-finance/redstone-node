@@ -11,7 +11,7 @@ const { default: axios } = require("axios");
 const providerToManifest = {
   "redstone-rapid": require("../../manifests/rapid.json"),
   "redstone-stocks": require("../../manifests/stocks.json"),
-  "redstone": require("../../manifests/all-supported-tokens.json"),
+  "redstone": require("../../manifests/main.json"),
 };
 
 // Note: Before running this script you should generate sources.json config
