@@ -5,24 +5,24 @@ const pathToExampleResponse = "../../src/fetchers/uniswap/example-response.json"
 const expectedResult = [
   {
     "symbol": "CREAM",
-    "value": 122.61225384387008
+    "value": 164.73043095163868
   },
   {
     "symbol": "SAND",
-    "value": 0.3511882127904635
+    "value": 1.043162053163669
   },
   {
     "symbol": "YFI",
-    "value": 48717.71993117326
+    "value": 37730.70165985392
   },
   {
     "symbol": "KP3R",
-    "value": 158.30070859099666
+    "value": 289.0442359730218
   },
   {
     "symbol": "XOR",
-    "value": 426.7112290136115
-  },
+    "value": 290.10178576836563
+  }
 ];
 
 jest.mock("axios");

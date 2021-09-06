@@ -79,11 +79,12 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
 export interface PriceDataSigned extends PriceDataBeforeSigning {
   signature: string;
   evmSignature?: string;
+  liteEvmSignature?: string;
 };
 
 export interface ShortSinglePrice {
   symbol: string;
-  value: number;
+  value: any;
 };
 
 export interface PricePackage {
@@ -95,6 +96,13 @@ export interface SignedPricePackage {
   pricePackage: PricePackage;
   signer: string;
   signature: string;
+  liteSignature: string;
+};
+
+export interface SerializedPriceData {
+  symbols: string[];
+  values: any[];
+  timestamp: number;
 };
 
 export interface ArweaveTransactionTags {

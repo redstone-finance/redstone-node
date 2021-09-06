@@ -2335,7 +2335,7 @@
   "AXNT": "axentro",
   "PIZZA": "pizza-usde",
   "OIL": "petroleum",
-  "SPORE": "spore-engineering",
+  "SPORE": "spore",
   "THIRM": "thirm-protocol",
   "GOAT": "goat-cash",
   "TOSHI": "toshi-token",
@@ -6300,5 +6300,7 @@
   "ZIG": "zignaly",
   "ZWAP": "zilswap",
   "ZIOT": "ziot",
-  "ZUZ": "zuz-protocol"
+  "ZUZ": "zuz-protocol",
+  "JOE": "joe",
+  "WAVAX": "wrapped-avax"
 }

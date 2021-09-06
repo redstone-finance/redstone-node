@@ -56,8 +56,8 @@ export default class PriceSignerService {
         timestamp: price.timestamp,
       }, this.ethereumPrivateKey);
       signedPrice.evmSignature = packageWithSinglePrice.signature;
+      signedPrice.liteEvmSignature = packageWithSinglePrice.liteSignature;
     }
-
 
     return signedPrice;
   }

@@ -2,11 +2,10 @@ const fs = require("fs");
 const _ = require("lodash");
 const { generateManifest } = require("./manifest-generator");
 
-const OUTPUT_FILE_PATH = "./manifests/all-supported-tokens.json";
+const OUTPUT_FILE_PATH = "./manifests/main.json";
 
 const manifestsToExclude = [
-  "5-top-tokens.json",
-  "all-supported-tokens.json",
+  "main.json",
   "api-dojo-rapid.json",
   "rapid.json",
   "stocks.json",

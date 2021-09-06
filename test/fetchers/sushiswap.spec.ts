@@ -5,12 +5,12 @@ const pathToExampleResponse = "../../src/fetchers/sushiswap/example-response.jso
 const expectedResult = [
   {
     "symbol": "CREAM",
-    "value": 122.61225384387008
+    "value": 162.29924837765495
   },
   {
-    "symbol": "SAND",
-    "value": 0.3511882127904635
-  },
+    "symbol": "UMA",
+    "value": 12.810977172957678
+  }
 ];
 
 jest.mock("axios");
@@ -23,7 +23,7 @@ describe("sushiswap fetcher", () => {
     mockFetcherResponse(pathToExampleResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND"]);
+    const result = await sut.fetchAll(["CREAM", "UMA"]);
 
     // Then
     expect(result).toEqual(expectedResult);
@@ -44,7 +44,7 @@ describe("sushiswap fetcher", () => {
     mockFetcherResponseWithFunction(getResponse);
 
     // When
-    const result = await sut.fetchAll(["CREAM", "SAND"]);
+    const result = await sut.fetchAll(["CREAM", "UMA"]);
 
     // Then
     expect(result).toEqual(expectedResult);
