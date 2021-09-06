@@ -35,8 +35,6 @@ export default class ArweaveProxy  {
       minLevel: "info",
     });
 
-    LoggerFactory.INST.logLevel("info");
-
     this.smartweave = SmartWeaveNodeFactory.memCached(this.arweave);
   }
 
