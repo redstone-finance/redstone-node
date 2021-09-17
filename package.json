@@ -6,8 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc",
+    "start": "MODE=PROD ts-node index.ts",
     "start:prod": "node dist/index.js",
-    "start:prod:old": "ts-node index.ts",
     "start:dev": "MODE=LOCAL ts-node index.ts",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
