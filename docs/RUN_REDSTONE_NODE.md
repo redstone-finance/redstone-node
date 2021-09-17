@@ -34,19 +34,19 @@ Config file is a **private** file created by provider. You should create your co
 ### Local run
 
 ```bash
-yarn start --config <PATH_TO_YOUR_CONFIG>
+yarn start --config PATH_TO_YOUR_CONFIG
 ```
 
 We recommend redirecting output to some log file(s), for example:
 ```bash
-yarn start --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
+yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 You can also enable JSON mode for logs to simplify the log analysing later.
 To do this append `ENABLE_JSON_LOGS=true` to the node running command:
 
 ```bash
-ENABLE_JSON_LOGS=true yarn start --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
+ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ### Run in docker
