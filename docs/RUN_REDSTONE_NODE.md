@@ -10,7 +10,7 @@
 yarn install
 ```
 
-### 2. Preare manifest
+### 2. Prepare manifest
 Manifest is a public JSON file that defines the provider's obligation regarding the data that they provide. It sets fetching interval, tokens, sources and other public technical details for the provided data.
 
 There are 2 options for loading manifest in the redstone-node:
@@ -25,7 +25,7 @@ For example:
 
 If you want to create your own manifest [read this guide.](./PREPARE_MANIFEST.md)
 
-### 3. Preare config file
+### 3. Prepare config file
 
 Config file is a **private** file created by provider. You should create your config file and place it inside the `.secrets` folder. To read more about config file creation [read this guide](./PREPARE_CONFIG.md)
 
@@ -37,7 +37,7 @@ Config file is a **private** file created by provider. You should create your co
 yarn start --config <PATH_TO_YOUR_CONFIG>
 ```
 
-We recommend to redirect output to some log file(s), for example:
+We recommend redirecting output to some log file(s), for example:
 ```bash
 yarn start --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
