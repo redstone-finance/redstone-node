@@ -26,35 +26,42 @@ For example:
 If you want to create your own manifest [read this guide.](./PREPARE_MANIFEST.md)
 
 ### 3. Preare config file
-Config file is a **private** file created by provider. It contains the following details required by the redstone-node:
-| Param                                 | Optionality | Description                                                                 |
-|---------------------------------------|-------------|-----------------------------------------------------------------------------|
-| arweaveKeysFile                       | required    | path to the arweave wallet                                                  |
-| minimumArBalance                      | required    | minimum AR balance required to run the node                                 |
-| useManifestFromSmartContract          | optional    | if set to  `true` , manifest will be loaded from Arweave Smart Contracts    |
-| manifestFile                          | optional    | path to the manifest file                                                   |
-| addEvmSignature                       | optional    | if set to `true`, EVM signature will be added to each price for each asset  |
-| credentials                           | required    | object with credentials for APIs and private keys                           |
-| credentials.ethereumPrivateKey        | required    | Ethereum private key that will be used for price data signing               |
-| credentials.yahooFinanceRapidApiKey   | optional    | API key for the `api-dojo-rapid` fetcher                                    |
 
-You should create your config file] and place it inside the `.secrets` folder.
-To read more about config file creation [read this guide](./PREPARE_CONFIG.md)
+Config file is a **private** file created by provider. You should create your config file and place it inside the `.secrets` folder. To read more about config file creation [read this guide](./PREPARE_CONFIG.md)
 
 ## Run
 
 ### Local run
+
+#### Simple run
 ```bash
-yarn start:dev --config <PATH_TO_CONFIG>
+yarn start:prod --config <PATH_TO_YOUR_CONFIG>
+```
+
+We recommend to redirect output to some log file, for example:
+```bash
+yarn start:prod --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
+```
+
+You can also enable JSON mode for logs to simplify the log analysing later.
+To do this append `ENABLE_JSON_LOGS=true` to the node running command:
+
+```bash
+ENABLE_JSON_LOGS=true yarn start:prod --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ### Run in docker
 You can run a local redstone-node in docker.
 
-1. Build a docker container with redstone-node
+1. Prepare your Dockerfile based on [./Dockerfile](../Dockerfile).
+Name it `Dockerfile.my-redstone-node` and place in the project root folder.
+
+2. Build a docker container with redstone-node
 ```bash
+docker build -f Dockerfile.my-redstone-node -t my-redstone-node .
 ```
 
-2. Run docker container
+3. Run the docker container
 ```bash
+docker run -it my-redstone-node
 ```
