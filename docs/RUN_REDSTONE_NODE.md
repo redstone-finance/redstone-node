@@ -29,16 +29,15 @@ If you want to create your own manifest [read this guide.](./PREPARE_MANIFEST.md
 
 Config file is a **private** file created by provider. You should create your config file and place it inside the `.secrets` folder. To read more about config file creation [read this guide](./PREPARE_CONFIG.md)
 
-## Run
+## Run the node
 
 ### Local run
 
-#### Simple run
 ```bash
 yarn start:prod --config <PATH_TO_YOUR_CONFIG>
 ```
 
-We recommend to redirect output to some log file, for example:
+We recommend to redirect output to some log file(s), for example:
 ```bash
 yarn start:prod --config <PATH_TO_YOUR_CONFIG> > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
