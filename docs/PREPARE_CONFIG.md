@@ -3,7 +3,7 @@
 Config file is a **private** file created by provider. It contains the following details required by the redstone-node:
 | Param                                 | Optionality | Description                                                                 |
 |---------------------------------------|-------------|-----------------------------------------------------------------------------|
-| arweaveKeysFile                       | required    | path to the arweave wallet                                                  |
+| arweaveKeysFile                       | required    | path to the arweave wallet (for relative paths it assumes that you are in the project root folder)|
 | minimumArBalance                      | required    | minimum AR balance required to run the node                                 |
 | useManifestFromSmartContract          | optional    | if set to  `true` , manifest will be loaded from Arweave Smart Contracts    |
 | manifestFile                          | optional    | path to the manifest file                                                   |
