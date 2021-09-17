@@ -4,7 +4,6 @@
   "minimumArBalance": 0.01,
   "addEvmSignature": true,
   "credentials": {
-    "infuraProjectId": "XXX",
     "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111"
   }
 }

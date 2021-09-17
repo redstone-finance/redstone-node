@@ -1,1 +1,2 @@
-## How to prepare manifest for a new provider
+# How to prepare a new manifest
+TODO
