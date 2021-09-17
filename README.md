@@ -11,7 +11,8 @@ RedStone Node is a core module in the RedStone ecosystem, which is responsible f
 | Config | **Private** configuration file created by provider |
 | Signer | A module responsible for data signing. Examples: EvmPriceSigner, ArweavePriceSigner |
 | Aggregator | A module responsible for aggregating the data fetched from different sources. [Median aggregator](src/aggregators/median-aggregator.ts) is used by default  |
-| Broadcaster | A module responsible for broadcasting the signed data. Currently it sends the signed data to the RedStone cache layer, which shares them through [RedStone API](http://api.docs.redstone.finance/) |
+| Broadcaster | A module responsible for broadcasting the signed data. Currently it sends the signed data to the RedStone cache layer. This data may be fetched then through the [RedStone API](http://api.docs.redstone.finance/) |
+| Arweave | Arweave is a new type of blockchain that allows to store data on Blockchain with much lower costs. It is used by RedStone protocol for storing data |
 
 ## 📜 Instructions
 - [Running the node](docs/RUN_REDSTONE_NODE.md)
