@@ -9,7 +9,6 @@ import {
 import ArweaveProxy from "./ArweaveProxy";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
 import Transaction from "arweave/node/lib/transaction";
-import {interactRead} from "smartweave";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
 const deepSortObject = require("deep-sort-object");
@@ -75,30 +74,32 @@ export default class ArweaveService {
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweaveProxy.getAddress();
 
-    const registryInteraction = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
-      ArweaveService.CONTRACT_REGISTRY_TX_ID,
-      {
-        function: "contractsCurrentTxId",
-        data: {
-          contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
-        }
-      });
+    // Getting contract tx id for providers registry contract
+    const contractRegistryContract = this.arweaveProxy.smartweave
+      .contract(ArweaveService.CONTRACT_REGISTRY_TX_ID)
+      .connect(this.arweaveProxy.jwk);
 
-    const providersRegistryContractTxId = registryInteraction[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
+    const { result: contractRegistry } = await contractRegistryContract.viewState<any, any>({
+      function: "contractsCurrentTxId",
+      data: {
+        contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
+      }
+    });
 
-    const result = await interactRead(
-      this.arweaveProxy.arweave,
-      this.arweaveProxy.jwk,
-      providersRegistryContractTxId,
-      {
-        function: "activeManifest",
-        data: {
-          providerId: jwkAddress,
-          eagerManifestLoad: true
-        }
-      });
+    const providersRegistryContractTxId = contractRegistry[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
+
+    // Getting the latest manifest for current provider
+    const providersRegistryContract = this.arweaveProxy.smartweave
+      .contract(providersRegistryContractTxId)
+      .connect(this.arweaveProxy.jwk);
+
+    const { result } = await providersRegistryContract.viewState<any, any>({
+      function: "activeManifest",
+      data: {
+        providerId: jwkAddress,
+        eagerManifestLoad: true
+      }
+    });
 
     return result.manifest.activeManifestContent;
   }
