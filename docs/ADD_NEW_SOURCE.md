@@ -1,6 +1,6 @@
 # How to add a new source
 
-We will use words `source` and `fetcher`. It's kind of the same thing.
+We will use words `source` and `fetcher`. Сonsider them to be synonymous.
 
 ## Select a name for the new source
 First, you should select a name for your source.
@@ -10,18 +10,18 @@ Source name must be unique, because it will unambiguously identify your source.
 ## Implementation
 ### Imlpement source (fetcher)
 Create a folder with a name of your fetcher in [src/fetchers](../src/fetchers).
-Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file. For more information check out [BaseFetcher code](src/fetchers/BaseFetcher.ts) and implementation of other fetchers, like [pangolin](../src/fetchers/pangolin), [coinbase](../src/fetchers/coinbase), or [ecb](../src/fetchers/ecb).
+Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coinbase](../src/fetchers/coinbase), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
 
 ### Implement tests
-We strongly recommend to implement tests for your fetcher. It's generaly a good practice and it will help you to avoid silly bugs in your fetcher. You can find examples of other fetchers tests in the [test/fetchers](../test/fetchers) folder.
+We strongly recommend to implement tests for your fetcher. It's generaly a good practice and it will help you to avoid silly bugs in your code. You can find examples of tests for other fetchers in the [test/fetchers](../test/fetchers) folder.
 
 ## Manifest(s)
-- Create a manifest with the name of the newly added source and place it in `manifests` folder
+- Create a manifest with the name of the newly added fetcher and place it in the [manifests](../manifests) folder
 - [Optional] If the source should be used in the main redstone provider, run `node tools/manifest/generate-main-manifest.js`
 
-## Sources config
-### Should I do this
-Sources config file is used in web app. If you want your source to be visible there you should add it to config and update the app appropriately.
+## Sources config [optional]
+### Should I do this?
+Sources config file is used in the RedStone web app. If you want your source to be visible there you should add it to config and update the app appropriately.
 
 ### How to add a source to config
 - Add source details to the `tools/config/predefined-configs/sources.json` file

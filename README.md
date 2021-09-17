@@ -1,6 +1,6 @@
 # redstone-node
 
-RedStone Node is a core module in RedStone ecosystem, which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
+RedStone Node is a core module in the RedStone ecosystem, which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
 
 ## 📖 Instructions
 - [Running local node](docs/RUN_LOCAL_NODE.md)
@@ -11,7 +11,7 @@ RedStone Node is a core module in RedStone ecosystem, which is responsible for f
 - [Publish to NPM](docs/PUBLISH_TO_NPM.md)
 
 ## 👨‍💻 Development and contributions
-The codebase consists of --TODO-- written in typescript which is responsible for --TODO--. We encourage anyone to build and test the code and we welcome any issues with suggestions and pull requests.
+We encourage anyone to build and test the code and we welcome any issues with suggestions and pull requests.
 
 ### Installing the dependencies
 ```bash
