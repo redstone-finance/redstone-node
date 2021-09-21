@@ -15,7 +15,7 @@ RedStone Node is a core module in the RedStone ecosystem, which is responsible f
 | Arweave | Arweave is a new type of blockchain that allows to store data on Blockchain with much lower costs. It is used by RedStone protocol for storing data |
 
 ## 📜 Instructions
-- [Running the node](docs/RUN_REDSTONE_NODE.md)
+- [Running a node](docs/RUN_REDSTONE_NODE.md)
 - [Prepare config file](docs/PREPARE_CONFIG.md)
 - [Prepare manifest](docs/PREPARE_MANIFEST.md)
 - [Add new source](docs/ADD_NEW_SOURCE.md)
