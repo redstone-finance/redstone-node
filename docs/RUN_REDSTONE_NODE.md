@@ -64,3 +64,11 @@ docker build -f Dockerfile.my-redstone-node -t my-redstone-node .
 ```bash
 docker run -it my-redstone-node
 ```
+
+## Verify if node is running
+There are 2 main things that your node need to do:
+### 1. Save prices on Arweave
+To verify if prices are being saved on Arweave, navigate to [https://viewblock.io/arweave/address/YOUR_ADDRESS.](https://viewblock.io/arweave/address/YOUR_ADDRESS)
+You should see some transactions with tag `app` and value `Redstone` ~20 minutes after the node running.
+### 2. Broadcast signed prices to the RedStone cache layer (RedStone API)
+You can simply open this URL [https://api.redstone.finance/prices?provider=YOUR_ADDRESS](https://api.redstone.finance/prices?provider=YOUR_ADDRESS) in browser and see if it returns signed data. Don't forget to replace `YOUR_ADDRESS` with your Arweave wallet address.
