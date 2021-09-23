@@ -2,8 +2,8 @@ import axios from "axios";
 import { BaseFetcher } from "../BaseFetcher";
 import { FetcherOpts, PricesObj } from "../../types";
 
-const URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes";
 const RAPID_API_HOST = "apidojo-yahoo-finance-v1.p.rapidapi.com";
+const URL = `https://${RAPID_API_HOST}/market/v2/get-quotes`;
 const DEFAULT_REGION = "US";
 
 export class ApiDojoRapidFetcher extends BaseFetcher {
