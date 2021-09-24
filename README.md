@@ -1,4 +1,4 @@
-# redstone-node
+# RedStone Node
 
 RedStone Node is a core module in the [RedStone ecosystem](docs/REDSTONE_ECOSYSTEM.md), which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
 

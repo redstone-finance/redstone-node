@@ -18,22 +18,17 @@ Redstone is a data ecosystem that should deliver fast and accurate financial inf
 The ecosystem could be divided into 3 main areas:
 
 - **Data provision** responsible for fetching the data from external api, transforming to a common format, and persisting collected information.
-<br />
-Implemented as → [RedStone Node](https://github.com/redstone-finance/redstone-node)
+  - Implemented as → [RedStone Node](https://github.com/redstone-finance/redstone-node)
 - **Data access** responsible for serving data to end user by various means including web portal, http api, discord bots, on-chain feeds or 3rd party applications (like spreadsheet extensions)
-<br />
-Web portal → [RedStone App](https://github.com/redstone-finance/redstone-app)
-<br />
-HTTP Api → [RedStone Api](https://github.com/redstone-finance/redstone-api)
-<br />
-Bots → [Examples](https://github.com/redstone-finance/redstone-api/tree/main/examples/discord-bots)
+  - Web portal → [RedStone App](https://github.com/redstone-finance/redstone-app)
+  - HTTP Api → [RedStone Api](https://github.com/redstone-finance/redstone-api)
+  - Bots → [Examples](https://github.com/redstone-finance/redstone-api/tree/main/examples/discord-bots)
 - **Data integrity** responsible for enforcing high quality of data by incentivising providers with tokens for keeping their service and punishing them for outage and misrepresented data
-<br />
-Concept → [Argue protocol](https://docs.google.com/document/d/1S-R7x3jWCO9ouFofHcyimZZQLwP7UwOg9EKozBinDSQ)
+  - Concept → [Argue protocol](https://docs.google.com/document/d/1S-R7x3jWCO9ouFofHcyimZZQLwP7UwOg9EKozBinDSQ)
 
 
 ## System architecture
-![alt text](docs/img/redstone-system-architecture.png)
+![alt text](img/redstone-system-architecture.png)
 
 ### External integrations (blue)
 - **Data sources** - provide data (like price information) via API
