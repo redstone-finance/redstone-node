@@ -28,7 +28,7 @@ The ecosystem could be divided into 3 main areas:
 
 
 ## System architecture
-![alt text](img/redstone-system-architecture.png)
+![redstone system architecture](img/redstone-system-architecture.png)
 
 ### External integrations (blue)
 - **Data sources** - provide data (like price information) via API
