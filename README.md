@@ -22,6 +22,7 @@ RedStone Node is a core module in the [RedStone ecosystem](docs/REDSTONE_ECOSYST
 - [Add new token](docs/ADD_NEW_TOKEN.md)
 - [Publish to NPM](docs/PUBLISH_TO_NPM.md)
 - [Deploy manifest on Arweave](docs/DEPLOY_MANIFEST_ON_ARWEAVE.md)
+- [Configure node monitoring](docs/MONITORING_TOOLS.md)
 
 ## ⚙️ How it works
 
