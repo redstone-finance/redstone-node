@@ -22,3 +22,9 @@ These are examples of ready-to-use manifests:
 You should place your JSON manifest file inside the `manifests` folder. The manifest file should be named using kebab case, i.e: `manifest.json`, `good-manifest.json`, or `your-source.json`.
 
 You can also publish your manifest to the Arweave smart contracts using this [manifest deployment guide.](./DEPLOY_MANIFEST_ON_ARWEAVE.md)
+
+## Available sources
+You can find a list of available sources along with its stability details in the RedStone Web app: [app.redstone.finance/#/app/sources.](https://app.redstone.finance/#/app/sources)
+
+![sources screenshot](img/sources-screenshot.png)
+
