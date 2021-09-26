@@ -6,7 +6,7 @@ const plotly = require('plotly')("hatskier", "vyujwn0zVNWbWR73W5Jh");
 
 const PROVIDER_ADDRESS = "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0";
 const LAST_BLOCKS_TO_CHECK = 10000;
-const VERSION = "0.2.0";
+const VERSION = "0.4";
 
 const arweave = Arweave.init({
   host: "arweave.net", // Hostname or IP address for a Arweave host

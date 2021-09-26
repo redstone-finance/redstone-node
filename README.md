@@ -40,17 +40,14 @@ This component fetches pricing data and makes it available to end users. The pro
 - **Data broadcasting** - publishing the data on publically available message board (like public firebase store)
 - **Data persistence** - securing packaged data on the Arweave blockchain
 
-![alt text](docs/img/redstone-node.png)
+![redstone-node](docs/img/redstone-node.png)
 
 ## 🛠 Implementation
-Each group of subcomponent should implement a generic interface and be inter-changable with other implementations:
+Each group of subcomponent implements a generic interface and is inter-changable with other implementations:
 - **Fetchers:** connect to external api, fetch the data and transform it to the standard form <em>Examples: coingecko-fetcher, uniswap-fetcher</em>
-- **Aggregators:** take values from multiple sources and aggregate them in a single value
-<em>Examples: median-aggregator, volume-weighted-aggregator</em>
-- **Signers:** sign the data with the provided private keys
-<em>Examples: ArweaveSigner, EthSigner</em>
-- **Broadcasters**: publish the data and signature
-<em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em>
+- **Aggregators:** take values from multiple sources and aggregate them in a single value <em>Examples: median-aggregator, volume-weighted-aggregator</em>
+- **Signers:** sign the data with the provided private keys <em>Examples: ArweaveSigner, EthSigner</em>
+- **Broadcasters**: publish the data and signature <em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em>
 - **Runner:** execute the entire process in a loop
 
 ## Data format
@@ -73,7 +70,7 @@ The price (ticker) is represented as a single JSON object
 ```
 
 ### Arweave transaction
-Price tickers will be aggregated per provider and timestamp and persisted on the Arweave chain. The provider is the tx sender.
+Price tickers are aggregated per provider and timestamp and persisted on the Arweave chain. The provider is the tx sender.
 
 #### Transaction tags
 ```js
@@ -119,6 +116,13 @@ We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to min
   ...
 ]
 ```
+
+## Flowcharts
+### Node runner flow
+![node running detailed](docs/img/node-running-detailed.png)
+
+### Median aggregator flow
+![median-aggregator](docs/img/median-aggregator.png)
 
 ## 👨‍💻 Development and contributions
 We encourage anyone to build and test the code and we welcome any issues with suggestions and pull requests.

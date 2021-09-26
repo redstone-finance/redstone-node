@@ -6,7 +6,7 @@ const manifests = {
 };
 
 const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
-const ONLY_ACTIVE_SYMBOLS = true;
+const ONLY_ACTIVE_SYMBOLS = false;
 
 main();
 
