@@ -13,10 +13,10 @@ Production environment automatically enables services, that are not useful in lo
 
 ## How to configure environments
 
-### Using environment vriables
+### Using environment variables
 Environments can be configured using environment variable `MODE`. Set it to `PROD` to run redstone node in production environment or to `LOCAL` to run redstone node locally.
 
-### Other envirnment variables
+### Other environment variables
 - **ENABLE_JSON_LOGS** - set this variable to `true` to enable logging in JSON format. It is recommended to set it to `true` if you run the node in production environment.
 - **PERFORMANCE_TRACKING_LABEL_PREFIX** - human-friendly name that will be appended to the performace tracking labels. (Examples: `main` for `redstone` provider, `stocks` for `redstone-stocks`, `rapid` for `redstone-rapid` provider)
 
