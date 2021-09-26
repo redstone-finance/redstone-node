@@ -199,7 +199,7 @@ Each group of subcomponent implements a generic interface and is inter-changable
 - **Broadcasters**: publish the data and signature <em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em>
 - **Runner:** execute the entire process in a loop
 
-On the diagram below you can see a standard flow of the node iteration
+ou can see a standard flow of the node iteration on the diagram below:
 ![node running detailed](img/node-running-detailed.png)
 
 Currently, the price data is aggregated using default `median-aggregator`. It works in the following way:
@@ -468,7 +468,8 @@ Tokens config file, which is located in `src/config/tokens.json`, is used in Red
 - Update `redstone-node` dependency in `redstone-api`, `redstone-app` and other packages where `tokens.json` is used.
 
 
-## Providers registry
+## TODO - Providers registry
+TODO - add some small info about providers registry
 ### RedStone contracts
 ### Deploying new manifest
 
@@ -497,9 +498,21 @@ You can find more details about running or extending this monitoring service in 
 
 
 ## RedStone cache layer (RedStone API)
-### API implementation
-#### Testing
-### Running your own api instance
+### Implementation
+The codebase of the Redstone Cache layer is located in the [github.com/redstone-finance/redstone-cache-layer](https://github.com/redstone-finance/redstone-cache-layer) repo. It is a Node.js Express app, which allows to save and query signed data points (currently  pricing for assets) in MongoDB.
+
+### Testing
+We always implemente tests for all the core modules of the RedStone ecosystem, including the cache layer app. You can run tests in the following way:
+```bash
+# Install dependencies
+yarn install
+
+# Run tests
+yarn test
+```
+
+### Running your own cache layer
+We run our instance of the cache layer on AWS. However, it can be deployed on GCP, Azure, Heroku or any other service. You should set up a mongoDB instance (the simplest way to do this is using [Mongo Atlas](https://www.mongodb.com/cloud)). Then you should place .secrets.json file into the root folder of the repo and run the app using `yarn dev` command.
 
 ## ArGue - Dispute resolution protocol [to be implemented]
 ### Introduction
@@ -580,7 +593,7 @@ Jurors benefit from participating in the judgement, therefore there may be a tou
 In most of the cases, public voting will be sufficient and the most cost-effective method to judge the dispute. However, in special cases involving high-stake or confidential content, there could be a need for a privacy-preserving process. We could easily extend the voting mechanism implemented by the Tribunal contract to support either a two-phase commit-reveal process or use zero-knowledge proofs of jurors’ decision.
 
 
-## Accessing data
+## TODO - Accessing data
 ### DeFi protocols
 #### Accessing data in EVM smart contracts
 ### Web integrations
