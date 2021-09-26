@@ -190,7 +190,7 @@ This component fetches pricing data and makes it available to end users. The pro
 - **Data broadcasting** - publishing the data on publically available message board (like public firebase store)
 - **Data persistence** - securing packaged data on the Arweave blockchain
 
-![redstone-node](docs/img/redstone-node.png)
+![redstone-node](img/redstone-node.png)
 ### Codebase structure
 Each group of subcomponent implements a generic interface and is inter-changable with other implementations:
 - **Fetchers:** connect to external api, fetch the data and transform it to the standard form <em>Examples: coingecko-fetcher, uniswap-fetcher</em>
@@ -200,10 +200,10 @@ Each group of subcomponent implements a generic interface and is inter-changable
 - **Runner:** execute the entire process in a loop
 
 On the diagram below you can see a standard flow of the node iteration
-![node running detailed](docs/img/node-running-detailed.png)
+![node running detailed](img/node-running-detailed.png)
 
 Currently, the price data is aggregated using default `median-aggregator`. It works in the following way:
-![median-aggregator](docs/img/median-aggregator.png)
+![median-aggregator](img/median-aggregator.png)
 ### Data format
 
 #### JSON ticker
