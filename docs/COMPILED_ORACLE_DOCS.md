@@ -51,7 +51,7 @@
       - [Add new source / fetcher](#add-new-source---fetcher)
         * [Select a name for the new source](#select-a-name-for-the-new-source)
         * [Implementation](#implementation)
-          + [Imlpement source (fetcher)](#imlpement-source--fetcher-)
+          + [Implement source (fetcher)](#implement-source--fetcher-)
           + [Implement tests](#implement-tests)
         * [Manifest(s)](#manifest-s-)
         * [Sources config [optional]](#sources-config--optional-)
@@ -64,9 +64,9 @@
     + [Deploying new manifest](#deploying-new-manifest)
   * [Node monitoring tools](#node-monitoring-tools)
   * [RedStone cache layer (RedStone API)](#redstone-cache-layer--redstone-api-)
-    + [API implementation](#api-implementation)
-      - [Testing](#testing-1)
-    + [Running your own api instance](#running-your-own-api-instance)
+    + [Implementation](#implementation-1)
+    + [Testing](#testing-1)
+    + [Running your own cache layer](#running-your-own-cache-layer)
   * [ArGue - Dispute resolution protocol [to be implemented]](#argue---dispute-resolution-protocol--to-be-implemented-)
     + [Introduction](#introduction-1)
     + [Dispute process](#dispute-process)
@@ -85,15 +85,13 @@
       - [Privacy](#privacy)
   * [Accessing data](#accessing-data)
     + [DeFi protocols](#defi-protocols)
-      - [Accessing data in EVM smart contracts](#accessing-data-in-evm-smart-contracts)
     + [Web integrations](#web-integrations)
       - [RedStone Web App](#redstone-web-app)
       - [RedStone API](#redstone-api)
-      - [NPM module](#npm-module)
-      - [HTTP API](#http-api)
+        * [HTTP Api](#http-api)
+        * [NPM module](#npm-module)
     + [Arweave](#arweave)
-      - [NPM module](#npm-module-1)
-      - [Arweave GraphQL](#arweave-graphql)
+  * [Need help?](#need-help-)
 
 ## Introduction
 
@@ -127,7 +125,7 @@ The ecosystem could be divided into 3 main areas:
 
 ### Modules
 
-![redstone system architecture](img/redstone-system-architecture.png)
+![redstone system architecture](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-system-architecture.png)
 
 #### External integrations (blue)
 - **Data sources** - provide data (like price information) via API
@@ -144,7 +142,7 @@ The ecosystem could be divided into 3 main areas:
 - **Data cache** - a module that holds data and makes it available to interested parties. Multiple services might implement it on various infrastructure to increase availability. It should achieve minimum latency and scale to handle large volume of requests
 - **Smart contracts api** - it provides the data to on-chain protocols. Initially, we cover Arweave and EVM (ethereum) infrastructure. It minimizes the running (gas) costs and verifies signed data on-chain
 - **HTTP api** - web based that serves information via REST api. It can power websites, node-js scripts and social media bots. There will be a dedicated java script wrapper that will abstract request formatting and error handling to make service easier to integrate
-- **Providers registry** - an Arweave smart contract that manages provider's token stake, holds the manifesto (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime)
+- **Providers registry** - an Arweave smart contract that manages provider's token stake, holds the manifest (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime)
 - **Dispute resolution protocol** - a set of Arweave contracts allowing to challenge any existing pricing feed, and managing the dispute process enabling juries to vote for the verdicts
 - **Web portal** - a web application that is an interface to browse data, check providers' statistics, see historical feeds with an option to raise a dispute and participate in the voting process
 
@@ -167,7 +165,7 @@ Because of the diverse nature of provided information, it will not always be pos
 ##### Bootstrapping market
 At the early stage of development, the token could be distributed to providers to reward their availability and bootstrap the market before there is enough demand coming for data users.
 
-![redstone token design](img/redstone-token-design.png)
+![redstone token design](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-token-design.png)
 
 ## RedStone Node
 RedStone Node is a core module in the [RedStone ecosystem](docs/REDSTONE_ECOSYSTEM.md), which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
@@ -190,7 +188,7 @@ This component fetches pricing data and makes it available to end users. The pro
 - **Data broadcasting** - publishing the data on publically available message board (like public firebase store)
 - **Data persistence** - securing packaged data on the Arweave blockchain
 
-![redstone-node](img/redstone-node.png)
+![redstone-node](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-node.png)
 ### Codebase structure
 Each group of subcomponent implements a generic interface and is inter-changable with other implementations:
 - **Fetchers:** connect to external api, fetch the data and transform it to the standard form <em>Examples: coingecko-fetcher, uniswap-fetcher</em>
@@ -199,11 +197,16 @@ Each group of subcomponent implements a generic interface and is inter-changable
 - **Broadcasters**: publish the data and signature <em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em>
 - **Runner:** execute the entire process in a loop
 
-ou can see a standard flow of the node iteration on the diagram below:
-![node running detailed](img/node-running-detailed.png)
+You can see a standard flow of the node iteration on the diagram below:
+<br />
+<br />
+![node running detailed](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-running-detailed.png)
 
-Currently, the price data is aggregated using default `median-aggregator`. It works in the following way:
-![median-aggregator](img/median-aggregator.png)
+Currently, the price value is aggregated using default `median-aggregator`. It works in the following way:
+<br />
+<br />
+![median-aggregator](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/median-aggregator.png)
+
 ### Data format
 
 #### JSON ticker
@@ -217,7 +220,7 @@ The price (ticker) is represented as a single JSON object
   "version": "0.4",
   "value": 22.05,
   "permawebTx":"g3NL...", // id of Arweave tx that includes this ticker
-  "provider": "[PROVIDER_ADDRESS]",
+  "provider": "I-1xz...", // Address of the provider's arweave wallet
   "signature": "0x...",
   "evmSignature": "0x..."
 }
@@ -240,7 +243,7 @@ Price tickers are aggregated per provider and timestamp and persisted on the Arw
 ```
 
 ##### Transaction data
-We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to minimize transaction cost. We don't store signature for each price on the Arweave blockchain.
+We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to minimize transactions cost. We don't store signature for each price on the Arweave blockchain, because each transaction is already signed using default Arweave transaction signer.
 ```js
 [
   {
@@ -297,7 +300,7 @@ You can also prepare your own manifest and place it inside the `manifests` folde
 
 You can also publish your manifest to the Arweave smart contracts.
 
-Here is the structure of each manifest file:
+Here is the structure of the manifest file:
 | Param | Optionality | Type | Description |
 |---|---|---|---|
 | interval | required | Number | Data fetching interval in milliseconds |
@@ -310,7 +313,7 @@ Here is the structure of each manifest file:
 
 You can find a list of available sources along with its stability details in the RedStone Web app: [app.redstone.finance/#/app/sources.](https://app.redstone.finance/#/app/sources)
 
-![sources screenshot](img/sources-screenshot.png)
+![sources screenshot](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/sources-screenshot.png)
 
 ##### 3. Prepare config file
 
@@ -326,8 +329,6 @@ Config file is a **private** file created by provider. It contains the following
 | credentials | required | object with credentials for APIs and private keys |
 | credentials.ethereumPrivateKey | required | Ethereum private key that will be used for price data signing |
 | credentials.yahooFinanceRapidApiKey | optional | API key for the api-dojo-rapid fetcher |
-
-Check out the [sample-config.json](../sample-config.json)
 
 You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
 #### Run
@@ -366,7 +367,7 @@ docker build -f Dockerfile.my-redstone-node -t my-redstone-node .
 docker run -it my-redstone-node
 ```
 #### Verify
-There are 2 main things that your node need to do:
+There are 2 main things that your node needs to do:
 ##### 1. Save prices on Arweave
 To verify if prices are being saved on Arweave, navigate to [https://viewblock.io/arweave/address/YOUR_ADDRESS.](https://viewblock.io/arweave/address/YOUR_ADDRESS)
 You should see some transactions with tag `app` and value `Redstone` ~20 minutes after the node running.
@@ -374,7 +375,7 @@ You should see some transactions with tag `app` and value `Redstone` ~20 minutes
 You can simply open this URL [https://api.redstone.finance/prices?provider=YOUR_ADDRESS](https://api.redstone.finance/prices?provider=YOUR_ADDRESS) in browser and see if it returns signed data. Don't forget to replace `YOUR_ADDRESS` with your Arweave wallet address
 
 ##### Node monitoring
-We've also implemented an automated monitoring system for redstone-node. It will be described below in the `Node monitoring tools` section.
+We've also implemented an automated monitoring system for nodes. It will be described below in the `Node monitoring tools` section.
 ### Environments
 RedStone node environments (modes) help to differentiate node configuration for different purposes.
 
@@ -406,7 +407,7 @@ ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
 ### Performance tracking
 Performance tracking is enabled in production environment and tracks by default all of the most important processes during each nde iteration. Currently we save perofmance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
 
-![performance chart](img/performance-chart.png)
+![performance chart](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/performance-chart.png)
 
 We track performance for the following processes:
 - processing-all
@@ -421,7 +422,16 @@ We track performance for the following processes:
 
 If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value will be appended to the performance tracking labels (for example: `rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`)
 ### Testing
-TODO - add and place here
+We use jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules: - EvmPriceSigner
+- ManifestParser
+- median-aggregator
+- PricesService
+
+You can run the tests in the following way:
+```bash
+yarn test
+```
+
 ### Connecting custom data
 #### Add new source / fetcher
 We will use words `source` and `fetcher`. Сonsider them to be synonymous.
@@ -432,7 +442,7 @@ It should use kebab case, for example: `source`, `good-source`, `the-best-source
 Source name must be unique, because it will unambiguously identify your source.
 
 ##### Implementation
-###### Imlpement source (fetcher)
+###### Implement source (fetcher)
 Create a folder with a name of your fetcher in [src/fetchers](../src/fetchers).
 Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coinbase](../src/fetchers/coinbase), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
 
@@ -468,10 +478,15 @@ Tokens config file, which is located in `src/config/tokens.json`, is used in Red
 - Update `redstone-node` dependency in `redstone-api`, `redstone-app` and other packages where `tokens.json` is used.
 
 
-## TODO - Providers registry
-TODO - add some small info about providers registry
+## Providers registry
+Providers registry is an Arweave smart contract that manages provider's token stake, holds the manifest (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime).
+
 ### RedStone contracts
+You can find the source code of providers registry smart contracts in the [github.com/redstone-finance/redstone-smartweave-contracts](https://github.com/redstone-finance/redstone-smartweave-contracts) repo.
+
 ### Deploying new manifest
+- place your JWK key in .secrets/redstone-jwk.json
+- run the following command `node src/tools/providers-registry.api.js addManifest "<PATH_TO_MANIFEST>" "<UPDATE_COMMENT>" 0 false`
 
 ## Node monitoring tools
 It's insanely important for oracles to provide high quality data without interruptions.
@@ -479,7 +494,7 @@ So, the node operators need to monitor their nodes and immediately fix any poten
 
 That's why we've implemented a special app [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring), which is executed in a loop and automatically verifies if a selected node regularly publishes new data to the RedStone cache layer and the Arweave blockchain. In each loop iteration multiple checkers are executed. And if any of these checkers fail then the error is reported.
 
-![node monitoring](img/node-monitoring.png)
+![node monitoring](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-monitoring.png)
 
 **Checker** - a module responsible for data intergtity checking. It can check the number of saved data points during last 5 minutes or the timestamp of the latest saved data point.
 
@@ -492,7 +507,7 @@ Implemented checkers:
 - **TimestampIsCloseToNowRedstoneRapid**
 - **TimestampIsCloseToNow**
 
-**Reporter** - a module responsible for error/warning reporting. It can notify a node operator via email, SMS or discord. It can also save a notification to a text file.
+**Reporter** - a module responsible for error/warning reporting. For example, it can notify a node operator via email, SMS or discord. It can also save a notification to a text file. Currently we send email notifications to our developer team and save logs in AWS Cloudwatch.
 
 You can find more details about running or extending this monitoring service in the [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring) GitHub repo.
 
@@ -502,7 +517,7 @@ You can find more details about running or extending this monitoring service in 
 The codebase of the Redstone Cache layer is located in the [github.com/redstone-finance/redstone-cache-layer](https://github.com/redstone-finance/redstone-cache-layer) repo. It is a Node.js Express app, which allows to save and query signed data points (currently  pricing for assets) in MongoDB.
 
 ### Testing
-We always implemente tests for all the core modules of the RedStone ecosystem, including the cache layer app. You can run tests in the following way:
+We always implement tests for all the core modules of the RedStone ecosystem, including the cache layer app. You can run tests in the following way:
 ```bash
 # Install dependencies
 yarn install
@@ -564,7 +579,7 @@ The list below contains system parameters used to manage the dispute resolution 
 ### Architecture
 The diagram below presents smart-contracts with their connections and descriptions below.
 
-![argue dispute resolution](img/dispute-resolution.png)
+![argue dispute resolution](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-resolution.png)
 
 **Tribunal** - a master contract orchestrating the dispute process and linking all the dependent components
 
@@ -593,14 +608,88 @@ Jurors benefit from participating in the judgement, therefore there may be a tou
 In most of the cases, public voting will be sufficient and the most cost-effective method to judge the dispute. However, in special cases involving high-stake or confidential content, there could be a need for a privacy-preserving process. We could easily extend the voting mechanism implemented by the Tribunal contract to support either a two-phase commit-reveal process or use zero-knowledge proofs of jurors’ decision.
 
 
-## TODO - Accessing data
+## Accessing data
 ### DeFi protocols
-#### Accessing data in EVM smart contracts
+Putting data directly into storage is the easiest to make information accessible to smart contracts. However, the convenience comes at a high price, as the storage access is the most costly operation in EVM (20k gas for 256bit word ~ $160k for 1Mb checked 30/08/2021) making it prohibitively expensive to use.
+
+`redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (on-demand fetching). Until that moment, the data remains available in the Arweave blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a meta-transaction pattern and the information integrity is verified on-chain through signature checking.
+
+The `redstone-flash-storage` tool can be installed from the NPM regstry:
+```bash
+# using npm
+npm install redstone-flash-storage
+
+# or using yarn
+yarn add redstone-flash-storage
+```
+
+You can find more details and documentation in its GitHub repo: [github.com/redstone-finance/redstone-flash-storage](https://github.com/redstone-finance/redstone-flash-storage)
 ### Web integrations
 #### RedStone Web App
+Data provided by current RedStone providers is accessible in the RedStone web app: [app.redstone.finance](https://app.redstone.finance).
+
+![redstone app screenshot tokens](img/redstone-app-screenshot-tokens.png)
+
+![redstone app screenshot price chart](img/redstone-app-screenshot-price-chart.png)
 #### RedStone API
-#### NPM module
-#### HTTP API
+##### HTTP Api
+
+Redstone HTTP API allows to fetch data from the RedStone cache layer.
+
+Base url: `https://api.redstone.finance`
+
+More details about RedStone HTTP API: https://api.docs.redstone.finance/http-api/prices
+##### NPM module
+We've also implemented a Javascript library for fetching RedStone data from the RedStone cache layer.
+
+It can be installed from the NPM registry:
+```bash
+# using npm
+npm install redstone-api
+
+# using yarn
+yarn add redstone-api
+```
+
+You can find much more details and API documentation using the links below:
+- Documentation: https://api.docs.redstone.finance/
+- Source code: https://github.com/redstone-finance/redstone-api
+- NPM module: https://www.npmjs.com/package/redstone-api
 ### Arweave
-#### NPM module
-#### Arweave GraphQL
+You can fetch all the data provided by RedStone providers directly from the Arweave blockchain using its graphql endpoint: https://arweave.net/graphql.
+
+But keep in mind that you should decompress it using `gzip` algorithm after fetching.
+
+Example query to fetch RedStone transactions
+```json
+{
+  transactions(
+    tags: [
+      { name: "app", values: "Redstone" }
+      { name: "type", values: "data" }
+      { name: "Content-Type", values: "application/json"}
+      { name: "version", values: "0.4" }
+    ]
+    block: { min: 775000 }
+    owners: ["I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0"]
+    first: 50
+  ) {
+    edges {
+      node {
+        tags {
+          name
+          value
+        }
+        id
+      }
+    }
+  }
+}
+```
+
+You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
+
+## Need help?
+If you have any questions about the technical documentation, please send us a message via:
+- Discord: https://redstone.finance/discord
+- E-Mail: dev@redstone.finance

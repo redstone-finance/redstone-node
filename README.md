@@ -63,7 +63,7 @@ The price (ticker) is represented as a single JSON object
   "version": "0.4",
   "value": 22.05,
   "permawebTx":"g3NL...", // id of Arweave tx that includes this ticker
-  "provider": "[PROVIDER_ADDRESS]",
+  "provider": "I-1xz...", // Address of the provider's arweave wallet
   "signature": "0x...",
   "evmSignature": "0x..."
 }
@@ -86,7 +86,7 @@ Price tickers are aggregated per provider and timestamp and persisted on the Arw
 ```
 
 #### Transaction data
-We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to minimize transaction cost. We don't store signature for each price on the Arweave blockchain.
+We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to minimize transactions cost. We don't store signature for each price on the Arweave blockchain, because each transaction is already signed using default Arweave transaction signer.
 ```js
 [
   {

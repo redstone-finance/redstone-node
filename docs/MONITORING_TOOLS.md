@@ -18,6 +18,6 @@ Implemented checkers:
 - **TimestampIsCloseToNowRedstoneRapid**
 - **TimestampIsCloseToNow**
 
-**Reporter** - a module responsible for error/warning reporting. It can notify a node operator via email, SMS or discord. It can also save a notification to a text file.
+**Reporter** - a module responsible for error/warning reporting. For example, it can notify a node operator via email, SMS or discord. It can also save a notification to a text file. Currently we send email notifications to our developer team and save logs in AWS Cloudwatch.
 
 You can find more details about running or extending this monitoring service in the [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring) GitHub repo.

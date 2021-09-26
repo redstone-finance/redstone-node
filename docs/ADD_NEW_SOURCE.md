@@ -8,7 +8,7 @@ It should use kebab case, for example: `source`, `good-source`, `the-best-source
 Source name must be unique, because it will unambiguously identify your source.
 
 ## Implementation
-### Imlpement source (fetcher)
+### Implement source (fetcher)
 Create a folder with a name of your fetcher in [src/fetchers](../src/fetchers).
 Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coinbase](../src/fetchers/coinbase), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
 
