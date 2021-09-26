@@ -380,8 +380,8 @@ We've also implemented an automated monitoring system for nodes. It will be desc
 RedStone node environments (modes) help to differentiate node configuration for different purposes.
 
 There are 2 main environments, that are already created in the RedStone node:
-- PROD (should be used for real long-term node deployment)
-- LOCAL (should be used for tests, development and experiments)
+- **PROD** (should be used for real long-term node deployment)
+- **LOCAL** (should be used for tests, development and experiments)
 
 Production environment automatically enables services, that are not useful in local environment, such as:
 - error reporting
@@ -422,10 +422,12 @@ We track performance for the following processes:
 
 If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value will be appended to the performance tracking labels (for example: `rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`)
 ### Testing
-We use jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules: - EvmPriceSigner
-- ManifestParser
-- median-aggregator
-- PricesService
+We use jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules:
+
+- EvmPriceSigner.spec.ts
+- ManifestParser.spec.ts
+- median-aggregator.spec.ts
+- PricesService.spec.ts
 
 You can run the tests in the following way:
 ```bash
@@ -658,10 +660,10 @@ You can find much more details and API documentation using the links below:
 ### Arweave
 You can fetch all the data provided by RedStone providers directly from the Arweave blockchain using its graphql endpoint: https://arweave.net/graphql.
 
-But keep in mind that you should decompress it using `gzip` algorithm after fetching.
+Please keep in mind that you should decompress the transaction data using `gzip` algorithm after fetching.
 
-Example query to fetch RedStone transactions
-```json
+Example query to fetch RedStone transactions IDs and tags
+```
 {
   transactions(
     tags: [
