@@ -20,7 +20,7 @@ main();
 
 async function main() {
   const transactions = await getTransactionWithPagination({ maxPages: 50 });
-  // const { transactions } = await getLimestoneTransactions();
+  // const { transactions } = await getRedstoneTransactions();
 
   const minutesOfDelay = [], times = [];
 
@@ -65,7 +65,7 @@ async function getTransactionWithPagination({ maxPages }) {
 
   while (hasNextPage && pageNr < maxPages) {
     console.log(`Getting transactions from page nr ${pageNr}. Cursor: ${after}`);
-    const response = await getLimestoneTransactions(after);
+    const response = await getRedstoneTransactions(after);
     allTransactions = allTransactions.concat(response.transactions);
     after = _.last(response.transactions).cursor;
     hasNextPage = response.hasNextPage;
@@ -76,7 +76,7 @@ async function getTransactionWithPagination({ maxPages }) {
     tx.node.tags.find(t => t.name === "timestamp").value));
 }
 
-async function getLimestoneTransactions(after) {
+async function getRedstoneTransactions(after) {
   const networkInfo = await arweave.network.getInfo();
   const minBlock = networkInfo.height - LAST_BLOCKS_TO_CHECK;
 

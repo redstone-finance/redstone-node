@@ -13,7 +13,7 @@ The token will be used to:
 ## Longer description
 
 ### Usage of the token
-Tokens are proven to be a very useful tool for achieving coordination in the distributed systems and aligning incentives of various actors. Limestone token facilitates data sharing ecosystem incentivising participants to produce, publish and validate data in a continuous and diligent way.
+Tokens are proven to be a very useful tool for achieving coordination in the distributed systems and aligning incentives of various actors. RedStone token facilitates data sharing ecosystem incentivising participants to produce, publish and validate data in a continuous and diligent way.
 
 #### Data access fees
 The end users who benefit from access to valuable information use tokens to reward providers that published these data. The exact fee and the subscription terms are at the discretion of the provider and depend on their effort, demand for data and potential competition.
