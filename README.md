@@ -117,6 +117,14 @@ We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to min
 ]
 ```
 
+## Next steps
+* **Flexible data format** - supporting multiple types and formats of data instead of simple price values
+* **Virtual nodes** - ability to quickly run data provider service without the need to configure the node infrastructure
+* **Improved aggregation logic** - implementing multiple types of aggregation (e.g. time-weighted avg) based on users needs and empirical findings
+* **Full implementation of dispute resolution** - implementing and testing the disputes resolution protocol
+* **Code audits** - auditing the core parts of the codes, especially the smart contracts responsible for data transfers to EVM
+
+
 ## Flowcharts
 ### Node runner flow
 ![node running detailed](docs/img/node-running-detailed.png)
