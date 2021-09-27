@@ -96,11 +96,11 @@
 ## Introduction
 
 ### Overview
-Redstone is a data ecosystem that should deliver fast and accurate financial information in a decentralised fashion.
+RedStone is a data ecosystem that should deliver fast and accurate financial information in a decentralised fashion.
 
 #### Problem Statement (Defi Pain points)
 - It is very expensive to put all the pricing data on-chain (it cost more than 2m to do it for Ethereum Defi with Chainlink)
-- To reduce costs current providers cover only a small subset of tokens (Chainlink: 25) and have low update frequency (Chainlink: 10m)
+- To reduce costs current providers cover only a small subset of tokens (Chainlink: 25 - PPE - this information is out of date - https://data.chain.link/?_ga=2.221957087.616302317.1632727519-1452125650.1621248640) and have low update frequency (Chainlink: 10m - where does this info comes from? I see 21 minutes delay on eth/usd)
 - DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like margin lending (which require higher update frequency)
 
 #### Solution
@@ -141,9 +141,9 @@ The ecosystem could be divided into 3 main areas:
 - **RedStone node** - fetches data from external sources via api, aggregates and attest information with a cryptographic key, broadcast the results and persist them on the Arweave blockchain
 - **Data cache** - a module that holds data and makes it available to interested parties. Multiple services might implement it on various infrastructure to increase availability. It should achieve minimum latency and scale to handle large volume of requests
 - **Smart contracts api** - it provides the data to on-chain protocols. Initially, we cover Arweave and EVM (ethereum) infrastructure. It minimizes the running (gas) costs and verifies signed data on-chain
-- **HTTP api** - web based that serves information via REST api. It can power websites, node-js scripts and social media bots. There will be a dedicated java script wrapper that will abstract request formatting and error handling to make service easier to integrate
+- **HTTP api** - web based that serves information via REST api. It can power websites, node-js scripts and social media bots. There will (isn't it already available as redstone-api library?) be a dedicated javascript wrapper that will abstract request formatting and error handling to make service easier to integrate
 - **Providers registry** - an Arweave smart contract that manages provider's token stake, holds the manifest (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime)
-- **Dispute resolution protocol** - a set of Arweave contracts allowing to challenge any existing pricing feed, and managing the dispute process enabling juries to vote for the verdicts
+- **Dispute resolution protocol** - a set of Arweave (are we sure we want to implement this on Arweave?)  contracts allowing to challenge any existing pricing feed, and managing the dispute process enabling juries to vote for the verdicts
 - **Web portal** - a web application that is an interface to browse data, check providers' statistics, see historical feeds with an option to raise a dispute and participate in the voting process
 
 ### Token design
@@ -170,7 +170,7 @@ At the early stage of development, the token could be distributed to providers t
 ## RedStone Node
 RedStone Node is a core module in the [RedStone ecosystem](docs/REDSTONE_ECOSYSTEM.md), which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
 
-You can find the implementation of the redstone node in the [github.com/redstone-finance/redstone-node](https://github.com/redstone-finance/redstone-node) repository.
+You can find the implementation of the RedStone Node in the [github.com/redstone-finance/redstone-node](https://github.com/redstone-finance/redstone-node) repository.
 
 ### Node architecture
 
@@ -182,19 +182,19 @@ In a cycle, we perform 3 major activities:
 
 #### Process view
 This component fetches pricing data and makes it available to end users. The process consists of the following steps:
-- **Data fetching** - getting data from public or private api and transforming it the standard format
+- **Data fetching** - getting data from a public or private api and transforming it to the standard format (some more explanation? what does "standard format" mean?)
 - **Data aggregation** - combining data from multiple sources to produce a single feed using median or volume weighted average
 - **Data attestation** - signing data with the provider's cryptographic key
-- **Data broadcasting** - publishing the data on publically available message board (like public firebase store)
+- **Data broadcasting** - publishing the data on publicly available message board (like public firebase store)
 - **Data persistence** - securing packaged data on the Arweave blockchain
 
 ![redstone-node](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-node.png)
 ### Codebase structure
-Each group of subcomponent implements a generic interface and is inter-changable with other implementations:
+Each group of subcomponent implements a generic interface and is inter-changeable with other implementations:
 - **Fetchers:** connect to external api, fetch the data and transform it to the standard form <em>Examples: coingecko-fetcher, uniswap-fetcher</em>
 - **Aggregators:** take values from multiple sources and aggregate them in a single value <em>Examples: median-aggregator, volume-weighted-aggregator</em>
 - **Signers:** sign the data with the provided private keys <em>Examples: ArweaveSigner, EthSigner</em>
-- **Broadcasters**: publish the data and signature <em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em>
+- **Broadcasters**: publish the data and signature <em>Examples: FirebaseBroadcaster, SwarmBroadcaster</em> - hmm, do we have such examples in our repository?
 - **Runner:** execute the entire process in a loop
 
 You can see a standard flow of the node iteration on the diagram below:
@@ -238,7 +238,7 @@ Price tickers are aggregated per provider and timestamp and persisted on the Arw
   "Content-Type": "application/json",
   "Content-Encoding": "gzip",
   "timestamp": 1632485616172,
-  "AR": 45.083730599999996
+  "AR": 45.083730599999996 (why is this price stored in a tag?)
 }
 ```
 
@@ -333,7 +333,7 @@ Config file is a **private** file created by provider. It contains the following
 You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
 #### Run
 
-##### Local run
+##### Local run (either add warning regarding running on Windows or remove the part?)
 
 ```bash
 yarn start --config PATH_TO_YOUR_CONFIG
@@ -405,7 +405,7 @@ ENV ENABLE_JSON_LOGS=true
 ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
 ```
 ### Performance tracking
-Performance tracking is enabled in production environment and tracks by default all of the most important processes during each nde iteration. Currently we save perofmance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
+Performance tracking is enabled in production environment and tracks by default all of the most important processes during each nde iteration. Currently, we save performance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
 
 ![performance chart](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/performance-chart.png)
 
@@ -422,7 +422,7 @@ We track performance for the following processes:
 
 If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value will be appended to the performance tracking labels (for example: `rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`)
 ### Testing
-We use jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules:
+We use Jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules:
 
 - EvmPriceSigner.spec.ts
 - ManifestParser.spec.ts
@@ -436,7 +436,7 @@ yarn test
 
 ### Connecting custom data
 #### Add new source / fetcher
-We will use words `source` and `fetcher`. Сonsider them to be synonymous.
+We will use words `source` and `fetcher`. Consider them to be synonymous.
 
 ##### Select a name for the new source
 First, you should select a name for your source.
@@ -449,7 +449,7 @@ Create a folder with a name of your fetcher in [src/fetchers](../src/fetchers).
 Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coinbase](../src/fetchers/coinbase), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
 
 ###### Implement tests
-We strongly recommend to implement tests for your fetcher. It's generaly a good practice and it will help you to avoid silly bugs in your code. You can find examples of tests for other fetchers in the [test/fetchers](../test/fetchers) folder.
+We strongly recommend implementing tests for your fetcher. It's generally a good practice and it will help you to avoid bugs in your code. You can find examples of tests for other fetchers in the [test/fetchers](../test/fetchers) folder.
 
 ##### Manifest(s)
 - Create a manifest with the name of the newly added fetcher and place it in the [manifests](../manifests) folder
@@ -466,7 +466,7 @@ Sources config file is used in the RedStone web app. If you want your source to 
 - Download logo for the newly created source
   - You can simply download it in browser and save as `<SOURCE_NAME>.<IMG_EXTENSTION>`
   - Or you can run `node tools/cdn-images/download-source-logos.js`, but it will download logos for all sources
-- Upload the source logo to RedStone CDN (manually through AWS S3 web interface)
+- Upload the source logo to RedStone CDN (manually through AWS S3 web interface) - how an external provider can upload sth. to RedStone CDN?
 - Run `node tools/cdn-images/update-sources-config.js` to replace logo urls in sources config with redstone CDN urls
 - Update `redstone-node` dependency in redstone-app for being able to use the new source config file
 #### Add new asset
@@ -481,7 +481,7 @@ Tokens config file, which is located in `src/config/tokens.json`, is used in Red
 
 
 ## Providers registry
-Providers registry is an Arweave smart contract that manages provider's token stake, holds the manifest (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime).
+Providers registry is an Arweave smart contract that manages provider's token stake, holds the manifest (SLA of pricing data) and allows checking historical performance (showing any data inconsistency and downtime) - not sure about this "checking" part....
 
 ### RedStone contracts
 You can find the source code of providers registry smart contracts in the [github.com/redstone-finance/redstone-smartweave-contracts](https://github.com/redstone-finance/redstone-smartweave-contracts) repo.
@@ -491,14 +491,14 @@ You can find the source code of providers registry smart contracts in the [githu
 - run the following command `node src/tools/providers-registry.api.js addManifest "<PATH_TO_MANIFEST>" "<UPDATE_COMMENT>" 0 false`
 
 ## Node monitoring tools
-It's insanely important for oracles to provide high quality data without interruptions.
+It's very important for oracles to provide high quality data without interruptions.
 So, the node operators need to monitor their nodes and immediately fix any potential problems.
 
-That's why we've implemented a special app [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring), which is executed in a loop and automatically verifies if a selected node regularly publishes new data to the RedStone cache layer and the Arweave blockchain. In each loop iteration multiple checkers are executed. And if any of these checkers fail then the error is reported.
+That's why we've implemented a special app [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring), which is executed in a loop and automatically verifies if a selected node regularly publishes new data to the RedStone cache layer and the Arweave blockchain. In each loop iteration multiple checkers are executed. If any of these checkers fail then the error is reported.
 
 ![node monitoring](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-monitoring.png)
 
-**Checker** - a module responsible for data intergtity checking. It can check the number of saved data points during last 5 minutes or the timestamp of the latest saved data point.
+**Checker** - a module responsible for data integrity checking. It can check the number of saved data points during last 5 minutes or the timestamp of the latest saved data point.
 
 Implemented checkers:
 - **ArPriceReturnedRedstoneRapid**
@@ -509,14 +509,14 @@ Implemented checkers:
 - **TimestampIsCloseToNowRedstoneRapid**
 - **TimestampIsCloseToNow**
 
-**Reporter** - a module responsible for error/warning reporting. For example, it can notify a node operator via email, SMS or discord. It can also save a notification to a text file. Currently we send email notifications to our developer team and save logs in AWS Cloudwatch.
+**Reporter** - a module responsible for error/warning reporting. For example, it can notify a node operator via email, SMS or discord. It can also save a notification to a text file. Currently, we send email notifications to our developer team and save logs in AWS Cloudwatch.
 
 You can find more details about running or extending this monitoring service in the [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring) GitHub repo.
 
 
 ## RedStone cache layer (RedStone API)
 ### Implementation
-The codebase of the Redstone Cache layer is located in the [github.com/redstone-finance/redstone-cache-layer](https://github.com/redstone-finance/redstone-cache-layer) repo. It is a Node.js Express app, which allows to save and query signed data points (currently  pricing for assets) in MongoDB.
+The codebase of the RedStone Cache layer is located in the [github.com/redstone-finance/redstone-cache-layer](https://github.com/redstone-finance/redstone-cache-layer) repo (this is currently a private repository..). It is a Node.js Express app, which allows to save and query signed data points (currently pricing for assets) in MongoDB.
 
 ### Testing
 We always implement tests for all the core modules of the RedStone ecosystem, including the cache layer app. You can run tests in the following way:
@@ -533,7 +533,7 @@ We run our instance of the cache layer on AWS. However, it can be deployed on GC
 
 ## ArGue - Dispute resolution protocol [to be implemented]
 ### Introduction
-Decentralised data feeds have many advantages over centralised competitors. They are more secure, lacking a central point of failure and more censorship-resilient because of diversified governance. However, it’s not trivial to manage data integrity and accuracy without a central point of control.
+Decentralised data feeds have many advantages over centralised competitors. They are more secure (why?), lacking a central point of failure and more censorship-resilient because of diversified governance. However, it’s not trivial to manage data integrity and accuracy without a central point of control.
 
 ARgue protocol enables high data integrity preserving the benefits of keeping a fully decentralised and diverse set of data providers. Users are incentivised to report problems with data quality by opening a dispute. Disputes are resolved by a panel of jurors who vote by staking tokens. The consensus is based on the majority rule, where voters are rewarded for voting alongside others and penalised for being outliers.
 
@@ -541,7 +541,7 @@ The majority rule is the most common strategy for reaching coordination in a dec
 
 One of the adaptations of this idea was drafted by Vitalik Buterin in 2014 as a Schelling Coin concept. It was also proposed as an architecture for the Ethereum Price Feeds: “For financial contracts for difference, it may actually be possible to decentralize the data feed via a protocol called SchellingCoin” (from the Ethereum whitepaper). However, the network congestion, high gas price and the extreme storage cost of the Ethereum Virtual Machine rendered the solution impractical at the current level of technology.
 
-New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement voting while maintaining the high quality of decisions. Hopefully, the recent simulations done by the Redstone team prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see the simulations of TCR-based decision model presented during EdCon Paris 2019).
+New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement voting while maintaining the high quality of decisions. Hopefully, the recent simulations done by the RedStone team (BS alert...what simulations? any docs with results?) prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see the simulations of TCR-based decision model presented during EdCon Paris 2019 - add link?).
 
 ### Dispute process
 The dispute is a multi-stage process that involves two main counter-parties: a challenger, who initiates the dispute, a provider, who originated the challenged data entry and a jury panel that makes the final decision. The actors are incentivised to participate with potential token rewards. All of the stages of the process are described below:
@@ -553,7 +553,7 @@ A data provider may deposit collateral as a signal to the users that there is a 
 Anyone could open a dispute providing he can deposit an initial stake which is proportional to the provider’s deposit. There is also a minimum stake value introduced to avoid spamming. The challenger stake is locked until the dispute is settled.
 
 #### 3. Voting
-Jurors vote by staking their tokens either to support or reject the dispute. The maximum amount of tokens that could be staked is limited by their an additional parameter called voting capacity (see the challenges section for more details).
+Jurors vote by staking their tokens either to support or reject the dispute. The maximum amount of tokens that could be staked is limited by their an (this sentence makes no sense..) additional parameter called voting capacity (see the challenges section for more details - where is this section? link?).
 Voting lasts until a deadline which is typically a week.
 
 #### 4. Verdict
@@ -563,7 +563,7 @@ If a required quorum is reached before the deadline, the choice with the highest
 An appeal submission requires doubling the current challenge fee. It will restart the voting and double the required quorum. If the quorum is already above 50% it is impossible to submit another appeal and the current verdict is considered final.
 
 #### 6. Settlement
-After the verdict is final the winning party receives a reward which is taken either from a challenger fee or provider deposit. Part of the reward is distributed to the judges. There is also an internal redistribution of tokens among the judges. Those supporting the majority choice get part of the tokens staked on the losing side. The jurors who were on the winning side also increased their voting capacity. The results are persisted on the permaweb and could be used as a base for reputation score for providers, watchers and jurors.
+After the verdict is final the winning party receives a reward which is taken either from a challenger fee or provider deposit. Part of the reward is distributed to the judges (who are the judges? where is it described? how do we assure that they are impartial? can they be punished for a "wrong" verdict?). There is also an internal redistribution of tokens among the judges. Those supporting the majority choice get part of the tokens staked on the losing side. The jurors who were on the winning side also increase their voting capacity (what does "capacity" exactly means here?). The results are persisted on the permaweb and could be used as a base for reputation score for providers, watchers and jurors.
 
 ### Dispute parameters
 The list below contains system parameters used to manage the dispute resolution process. The values are based on the similar existing models and simulations, therefore they might require tuning after the deployment in the real-world environment. The update could be managed by decentralised governance in the form of token weighted voting by all the stakeholders.
@@ -574,7 +574,7 @@ The list below contains system parameters used to manage the dispute resolution 
 | appeal window | 3 days | A time when the losing side could submit an appeal |
 | base quorum | 5% | A minimum percentage of total token supply that needs to be staked during the voting |
 | escalation factor | 2x | A multiplier that is applied both to the quorum and challenger fee after the appeal |
-| min challenge fee | 100 RDST | A minimum amount of tokens that need to be staked by the watcher (challenger) |
+| min challenge fee | 100 RDST (why 100 and not 500 or 1000? shouldn't it depend on the market value of the token?) | A minimum amount of tokens that need to be staked by the watcher (challenger) |
 | judgement fee | 20% | Part of the voting stake (from challenger or provider) that is redistributed to the jurors |
 | voting penalty | 10% | Part of the losing jurors’ stake that is redistributed to the one who supported the final verdict.  |
 
@@ -598,13 +598,13 @@ The diagram below presents smart-contracts with their connections and descriptio
 ### Challenges
 
 #### Low turnout
-Many blockchain voting systems suffer from voters’ apathy as governance proposals cannot attract the required quorum. Redstone mitigates this problem by introducing a gradual voting scheme. For the first voting on a dispute, there is a low quorum that increases with every appeal. This allows to resolve uncomplicated cases with little friction but allows for proper verification and majority voting if the case is complex enough.
+Many blockchain voting systems suffer from voters’ apathy as governance proposals cannot attract the required quorum. RedStone mitigates this problem by introducing a gradual voting scheme. For the first voting on a dispute, there is a low quorum that increases with every appeal. This allows to resolve uncomplicated cases with little friction but allows for proper verification and majority voting if the case is complex enough.
 
 #### Vote buying
-Decentralised voting systems use tokens to express voting power. Although the freedom to trade is a necessary feature of every token, buying a large amount of tokens just before important voting could derail the entire system. Not addressing this point was one of the most criticised vulnerabilities of the Aragon court. Redstone mitigates the issue by introducing another dimension to token ownership called holding capacity. It represents the maximum amount of tokens a juror could hold that can increase only as a result of making correct decisions. This ensures that jurors could gradually earn their voting power and the system is immune to short-term votes buying
+Decentralised voting systems use tokens to express voting power. Although the freedom to trade is a necessary feature of every token, buying a large amount of tokens just before important voting could derail the entire system. Not addressing this point was one of the most criticised vulnerabilities of the Aragon court. RedStone mitigates the issue by introducing another dimension to token ownership called holding capacity. It represents the maximum amount of tokens a juror could hold that can increase only as a result of making correct decisions. This ensures that jurors could gradually earn their voting power and the system is immune to short-term votes buying
 
 #### Jurors selection
-Jurors benefit from participating in the judgement, therefore there may be a tough competition to vote for a high-stake dispute. To prevent front-running and guarantee an equal right to vote for all the token holders, Redstone plans to implement a random-based selection process. The chances to be selected as a judge are proportional to the voting capacity, a variable that describes that increased gradually with every successful choice made by a juror. This ensures that the best arbiters will have the most opportunities to resolve disputes.
+Jurors benefit from participating in the judgement, therefore there may be a tough competition to vote for a high-stake dispute. To prevent front-running and guarantee an equal right to vote for all the token holders, RedStone plans to implement a random-based selection process. The chances to be selected as a judge are proportional to the voting capacity, a variable that describes that increased gradually with every successful choice made by a juror. This ensures that the best arbiters will have the most opportunities to resolve disputes.
 
 #### Privacy
 In most of the cases, public voting will be sufficient and the most cost-effective method to judge the dispute. However, in special cases involving high-stake or confidential content, there could be a need for a privacy-preserving process. We could easily extend the voting mechanism implemented by the Tribunal contract to support either a two-phase commit-reveal process or use zero-knowledge proofs of jurors’ decision.
@@ -614,9 +614,9 @@ In most of the cases, public voting will be sufficient and the most cost-effecti
 ### DeFi protocols
 Putting data directly into storage is the easiest to make information accessible to smart contracts. However, the convenience comes at a high price, as the storage access is the most costly operation in EVM (20k gas for 256bit word ~ $160k for 1Mb checked 30/08/2021) making it prohibitively expensive to use.
 
-`redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (on-demand fetching). Until that moment, the data remains available in the Arweave blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a meta-transaction pattern and the information integrity is verified on-chain through signature checking.
+`redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (on-demand fetching). Until that moment, the data remains available in the Arweave blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a meta-transaction pattern (some more description or at least a link - since it's the core of the whole solution?) and the information integrity is verified on-chain through signature checking.
 
-The `redstone-flash-storage` tool can be installed from the NPM regstry:
+The `redstone-flash-storage` tool can be installed from the NPM registry:
 ```bash
 # using npm
 npm install redstone-flash-storage
@@ -636,7 +636,7 @@ Data provided by current RedStone providers is accessible in the RedStone web ap
 #### RedStone API
 ##### HTTP Api
 
-Redstone HTTP API allows to fetch data from the RedStone cache layer.
+RedStone HTTP API allows to fetch data from the RedStone cache layer.
 
 Base url: `https://api.redstone.finance`
 
