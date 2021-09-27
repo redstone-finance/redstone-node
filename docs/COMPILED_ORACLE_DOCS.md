@@ -1,103 +1,102 @@
 # RedStone oracle technical doc
 
-- [RedStone oracle technical doc](#redstone-oracle-technical-doc)
-  * [Introduction](#introduction)
-    + [Overview](#overview)
-      - [Problem Statement (Defi Pain points)](#problem-statement--defi-pain-points-)
-      - [Solution](#solution)
-    + [Top level view](#top-level-view)
-  * [System architecture](#system-architecture)
-    + [Modules](#modules)
-      - [External integrations (blue)](#external-integrations--blue-)
-      - [Stakeholders (red)](#stakeholders--red-)
-      - [RedStone modules (purple)](#redstone-modules--purple-)
-    + [Token design](#token-design)
-      - [Usage of the token](#usage-of-the-token)
-        * [Data access fees](#data-access-fees)
-        * [Staking](#staking)
-        * [Dispute resolution](#dispute-resolution)
-        * [Bootstrapping market](#bootstrapping-market)
-  * [RedStone Node](#redstone-node)
-    + [Node architecture](#node-architecture)
-      - [Top level view](#top-level-view-1)
-      - [Process view](#process-view)
-    + [Codebase structure](#codebase-structure)
-    + [Data format](#data-format)
-      - [JSON ticker](#json-ticker)
-      - [Arweave transaction](#arweave-transaction)
-        * [Transaction tags](#transaction-tags)
-        * [Transaction data](#transaction-data)
-    + [Running a node](#running-a-node)
-      - [Prerequisites](#prerequisites)
-      - [Prepare](#prepare)
-        * [1. Install dependencies](#1-install-dependencies)
-        * [2. Prepare manifest](#2-prepare-manifest)
-        * [3. Prepare config file](#3-prepare-config-file)
-      - [Run](#run)
-        * [Local run](#local-run)
-        * [Run in docker](#run-in-docker)
-      - [Verify](#verify)
-        * [1. Save prices on Arweave](#1-save-prices-on-arweave)
-        * [2. Broadcast signed prices to the RedStone cache layer (RedStone API)](#2-broadcast-signed-prices-to-the-redstone-cache-layer--redstone-api-)
-        * [Node monitoring](#node-monitoring)
-    + [Environments](#environments)
-      - [How to configure environments](#how-to-configure-environments)
-        * [Using environment variables](#using-environment-variables)
-        * [Other environment variables](#other-environment-variables)
-        * [Configure in Docker](#configure-in-docker)
-    + [Performance tracking](#performance-tracking)
-    + [Testing](#testing)
-    + [Connecting custom data](#connecting-custom-data)
-      - [Add new source / fetcher](#add-new-source---fetcher)
-        * [Select a name for the new source](#select-a-name-for-the-new-source)
-        * [Implementation](#implementation)
-          + [Implement source (fetcher)](#implement-source--fetcher-)
-          + [Implement tests](#implement-tests)
-        * [Manifest(s)](#manifest-s-)
-        * [Sources config [optional]](#sources-config--optional-)
-          + [Should I do this?](#should-i-do-this-)
-          + [How to add a source to config](#how-to-add-a-source-to-config)
-      - [Add new asset](#add-new-asset)
-        * [How to add a token](#how-to-add-a-token)
-  * [Providers registry](#providers-registry)
-    + [RedStone contracts](#redstone-contracts)
-    + [Deploying new manifest](#deploying-new-manifest)
-  * [Node monitoring tools](#node-monitoring-tools)
-  * [RedStone cache layer (RedStone API)](#redstone-cache-layer--redstone-api-)
-    + [Implementation](#implementation-1)
-    + [Testing](#testing-1)
-    + [Running your own cache layer](#running-your-own-cache-layer)
-  * [ArGue - Dispute resolution protocol [to be implemented]](#argue---dispute-resolution-protocol--to-be-implemented-)
-    + [Introduction](#introduction-1)
-    + [Dispute process](#dispute-process)
-      - [1. Pre dispute](#1-pre-dispute)
-      - [2. Opening dispute](#2-opening-dispute)
-      - [3. Voting](#3-voting)
-      - [4. Verdict](#4-verdict)
-      - [5. Appeal](#5-appeal)
-      - [6. Settlement](#6-settlement)
-    + [Dispute parameters](#dispute-parameters)
-    + [Architecture](#architecture)
-    + [Challenges](#challenges)
-      - [Low turnout](#low-turnout)
-      - [Vote buying](#vote-buying)
-      - [Jurors selection](#jurors-selection)
-      - [Privacy](#privacy)
-  * [Accessing data](#accessing-data)
-    + [DeFi protocols](#defi-protocols)
-      - [How it works](#how-it-works)
-        * [Data packing (off-chain data encoding)](#data-packing--off-chain-data-encoding-)
-        * [Data unpacking (on-chain data verification)](#data-unpacking--on-chain-data-verification-)
-        * [Benchmarks](#benchmarks)
-      - [Usage](#usage)
-    + [Web integrations](#web-integrations)
-      - [RedStone Web App](#redstone-web-app)
-      - [RedStone API](#redstone-api)
-        * [HTTP Api](#http-api)
-        * [NPM module](#npm-module)
-    + [Arweave](#arweave)
-  * [Next steps](#next-steps)
-  * [Need help?](#need-help-)
+- [Introduction](#introduction)
+  - [Overview](#overview)
+    - [Problem Statement (Defi Pain points)](#problem-statement-defi-pain-points)
+    - [Solution](#solution)
+  - [Top level view](#top-level-view)
+- [System architecture](#system-architecture)
+  - [Modules](#modules)
+    - [External integrations (blue)](#external-integrations-blue)
+    - [Stakeholders (red)](#stakeholders-red)
+    - [RedStone modules (purple)](#redstone-modules-purple)
+  - [Token design](#token-design)
+    - [Usage of the token](#usage-of-the-token)
+      - [Data access fees](#data-access-fees)
+      - [Staking](#staking)
+      - [Dispute resolution](#dispute-resolution)
+      - [Bootstrapping market](#bootstrapping-market)
+- [RedStone Node](#redstone-node)
+  - [Node architecture](#node-architecture)
+    - [Top level view](#top-level-view)
+    - [Process view](#process-view)
+  - [Codebase structure](#codebase-structure)
+  - [Data format](#data-format)
+    - [JSON ticker](#json-ticker)
+    - [Arweave transaction](#arweave-transaction)
+      - [Transaction tags](#transaction-tags)
+      - [Transaction data](#transaction-data)
+  - [Running a node](#running-a-node)
+    - [Prerequisites](#prerequisites)
+    - [Prepare](#prepare)
+      - [1. Install dependencies](#1-install-dependencies)
+      - [2. Prepare manifest](#2-prepare-manifest)
+      - [3. Prepare config file](#3-prepare-config-file)
+    - [Run](#run)
+      - [Local run](#local-run)
+      - [Run in docker](#run-in-docker)
+    - [Verify](#verify)
+      - [1. Save prices on Arweave](#1-save-prices-on-arweave)
+      - [2. Broadcast signed prices to the RedStone cache layer (RedStone API)](#2-broadcast-signed-prices-to-the-redstone-cache-layer-redstone-api)
+      - [Node monitoring](#node-monitoring)
+  - [Environments](#environments)
+    - [How to configure environments](#how-to-configure-environments)
+      - [Using environment variables](#using-environment-variables)
+      - [Other environment variables](#other-environment-variables)
+      - [Configure in Docker](#configure-in-docker)
+  - [Performance tracking](#performance-tracking)
+  - [Testing](#testing)
+  - [Connecting custom data](#connecting-custom-data)
+    - [Add new source / fetcher](#add-new-source--fetcher)
+      - [Select a name for the new source](#select-a-name-for-the-new-source)
+      - [Implementation](#implementation)
+        - [Implement source (fetcher)](#implement-source-fetcher)
+        - [Implement tests](#implement-tests)
+      - [Manifest(s)](#manifests)
+      - [Sources config [optional]](#sources-config-optional)
+        - [Should I do this?](#should-i-do-this)
+        - [How to add a source to config](#how-to-add-a-source-to-config)
+    - [Add new asset](#add-new-asset)
+      - [How to add a token](#how-to-add-a-token)
+- [Providers registry](#providers-registry)
+  - [RedStone contracts](#redstone-contracts)
+  - [Deploying new manifest](#deploying-new-manifest)
+- [Node monitoring tools](#node-monitoring-tools)
+- [RedStone cache layer (RedStone API)](#redstone-cache-layer-redstone-api)
+  - [Implementation](#implementation)
+  - [Testing](#testing)
+  - [Running your own cache layer](#running-your-own-cache-layer)
+- [ArGue - Dispute resolution protocol [to be implemented]](#argue---dispute-resolution-protocol-to-be-implemented)
+  - [Introduction](#introduction)
+  - [Dispute process](#dispute-process)
+    - [1. Pre dispute](#1-pre-dispute)
+    - [2. Opening dispute](#2-opening-dispute)
+    - [3. Voting](#3-voting)
+    - [4. Verdict](#4-verdict)
+    - [5. Appeal](#5-appeal)
+    - [6. Settlement](#6-settlement)
+  - [Dispute parameters](#dispute-parameters)
+  - [Architecture](#architecture)
+  - [Challenges](#challenges)
+    - [Low turnout](#low-turnout)
+    - [Vote buying](#vote-buying)
+    - [Jurors selection](#jurors-selection)
+    - [Privacy](#privacy)
+- [Accessing data](#accessing-data)
+  - [DeFi protocols](#defi-protocols)
+    - [How it works](#how-it-works)
+      - [Data packing (off-chain data encoding)](#data-packing-off-chain-data-encoding)
+      - [Data unpacking (on-chain data verification)](#data-unpacking-on-chain-data-verification)
+      - [Benchmarks](#benchmarks)
+    - [Usage](#usage)
+  - [Web integrations](#web-integrations)
+    - [RedStone Web App](#redstone-web-app)
+    - [RedStone API](#redstone-api)
+      - [HTTP Api](#http-api)
+      - [NPM module](#npm-module)
+  - [Arweave](#arweave)
+- [Next steps](#next-steps)
+- [Need help?](#need-help)
 
 ## Introduction
 
@@ -108,7 +107,7 @@ Redstone is a data ecosystem that should deliver fast and accurate financial inf
 #### Problem Statement (Defi Pain points)
 
 - It is very expensive to put all the pricing data on-chain (it cost more than 2m to do it for Ethereum Defi with Chainlink)
-- To reduce costs current providers cover only a small subset of tokens (Chainlink: 25) and have low update frequency (Chainlink: 10m)
+- To reduce costs current providers cover only a small subset of tokens (Chainlink: 79 cryptocurrencies) and have low update frequency (Chainlink: at least 10 minutes)
 - DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like margin lending (which require higher update frequency)
 
 #### Solution
@@ -375,6 +374,9 @@ You should place your config file inside the `.secrets` folder, which is include
 #### Run
 
 ##### Local run
+
+Please note, the instruction below is for Unix operating systems (like Linux or MacOS).
+If you use Windows, we recommend to run the redstone node in a Docker container.
 
 ```bash
 yarn start --config PATH_TO_YOUR_CONFIG
@@ -675,7 +677,7 @@ The majority rule is the most common strategy for reaching coordination in a dec
 
 One of the adaptations of this idea was drafted by Vitalik Buterin in 2014 as a Schelling Coin concept. It was also proposed as an architecture for the Ethereum Price Feeds: “For financial contracts for difference, it may actually be possible to decentralize the data feed via a protocol called SchellingCoin” (from the Ethereum whitepaper). However, the network congestion, high gas price and the extreme storage cost of the Ethereum Virtual Machine rendered the solution impractical at the current level of technology.
 
-New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement voting while maintaining the high quality of decisions. Hopefully, the recent simulations done by the Redstone team prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see the simulations of TCR-based decision model presented during EdCon Paris 2019).
+New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement voting while maintaining the high quality of decisions. Hopefully, [the recent simulations](https://github.com/alice-si/TcrSimulation.jl) done by the Redstone team prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see [the simulations of TCR-based decision model](https://github.com/alice-si/TcrSimulation.jl) presented during EdCon Paris 2019).
 
 ### Dispute process
 
@@ -691,7 +693,7 @@ Anyone could open a dispute providing he can deposit an initial stake which is p
 
 #### 3. Voting
 
-Jurors vote by staking their tokens either to support or reject the dispute. The maximum amount of tokens that could be staked is limited by their an additional parameter called voting capacity (see the challenges section for more details).
+Jurors vote by staking their tokens either to support or reject the dispute. The maximum amount of tokens that could be staked is limited by an additional parameter called "voting capacity" (see the challenges section for more details).
 Voting lasts until a deadline which is typically a week.
 
 #### 4. Verdict
@@ -710,15 +712,16 @@ After the verdict is final the winning party receives a reward which is taken ei
 
 The list below contains system parameters used to manage the dispute resolution process. The values are based on the similar existing models and simulations, therefore they might require tuning after the deployment in the real-world environment. The update could be managed by decentralised governance in the form of token weighted voting by all the stakeholders.
 
-| Parameter         | Default value | Description                                                                                        |
-| ----------------- | ------------- | -------------------------------------------------------------------------------------------------- |
-| voting duration   | 7 days        | A period when jurors are able to vote on the dispute                                               |
-| appeal window     | 3 days        | A time when the losing side could submit an appeal                                                 |
-| base quorum       | 5%            | A minimum percentage of total token supply that needs to be staked during the voting               |
-| escalation factor | 2x            | A multiplier that is applied both to the quorum and challenger fee after the appeal                |
-| min challenge fee | 100 RDST      | A minimum amount of tokens that need to be staked by the watcher (challenger)                      |
-| judgement fee     | 20%           | Part of the voting stake (from challenger or provider) that is redistributed to the jurors         |
-| voting penalty    | 10%           | Part of the losing jurors’ stake that is redistributed to the one who supported the final verdict. |
+| Parameter         | Default value                 | Description                                                                                        |
+|-------------------|-------------------------------|----------------------------------------------------------------------------------------------------|
+| voting duration   | 7 days                        | A period when jurors are able to vote on the dispute                                               |
+| appeal window     | 3 days                        | A time when the losing side could submit an appeal                                                 |
+| base quorum       | 5%                            | A minimum percentage of total token supply that needs to be staked during the voting               |
+| escalation factor | 2x                            | A multiplier that is applied both to the quorum and challenger fee after the appeal                |
+| min challenge fee | $100 worth of Redstone Tokens | A minimum amount of tokens that need to be staked by the watcher (challenger)                      |
+| judgement fee     | 20%                           | Part of the voting stake (from challenger or provider) that is redistributed to the jurors         |
+| voting penalty    | 10%                           | Part of the losing jurors’ stake that is redistributed to the one who supported the final verdict. |
+
 
 ### Architecture
 
@@ -762,7 +765,7 @@ In most of the cases, public voting will be sufficient and the most cost-effecti
 
 Putting data directly into storage is the easiest to make information accessible to smart contracts. However, the convenience comes at a high price, as the storage access is the most costly operation in [EVM](https://ethereum.github.io/yellowpaper/paper.pdf) (20k gas for 256bit word ~ $160k for 1Mb checked 30/08/2021) making it prohibitively expensive to use.
 
-Flash storage implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (**on-demand fetching**). Until that moment, the data remains available in the [Arweave](https://www.arweave.org/) blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a [meta-transaction pattern](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84) and the information integrity is verified on-chain through signature checking.
+`redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (**on-demand fetching**). Until that moment, the data remains available in the [Arweave](https://www.arweave.org/) blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a [meta-transaction pattern](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84) and the information integrity is verified on-chain through signature checking.
 
 #### How it works
 ##### Data packing (off-chain data encoding)
