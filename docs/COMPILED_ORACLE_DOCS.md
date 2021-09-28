@@ -818,6 +818,10 @@ Putting data directly into storage is the easiest to make information accessible
 `redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (**on-demand fetching**). Until that moment, the data remains available in the [Arweave](https://www.arweave.org/) blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a [meta-transaction pattern](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84) and the information integrity is verified on-chain through signature checking.
 
 #### How it works
+At a top level, transferring data to an EVM environment requires packing an extra payload to a user's transaction and processing the message on-chain.
+
+[![image.png](https://i.postimg.cc/5NZSqtFT/image.png)](https://postimg.cc/xc3m9n53)
+
 ##### Data packing (off-chain data encoding)
 
 1. Relevant data needs to be fetched from the RedStone api
