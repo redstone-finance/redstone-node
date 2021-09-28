@@ -1,9 +1,12 @@
 # RedStone oracle technical doc
 
+# Table of contents
+
 - [Introduction](#introduction)
   - [Overview](#overview)
     - [Problem Statement (Defi Pain points)](#problem-statement-defi-pain-points)
     - [Solution](#solution)
+    - [Oracles landscape](#oracles-landscape)
   - [Top level view](#top-level-view)
 - [System architecture](#system-architecture)
   - [Modules](#modules)
@@ -62,7 +65,7 @@
   - [RedStone contracts](#redstone-contracts)
   - [Deploying new manifest](#deploying-new-manifest)
 - [Node monitoring tools](#node-monitoring-tools)
-- [RedStone cache layer (RedStone API)](#redstone-cache-layer-redstone-api)
+- [RedStone cache layers (RedStone API)](#redstone-cache-layers-redstone-api)
   - [Implementation](#implementation)
   - [Testing](#testing)
   - [Running your own cache layer](#running-your-own-cache-layer)
@@ -82,6 +85,7 @@
     - [Vote buying](#vote-buying)
     - [Jurors selection](#jurors-selection)
     - [Privacy](#privacy)
+  - [Disputes reasoning](#disputes-reasoning)
 - [Accessing data](#accessing-data)
   - [DeFi protocols](#defi-protocols)
     - [How it works](#how-it-works)
@@ -95,6 +99,11 @@
       - [HTTP Api](#http-api)
       - [NPM module](#npm-module)
   - [Arweave](#arweave)
+- [Use cases for RedStone oracle](#use-cases-for-redstone-oracle)
+  - [Less popular tokens](#less-popular-tokens)
+  - [Advanced financial data](#advanced-financial-data)
+  - [Historical data](#historical-data)
+  - [Other data types](#other-data-types)
 - [Next steps](#next-steps)
 - [Need help?](#need-help)
 
@@ -614,7 +623,7 @@ Most of the administrative operations can be also performed using dedicated user
 List of available data providers loaded from the Arweave:
 ![providers](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-providers.png?raw=true)
 
-Details of the provided data for the selected provider (here RedStone):
+Details of the provided data for the selected provider (selected provider: RedStone):
 ![provider details](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-details.png?raw=true)
 
 Provider's manifests history loaded from the Arweave:
@@ -924,6 +933,36 @@ Example query to fetch RedStone transactions IDs and tags
 ```
 
 You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
+
+## Use cases for RedStone oracle
+Thanks to its scalability, the RedStone protocol creates unlimited possibilities for the DeFi protocols. You can find some common use cases for the RedStone data ecosystem below:
+
+### Less popular tokens
+Less popular tokens face difficulties trying to provide their price data on-chain. It doesn't make an economical sense for today's oracles, because the revenue from the provided data would be lower than its provisioning costs.
+
+RedStone already provides data for more than 1000 different crypto assets. Yet our technology allows to provide even 5 times more data spending just a small part of the other oracle's operating costs.
+
+### Advanced financial data
+Thanks to its scalablity and much lower storage costs, RedStone protocol makes it possible to improve current DeFi protocols using more advanced financial data, like:
+- interest rates
+- volatility
+- liquidity
+- and many more
+
+### Historical data
+Historical data have lower economical value for DeFi protocols than the real-time data. That's why they are not supported by most of today's oracles. Fortunately, the RedStone protocol allows to use them on-chain as well.
+
+### Other data types
+There are unlimited possibilities for the data types that can be provided on-chain through the RedStone protocol, including financial derivatives, voting data, political decisions, climate conditions, sport competition results, and much more.
+
+RedStone-stocks provider is a good example, as it already provides versatile data, including pricing data for:
+- Stocks
+- Currencies
+- ETFs
+- Grains
+- Energies
+- Metals
+- Livestocks
 
 ## Next steps
 
