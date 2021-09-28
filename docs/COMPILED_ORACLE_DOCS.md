@@ -102,23 +102,45 @@
 
 ### Overview
 
-Redstone is a data ecosystem that should deliver fast and accurate financial information in a decentralised fashion.
+RedStone is a data ecosystem that delivers fast and accurate financial information in a decentralised fashion.
 
 #### Problem Statement (Defi Pain points)
 
-- It is very expensive to put all the pricing data on-chain (it cost more than 2m to do it for Ethereum Defi with Chainlink)
-- To reduce costs current providers cover only a small subset of tokens (Chainlink: 79 cryptocurrencies) and have low update frequency (Chainlink: at least 10 minutes)
-- DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like margin lending (which require higher update frequency)
+- It is not sustainable to put all the pricing data into the Ethereum blockchain, as it wasn’t designed for this purpose. Sourcing data becomes enormously expensive with Gas price spikes. On a historically busy day on Ethereum, with a day average 500gwei Gas price, a single transaction may cost above $100, so if we persist every 10m across 30 sources, the daily bill will be more than $400k per one token
+- To reduce costs current providers cover only a small subset of tokens and have low update frequency
+- DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like [margin lending](https://www.nasdaq.com/articles/hodling-coins-is-one-plan-of-action-but-serious-investors-will-look-at-marginal-lending) (which require higher update frequency)
+
+Currently, the most commnly utilised form for Oracle operations is the “two phase approach”:
+1. A contract submits a request for data to an Oracle Service;
+2. An Oracle Service sends back a response with data.
+
+This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
 
 #### Solution
 
+RedStone offers a radically different design of Oracles catering for the needs of modern Defi protocols.
 - Leverage Arweave blockchain as a cheap and permanent storage
 - Use token incentives to motivate data providers to maintain data integrity and the uninterrupted service
 - Use signed meta-transactions to deliver prices on-chain
+- Although the data at RedStone is persisted on the Arweave chain, it could be used with any other blockchain
+
+#### Oracles landscape
+
+Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
+
+|            Name of Project            | Redstone | Chainlink |                    Band Protocol                    |                       DIA                      |          API3          |  Flux   |   Pyth  |
+|:-------------------------------------:|:--------:|:---------:|:---------------------------------------------------:|:----------------------------------------------:|:----------------------:|:-------:|:-------:|
+|       Blockchain of data storage      |  Arweave | Ethereum  |                        Cosmos                       | Database host with oracles on different chains |     DAO on Ethereum    |   NEAR  |  Solana |
+|       Number of assets supported      |   1084   |     79    |                         175                         |                       50                       |         No Info        | No Info | No Info |
+|        Decentralised Governance       |    Yes   |     No    |                         Yes                         |                       No                       |           Yes          |   Yes   |    No   |
+|          Multi-chain support          |    Yes   |    Yes    | Dependent on Cosmos' Inter-Blockchain-Communication |                       No                       | Dependent in Parachain |   Yes   |    No   |
+|           Oracle Aggregator           |    Yes   |     No    |                          No                         |                       Yes                      |           Yes          |   Yes   |    No   |
+| New datafeeds requests from community |    Yes   |     No    |                          No                         |                       No                       |           No           |   Yes   |    No   |
+|      Supporting custom data feeds     |    Yes   |     No    |                          No                         |                       No                       |           No           |    No   |    No   |
 
 ### Top level view
 
-The ecosystem could be divided into 3 main areas:
+RedStone ecosystem could be divided into 3 main areas:
 
 - **Data provision** responsible for fetching the data from external api, transforming to a common format, and persisting collected information.
   - Implemented as → [RedStone Node](https://github.com/redstone-finance/redstone-node)
@@ -885,6 +907,8 @@ Example query to fetch RedStone transactions IDs and tags
 You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
 
 ## Next steps
+
+The RedStone team works on improving and expanding functionalities of our ecosystem. Further development will focus at:
 * **Flexible data format** - supporting multiple types and formats of data instead of simple price values
 * **Virtual nodes** - ability to quickly run data provider service without the need to configure the node infrastructure
 * **Improved aggregation logic** - implementing multiple types of aggregation (e.g. time-weighted avg) based on users needs and empirical findings
@@ -893,7 +917,11 @@ You can learn more about fetching data from the Arweave blockchain at: https://g
 
 ## Need help?
 
-If you have any questions about the technical documentation, please send us a message via:
+This documentation is a living file with constant updates. If you find something unclear, would like to share suggestions or ask questions, join our Discord channel or send us a note via contact form. We're always happy to get feedback and improve our products.
 
 - Discord: https://redstone.finance/discord
 - E-Mail: dev@redstone.finance
+
+Thank you for your trust and choosing RedStone Oracle!
+
+RedStone Team
