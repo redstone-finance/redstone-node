@@ -116,20 +116,27 @@ Currently, the most commnly utilised form for Oracle operations is the “two ph
 
 This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
 
-#### Oracles landscape
-
-Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
-
-Space for Competition analysis
-
-
 #### Solution
 
 RedStone offers a radically different design of Oracles catering for the needs of modern Defi protocols.
 - Leverage Arweave blockchain as a cheap and permanent storage
 - Use token incentives to motivate data providers to maintain data integrity and the uninterrupted service
 - Use signed meta-transactions to deliver prices on-chain
-- Although the data at RedStone is persisted on the Arweave chain, it could be used with any other blockchain  
+- Although the data at RedStone is persisted on the Arweave chain, it could be used with any other blockchain
+
+#### Oracles landscape
+
+Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
+
+|            Name of Project            | Redstone | Chainlink |                    Band Protocol                    |                       DIA                      |          API3          |  Flux   |   Pyth  |
+|:-------------------------------------:|:--------:|:---------:|:---------------------------------------------------:|:----------------------------------------------:|:----------------------:|:-------:|:-------:|
+|       Blockchain of data storage      |  Arweave | Ethereum  |                        Cosmos                       | Database host with oracles on different chains |     DAO on Ethereum    |   NEAR  |  Solana |
+|       Number of assets supported      |   1084   |     79    |                         175                         |                       50                       |         No Info        | No Info | No Info |
+|        Decentralised Governance       |    Yes   |     No    |                         Yes                         |                       No                       |           Yes          |   Yes   |    No   |
+|          Multi-chain support          |    Yes   |    Yes    | Dependent on Cosmos' Inter-Blockchain-Communication |                       No                       | Dependent in Parachain |   Yes   |    No   |
+|           Oracle Aggregator           |    Yes   |     No    |                          No                         |                       Yes                      |           Yes          |   Yes   |    No   |
+| New datafeeds requests from community |    Yes   |     No    |                          No                         |                       No                       |           No           |   Yes   |    No   |
+|      Supporting custom data feeds     |    Yes   |     No    |                          No                         |                       No                       |           No           |    No   |    No   |
 
 ### Top level view
 
