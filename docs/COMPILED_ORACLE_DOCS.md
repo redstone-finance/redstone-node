@@ -611,15 +611,19 @@ This contract:
 Contract is implemented as an Arweave SmartWeave contract and is currently available under `OrO8n453N6bx921wtsEs-0OCImBLCItNU5oSbFKlFuU` address.
 Most of the administrative operations can be also performed using dedicated user interface in [app.redstone.finance](https://app.redstone.finance/#/app/providers).
 
+List of available data providers loaded from the Arweave:
 ![providers](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-providers.png?raw=true)
 
+Details of the provided data for the selected provider (here RedStone):
 ![provider details](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-details.png?raw=true)
 
+Provider's manifests history loaded from the Arweave:
 ![provider manifests](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-manifests.png?raw=true)
 
+UI for the maifest creation and updating:
 ![new manifest](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-new-manifest.png?raw=true)
 
-In order to perform any operation, you need to connect provider's wallet first (using ArConnect Google Chrome extension).
+In order to perform any operation, you need to connect provider's wallet first (using [ArConnect Browser extension](https://arconnect.io/)).
 
 There are also currently two other contracts implemented:
 
@@ -665,11 +669,15 @@ Implemented checkers:
 
 You can find more details about running or extending this monitoring service in the [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring) GitHub repo.
 
-## RedStone cache layer (RedStone API)
+## RedStone cache layers (RedStone API)
+
+The data signed by provider should be broadcasted to multiple cache layers in order to ensure the data accessibility and to keep the whole system more decentralised, stable and resistant to attacks. By default, redstone-node uses a single RedStone API cache layer. However each data provider is able to update the broadcasting logic in their node and enable broadcasting to several cache layers.
+
+The cache layer code is Open Source and can be downloaded from our [GitHub](https://github.com/redstone-finance/redstone-cache-layer). You can find more details about its architecture and the deployment process below.
 
 ### Implementation
 
-The codebase of the Redstone Cache layer is located in the [github.com/redstone-finance/redstone-cache-layer](https://github.com/redstone-finance/redstone-cache-layer) repo. It is a Node.js Express app, which allows to save and query signed data points (currently pricing for assets) in MongoDB.
+RedStone cache layer is a Node.js Express app, which allows to save and query signed data points (currently pricing for assets) in MongoDB.
 
 ### Testing
 
@@ -730,6 +738,9 @@ An appeal submission requires doubling the current challenge fee. It will restar
 
 After the verdict is final the winning party receives a reward which is taken either from a challenger fee or provider deposit. Part of the reward is distributed to the judges. There is also an internal redistribution of tokens among the judges. Those supporting the majority choice get part of the tokens staked on the losing side. The jurors who were on the winning side also increased their voting capacity. The results are persisted on the permaweb and could be used as a base for reputation score for providers, watchers and jurors.
 
+Here is the flowchart showing the dispute flow:
+![dispute flow](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-flow.png?raw=true)
+
 ### Dispute parameters
 
 The list below contains system parameters used to manage the dispute resolution process. The values are based on the similar existing models and simulations, therefore they might require tuning after the deployment in the real-world environment. The update could be managed by decentralised governance in the form of token weighted voting by all the stakeholders.
@@ -780,6 +791,14 @@ Jurors benefit from participating in the judgement, therefore there may be a tou
 #### Privacy
 
 In most of the cases, public voting will be sufficient and the most cost-effective method to judge the dispute. However, in special cases involving high-stake or confidential content, there could be a need for a privacy-preserving process. We could easily extend the voting mechanism implemented by the Tribunal contract to support either a two-phase commit-reveal process or use zero-knowledge proofs of jurors’ decision.
+
+### Disputes reasoning
+RedStone data providers have an obligation to keep the broadcasted data on the Arweave blockchain to guarantee the data accessibility and power the dispute resolution mechanism. The signature that is attached to the broadcasted data allows to prove the data ownership.
+
+Therefore, if there is a data package that is signed by a data provider and not persisted on the Arweave blockchain, a dispute can be raised.
+
+You can see a detailed scheme of a dispute reasoning on the diagram below:
+![dispute reasoning](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-reasoning.png?raw=true)
 
 ## Accessing data
 
