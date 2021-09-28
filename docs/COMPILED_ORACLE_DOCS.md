@@ -106,15 +106,30 @@ RedStone is a data ecosystem that delivers fast and accurate financial informati
 
 #### Problem Statement (Defi Pain points)
 
-- It is not sustainable to put all the pricing data into the Ethereum blockchain, as it wasn’t designed for this purpose. Sourcing data becomes enormously expensive with Gas price spikes
+- It is not sustainable to put all the pricing data into the Ethereum blockchain, as it wasn’t designed for this purpose. Sourcing data becomes enormously expensive with Gas price spikes. On a historically busy day on Ethereum, with a day average 500gwei Gas price, a single transaction may cost above $100, so if we persist every 10m across 30 sources, the daily bill will be more than $400k per one token
 - To reduce costs current providers cover only a small subset of tokens and have low update frequency
 - DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like [margin lending](https://www.nasdaq.com/articles/hodling-coins-is-one-plan-of-action-but-serious-investors-will-look-at-marginal-lending) (which require higher update frequency)
 
+Currently, the most commnly utilised form for Oracle operations is the “two phase approach”:
+1. A contract submits a request for data to an Oracle Service;
+2. An Oracle Service sends back a response with data.
+
+This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
+
+#### Oracles landscape
+
+Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
+
+Space for Competition analysis
+
+
 #### Solution
 
+RedStone offers a radically different design of Oracles catering for the needs of modern Defi protocols.
 - Leverage Arweave blockchain as a cheap and permanent storage
 - Use token incentives to motivate data providers to maintain data integrity and the uninterrupted service
 - Use signed meta-transactions to deliver prices on-chain
+- Although the data at RedStone is persisted on the Arweave chain, it could be used with any other blockchain  
 
 ### Top level view
 
