@@ -129,23 +129,23 @@ RedStone offers a radically different design of Oracles catering for the needs o
 
 #### Oracles landscape
 
-Initially, the most commnly utilised form for Oracle operations were the “two phase approach”:
+Initially, the most commonly utilised form for Oracle operations were the “two phase approach”:
 1. A contract submits a request for data to an Oracle Service;
 2. An Oracle Service sends back a response with data.
 
 This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
 
-Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
+Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle solutions:
 
-|            Name of Project            | Redstone | Chainlink |                    Band Protocol                    |                       DIA                      |          API3          |  Flux   |   Pyth  |
-|:-------------------------------------:|:--------:|:---------:|:---------------------------------------------------:|:----------------------------------------------:|:----------------------:|:-------:|:-------:|
-|       Blockchain of data storage      |  Arweave | Ethereum  |                        Cosmos                       | Database host with oracles on different chains |     DAO on Ethereum    |   NEAR  |  Solana |
-|       Number of assets supported      |   1084   |     79    |                         175                         |                       50                       |         No Info        | No Info | No Info |
-|        Decentralised Governance       |    Yes   |     No    |                         Yes                         |                       No                       |           Yes          |   Yes   |    No   |
-|          Multi-chain support          |    Yes   |    Yes    | Dependent on Cosmos' Inter-Blockchain-Communication |                       No                       | Dependent in Parachain |   Yes   |    No   |
-|           Oracle Aggregator           |    Yes   |     No    |                          No                         |                       Yes                      |           Yes          |   Yes   |    No   |
-| New datafeeds requests from community |    Yes   |     No    |                          No                         |                       No                       |           No           |   Yes   |    No   |
-|      Supporting custom data feeds     |    Yes   |     No    |                          No                         |                       No                       |           No           |    No   |    No   |
+| Name of Project                       | Redstone | Chainlink | Band Protocol                                       | DIA                                            | API3                   | Flux    | Pyth    |
+|---------------------------------------|----------|-----------|-----------------------------------------------------|------------------------------------------------|------------------------|---------|---------|
+| Blockchain of data storage            | Arweave  | Ethereum  | Cosmos                                              | Database host with oracles on different chains | DAO on Ethereum        | NEAR    | Solana  |
+| Number of assets supported            | 1084     | 79        | 175                                                 | 50                                             | No Info                | No Info | No Info |
+| Decentralised Governance              | Yes      | No        | Yes                                                 | No                                             | Yes                    | Yes     | No      |
+| Multi-chain support                   | Yes      | Yes       | Dependent on Cosmos' Inter-Blockchain-Communication | No                                             | Dependent in Parachain | Yes     | No      |
+| Oracle Aggregator                     | Yes      | No        | No                                                  | Yes                                            | Yes                    | Yes     | No      |
+| New datafeeds requests from community | Yes      | No        | No                                                  | No                                             | No                     | Yes     | No      |
+| Supporting custom data feeds          | Yes      | No        | No                                                  | No                                             | No                     | No      | No      |
 
 ### Top level view
 
@@ -202,11 +202,11 @@ The end users who benefit from access to valuable information use tokens to rewa
 
 ##### Staking
 
-Every provider needs to publish a Service Level Agreement describing the scope of data being served, the source of information, and the frequency of updates. In case a provider breach the terms of service, there will be a penalty applied which is also denominated in tokens. In order to assure users that any further claims could be fully covered, providers need to put aside a certain amount of token and lock it for a period of time. These funds are labelled as a stake in the ecosystem and are an important factor for users to select the most reliable provider.
+Every provider needs to publish a Service Level Agreement describing the scope of data being served, the source of information, and the frequency of updates. In case a provider breaches the terms of service, there will be a penalty applied which is also denominated in tokens. In order to assure users that any further claims could be fully covered, providers need to put aside a certain amount of token and lock it for a period of time. These funds are labelled as a stake in the ecosystem and are an important factor for users to select the most reliable provider.
 
 ##### Dispute resolution
 
-Because of the diverse nature of provided information, it will not always be possible to decide if a data was corrupted. Therefore, it will be necessary to have fallback procedure to resolve any disputes about data quality. The process could be facilitated by tokens when juries will be rewarded for voting alongside the majority and punished for supporting a losing side.
+Because of the diverse nature of provided information, it will not always be possible to decide if a data was corrupted. Therefore, it will be necessary to have a fallback procedure to resolve any disputes about data quality. The process could be facilitated by tokens when juries will be rewarded for voting alongside the majority and punished for supporting a losing side.
 
 ##### Bootstrapping market
 
@@ -244,7 +244,7 @@ This component fetches pricing data and makes it available to end users. The pro
 
 ### Codebase structure
 
-Each group of subcomponent implements a generic interface and is inter-changable with other implementations:
+Each group of subcomponent implements a generic interface and is interchangable with other implementations:
 
 - **Fetchers:** connect to external api, fetch the data and transform it to the standard form <em>Examples: coingecko-fetcher, uniswap-fetcher</em>
 - **Aggregators:** take values from multiple sources and aggregate them in a single value <em>Examples: median-aggregator, volume-weighted-aggregator</em>
@@ -257,7 +257,7 @@ You can see a standard flow of the node iteration on the diagram below:
 <br />
 ![node running detailed](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-running-detailed.png?raw=true)
 
-Currently, the price value is aggregated using default `median-aggregator`. It works in the following way:
+Currently, the price value is aggregated using the default `median-aggregator`. It works in the following way:
 <br />
 <br />
 ![median-aggregator](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/median-aggregator.png?raw=true)
@@ -303,7 +303,7 @@ Price tickers are aggregated per provider and timestamp and persisted on the Arw
 
 ##### Transaction data
 
-We encrypt transaction data using [gzip algorithm](https://www.gzip.org/) to minimize transactions cost. We don't store signature for each price on the Arweave blockchain, because each transaction is already signed using default Arweave transaction signer.
+We encrypt transaction data using the [gzip algorithm](https://www.gzip.org/) to minimize transaction cost. We don't store a signature for each price on the Arweave blockchain, because each transaction is already signed using the default Arweave transaction signer.
 
 ```js
 [
@@ -387,7 +387,7 @@ You can find a list of available sources along with its stability details in the
 
 ##### 3. Prepare config file
 
-Config file is a **private** file created by provider. It contains the following details required by the redstone-node:
+Config file is a **private** file created by a provider. It contains the following details required by the redstone-node:
 
 | Param                               | Optionality | Description                                                                                        |
 | ----------------------------------- | :---------: | -------------------------------------------------------------------------------------------------- |
@@ -407,7 +407,7 @@ You should place your config file inside the `.secrets` folder, which is include
 ##### Local run
 
 Please note, the instruction below is for Unix operating systems (like Linux or MacOS).
-If you use Windows, we recommend to run the redstone node in a Docker container.
+If you use Windows, we recommend running the redstone node in a Docker container.
 
 ```bash
 yarn start --config PATH_TO_YOUR_CONFIG
@@ -431,7 +431,7 @@ ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node
 You can run a local redstone-node in docker.
 
 1. Prepare your Dockerfile based on [./Dockerfile](../Dockerfile).
-   Name it `Dockerfile.my-redstone-node` and place in the project root folder.
+   Name it `Dockerfile.my-redstone-node` and place it in the project root folder.
 
 2. Build a docker container with redstone-node
 
@@ -452,7 +452,7 @@ There are 2 main things that your node needs to do:
 ##### 1. Save prices on Arweave
 
 To verify if prices are being saved on Arweave, navigate to [https://viewblock.io/arweave/address/YOUR_ADDRESS.](https://viewblock.io/arweave/address/YOUR_ADDRESS)
-You should see some transactions with tag `app` and value `Redstone` ~20 minutes after the node running.
+You should see some transactions with the tag `app` and value `Redstone` ~20 minutes after the node running.
 
 ##### 2. Broadcast signed prices to the RedStone cache layer (RedStone API)
 
@@ -481,16 +481,16 @@ Production environment automatically enables services, that are not useful in lo
 
 ##### Using environment variables
 
-Environments can be configured using environment variable `MODE`. Set it to `PROD` to run redstone node in production environment or to `LOCAL` to run redstone node locally.
+Environments can be configured using environment variable `MODE`. Set it to `PROD` to run redstone node in the production environment or to `LOCAL` to run redstone node locally.
 
 ##### Other environment variables
 
-- **ENABLE_JSON_LOGS** - set this variable to `true` to enable logging in JSON format. It is recommended to set it to `true` if you run the node in production environment.
-- **PERFORMANCE_TRACKING_LABEL_PREFIX** - human-friendly name that will be appended to the performace tracking labels. (Examples: `main` for `redstone` provider, `stocks` for `redstone-stocks`, `rapid` for `redstone-rapid` provider)
+- **ENABLE_JSON_LOGS** - set this variable to `true` to enable logging in JSON format. It is recommended to set it to `true` if you run the node in the production environment.
+- **PERFORMANCE_TRACKING_LABEL_PREFIX** - human-friendly name that will be appended to the performance tracking labels. (Examples: `main` for `redstone` provider, `stocks` for `redstone-stocks`, `rapid` for `redstone-rapid` provider)
 
 ##### Configure in Docker
 
-Dockerfiles are used to build docker images, which are usually executed in Production environment. To configure production environment `ENV` instruction should be added to a Dockerfile.
+Dockerfiles are used to build docker images, which are usually executed in the Production environment. To configure the production environment, `ENV` instruction should be added to a Dockerfile.
 
 ```dockerfile
 ENV MODE=PROD
@@ -500,7 +500,7 @@ ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
 
 ### Performance tracking
 
-Performance tracking is enabled in production environment and tracks by default all of the most important processes during each nde iteration. Currently we save perofmance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
+Performance tracking is enabled in the production environment and tracks by default all of the most important processes during each node iteration. Currently we save performance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
 
 ![performance chart](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/performance-chart.png?raw=true)
 
@@ -520,7 +520,7 @@ If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value w
 
 ### Testing
 
-We use jest framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules:
+We use the [jest](https://jestjs.io/) framework for automated testing. Test files are located in the `test` folder. We test each fetcher separately (fetchers tests are located in the `test/fetchers` folder). We also have integration tests in the `test/integration` folder and tests for separate modules:
 
 - EvmPriceSigner.spec.ts
 - ManifestParser.spec.ts
@@ -554,7 +554,7 @@ Place the code of your fetcher inside of this folder and update [src/fetchers/in
 
 ###### Implement tests
 
-We strongly recommend to implement tests for your fetcher. It's generaly a good practice and it will help you to avoid silly bugs in your code. You can find examples of tests for other fetchers in the [test/fetchers](../test/fetchers) folder.
+We strongly recommend implementing tests for your fetcher. It's generally a good practice and it will help you to avoid silly bugs in your code. You can find examples of tests for other fetchers in the [test/fetchers](../test/fetchers) folder.
 
 ##### Manifest(s)
 
@@ -581,7 +581,7 @@ Sources config file is used in the RedStone web app. If you want your source to 
 
 #### Add new asset
 
-Tokens config file, which is located in `src/config/tokens.json`, is used in RedStone web app and `redstone-api`. If you want your token to be accessible through `redstone-api` npm module you should add it to the config.
+Tokens config file, which is located in `src/config/tokens.json`, is used in the RedStone web app and `redstone-api`. If you want your token to be accessible through  the `redstone-api` npm module you should add it to the config.
 
 ##### How to add a token
 
@@ -618,7 +618,7 @@ This contract:
 6. Allows configuring provider's admin accounts (i.e. account that are allowed to change provider's manifest and meta-data).
 
 Contract is implemented as an Arweave SmartWeave contract and is currently available under `OrO8n453N6bx921wtsEs-0OCImBLCItNU5oSbFKlFuU` address.
-Most of the administrative operations can be also performed using dedicated user interface in [app.redstone.finance](https://app.redstone.finance/#/app/providers).
+Most of the administrative operations can be also performed using a dedicated user interface in [app.redstone.finance](https://app.redstone.finance/#/app/providers).
 
 List of available data providers loaded from the Arweave:
 ![providers](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-providers.png?raw=true)
@@ -629,15 +629,15 @@ Details of the provided data for the selected provider (selected provider: RedSt
 Provider's manifests history loaded from the Arweave:
 ![provider manifests](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-manifests.png?raw=true)
 
-UI for the maifest creation and updating:
+UI for the manifest creation and updating:
 ![new manifest](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-new-manifest.png?raw=true)
 
-In order to perform any operation, you need to connect provider's wallet first (using [ArConnect Browser extension](https://arconnect.io/)).
+In order to perform any operation, you need to connect the provider's wallet first (using [ArConnect Browser extension](https://arconnect.io/)).
 
 There are also currently two other contracts implemented:
 
 1. [contracts-registry](https://github.com/redstone-finance/redstone-smartweave-contracts/blob/main/src/contracts-registry/contracts-registry.contract.ts) contract - this contract keeps track of all the RedStone's SmartWeave contracts
-   and allows to abstract given contract's logical name from its current Arweave tx address.
+   and allows to abstract a given contract's logical name from its current Arweave tx address.
    It also allows versioning of the contracts.
    We also post the Arweave transaction id of the contract [here](https://raw.githubusercontent.com/redstone-finance/redstone-smartweave-contracts/main/contracts-registry.address.txt) to make web integrations easier.
 2. [token](https://github.com/redstone-finance/redstone-smartweave-contracts/blob/main/src/token/token.contract.ts) contract - this a work-in-progress of a RedStone Token contract, which is an implementation of a Profit Sharing Token with additional features - like
@@ -662,7 +662,7 @@ That's why we've implemented a special app [redstone-node-monitoring](https://gi
 
 ![node monitoring](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-monitoring.png?raw=true)
 
-**Checker** - a module responsible for data intergtity checking. It can check the number of saved data points during last 5 minutes or the timestamp of the latest saved data point.
+**Checker** - a module responsible for data integrity checking. It can check the number of saved data points during the last 5 minutes or the timestamp of the latest saved data point.
 
 Implemented checkers:
 
@@ -680,13 +680,13 @@ You can find more details about running or extending this monitoring service in 
 
 ## RedStone cache layers (RedStone API)
 
-The data signed by provider should be broadcasted to multiple cache layers in order to ensure the data accessibility and to keep the whole system more decentralised, stable and resistant to attacks. By default, redstone-node uses a single RedStone API cache layer. However each data provider is able to update the broadcasting logic in their node and enable broadcasting to several cache layers.
+The data signed by a provider should be broadcasted to multiple cache layers in order to ensure the data accessibility and to keep the whole system more decentralised, stable and resistant to attacks. By default, redstone-node uses a single RedStone API cache layer. However each data provider is able to update the broadcasting logic in their node and enable broadcasting to several cache layers.
 
 The cache layer code is Open Source and can be downloaded from our [GitHub](https://github.com/redstone-finance/redstone-cache-layer). You can find more details about its architecture and the deployment process below.
 
 ### Implementation
 
-RedStone cache layer is a Node.js Express app, which allows to save and query signed data points (currently pricing for assets) in MongoDB.
+RedStone cache layer is a Node.js Express app, which allows users to save and query signed data points (currently pricing for assets) in MongoDB.
 
 ### Testing
 
@@ -702,7 +702,7 @@ yarn test
 
 ### Running your own cache layer
 
-We run our instance of the cache layer on AWS. However, it can be deployed on GCP, Azure, Heroku or any other service. You should set up a mongoDB instance (the simplest way to do this is using [Mongo Atlas](https://www.mongodb.com/cloud)). Then you should place .secrets.json file into the root folder of the repo and run the app using `yarn dev` command.
+We run our instance of the cache layer on AWS. However, it can be deployed on GCP, Azure, Heroku or any other service. You should set up a mongoDB instance (the simplest way to do this is using [Mongo Atlas](https://www.mongodb.com/cloud)). Then you should place .secrets.json file into the root folder of the repo and run the app using the `yarn dev` command.
 
 ## ArGue - Dispute resolution protocol [to be implemented]
 
@@ -716,7 +716,7 @@ The majority rule is the most common strategy for reaching coordination in a dec
 
 One of the adaptations of this idea was drafted by Vitalik Buterin in 2014 as a Schelling Coin concept. It was also proposed as an architecture for the Ethereum Price Feeds: “For financial contracts for difference, it may actually be possible to decentralize the data feed via a protocol called SchellingCoin” (from the Ethereum whitepaper). However, the network congestion, high gas price and the extreme storage cost of the Ethereum Virtual Machine rendered the solution impractical at the current level of technology.
 
-New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement voting while maintaining the high quality of decisions. Hopefully, [the recent simulations](https://github.com/alice-si/TcrSimulation.jl) done by the Redstone team prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see [the simulations of TCR-based decision model](https://github.com/alice-si/TcrSimulation.jl) presented during EdCon Paris 2019).
+New generations of blockchains like Arweave could finally make the implementation of Schelling-point based algorithms economically feasible due to the cheaper storage and low contracts execution cost. The challenging part is setting the system parameters to keep the user friction as low as possible and reduce the voting requirement while maintaining the high quality of decisions. Hopefully, [the recent simulations](https://github.com/alice-si/TcrSimulation.jl) done by the Redstone team prove that even a small percentage of expert jurors could produce high-quality results when the incentives are properly set up (see [the simulations of TCR-based decision model](https://github.com/alice-si/TcrSimulation.jl) presented during EdCon Paris 2019).
 
 ### Dispute process
 
@@ -813,7 +813,7 @@ You can see a detailed scheme of a dispute reasoning on the diagram below:
 
 ### DeFi protocols
 
-Putting data directly into storage is the easiest to make information accessible to smart contracts. However, the convenience comes at a high price, as the storage access is the most costly operation in [EVM](https://ethereum.github.io/yellowpaper/paper.pdf) (20k gas for 256bit word ~ $160k for 1Mb checked 30/08/2021) making it prohibitively expensive to use.
+Putting data directly into storage is the easiest way to make information accessible to smart contracts. However, the convenience comes at a high price, as the storage access is the most costly operation in [EVM](https://ethereum.github.io/yellowpaper/paper.pdf) (20k gas for 256bit word ~ $160k for 1Mb checked 30/08/2021) making it prohibitively expensive to use.
 
 `redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (**on-demand fetching**). Until that moment, the data remains available in the [Arweave](https://www.arweave.org/) blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a [meta-transaction pattern](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84) and the information integrity is verified on-chain through signature checking.
 
@@ -850,7 +850,7 @@ We work hard to optimise the code using solidity assembly and reduce the gas cos
 
 #### Usage
 
-The `redstone-flash-storage` tool can be installed from the NPM regstry:
+The `redstone-flash-storage` tool can be installed from the NPM registry:
 
 ```bash
 # using npm
@@ -906,7 +906,7 @@ You can find much more details and API documentation using the links below:
 
 You can fetch all the data provided by RedStone providers directly from the Arweave blockchain using its graphql endpoint: https://arweave.net/graphql.
 
-Please keep in mind that you should decompress the transaction data using `gzip` algorithm after fetching.
+Please keep in mind that you should decompress the transaction data using the `gzip` algorithm after fetching.
 
 Example query to fetch RedStone transactions IDs and tags
 
@@ -939,15 +939,15 @@ Example query to fetch RedStone transactions IDs and tags
 You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
 
 ## Use cases for RedStone oracle
-Thanks to its scalability, the RedStone protocol creates unlimited possibilities for the DeFi protocols. You can find some common use cases for the RedStone data ecosystem below:
+Thanks to its scalability, the RedStone protocol creates unlimited possibilities for the DeFi protocols. You can find some common use cases for the RedStone data ecosystem below.
 
 ### Less popular tokens
-Less popular tokens face difficulties trying to provide their price data on-chain. It doesn't make an economical sense for today's oracles, because the revenue from the provided data would be lower than its provisioning costs.
+Less popular tokens face difficulties trying to provide their price data on-chain. It doesn't make an economical sense for today's oracles, because the revenue from the provided data would be lower than its providing costs.
 
 RedStone already provides data for more than 1000 different crypto assets. Yet our technology allows to provide even 5 times more data spending just a small part of the other oracle's operating costs.
 
 ### Advanced financial data
-Thanks to its scalablity and much lower storage costs, RedStone protocol makes it possible to improve current DeFi protocols using more advanced financial data, like:
+Thanks to its scalability and much lower storage costs, RedStone protocol makes it possible to improve current DeFi protocols using more advanced financial data, like:
 - interest rates
 - volatility
 - liquidity
