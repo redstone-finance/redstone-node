@@ -893,7 +893,10 @@ You can learn more about fetching data from the Arweave blockchain at: https://g
 
 ## Need help?
 
-If you have any questions about the technical documentation, please send us a message via:
+This documentation is a living file with constant updates. If you find something unclear, would like to share suggestions or ask questions, join our Discord channel or send us a note via contact form. We're always happy to get feedback and improve our products.
 
 - Discord: https://redstone.finance/discord
 - E-Mail: dev@redstone.finance
+
+Thank you for your trust and choosing RedStone Oracle!
+RedStone Team
