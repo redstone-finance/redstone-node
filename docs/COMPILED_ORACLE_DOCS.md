@@ -102,13 +102,13 @@
 
 ### Overview
 
-Redstone is a data ecosystem that should deliver fast and accurate financial information in a decentralised fashion.
+RedStone is a data ecosystem that delivers fast and accurate financial information in a decentralised fashion.
 
 #### Problem Statement (Defi Pain points)
 
-- It is very expensive to put all the pricing data on-chain (it cost more than 2m to do it for Ethereum Defi with Chainlink)
-- To reduce costs current providers cover only a small subset of tokens (Chainlink: 79 cryptocurrencies) and have low update frequency (Chainlink: at least 10 minutes)
-- DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like margin lending (which require higher update frequency)
+- It is not sustainable to put all the pricing data into the Ethereum blockchain, as it wasn’t designed for this purpose. Sourcing data becomes enormously expensive with Gas price spikes
+- To reduce costs current providers cover only a small subset of tokens and have low update frequency
+- DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like [margin lending](https://www.nasdaq.com/articles/hodling-coins-is-one-plan-of-action-but-serious-investors-will-look-at-marginal-lending) (which require higher update frequency)
 
 #### Solution
 
@@ -118,7 +118,7 @@ Redstone is a data ecosystem that should deliver fast and accurate financial inf
 
 ### Top level view
 
-The ecosystem could be divided into 3 main areas:
+RedStone ecosystem could be divided into 3 main areas:
 
 - **Data provision** responsible for fetching the data from external api, transforming to a common format, and persisting collected information.
   - Implemented as → [RedStone Node](https://github.com/redstone-finance/redstone-node)
@@ -885,6 +885,8 @@ Example query to fetch RedStone transactions IDs and tags
 You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
 
 ## Next steps
+
+The RedStone team works on improving and expanding functionalities of our ecosystem. Further development will focus at:
 * **Flexible data format** - supporting multiple types and formats of data instead of simple price values
 * **Virtual nodes** - ability to quickly run data provider service without the need to configure the node infrastructure
 * **Improved aggregation logic** - implementing multiple types of aggregation (e.g. time-weighted avg) based on users needs and empirical findings
@@ -899,4 +901,5 @@ This documentation is a living file with constant updates. If you find something
 - E-Mail: dev@redstone.finance
 
 Thank you for your trust and choosing RedStone Oracle!
+
 RedStone Team
