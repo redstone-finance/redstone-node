@@ -110,12 +110,6 @@ RedStone is a data ecosystem that delivers fast and accurate financial informati
 - To reduce costs current providers cover only a small subset of tokens and have low update frequency
 - DeFi protocols cannot expand beyond a small set of assets and cannot offer advanced solutions like [margin lending](https://www.nasdaq.com/articles/hodling-coins-is-one-plan-of-action-but-serious-investors-will-look-at-marginal-lending) (which require higher update frequency)
 
-Currently, the most commnly utilised form for Oracle operations is the “two phase approach”:
-1. A contract submits a request for data to an Oracle Service;
-2. An Oracle Service sends back a response with data.
-
-This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
-
 #### Solution
 
 RedStone offers a radically different design of Oracles catering for the needs of modern Defi protocols.
@@ -125,6 +119,12 @@ RedStone offers a radically different design of Oracles catering for the needs o
 - Although the data at RedStone is persisted on the Arweave chain, it could be used with any other blockchain
 
 #### Oracles landscape
+
+Initially, the most commnly utilised form for Oracle operations were the “two phase approach”:
+1. A contract submits a request for data to an Oracle Service;
+2. An Oracle Service sends back a response with data.
+
+This simple and flexible solution was pioneered by Oraclize (now Provable) and Chainlink as Basic Request Pattern, but the main disadvantage to this approach is that the contract cannot access data immediately as it requires two separate transactions. Such design kills usability as the client needs to wait until the data comes to contract to see a result of an action. An even bigger problem is that fetching data is not atomic (meaning not in a single transaction) which means that synchronizing multiple contracts is complex, slow and ultimately kills interoperability.
 
 Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle soltions:
 
