@@ -164,7 +164,7 @@ RedStone ecosystem could be divided into 3 main areas:
 
 ### Modules
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-system-architecture.png?raw=true" style="max-height: 600px" />
+<img alt="redstone-system-architecture" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-system-architecture.png?raw=true" width="800" />
 
 #### External integrations (blue)
 
@@ -212,7 +212,7 @@ Because of the diverse nature of provided information, it will not always be pos
 
 At the early stage of development, the token could be distributed to providers to reward their availability and bootstrap the market before there is enough demand coming for data users.
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-token-design.png?raw=true" style="max-height: 600px" />
+<img alt="redstone-token-design" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-token-design.png?raw=true" style="max-height: 600px" />
 
 ## RedStone Node
 
