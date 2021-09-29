@@ -212,7 +212,7 @@ Because of the diverse nature of provided information, it will not always be pos
 
 At the early stage of development, the token could be distributed to providers to reward their availability and bootstrap the market before there is enough demand coming for data users.
 
-<img alt="redstone-token-design" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-token-design.png?raw=true" style="max-height: 600px" />
+<img alt="redstone-token-design" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-token-design.png?raw=true" width="600" />
 
 ## RedStone Node
 
@@ -240,7 +240,7 @@ This component fetches pricing data and makes it available to end users. The pro
 - **Data broadcasting** - publishing the data on publically available message board (like public firebase store)
 - **Data persistence** - securing packaged data on the Arweave blockchain
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-node.png?raw=true" style="max-height: 600px" />
+<img alt="redstone-node" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-node.png?raw=true" width="400" />
 
 ### Codebase structure
 
@@ -256,13 +256,13 @@ You can see a standard flow of the node iteration on the diagram below:
 <br />
 <br />
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-running-detailed.png?raw=true" style="max-height: 600px" />
+<img alt="node-running-detailed" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-running-detailed.png?raw=true" width="400" />
 
 Currently, the price value is aggregated using the default `median-aggregator`. It works in the following way:
 <br />
 <br />
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/median-aggregator.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/median-aggregator.png?raw=true" width="400" />
 
 ### Data format
 
@@ -385,7 +385,7 @@ Here is the structure of the manifest file:
 
 You can find a list of available sources along with its stability details in the RedStone Web app: [app.redstone.finance/#/app/sources.](https://app.redstone.finance/#/app/sources)
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/sources-screenshot.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/sources-screenshot.png?raw=true" width="800" />
 
 ##### 3. Prepare config file
 
@@ -504,7 +504,7 @@ ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
 
 Performance tracking is enabled in the production environment and tracks by default all of the most important processes during each node iteration. Currently we save performance data in AWS cloudwatch, where it can be analysed using convenient chart tool:
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/performance-chart.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/performance-chart.png?raw=true" />
 
 We track performance for the following processes:
 
@@ -623,16 +623,16 @@ Contract is implemented as an Arweave SmartWeave contract and is currently avail
 Most of the administrative operations can be also performed using a dedicated user interface in [app.redstone.finance](https://app.redstone.finance/#/app/providers).
 
 List of available data providers loaded from the Arweave:
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-providers.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-providers.png?raw=true" width="800" />
 
 Details of the provided data for the selected provider (selected provider: RedStone):
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-details.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-details.png?raw=true" width="800" />
 
 Provider's manifests history loaded from the Arweave:
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-manifests.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-provider-manifests.png?raw=true" width="800" />
 
 UI for the manifest creation and updating:
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-new-manifest.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-new-manifest.png?raw=true" width="800" />
 
 In order to perform any operation, you need to connect the provider's wallet first (using [ArConnect Browser extension](https://arconnect.io/)).
 
@@ -662,7 +662,7 @@ So, the node operators need to monitor their nodes and immediately fix any poten
 
 That's why we've implemented a special app [redstone-node-monitoring](https://github.com/redstone-finance/redstone-node-monitoring), which is executed in a loop and automatically verifies if a selected node regularly publishes new data to the RedStone cache layer and the Arweave blockchain. In each loop iteration multiple checkers are executed. And if any of these checkers fail then the error is reported.
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-monitoring.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-monitoring.png?raw=true" width="600" />
 
 **Checker** - a module responsible for data integrity checking. It can check the number of saved data points during the last 5 minutes or the timestamp of the latest saved data point.
 
@@ -750,7 +750,8 @@ An appeal submission requires doubling the current challenge fee. It will restar
 After the verdict is final the winning party receives a reward which is taken either from a challenger fee or provider deposit. Part of the reward is distributed to the judges. There is also an internal redistribution of tokens among the judges. Those supporting the majority choice get part of the tokens staked on the losing side. The jurors who were on the winning side also increased their voting capacity. The results are persisted on the permaweb and could be used as a base for reputation score for providers, watchers and jurors.
 
 Here is the flowchart showing the dispute flow:
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-flow.png?raw=true" style="max-height: 600px" />
+
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-flow.png?raw=true" width="400" />
 
 ### Dispute parameters
 
@@ -771,7 +772,7 @@ The list below contains system parameters used to manage the dispute resolution 
 
 The diagram below presents smart-contracts with their connections and descriptions below.
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-resolution.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-resolution.png?raw=true" width="800" />
 
 **Tribunal** - a master contract orchestrating the dispute process and linking all the dependent components
 
@@ -809,7 +810,7 @@ RedStone data providers have an obligation to keep the broadcasted data on the A
 Therefore, if there is a data package that is signed by a data provider and not persisted on the Arweave blockchain, a dispute can be raised.
 
 You can see a detailed scheme of a dispute reasoning on the diagram below:
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-reasoning.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/dispute-reasoning.png?raw=true" width="600" />
 
 ## Accessing data
 
@@ -822,14 +823,14 @@ Putting data directly into storage is the easiest way to make information access
 #### How it works
 At a top level, transferring data to an EVM environment requires packing an extra payload to a user's transaction and processing the message on-chain.
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-flowchart.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-flowchart.png?raw=true" />
 
 ##### Data packing (off-chain data encoding)
 
 1. Relevant data needs to be fetched from the RedStone api
 2. Data is packed into a message according to the following structure
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-data-structure.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-data-structure.png?raw=true" />
 
 3. The package is appended to the original transaction message, signed and submitted to the network
 
@@ -848,7 +849,7 @@ At a top level, transferring data to an EVM environment requires packing an extr
 
 We work hard to optimise the code using solidity assembly and reduce the gas costs of our contracts. Below there is a comparison of the read operation gas costs using the most popular Chainlink Reference Data, the standard version of Redstone PriceAware contract and the optimised version where provider address is inlined at the compilation time. The [scripts](https://github.com/redstone-finance/redstone-flash-storage/tree/price-aware/scripts) which generated the data together with [results](https://github.com/redstone-finance/redstone-flash-storage/blob/price-aware/benchmarks.txt) and transactions details could be found in our repository.
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-competitors.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-competitors.png?raw=true" />
 
 
 #### Usage
@@ -871,9 +872,9 @@ You can find more details and documentation in its GitHub repo: [github.com/reds
 
 Data provided by current RedStone providers is accessible in the RedStone web app: [app.redstone.finance](https://app.redstone.finance).
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-tokens.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-tokens.png?raw=true" width="800" />
 
-<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-price-chart.png?raw=true" style="max-height: 600px" />
+<img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-price-chart.png?raw=true" width="800" />
 
 #### RedStone API
 
