@@ -255,11 +255,13 @@ Each group of subcomponent implements a generic interface and is interchangable 
 You can see a standard flow of the node iteration on the diagram below:
 <br />
 <br />
+
 ![node running detailed](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/node-running-detailed.png?raw=true)
 
 Currently, the price value is aggregated using the default `median-aggregator`. It works in the following way:
 <br />
 <br />
+
 ![median-aggregator](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/median-aggregator.png?raw=true)
 
 ### Data format
@@ -820,14 +822,14 @@ Putting data directly into storage is the easiest way to make information access
 #### How it works
 At a top level, transferring data to an EVM environment requires packing an extra payload to a user's transaction and processing the message on-chain.
 
-[![image.png](https://i.postimg.cc/5NZSqtFT/image.png)](https://postimg.cc/xc3m9n53)
+![redstone flash storage flowchart](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-flowchart.png?raw=true)
 
 ##### Data packing (off-chain data encoding)
 
 1. Relevant data needs to be fetched from the RedStone api
 2. Data is packed into a message according to the following structure
 
-[![image.png](https://i.postimg.cc/SRgRHHF1/image.png?raw=true)](https://postimg.cc/jnJR7gjy)
+![redstone flash storage data structure](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-data-structure.png?raw=true)
 
 3. The package is appended to the original transaction message, signed and submitted to the network
 
@@ -846,7 +848,8 @@ At a top level, transferring data to an EVM environment requires packing an extr
 
 We work hard to optimise the code using solidity assembly and reduce the gas costs of our contracts. Below there is a comparison of the read operation gas costs using the most popular Chainlink Reference Data, the standard version of Redstone PriceAware contract and the optimised version where provider address is inlined at the compilation time. The [scripts](https://github.com/redstone-finance/redstone-flash-storage/tree/price-aware/scripts) which generated the data together with [results](https://github.com/redstone-finance/redstone-flash-storage/blob/price-aware/benchmarks.txt) and transactions details could be found in our repository.
 
-[![Screenshot-2021-09-05-at-17-18-25.png](https://i.postimg.cc/CK14BQTC/Screenshot-2021-09-05-at-17-18-25.png?raw=true)](https://postimg.cc/NK3XZb0L)
+![redstone flash storage competitors](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-competitors.png?raw=true)
+
 
 #### Usage
 
@@ -868,9 +871,9 @@ You can find more details and documentation in its GitHub repo: [github.com/reds
 
 Data provided by current RedStone providers is accessible in the RedStone web app: [app.redstone.finance](https://app.redstone.finance).
 
-![redstone app screenshot tokens](img/redstone-app-screenshot-tokens.png?raw=true)
+![redstone app screenshot tokens](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-tokens.png?raw=true)
 
-![redstone app screenshot price chart](img/redstone-app-screenshot-price-chart.png?raw=true)
+![redstone app screenshot price chart](https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-app-screenshot-price-chart.png?raw=true)
 
 #### RedStone API
 
