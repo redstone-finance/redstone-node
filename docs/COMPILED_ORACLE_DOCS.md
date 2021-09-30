@@ -1,9 +1,5 @@
 # RedStone oracle technical doc
 
-# Table of contents
-
-# Table of contents
-
 - [RedStone oracle technical doc](#redstone-oracle-technical-doc)
 - [Table of contents](#table-of-contents)
   - [Introduction](#introduction)
