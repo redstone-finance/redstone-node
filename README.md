@@ -1,6 +1,8 @@
 # RedStone Node
 
-RedStone Node is a core module in the [RedStone ecosystem](docs/REDSTONE_ECOSYSTEM.md), which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
+RedStone Node is a core module in the [RedStone ecosystem](docs/COMPILED_ORACLE_DOCS.md), which is responsible for fetching data from different sources and broadcasting it to the Arweave blockchain and the RedStone cache layer.
+
+You can check the compiled oracle documentation [here.](docs/COMPILED_ORACLE_DOCS.md)
 
 ## 📖 Main concepts
 | Concept | Description |
