@@ -6,6 +6,22 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "ETH": {
+      "source": [
+        "binance",
+        "coinbase",
+        "coingecko",
+        "kraken",
+        "coinex",
+        "currencycom",
+        "delta",
+        "exx",
+        "ftx",
+        "huobipro",
+        "okex5"
+      ]
+    },
+
     "TSLA": {},
     "AAPL": {},
     "IBM": {},
