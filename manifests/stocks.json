@@ -22,6 +22,16 @@
       ]
     },
 
+    "CELO": {
+      "source": [
+        "binance",
+        "bittrex",
+        "kucoin",
+        "okcoin",
+        "okex5"
+      ]
+    },
+
     "TSLA": {},
     "AAPL": {},
     "IBM": {},
