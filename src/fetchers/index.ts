@@ -7,6 +7,7 @@ import { TraderJoeFetcher } from "./trader-joe/TraderJoeFetcher";
 import { CoingeckoFetcher } from "./coingecko/CoingeckoFetcher";
 import { SushiswapFetcher } from "./sushiswap/SushiswapFetcher";
 import { CoinbaseFetcher } from "./coinbase/CoinbaseFetcher";
+import { OddsApiFetcher } from "./odds-api/OddsApiFetcher";
 import { UniswapFetcher } from "./uniswap/UniswapFetcher";
 import { KyberFetcher } from "./kyber/KyberFetcher";
 import { VertoFetcher } from "./verto/VertoFetcher";
@@ -16,6 +17,7 @@ export default {
   "api-dojo-rapid": new ApiDojoRapidFetcher(),
   "yf-unofficial": new YfUnofficialFetcher(),
   "trader-joe": new TraderJoeFetcher(),
+  "odds-api": new OddsApiFetcher(),
   coingecko: new CoingeckoFetcher(),
   sushiswap: new SushiswapFetcher(),
   coinbase: new CoinbaseFetcher(),

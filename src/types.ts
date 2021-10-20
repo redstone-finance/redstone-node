@@ -21,6 +21,7 @@ export interface Credentials {
   barchartUsername?: string;
   barchartPassword?: string;
   yahooFinanceRapidApiKey?: string;
+  theOddsApiKey?: string;
 };
 
 export interface TokenConfig {

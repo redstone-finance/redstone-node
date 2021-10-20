@@ -1,0 +1,668 @@
+{
+  "interval": 3600000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "odds-api"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 100,
+  "evmChainId": 1,
+  "tokens": {
+    "nnWhu8FHPxVOsWlp0GhN2HUNvlCzR/": {
+      "metadata": {
+        "commence_time": "2021-10-23T17:30:00Z",
+        "home_team": "Randa Markos",
+        "away_team": "Livia Renata Souza",
+        "outcome": "Randa Markos"
+      }
+    },
+    "wyOvWDNDpdT4cqrWml3DSXq4UiCQxD": {
+      "metadata": {
+        "commence_time": "2021-10-23T17:30:00Z",
+        "home_team": "Randa Markos",
+        "away_team": "Livia Renata Souza",
+        "outcome": "Livia Renata Souza"
+      }
+    },
+    "UqDNWk1TB5i4wPJv1FZcl/ZbH+abKB": {
+      "metadata": {
+        "commence_time": "2021-10-23T18:10:00Z",
+        "home_team": "Khama Worthy",
+        "away_team": "Jai Herbert",
+        "outcome": "Khama Worthy"
+      }
+    },
+    "mdloinv8Krf0VREmMN0jo/D21IEber": {
+      "metadata": {
+        "commence_time": "2021-10-23T18:10:00Z",
+        "home_team": "Khama Worthy",
+        "away_team": "Jai Herbert",
+        "outcome": "Jai Herbert"
+      }
+    },
+    "/EHCkhmEozRZtjKZXq1+fOrL6I85fo": {
+      "metadata": {
+        "commence_time": "2021-10-23T18:30:00Z",
+        "home_team": "Laureano Staropoli",
+        "away_team": "Jamie Pickett",
+        "outcome": "Laureano Staropoli"
+      }
+    },
+    "P1NOOQQQGiK8pQVCdnPbudNTASnFwu": {
+      "metadata": {
+        "commence_time": "2021-10-23T18:30:00Z",
+        "home_team": "Laureano Staropoli",
+        "away_team": "Jamie Pickett",
+        "outcome": "Jamie Pickett"
+      }
+    },
+    "jGFUk8xXgWzVv/iJjR2yUfDmIqwV9R": {
+      "metadata": {
+        "commence_time": "2021-10-23T20:15:00Z",
+        "home_team": "Nicolae Negumereanu",
+        "away_team": "Ike Villanueva",
+        "outcome": "Nicolae Negumereanu"
+      }
+    },
+    "uU4cc0Snd0GqiM5N4rEKGAi64Ay5wP": {
+      "metadata": {
+        "commence_time": "2021-10-23T20:15:00Z",
+        "home_team": "Nicolae Negumereanu",
+        "away_team": "Ike Villanueva",
+        "outcome": "Ike Villanueva"
+      }
+    },
+    "zmb/Sb4y0Ut+ebSMEBZDMbGPbnded5": {
+      "metadata": {
+        "commence_time": "2021-10-23T20:45:00Z",
+        "home_team": "Francisco Trinaldo",
+        "away_team": "Dwight Grant",
+        "outcome": "Francisco Trinaldo"
+      }
+    },
+    "K2qt4zIczyIdFctmrR19y67rSo6PtM": {
+      "metadata": {
+        "commence_time": "2021-10-23T20:45:00Z",
+        "home_team": "Francisco Trinaldo",
+        "away_team": "Dwight Grant",
+        "outcome": "Dwight Grant"
+      }
+    },
+    "aI6B7Ko+9hqaXXW+cLPQKEC2qFZZcR": {
+      "metadata": {
+        "commence_time": "2021-10-23T21:15:00Z",
+        "home_team": "Seung-Woo Choi",
+        "away_team": "Alex Caceres",
+        "outcome": "Seung-Woo Choi"
+      }
+    },
+    "nSs83cqeiPJdlJ5OF4tQ4aBNMOB+1R": {
+      "metadata": {
+        "commence_time": "2021-10-23T21:15:00Z",
+        "home_team": "Seung-Woo Choi",
+        "away_team": "Alex Caceres",
+        "outcome": "Alex Caceres"
+      }
+    },
+    "6RrfVZbAxCw/JIszKKKdEwaY2Tqk32": {
+      "metadata": {
+        "commence_time": "2021-10-23T21:45:00Z",
+        "home_team": "Joselyne Edwards",
+        "away_team": "Jessy-Rose Clark",
+        "outcome": "Joselyne Edwards"
+      }
+    },
+    "ipm/lY2gGHeHIzZ5NtTnOTULr8+qUG": {
+      "metadata": {
+        "commence_time": "2021-10-23T21:45:00Z",
+        "home_team": "Joselyne Edwards",
+        "away_team": "Jessy-Rose Clark",
+        "outcome": "Jessy-Rose Clark"
+      }
+    },
+    "AXOhG7qUAmFFdSdgGhg+9apirhXfsY": {
+      "metadata": {
+        "commence_time": "2021-10-23T22:15:00Z",
+        "home_team": "Rick Glenn",
+        "away_team": "Grant Dawson",
+        "outcome": "Rick Glenn"
+      }
+    },
+    "ic78b4rmczfQjqVLFfWhFf0ecO++nZ": {
+      "metadata": {
+        "commence_time": "2021-10-23T22:15:00Z",
+        "home_team": "Rick Glenn",
+        "away_team": "Grant Dawson",
+        "outcome": "Grant Dawson"
+      }
+    },
+    "guMEivwJ1E3yR/rL48iaAQfMEFuBcj": {
+      "metadata": {
+        "commence_time": "2021-10-23T23:00:00Z",
+        "home_team": "Marvin Vettori",
+        "away_team": "Paulo Henrique Costa",
+        "outcome": "Marvin Vettori"
+      }
+    },
+    "cXkyR0ShOhJOZVKAjBBFgVijwE5FPg": {
+      "metadata": {
+        "commence_time": "2021-10-23T23:00:00Z",
+        "home_team": "Marvin Vettori",
+        "away_team": "Paulo Henrique Costa",
+        "outcome": "Paulo Henrique Costa"
+      }
+    },
+    "OnXzQzL+TKEet1fK7G7hfyd9jrbQUl": {
+      "metadata": {
+        "commence_time": "2021-10-30T15:00:00Z",
+        "home_team": "Magomed Mustafaev",
+        "away_team": "Damir Ismagulov",
+        "outcome": "Magomed Mustafaev"
+      }
+    },
+    "PP4o4IoTM2GREqh3qmQ6Uu1dI4ksNj": {
+      "metadata": {
+        "commence_time": "2021-10-30T15:00:00Z",
+        "home_team": "Magomed Mustafaev",
+        "away_team": "Damir Ismagulov",
+        "outcome": "Damir Ismagulov"
+      }
+    },
+    "xC5QSZueJN4HjPzQYZ/J4ex6AonJIV": {
+      "metadata": {
+        "commence_time": "2021-10-30T15:40:00Z",
+        "home_team": "Makwan Amirkhani",
+        "away_team": "Lerone Murphy",
+        "outcome": "Makwan Amirkhani"
+      }
+    },
+    "h0SpN4sXgjLPl5blIxSb7Cjv6i66L9": {
+      "metadata": {
+        "commence_time": "2021-10-30T15:40:00Z",
+        "home_team": "Makwan Amirkhani",
+        "away_team": "Lerone Murphy",
+        "outcome": "Lerone Murphy"
+      }
+    },
+    "lVjUeq7eZq2SpXumQh0YMsVQVmlhNI": {
+      "metadata": {
+        "commence_time": "2021-10-30T16:00:00Z",
+        "home_team": "Shamil Gamzatov",
+        "away_team": "Michal Oleksiejczuk",
+        "outcome": "Shamil Gamzatov"
+      }
+    },
+    "wbRCef/9EvXsoPAvaoPdAj6p3DHkvQ": {
+      "metadata": {
+        "commence_time": "2021-10-30T16:00:00Z",
+        "home_team": "Shamil Gamzatov",
+        "away_team": "Michal Oleksiejczuk",
+        "outcome": "Michal Oleksiejczuk"
+      }
+    },
+    "3rIjj6e54XQkZsNwgBv1t3tUfVxwm2": {
+      "metadata": {
+        "commence_time": "2021-10-30T17:15:00Z",
+        "home_team": "Zubaira Tukhugov",
+        "away_team": "Ricardo Ramos",
+        "outcome": "Zubaira Tukhugov"
+      }
+    },
+    "Y1HSQmTKeKcZoWqNxT1tk0Z8ewnI4k": {
+      "metadata": {
+        "commence_time": "2021-10-30T17:15:00Z",
+        "home_team": "Zubaira Tukhugov",
+        "away_team": "Ricardo Ramos",
+        "outcome": "Ricardo Ramos"
+      }
+    },
+    "iSWaM7TuIcNpf9dnHRmaHrlsF8zEV0": {
+      "metadata": {
+        "commence_time": "2021-10-30T17:45:00Z",
+        "home_team": "Virna Jandiroba",
+        "away_team": "Amanda Ribas",
+        "outcome": "Virna Jandiroba"
+      }
+    },
+    "paMHVTM+prjH2I5AerUWlbkdZ4wXBt": {
+      "metadata": {
+        "commence_time": "2021-10-30T17:45:00Z",
+        "home_team": "Virna Jandiroba",
+        "away_team": "Amanda Ribas",
+        "outcome": "Amanda Ribas"
+      }
+    },
+    "YyAx1bVojXiipNnrmzQdlgnsxBiJD5": {
+      "metadata": {
+        "commence_time": "2021-10-30T18:45:00Z",
+        "home_team": "Li Jingliang",
+        "away_team": "Khamzat Chimaev",
+        "outcome": "Li Jingliang"
+      }
+    },
+    "QLzDFng+tLaIPXhYbKCjL2wvT8P4r+": {
+      "metadata": {
+        "commence_time": "2021-10-30T18:45:00Z",
+        "home_team": "Li Jingliang",
+        "away_team": "Khamzat Chimaev",
+        "outcome": "Khamzat Chimaev"
+      }
+    },
+    "1VW6U7WvjNBbM7EzsyKJg7+jVjskHO": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:00:00Z",
+        "home_team": "Magomed Ankalaev",
+        "away_team": "Volkan Oezdemir",
+        "outcome": "Magomed Ankalaev"
+      }
+    },
+    "2UW+GEyIfdVOsF+2CcVupJJYFxS8gO": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:00:00Z",
+        "home_team": "Magomed Ankalaev",
+        "away_team": "Volkan Oezdemir",
+        "outcome": "Volkan Oezdemir"
+      }
+    },
+    "ESi4oCDRfYWI7e4iwbvTv2dMeA4v1r": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:15:00Z",
+        "home_team": "Marcin Tybura",
+        "away_team": "Alexander Volkov",
+        "outcome": "Marcin Tybura"
+      }
+    },
+    "k1wiYwCQzQPTCqSw98ExjrW/H4jtnW": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:15:00Z",
+        "home_team": "Marcin Tybura",
+        "away_team": "Alexander Volkov",
+        "outcome": "Alexander Volkov"
+      }
+    },
+    "G8IyS0x8fDFbHPmv88wDDa3M3hd+JO": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:45:00Z",
+        "home_team": "Islam Makhachev",
+        "away_team": "Daniel Hooker",
+        "outcome": "Islam Makhachev"
+      }
+    },
+    "iTFZuqCmr5+ePc+ncAgRamQujnsK+X": {
+      "metadata": {
+        "commence_time": "2021-10-30T19:45:00Z",
+        "home_team": "Islam Makhachev",
+        "away_team": "Daniel Hooker",
+        "outcome": "Daniel Hooker"
+      }
+    },
+    "JyDnlRXjJW731q84gaq17mnrH4a2fD": {
+      "metadata": {
+        "commence_time": "2021-10-30T20:00:00Z",
+        "home_team": "Tai Tuivasa",
+        "away_team": "Walt Harris",
+        "outcome": "Tai Tuivasa"
+      }
+    },
+    "6xXxJNbZ11kqMMBJXqHQ8zxRJeE/qq": {
+      "metadata": {
+        "commence_time": "2021-10-30T20:00:00Z",
+        "home_team": "Tai Tuivasa",
+        "away_team": "Walt Harris",
+        "outcome": "Walt Harris"
+      }
+    },
+    "u0CyuO2RQIGcLXedjKd9gYB3MuIEF+": {
+      "metadata": {
+        "commence_time": "2021-10-30T20:45:00Z",
+        "home_team": "Cory Sandhagen",
+        "away_team": "Petr Yan",
+        "outcome": "Cory Sandhagen"
+      }
+    },
+    "VTT0DObkPYBgZvNbGgnslpdvVTED9L": {
+      "metadata": {
+        "commence_time": "2021-10-30T20:45:00Z",
+        "home_team": "Cory Sandhagen",
+        "away_team": "Petr Yan",
+        "outcome": "Petr Yan"
+      }
+    },
+    "INWd7rzoOr1wpcDJQDOyf748I4pG5I": {
+      "metadata": {
+        "commence_time": "2021-10-30T22:00:00Z",
+        "home_team": "Alen Amedovski",
+        "away_team": "Yaozong Hu",
+        "outcome": "Alen Amedovski"
+      }
+    },
+    "hyQrt0rylhF+M1eT2CUz5cupMCcX/c": {
+      "metadata": {
+        "commence_time": "2021-10-30T22:00:00Z",
+        "home_team": "Alen Amedovski",
+        "away_team": "Yaozong Hu",
+        "outcome": "Yaozong Hu"
+      }
+    },
+    "rIwa0yuJEJ44pAGpa24EVwEYcvQgbl": {
+      "metadata": {
+        "commence_time": "2021-10-30T22:00:00Z",
+        "home_team": "Jan Blachowicz",
+        "away_team": "Glover Teixeira",
+        "outcome": "Jan Blachowicz"
+      }
+    },
+    "wGvKUg5uqFLtEqvT+bL5mk2GQyoZm8": {
+      "metadata": {
+        "commence_time": "2021-10-30T22:00:00Z",
+        "home_team": "Jan Blachowicz",
+        "away_team": "Glover Teixeira",
+        "outcome": "Glover Teixeira"
+      }
+    },
+    "h3p8+LvGlYl+6pFWdU4UoyIs1basH4": {
+      "metadata": {
+        "commence_time": "2021-11-06T23:30:00Z",
+        "home_team": "Irene Aldana",
+        "away_team": "Germaine de Randamie",
+        "outcome": "Irene Aldana"
+      }
+    },
+    "PKqABlNF0sFDiYFkxCmXfetl9NqJv4": {
+      "metadata": {
+        "commence_time": "2021-11-06T23:30:00Z",
+        "home_team": "Irene Aldana",
+        "away_team": "Germaine de Randamie",
+        "outcome": "Germaine de Randamie"
+      }
+    },
+    "3gPZfY5fedlFb4IeFhBoZgVQh4cSNZ": {
+      "metadata": {
+        "commence_time": "2021-11-07T00:00:00Z",
+        "home_team": "Nassourdine Imavov",
+        "away_team": "Edmen Shahbazyan",
+        "outcome": "Nassourdine Imavov"
+      }
+    },
+    "+mAC5kq3KzPpaSTb7yxYrlDOAGKPS3": {
+      "metadata": {
+        "commence_time": "2021-11-07T00:00:00Z",
+        "home_team": "Nassourdine Imavov",
+        "away_team": "Edmen Shahbazyan",
+        "outcome": "Edmen Shahbazyan"
+      }
+    },
+    "Dg2PtrYQPfO+yHuNyO041U6/5AEcoe": {
+      "metadata": {
+        "commence_time": "2021-11-07T01:30:00Z",
+        "home_team": "Marlon Vera",
+        "away_team": "Frankie Edgar",
+        "outcome": "Marlon Vera"
+      }
+    },
+    "g/YT82Ohhnmohlqv/rlItG/pYYxgFH": {
+      "metadata": {
+        "commence_time": "2021-11-07T01:30:00Z",
+        "home_team": "Marlon Vera",
+        "away_team": "Frankie Edgar",
+        "outcome": "Frankie Edgar"
+      }
+    },
+    "tDVD6ZiBd/UqPqaVAqa1/EDoRmFwn2": {
+      "metadata": {
+        "commence_time": "2021-11-07T04:00:00Z",
+        "home_team": "Justin Gaethje",
+        "away_team": "Michael Chandler",
+        "outcome": "Justin Gaethje"
+      }
+    },
+    "LeeQj7FjGlcumyaCgZzHQkVErUcGrw": {
+      "metadata": {
+        "commence_time": "2021-11-07T04:00:00Z",
+        "home_team": "Justin Gaethje",
+        "away_team": "Michael Chandler",
+        "outcome": "Michael Chandler"
+      }
+    },
+    "MvT3z6BZW/gwbRP8dEhk4HenUSZWmo": {
+      "metadata": {
+        "commence_time": "2021-11-07T04:30:00Z",
+        "home_team": "Weili Zhang",
+        "away_team": "Rose Namajunas",
+        "outcome": "Weili Zhang"
+      }
+    },
+    "ktpj7j6/bFMh6qootlgy9ubhNER/e2": {
+      "metadata": {
+        "commence_time": "2021-11-07T04:30:00Z",
+        "home_team": "Weili Zhang",
+        "away_team": "Rose Namajunas",
+        "outcome": "Rose Namajunas"
+      }
+    },
+    "/gz2ydOfBIQkbHZ2ypPtuCyC65AEBj": {
+      "metadata": {
+        "commence_time": "2021-11-07T05:00:00Z",
+        "home_team": "Colby Covington",
+        "away_team": "Kamaru Usman",
+        "outcome": "Colby Covington"
+      }
+    },
+    "CMP4h/MkodpWIIsF1b2kgR8kBvQchw": {
+      "metadata": {
+        "commence_time": "2021-11-07T05:00:00Z",
+        "home_team": "Colby Covington",
+        "away_team": "Kamaru Usman",
+        "outcome": "Kamaru Usman"
+      }
+    },
+    "HMn8UCSEwjiXMcN03mm7+kmtLc5cY7": {
+      "metadata": {
+        "commence_time": "2021-11-13T18:00:00Z",
+        "home_team": "Kennedy Nzechukwu",
+        "away_team": "Da Un Jung",
+        "outcome": "Kennedy Nzechukwu"
+      }
+    },
+    "ghJNByAD57lyeHYk3C+WSlBlQW9SDP": {
+      "metadata": {
+        "commence_time": "2021-11-13T18:00:00Z",
+        "home_team": "Kennedy Nzechukwu",
+        "away_team": "Da Un Jung",
+        "outcome": "Da Un Jung"
+      }
+    },
+    "KRLcQdfUWTVEiS9jXh+SkUJ0ZltEjN": {
+      "metadata": {
+        "commence_time": "2021-11-14T00:00:00Z",
+        "home_team": "Kyle Daukaus",
+        "away_team": "Kevin Holland",
+        "outcome": "Kyle Daukaus"
+      }
+    },
+    "dPieNczQz5cKa0noivelMNS/7A02bA": {
+      "metadata": {
+        "commence_time": "2021-11-14T00:00:00Z",
+        "home_team": "Kyle Daukaus",
+        "away_team": "Kevin Holland",
+        "outcome": "Kevin Holland"
+      }
+    },
+    "i+1YGnUG6uFSfnJtWGBnf/WRKfDSfn": {
+      "metadata": {
+        "commence_time": "2021-11-14T04:00:00Z",
+        "home_team": "Yair Rodriguez",
+        "away_team": "Max Holloway",
+        "outcome": "Yair Rodriguez"
+      }
+    },
+    "5NwP51ofJRU9GCCKvqN8dIdga2wlvq": {
+      "metadata": {
+        "commence_time": "2021-11-14T04:00:00Z",
+        "home_team": "Yair Rodriguez",
+        "away_team": "Max Holloway",
+        "outcome": "Max Holloway"
+      }
+    },
+    "FKuQmlmW+Zz/j8Xpiwrlpbc8b31Zff": {
+      "metadata": {
+        "commence_time": "2021-12-12T01:00:00Z",
+        "home_team": "Jorge Masvidal",
+        "away_team": "Leon Edwards",
+        "outcome": "Jorge Masvidal"
+      }
+    },
+    "IWMks9L1GpgboHh1o871VctY3um1JN": {
+      "metadata": {
+        "commence_time": "2021-12-12T01:00:00Z",
+        "home_team": "Jorge Masvidal",
+        "away_team": "Leon Edwards",
+        "outcome": "Leon Edwards"
+      }
+    },
+    "jeJ/K267+ekaE2vAuVie4G4Qf2Xd30": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Julianna Pena",
+        "away_team": "Amanda Nunes",
+        "outcome": "Julianna Pena"
+      }
+    },
+    "sY+aCe9msVIPrTz3qN+3tOx1LTKKgL": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Julianna Pena",
+        "away_team": "Amanda Nunes",
+        "outcome": "Amanda Nunes"
+      }
+    },
+    "+kkO4cZuRt9eOC3TKFjK68EMZz+C/F": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Brandon Moreno",
+        "away_team": "Deiveson Figueiredo",
+        "outcome": "Brandon Moreno"
+      }
+    },
+    "5GxPVkjgGawpCa++grBZS0uUCEObrQ": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Brandon Moreno",
+        "away_team": "Deiveson Figueiredo",
+        "outcome": "Deiveson Figueiredo"
+      }
+    },
+    "1kA7rZq+f6evw3Quc2ZR2hRyy+rzR5": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Dustin Poirier",
+        "away_team": "Charles Oliveira",
+        "outcome": "Dustin Poirier"
+      }
+    },
+    "XUh9qq1cQmYMvrgqqYH7ZO4Up5mHcZ": {
+      "metadata": {
+        "commence_time": "2021-12-12T03:00:00Z",
+        "home_team": "Dustin Poirier",
+        "away_team": "Charles Oliveira",
+        "outcome": "Charles Oliveira"
+      }
+    },
+    "0iuUEW6O+c93Ieq6S+EHhOJe/PLFdt": {
+      "metadata": {
+        "commence_time": "2021-12-19T04:00:00Z",
+        "home_team": "Derrick Lewis",
+        "away_team": "Chris Daukaus",
+        "outcome": "Derrick Lewis"
+      }
+    },
+    "CpGFqCr1bNedYNO80EK/wOmGLtHxyI": {
+      "metadata": {
+        "commence_time": "2021-12-19T04:00:00Z",
+        "home_team": "Derrick Lewis",
+        "away_team": "Chris Daukaus",
+        "outcome": "Chris Daukaus"
+      }
+    },
+    "a4PrvXMMn7izxbvDu2EwGZAi25ziUK": {
+      "metadata": {
+        "commence_time": "2021-12-30T23:00:00Z",
+        "home_team": "Israel Adesanya",
+        "away_team": "Robert Whittaker",
+        "outcome": "Israel Adesanya"
+      }
+    },
+    "kPJmE+FIuP77YwEFuFPh5JeQOVPGtX": {
+      "metadata": {
+        "commence_time": "2021-12-30T23:00:00Z",
+        "home_team": "Israel Adesanya",
+        "away_team": "Robert Whittaker",
+        "outcome": "Robert Whittaker"
+      }
+    },
+    "ruVgRfU7oazsJufDapuLIJZIdHLFtp": {
+      "metadata": {
+        "commence_time": "2022-01-16T03:00:00Z",
+        "home_team": "Giga Chikadze",
+        "away_team": "Calvin Kattar",
+        "outcome": "Giga Chikadze"
+      }
+    },
+    "aPZUi8JoKog5P+ufaukqxZ316jBL6o": {
+      "metadata": {
+        "commence_time": "2022-01-16T03:00:00Z",
+        "home_team": "Giga Chikadze",
+        "away_team": "Calvin Kattar",
+        "outcome": "Calvin Kattar"
+      }
+    },
+    "qEpCoEPbqzd2X58uNa1ghQnNKtTp2g": {
+      "metadata": {
+        "commence_time": "2022-01-23T04:00:00Z",
+        "home_team": "Deiveson Figueiredo",
+        "away_team": "Brandon Moreno",
+        "outcome": "Deiveson Figueiredo"
+      }
+    },
+    "lyYEyOcbUFWr9C35dqvWsfrabQ3pqw": {
+      "metadata": {
+        "commence_time": "2022-01-23T04:00:00Z",
+        "home_team": "Deiveson Figueiredo",
+        "away_team": "Brandon Moreno",
+        "outcome": "Brandon Moreno"
+      }
+    },
+    "i0EOMWQOpJeQtIXvGJH0gJPGrAqwMC": {
+      "metadata": {
+        "commence_time": "2022-01-23T05:00:00Z",
+        "home_team": "Ciryl Gane",
+        "away_team": "Francis Ngannou",
+        "outcome": "Ciryl Gane"
+      }
+    },
+    "L8YTzzUdaW3pL6ZHsqG3FAc2pSx3iD": {
+      "metadata": {
+        "commence_time": "2022-01-23T05:00:00Z",
+        "home_team": "Ciryl Gane",
+        "away_team": "Francis Ngannou",
+        "outcome": "Francis Ngannou"
+      }
+    },
+    "OtTn45or+zcVxeuOG0eoG9f53Lj262": {
+      "metadata": {
+        "commence_time": "2022-02-13T04:00:00Z",
+        "home_team": "Robert Whittaker",
+        "away_team": "Israel Adesanya",
+        "outcome": "Robert Whittaker"
+      }
+    },
+    "SyWICnNYN8QAiso87wTVH2D4URIVTC": {
+      "metadata": {
+        "commence_time": "2022-02-13T04:00:00Z",
+        "home_team": "Robert Whittaker",
+        "away_team": "Israel Adesanya",
+        "outcome": "Israel Adesanya"
+      }
+    }
+  }
+}
