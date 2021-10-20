@@ -2,8 +2,7 @@ import _ from "lodash";
 import axios from "axios";
 import { FetcherOpts, PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
-
-const calculateAssethash = require("./calculate-asset-hash");
+import calculateAssethash from "./calculate-asset-hash";
 
 const SPORT_KEY = "mma_mixed_martial_arts";
 const URL = `https://api.the-odds-api.com/v4/sports/${SPORT_KEY}/odds/`;
@@ -25,6 +24,10 @@ export class OddsApiFetcher extends BaseFetcher {
 
   async extractPrices(response: any): Promise<PricesObj> {
     const result: PricesObj = {};
+
+    // TODO: remove later
+    // We use this console.log for easier debugging
+    console.log(JSON.stringify(response.data));
 
     for (const event of response.data) {
       const pureEvent = _.pick(event, ["commence_time", "home_team", "away_team"]);

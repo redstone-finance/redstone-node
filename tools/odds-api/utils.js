@@ -1,6 +1,8 @@
 const axios = require("axios");
 const _ = require("lodash");
-const calculateAssetHash = require("../../src/fetchers/odds-api/calculate-asset-hash");
+const calculateAssetHash = require("../../dist/src/fetchers/odds-api/calculate-asset-hash").default;
+
+// Please run `yarn build` before running any script that uses this utils.js module
 
 const API_KEY = require("../../.secrets/config-redstone-sport.json").credentials.theOddsApiKey;
 
