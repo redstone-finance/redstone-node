@@ -24,20 +24,50 @@ export class OddsApiFetcher extends BaseFetcher {
   }
 
   async extractPrices(response: any): Promise<PricesObj> {
-    const result: any = {}; // TODO: improve the type
+    const result: PricesObj = {};
 
     for (const event of response.data) {
       const pureEvent = _.pick(event, ["commence_time", "home_team", "away_team"]);
-      const assetHome = calculateAssethash({...pureEvent, outcome: pureEvent["home_team"]});
-      const assetAway = calculateAssethash({...pureEvent, outcome: pureEvent["away_team"]});
+      const teams = {
+        home: pureEvent["home_team"],
+        away: pureEvent["away_team"],
+      };
+      const assetHomeSymbol = calculateAssethash({...pureEvent, outcome: teams.home});
+      const assetAwaySymbol = calculateAssethash({...pureEvent, outcome: teams.away});
 
-      console.log({assetAway, assetHome});
+      const values = {
+        home: {
+          total: 0,
+          count: 0,
+        },
+        away: {
+          total: 0,
+          count: 0,
+        }
+      };
 
-      // TODO: improve the value fetching (using not only the first bookmaker)
-      if (event.bookmakers && event.bookmakers[0].markets && event.bookmakers[0].markets.length > 0) {
-        result[assetHome] = event.bookmakers[0].markets[0].outcomes[0].price;
-        result[assetAway] = event.bookmakers[0].markets[0].outcomes[1].price;
+      for (const bookmaker of event.bookmakers) {
+        for (const market of bookmaker.markets) {
+          for (const outcome of market.outcomes) {
+            if (outcome.name === teams.home) {
+              values.home.total += outcome.price;
+              values.home.count++;
+            }
+            if (outcome.name === teams.away) {
+              values.away.total += outcome.price;
+              values.away.count++;
+            }
+          }
+        }
       }
+
+      const getAvg = (key: "home" | "away") =>
+        values[key].count > 0
+          ? Number((values[key].total / values[key].count).toFixed(2))
+          : 0;
+
+      result[assetHomeSymbol] = getAvg("home");
+      result[assetAwaySymbol] = getAvg("away");
     }
 
     return result;

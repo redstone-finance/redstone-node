@@ -1,0 +1,8349 @@
+[
+  {
+    "id": "6002c2768416032e4bf9137dfb33fff1",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T17:30:00Z",
+    "home_team": "Randa Markos",
+    "away_team": "Livia Renata Souza",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.78
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.04
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.72
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.74
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.8
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.67
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.67
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.67
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.67
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.67
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.84
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.04
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Livia Renata Souza",
+                "price": 1.97
+              },
+              {
+                "name": "Randa Markos",
+                "price": 2.22
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "df357cc487913a10b934d54130822253",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T18:10:00Z",
+    "home_team": "Khama Worthy",
+    "away_team": "Jai Herbert",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.54
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.58
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.53
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.52
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.6
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.57
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.55
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.57
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.57
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.56
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.57
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.59
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.38
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Jai Herbert",
+                "price": 1.73
+              },
+              {
+                "name": "Khama Worthy",
+                "price": 2.68
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "9aafdc1fb5b76db1ad9fd24ae59a62ee",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T18:30:00Z",
+    "home_team": "Laureano Staropoli",
+    "away_team": "Jamie Pickett",
+    "bookmakers": [
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.5
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.47
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 3
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.98
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.98
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.48
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 3.05
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.51
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.85
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.9
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.43
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 2.95
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.43
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jamie Pickett",
+                "price": 3
+              },
+              {
+                "name": "Laureano Staropoli",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6efedbfdf38750db1cc083973c79f8a5",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T20:15:00Z",
+    "home_team": "Nicolae Negumereanu",
+    "away_team": "Ike Villanueva",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.82
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.47
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.86
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.43
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.8
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.75
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.8
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.8
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.8
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.95
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.95
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.95
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.95
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.95
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.7
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.48
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 3.05
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.45
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 3.2
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.48
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ike Villanueva",
+                "price": 2.9
+              },
+              {
+                "name": "Nicolae Negumereanu",
+                "price": 1.37
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d1c8703e1975a64046bfde8107c3ccc7",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T20:45:00Z",
+    "home_team": "Francisco Trinaldo",
+    "away_team": "Dwight Grant",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.04
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.08
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.76
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.05
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.95
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.83
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.05
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.05
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.94
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.94
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.94
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.94
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 1.95
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.12
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.78
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.3
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.77
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Dwight Grant",
+                "price": 2.05
+              },
+              {
+                "name": "Francisco Trinaldo",
+                "price": 1.8
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "db8bf95d065305dc7b3ae6a8ea863967",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T21:15:00Z",
+    "home_team": "Seung-Woo Choi",
+    "away_team": "Alex Caceres",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.45
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.34
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.25
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.34
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 2.8
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.4
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.4
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.33
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.3
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.34
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.4
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.33
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.25
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.3
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.15
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.15
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.15
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.15
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.15
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.35
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.33
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.25
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.36
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Alex Caceres",
+                "price": 3.75
+              },
+              {
+                "name": "Seung-Woo Choi",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b8f83042292a2a88bd1557d3047f9b7f",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T21:45:00Z",
+    "home_team": "Joselyne Edwards",
+    "away_team": "Jessy-Rose Clark",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.68
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.67
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.22
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.6
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.69
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.69
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.69
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.71
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.7
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.67
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.7
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.7
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.7
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.7
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.71
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.76
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.26
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Jessy-Rose Clark",
+                "price": 1.8
+              },
+              {
+                "name": "Joselyne Edwards",
+                "price": 2.3
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6b50bdc6bd3a95d4f062b16f879e14c0",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T22:15:00Z",
+    "home_team": "Rick Glenn",
+    "away_team": "Grant Dawson",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.28
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.25
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.3
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.28
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.28
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.27
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.29
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.3
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.3
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.31
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.3
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.3
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.28
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.29
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.29
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 3.85
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Grant Dawson",
+                "price": 1.35
+              },
+              {
+                "name": "Rick Glenn",
+                "price": 4.4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "f90f21b357d34eaa09ba78d58760181d",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-23T23:00:00Z",
+    "home_team": "Marvin Vettori",
+    "away_team": "Paulo Henrique Costa",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.65
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.31
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.62
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.62
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.75
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.69
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.67
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "bovada",
+        "title": "Bovada",
+        "last_update": "2021-10-20T08:50:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.61
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.35
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betfair",
+        "title": "Betfair",
+        "last_update": "2021-10-20T08:52:16Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.64
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.38
+              }
+            ]
+          },
+          {
+            "key": "h2h_lay",
+            "outcomes": [
+              {
+                "name": "Marvin Vettori",
+                "price": 1.72
+              },
+              {
+                "name": "Paulo Henrique Costa",
+                "price": 2.58
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ef83b899447e06ed78273874425df894",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T15:00:00Z",
+    "home_team": "Magomed Mustafaev",
+    "away_team": "Damir Ismagulov",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.43
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 2.94
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.36
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.4
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 2.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.36
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.36
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.36
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Damir Ismagulov",
+                "price": 1.38
+              },
+              {
+                "name": "Magomed Mustafaev",
+                "price": 3
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "a50a21cdcf924b2f0c758351f6c511b5",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T15:40:00Z",
+    "home_team": "Makwan Amirkhani",
+    "away_team": "Lerone Murphy",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.3
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.28
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.28
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.28
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.27
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Lerone Murphy",
+                "price": 1.29
+              },
+              {
+                "name": "Makwan Amirkhani",
+                "price": 3.6
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3794641193ba63599e6a5324115c233b",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T16:00:00Z",
+    "home_team": "Shamil Gamzatov",
+    "away_team": "Michal Oleksiejczuk",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.42
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.4
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.61
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.2
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.4
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.61
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.35
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.61
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.5
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.45
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Michal Oleksiejczuk",
+                "price": 2.4
+              },
+              {
+                "name": "Shamil Gamzatov",
+                "price": 1.57
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d0b18c066bd468c5ba8cfbc3c050bff9",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T17:15:00Z",
+    "home_team": "Zubaira Tukhugov",
+    "away_team": "Ricardo Ramos",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.42
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.4
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.61
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.35
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.35
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.35
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.35
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.35
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.2
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.45
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.4
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.5
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.45
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ricardo Ramos",
+                "price": 2.4
+              },
+              {
+                "name": "Zubaira Tukhugov",
+                "price": 1.57
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b958e2c3c6745f26094f5633225f3a02",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T17:45:00Z",
+    "home_team": "Virna Jandiroba",
+    "away_team": "Amanda Ribas",
+    "bookmakers": [
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.67
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.71
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.74
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.16
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.71
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.7
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.7
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.7
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.7
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.7
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.71
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.71
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Ribas",
+                "price": 1.71
+              },
+              {
+                "name": "Virna Jandiroba",
+                "price": 2.12
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "eb99e449046f556a80c98768bd818936",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T18:45:00Z",
+    "home_team": "Li Jingliang",
+    "away_team": "Khamzat Chimaev",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.29
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.21
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 4.59
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.22
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 4.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.23
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 4.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.28
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.23
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 4.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.23
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 4.35
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Khamzat Chimaev",
+                "price": 1.27
+              },
+              {
+                "name": "Li Jingliang",
+                "price": 3.8
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "4524da8470c6b1687088136889c4e733",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T19:00:00Z",
+    "home_team": "Magomed Ankalaev",
+    "away_team": "Volkan Oezdemir",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.34
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.35
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.3
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.33
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.31
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.29
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.31
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Magomed Ankalaev",
+                "price": 1.32
+              },
+              {
+                "name": "Volkan Oezdemir",
+                "price": 3.55
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "97cc3fd5cab019223e9bf5f41620cc75",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T19:15:00Z",
+    "home_team": "Marcin Tybura",
+    "away_team": "Alexander Volkov",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.33
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.37
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.33
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.34
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.36
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.36
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.36
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.36
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.37
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.4
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 2.8
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.33
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.32
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.32
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alexander Volkov",
+                "price": 1.33
+              },
+              {
+                "name": "Marcin Tybura",
+                "price": 3.4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "01dedbc209a10b9f31c4b01d658226c6",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T19:45:00Z",
+    "home_team": "Islam Makhachev",
+    "away_team": "Daniel Hooker",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.6
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.16
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 6.25
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.11
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 4
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.18
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.5
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.16
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.9
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Daniel Hooker",
+                "price": 5.3
+              },
+              {
+                "name": "Islam Makhachev",
+                "price": 1.15
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "92867a40a50c337f76bc18499390017e",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T20:00:00Z",
+    "home_team": "Tai Tuivasa",
+    "away_team": "Walt Harris",
+    "bookmakers": [
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.47
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.47
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.5
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.47
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.47
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Tai Tuivasa",
+                "price": 1.47
+              },
+              {
+                "name": "Walt Harris",
+                "price": 2.65
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "a77ae9761c93ff45d4d164c764a92c7b",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T20:45:00Z",
+    "home_team": "Cory Sandhagen",
+    "away_team": "Petr Yan",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.94
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.85
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.9
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.43
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3.2
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.8
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 3
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.9
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.42
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Cory Sandhagen",
+                "price": 2.95
+              },
+              {
+                "name": "Petr Yan",
+                "price": 1.43
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "59ca312591cb225db432590dc90b3e55",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T22:00:00Z",
+    "home_team": "Alen Amedovski",
+    "away_team": "Yaozong Hu",
+    "bookmakers": [
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2.05
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.75
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Alen Amedovski",
+                "price": 1.8
+              },
+              {
+                "name": "Yaozong Hu",
+                "price": 2.05
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6720d273d162cbacd1f114d9b4e0fe06",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-10-30T22:00:00Z",
+    "home_team": "Jan Blachowicz",
+    "away_team": "Glover Teixeira",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.1
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.39
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.2
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.38
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 2.8
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.25
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.25
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "mybookieag",
+        "title": "MyBookie.ag",
+        "last_update": "2021-10-20T08:56:15Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.15
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.05
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.37
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "wynnbet",
+        "title": "WynnBET",
+        "last_update": "2021-10-20T08:50:32Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Glover Teixeira",
+                "price": 3.2
+              },
+              {
+                "name": "Jan Blachowicz",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "53662a812bf0ffb4e28b65b923ea7b9c",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-06T23:30:00Z",
+    "home_team": "Irene Aldana",
+    "away_team": "Germaine de Randamie",
+    "bookmakers": [
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Germaine de Randamie",
+                "price": 1.57
+              },
+              {
+                "name": "Irene Aldana",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Germaine de Randamie",
+                "price": 1.59
+              },
+              {
+                "name": "Irene Aldana",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Germaine de Randamie",
+                "price": 1.58
+              },
+              {
+                "name": "Irene Aldana",
+                "price": 2.44
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Germaine de Randamie",
+                "price": 1.57
+              },
+              {
+                "name": "Irene Aldana",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "09ac8a0680991e21533c24653580e6a7",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-07T00:00:00Z",
+    "home_team": "Nassourdine Imavov",
+    "away_team": "Edmen Shahbazyan",
+    "bookmakers": [
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.35
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.71
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.3
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.25
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.1
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.3
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Edmen Shahbazyan",
+                "price": 2.2
+              },
+              {
+                "name": "Nassourdine Imavov",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "3931928b31f94379678ec4651e587809",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-07T01:30:00Z",
+    "home_team": "Marlon Vera",
+    "away_team": "Frankie Edgar",
+    "bookmakers": [
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.4
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.3
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.4
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.1
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.35
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.67
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.3
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.61
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Frankie Edgar",
+                "price": 2.25
+              },
+              {
+                "name": "Marlon Vera",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2cd2469ddb5d20227b91ea0a0afc2e4a",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-07T04:00:00Z",
+    "home_team": "Justin Gaethje",
+    "away_team": "Michael Chandler",
+    "bookmakers": [
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.55
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.57
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.55
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.55
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.54
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.56
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.62
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Justin Gaethje",
+                "price": 1.54
+              },
+              {
+                "name": "Michael Chandler",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bb11223b576ba10214af8ea19a195246",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-07T04:30:00Z",
+    "home_team": "Weili Zhang",
+    "away_team": "Rose Namajunas",
+    "bookmakers": [
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.85
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2.02
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.9
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 1.9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.83
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Rose Namajunas",
+                "price": 1.8
+              },
+              {
+                "name": "Weili Zhang",
+                "price": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7bd7aad9176cfb94ebee37d17836e96b",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-07T05:00:00Z",
+    "home_team": "Colby Covington",
+    "away_team": "Kamaru Usman",
+    "bookmakers": [
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.3
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.45
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.33
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 2.9
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.5
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.31
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.25
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.2
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.2
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.2
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.2
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.25
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.37
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.2
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.36
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pointsbetus",
+        "title": "PointsBet (US)",
+        "last_update": "2021-10-20T08:57:04Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Colby Covington",
+                "price": 3.3
+              },
+              {
+                "name": "Kamaru Usman",
+                "price": 1.33
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "34e7a0f4d093bee392c3fa4f21ee31f0",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-13T18:00:00Z",
+    "home_team": "Kennedy Nzechukwu",
+    "away_team": "Da Un Jung",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Da Un Jung",
+                "price": 1.56
+              },
+              {
+                "name": "Kennedy Nzechukwu",
+                "price": 2.46
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Da Un Jung",
+                "price": 1.44
+              },
+              {
+                "name": "Kennedy Nzechukwu",
+                "price": 2.63
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "94e972cf56866fd8fff60b13adb223b8",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-14T00:00:00Z",
+    "home_team": "Kyle Daukaus",
+    "away_team": "Kevin Holland",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Kevin Holland",
+                "price": 1.93
+              },
+              {
+                "name": "Kyle Daukaus",
+                "price": 1.93
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Kevin Holland",
+                "price": 1.85
+              },
+              {
+                "name": "Kyle Daukaus",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "86fecf7e8b92642481b80f1a94dcef37",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-11-14T04:00:00Z",
+    "home_team": "Yair Rodriguez",
+    "away_team": "Max Holloway",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.27
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.3
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 3.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Max Holloway",
+                "price": 1.25
+              },
+              {
+                "name": "Yair Rodriguez",
+                "price": 4
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7b85bab0fbeae27db501ef9fae3c3127",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-12T01:00:00Z",
+    "home_team": "Jorge Masvidal",
+    "away_team": "Leon Edwards",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jorge Masvidal",
+                "price": 2.66
+              },
+              {
+                "name": "Leon Edwards",
+                "price": 1.51
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jorge Masvidal",
+                "price": 2.8
+              },
+              {
+                "name": "Leon Edwards",
+                "price": 1.47
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jorge Masvidal",
+                "price": 2.4
+              },
+              {
+                "name": "Leon Edwards",
+                "price": 1.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jorge Masvidal",
+                "price": 2.6
+              },
+              {
+                "name": "Leon Edwards",
+                "price": 1.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Jorge Masvidal",
+                "price": 2.65
+              },
+              {
+                "name": "Leon Edwards",
+                "price": 1.51
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7141310b4c518fc6b57974a5fc6f5312",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-12T03:00:00Z",
+    "home_team": "Julianna Pena",
+    "away_team": "Amanda Nunes",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.12
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.14
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.14
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "williamhill_us",
+        "title": "William Hill (US)",
+        "last_update": "2021-10-20T08:56:53Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.15
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 5.75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.14
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Amanda Nunes",
+                "price": 1.13
+              },
+              {
+                "name": "Julianna Pena",
+                "price": 6.25
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "36e3e19aa622d068eb8d87c09f88b91c",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-12T03:00:00Z",
+    "home_team": "Brandon Moreno",
+    "away_team": "Deiveson Figueiredo",
+    "bookmakers": [
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.58
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.54
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.57
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.25
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.57
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "sugarhouse",
+        "title": "SugarHouse",
+        "last_update": "2021-10-20T08:53:07Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.56
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "barstool",
+        "title": "Barstool Sportsbook",
+        "last_update": "2021-10-20T08:53:37Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.56
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betrivers",
+        "title": "BetRivers",
+        "last_update": "2021-10-20T08:55:59Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.56
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "twinspires",
+        "title": "TwinSpires",
+        "last_update": "2021-10-20T08:53:23Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.56
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b29cf5ad2cfd54d623dd7ed03f6bf1ab",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-12T03:00:00Z",
+    "home_team": "Dustin Poirier",
+    "away_team": "Charles Oliveira",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Charles Oliveira",
+                "price": 2.34
+              },
+              {
+                "name": "Dustin Poirier",
+                "price": 1.63
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Charles Oliveira",
+                "price": 2.4
+              },
+              {
+                "name": "Dustin Poirier",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betmgm",
+        "title": "BetMGM",
+        "last_update": "2021-10-20T08:53:39Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Charles Oliveira",
+                "price": 2.3
+              },
+              {
+                "name": "Dustin Poirier",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Charles Oliveira",
+                "price": 2.15
+              },
+              {
+                "name": "Dustin Poirier",
+                "price": 1.62
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "44267c02cea04745250430e12e2f9504",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-19T04:00:00Z",
+    "home_team": "Derrick Lewis",
+    "away_team": "Chris Daukaus",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Chris Daukaus",
+                "price": 1.74
+              },
+              {
+                "name": "Derrick Lewis",
+                "price": 2.16
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "betonlineag",
+        "title": "BetOnline.ag",
+        "last_update": "2021-10-20T08:53:14Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Chris Daukaus",
+                "price": 1.71
+              },
+              {
+                "name": "Derrick Lewis",
+                "price": 2.2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "b439270c2ee19f1384e361b87aaa8f3f",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2021-12-30T23:00:00Z",
+    "home_team": "Israel Adesanya",
+    "away_team": "Robert Whittaker",
+    "bookmakers": [
+      {
+        "key": "unibet",
+        "title": "Unibet",
+        "last_update": "2021-10-20T08:52:31Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Israel Adesanya",
+                "price": 1.4
+              },
+              {
+                "name": "Robert Whittaker",
+                "price": 2.88
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "03558625730be30dca0b0a3c6a829ba3",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2022-01-16T03:00:00Z",
+    "home_team": "Giga Chikadze",
+    "away_team": "Calvin Kattar",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Calvin Kattar",
+                "price": 2.3
+              },
+              {
+                "name": "Giga Chikadze",
+                "price": 1.65
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "d6533d36af9948808da07cbc5b97d1d6",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2022-01-23T04:00:00Z",
+    "home_team": "Deiveson Figueiredo",
+    "away_team": "Brandon Moreno",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.62
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.34
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Brandon Moreno",
+                "price": 1.61
+              },
+              {
+                "name": "Deiveson Figueiredo",
+                "price": 2.45
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7de74ce615fe3e06c42e029e57012df6",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2022-01-23T05:00:00Z",
+    "home_team": "Ciryl Gane",
+    "away_team": "Francis Ngannou",
+    "bookmakers": [
+      {
+        "key": "foxbet",
+        "title": "FOX Bet",
+        "last_update": "2021-10-20T08:52:55Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ciryl Gane",
+                "price": 1.85
+              },
+              {
+                "name": "Francis Ngannou",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ciryl Gane",
+                "price": 2
+              },
+              {
+                "name": "Francis Ngannou",
+                "price": 1.85
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "draftkings",
+        "title": "DraftKings",
+        "last_update": "2021-10-20T08:54:44Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Ciryl Gane",
+                "price": 1.87
+              },
+              {
+                "name": "Francis Ngannou",
+                "price": 1.95
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2846fc35e61f95fd8991f1941999ada2",
+    "sport_key": "mma_mixed_martial_arts",
+    "sport_title": "MMA",
+    "commence_time": "2022-02-13T04:00:00Z",
+    "home_team": "Robert Whittaker",
+    "away_team": "Israel Adesanya",
+    "bookmakers": [
+      {
+        "key": "fanduel",
+        "title": "FanDuel",
+        "last_update": "2021-10-20T08:52:56Z",
+        "markets": [
+          {
+            "key": "h2h",
+            "outcomes": [
+              {
+                "name": "Israel Adesanya",
+                "price": 1.44
+              },
+              {
+                "name": "Robert Whittaker",
+                "price": 2.88
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
