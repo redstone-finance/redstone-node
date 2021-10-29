@@ -116,4 +116,5 @@ export interface NodeConfig {
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;
+  httpBroadcasterURLs?: string[];
 };

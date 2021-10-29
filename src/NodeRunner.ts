@@ -2,7 +2,7 @@ import { Consola } from "consola";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
-import broadcaster from "./broadcasters/lambda-broadcaster";
+import { HttpBroadcaster, Broadcaster } from "./broadcasters";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
@@ -43,6 +43,7 @@ export default class NodeRunner {
   private tokensBySource?: TokensBySource;
   private newManifest: Manifest | null = null;
   private priceSignerService?: PriceSignerService;
+  private broadcaster: Broadcaster;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -57,6 +58,7 @@ export default class NodeRunner {
     }
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
+    this.broadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
 
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     //alternatively use arrow functions...
@@ -184,7 +186,7 @@ export default class NodeRunner {
       await this.priceSignerService!.signPrices(pricesReadyForSigning);
 
     // Broadcasting
-    await NodeRunner.broadcastPrices(signedPrices);
+    await this.broadcastPrices(signedPrices);
     await this.broadcastEvmPricePackage(signedPrices);
 
     if (mode.isProd) {
@@ -213,11 +215,11 @@ export default class NodeRunner {
     return aggregatedPrices;
   }
 
-  private static async broadcastPrices(signedPrices: PriceDataSigned[]) {
+  private async broadcastPrices(signedPrices: PriceDataSigned[]) {
     logger.info("Broadcasting prices");
     const broadcastingTrackingId = trackStart("broadcasting");
     try {
-      await broadcaster.broadcast(signedPrices);
+      await this.broadcaster.broadcast(signedPrices);
       logger.info("Broadcasting completed");
     } catch (e) {
       if (e.response !== undefined) {
@@ -256,7 +258,7 @@ export default class NodeRunner {
     const signedPackageBroadcastingTrackingId =
       trackStart("signed-package-broadcasting");
     try {
-      await broadcaster.broadcastPricePackage(
+      await this.broadcaster.broadcastPricePackage(
         signedPackage,
         this.providerAddress);
     } catch (e) {
