@@ -14,7 +14,8 @@
     "test:ci": "NODE_ENV=test jest --ci --reporters='default' --reporters='./tools/GithubActionsReporter'",
     "prepublishOnly": "yarn test && yarn build",
     "version": "git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "docker:build": "docker build -f Dockerfile.public -t redstone-node-public ."
   },
   "license": "MIT",
   "author": "Redstone Team <dev@redstone.finance>",
