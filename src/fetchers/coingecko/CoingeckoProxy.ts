@@ -8,7 +8,12 @@ export default class CoingeckoProxy {
     this.symbolToId = require("./coingecko-symbol-to-id.json") as any;
   }
 
-  async getExchangeRates(ids: string[]) {
-    return await this.coinGeckoClient.simple.price({ ids });
+  async getExchangeRates(ids: string[], vs_currencies = ['usd']) {
+    return await this.coinGeckoClient.simple.price(
+      { 
+        ids:ids,
+        vs_currencies: vs_currencies
+       }
+    );
   }
 }
