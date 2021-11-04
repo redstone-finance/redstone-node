@@ -2,16 +2,14 @@ const generateSubManifest = require("./generate-submanifest-from-main");
 
 const OUTPUT_FILE_PATH = "./manifests/avalanche.json";
 const SYMBOLS = [
-  "AVAX",
+  "ETH",
+  "USDT",
   "PNG",
-  "SNOB",
-  "DYP",
-  "SPORE",
-  "WAVAX",
+  "AVAX",
   "XAVA",
-  "SHERPA",
-  "JOE",
-  "AVME",
+  "LINK",
+  "BTC",
+  "FRAX",
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
