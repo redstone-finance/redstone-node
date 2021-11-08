@@ -6,11 +6,8 @@ import { Consola } from "consola";
 
 const logger = require("../utils/logger")("HttpBroadcaster") as Consola;
 
-export class HttpBroadcaster extends Broadcaster {
-  constructor(
-    private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]) {
-      super();
-    }
+export class HttpBroadcaster implements Broadcaster {
+  constructor(private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]) {}
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
     for (const url of this.broadcasterURLs) {

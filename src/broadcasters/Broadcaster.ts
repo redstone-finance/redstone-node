@@ -1,14 +1,10 @@
 import { PriceDataSigned, SignedPricePackage } from "../types";
 
-export class Broadcaster {
+export interface Broadcaster {
 
-  async broadcast(_prices: PriceDataSigned[]): Promise<void> {
-    throw new Error("`broadcast` method must be implemented");
-  }
+  broadcast(prices: PriceDataSigned[]): Promise<void>;
 
-  async broadcastPricePackage(
-    _signedData: SignedPricePackage,
-    _providerAddress: string): Promise<void> {
-      throw new Error("`broadcast` method must be implemented");
-    }
+  broadcastPricePackage(
+    signedData: SignedPricePackage,
+    providerAddress: string): Promise<void>;
 };
