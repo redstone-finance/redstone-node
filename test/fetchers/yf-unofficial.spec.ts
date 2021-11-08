@@ -20,7 +20,8 @@ describe("yf-unofficial fetcher", () => {
     // Given
 
     // When
-    const result = await sut.fetchAll(["TSLA", "AMZN", "GOOG", "IBM", "AAPL"]);
+    const result = await sut.fetchAll(["TSLA", "AMZN", "GOOG", "IBM", "AAPL","USDMXN=X","USDBRL=X","USDCOP=X","USDARS=X","USDPEN=X"]);
+    console.log(result);
 
     // Then
     expect(result).toEqual([
@@ -43,6 +44,26 @@ describe("yf-unofficial fetcher", () => {
       {
         "symbol": "AAPL",
         "value": 126.85
+      },
+      {
+      "symbol": "USDMXN=X",
+      "value": 20.317
+      },
+      { 
+        "symbol": 'USDBRL=X',
+        value: 5.5134
+      },
+      {
+        "symbol": 'USDCOP=X',
+        value: 3870.03
+      },
+      {
+        "symbol": 'USDARS=X',
+        value: 99.9
+      },
+      {
+        "symbol": 'USDPEN=X',
+        value: 4.0023
       }
     ]);
   });
