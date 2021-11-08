@@ -1,3 +1,5 @@
+import { JWKInterface } from "arweave/node/lib/wallet";
+
 export interface Manifest {
   txId?: string; // note: this fiels is set by smart contract while downloading active manifest content
   interval: number;
@@ -110,10 +112,12 @@ export interface ArweaveTransactionTags {
 };
 
 export interface NodeConfig {
-  arweaveKeysFile: string;
+  arweaveKeysFile?: string;
+  arweaveKeysJWK?: JWKInterface; // it must be specified when we pass config through an env variable
   useManifestFromSmartContract?: boolean;
   addEvmSignature?: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;
+  httpBroadcasterURLs?: string[];
 };
