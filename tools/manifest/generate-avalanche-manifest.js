@@ -10,6 +10,8 @@ const SYMBOLS = [
   "LINK",
   "BTC",
   "FRAX",
+  "YAK",
+  "QI",
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
