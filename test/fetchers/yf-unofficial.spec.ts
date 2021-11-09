@@ -46,24 +46,24 @@ describe("yf-unofficial fetcher", () => {
         "value": 126.85
       },
       {
-      "symbol": "USDMXN=X",
-      "value": 20.317
-      },
-      { 
-        "symbol": 'USDBRL=X',
-        value: 5.5134
+        "symbol": "USDMXN=X",
+        "value": 20.317
       },
       {
-        "symbol": 'USDCOP=X',
-        value: 3870.03
+        "symbol": "USDBRL=X",
+        "value": 5.5134
       },
       {
-        "symbol": 'USDARS=X',
-        value: 99.9
+        "symbol": "USDCOP=X",
+        "value": 3870.03
       },
       {
-        "symbol": 'USDPEN=X',
-        value: 4.0023
+        "symbol": "USDARS=X",
+        "value": 99.9
+      },
+      {
+        "symbol": "USDPEN=X",
+        "value": 4.0023
       }
     ]);
   });
