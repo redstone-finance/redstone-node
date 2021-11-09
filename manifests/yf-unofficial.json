@@ -1,8 +1,8 @@
 {
-  "interval": 15000,
+  "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": ["api-dojo-rapid"],
-  "sourceTimeout": 12000,
+  "defaultSource": ["yf-unofficial"],
+  "sourceTimeout": 20000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
