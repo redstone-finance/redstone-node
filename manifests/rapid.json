@@ -44,8 +44,6 @@
         "liquid",
         "oceanex",
         "okcoin",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit",
@@ -93,8 +91,6 @@
         "liquid",
         "oceanex",
         "okcoin",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit",
@@ -186,8 +182,6 @@
         "liquid",
         "oceanex",
         "okcoin",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit"
@@ -229,8 +223,6 @@
         "lbank",
         "liquid",
         "oceanex",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit",
@@ -270,8 +262,6 @@
         "kucoin",
         "oceanex",
         "okcoin",
-        "okex",
-        "okex3",
         "okex5"
       ],
       "maxPriceDeviationPercent": 25
@@ -309,8 +299,6 @@
         "liquid",
         "oceanex",
         "okcoin",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit"
@@ -349,8 +337,6 @@
         "kucoin",
         "liquid",
         "oceanex",
-        "okex",
-        "okex3",
         "okex5",
         "poloniex",
         "probit"

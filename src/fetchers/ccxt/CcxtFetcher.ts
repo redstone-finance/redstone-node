@@ -1,7 +1,7 @@
 import { BaseFetcher } from "../BaseFetcher";
 import { PricesObj } from "../../types";
 import redstone from "redstone-api";
-import ccxt, { Exchange, ExchangeId, Ticker } from "ccxt";
+import ccxt, { Exchange, Ticker } from "ccxt";
 
 const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
 
@@ -11,9 +11,13 @@ export class CcxtFetcher extends BaseFetcher {
   // CCXT-based fetchers must have names that are exactly equal to
   // the appropriate exchange id in CCXT
   // List of ccxt exchanges: https://github.com/ccxt/ccxt/wiki/Exchange-Markets
-  constructor(name: ExchangeId) {
+  constructor(name: ccxt.ExchangeId) {
     super(name);
-    this.exchange = new (ccxt as any)[name]({
+    const exchangeClass = ccxt[name];
+    if (!exchangeClass) {
+      throw new Error(`Exchange ${name} is not accessible through CCXT`);
+    }
+    this.exchange = new exchangeClass({
       timeout: CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS,
       enableRateLimit: false, // This config option is required to avoid problems with requests timeout
     }) as Exchange;
