@@ -3,6 +3,12 @@ const fs = require("fs");
 const SYMBOL_TO_DETAILS_PATH = "./src/fetchers/coingecko/coingecko-symbol-to-details.json";
 const SYMBOL_TO_ID_PATH = "./src/fetchers/coingecko/coingecko-symbol-to-id.json";
 
+// If you want to add a token which symbol has collision with another token
+// You can hardcode it in the `hardcodedValues` object
+const hardcodedValues = {
+  "QI": "benqi",
+};
+
 main();
 
 function main() {
@@ -18,7 +24,7 @@ function main() {
     }
   }
 
-  saveJSON(newSymbolToIds, SYMBOL_TO_ID_PATH);
+  saveJSON({ ...newSymbolToIds, ...hardcodedValues }, SYMBOL_TO_ID_PATH);
 }
 
 function readJSON(path) {

@@ -9,6 +9,7 @@ const manifestsToExclude = [
   "api-dojo-rapid.json",
   "rapid.json",
   "stocks.json",
+  "avalanche.json",
 ];
 
 main();
