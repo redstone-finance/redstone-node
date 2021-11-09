@@ -30,7 +30,7 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
         },
       });
     });
-    return Promise.all(promises);
+    return await Promise.all(promises);
   }
 
   async extractPrices(responses: any): Promise<PricesObj> {
