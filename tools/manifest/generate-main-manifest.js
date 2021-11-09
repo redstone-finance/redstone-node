@@ -6,7 +6,6 @@ const OUTPUT_FILE_PATH = "./manifests/main.json";
 
 const manifestsToExclude = [
   "main.json",
-  "api-dojo-rapid.json",
   "rapid.json",
   "stocks.json",
   "avalanche.json",
