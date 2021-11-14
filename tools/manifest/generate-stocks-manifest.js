@@ -81,4 +81,7 @@ const SYMBOLS = [
   "USDPEN=X",
 ];
 
-generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
+generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH, {
+  "interval": 60000,
+  "sourceTimeout": 30000,
+});

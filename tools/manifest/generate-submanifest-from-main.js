@@ -1,7 +1,7 @@
 const fs = require("fs");
 const manifestForMainProvider = require("../../manifests/main.json");
 
-module.exports = function(symbols, outputFilePath) {
+module.exports = function(symbols, outputFilePath, predefinedManifest = {}) {
   const manifest = {
     "interval": 10000,
     "priceAggregator": "median",
@@ -10,6 +10,7 @@ module.exports = function(symbols, outputFilePath) {
     "maxPriceDeviationPercent": 25,
     "evmChainId": 1,
     tokens: {},
+    ...predefinedManifest,
   };
 
   // Building tokens
