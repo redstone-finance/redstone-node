@@ -510,35 +510,35 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "USDMXN=X": {
+    "MXNUSD=X": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
-    "USDBRL=X": {
+    "BRLUSD=X": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
-    "USDCOP=X": {
+    "COPUSD=X": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
-    "USDARS=X": {
+    "ARSUSD=X": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
-    "USDPEN=X": {
+    "PENUSD=X": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"

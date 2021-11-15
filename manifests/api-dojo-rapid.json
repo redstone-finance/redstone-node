@@ -61,10 +61,10 @@
     "CB=F": {},
     "CSC=F": {},
 
-    "USDMXN=X": {},
-    "USDBRL=X": {},
-    "USDCOP=X": {},
-    "USDARS=X": {},
-    "USDPEN=X": {}
+    "MXNUSD=X": {},
+    "BRLUSD=X": {},
+    "COPUSD=X": {},
+    "ARSUSD=X": {},
+    "PENUSD=X": {}
   }
 }
