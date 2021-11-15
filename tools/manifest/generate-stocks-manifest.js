@@ -68,17 +68,19 @@ const SYMBOLS = [
   "CB=F",
   "CSC=F",
 
-  // Currencies
+  // Popular currencies
   "GBP",
   "AUD",
   "CHF",
   "EUR",
   "JPY",
-  "USDMXN=X",
-  "USDBRL=X",
-  "USDCOP=X",
-  "USDARS=X",
-  "USDPEN=X",
+
+  // Latin american currencies
+  "MXNUSD=X",
+  "BRLUSD=X",
+  "COPUSD=X",
+  "ARSUSD=X",
+  "PENUSD=X"
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH, {
