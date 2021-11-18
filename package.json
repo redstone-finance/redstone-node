@@ -45,6 +45,7 @@
     "redstone-api": "^0.4.6",
     "redstone-smartweave": "^0.3.10-alpha.1",
     "sort-deep-object-arrays": "^1.1.2",
+    "streamr-client": "^5.5.0",
     "uuid": "^8.3.2",
     "yahoo-finance": "^0.3.7",
     "yargs": "^16.2.0"
