@@ -1,5 +1,5 @@
 import { Consola } from "consola";
-import { Fetcher, PriceDataFetched, FetcherOpts, PricesObj } from "../types";
+import { Fetcher, DataFetched, FetcherOpts, PricesObj } from "../types";
 import createLogger from "../utils/logger";
 
 const MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS = 3000;
@@ -25,7 +25,7 @@ export abstract class BaseFetcher implements Fetcher {
 
   async fetchAll(
     symbols: string[],
-    opts?: FetcherOpts): Promise<PriceDataFetched[]> {
+    opts?: FetcherOpts): Promise<DataFetched[]> {
       // Fetching data
       const fetchStartTime = Date.now();
       let response = await this.fetchData(symbols, opts);
@@ -53,7 +53,7 @@ export abstract class BaseFetcher implements Fetcher {
 
   private convertPricesObjToPriceArray(
     pricesObj: PricesObj,
-    requiredSymbols: string[]): PriceDataFetched[] {
+    requiredSymbols: string[]): DataFetched[] {
       const prices = [];
       for (const symbol of requiredSymbols) {
         if (pricesObj[symbol] === undefined) {

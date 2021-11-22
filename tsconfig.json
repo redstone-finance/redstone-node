@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "es5",
+    "target": "es2020",
     "declaration": true,
     "outDir": "./dist",
     "module": "commonjs",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "ts-node": {
     "files": true

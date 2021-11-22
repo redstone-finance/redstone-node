@@ -4,12 +4,14 @@ import { JWKInterface } from "arweave/node/lib/wallet";
 import { Consola } from "consola";
 import util from "util";
 import { gzip } from "zlib";
-import _  from "lodash";
 import ArweaveMultihost from "arweave-multihost";
-import { SmartWeave, SmartWeaveNodeFactory, LoggerFactory } from "redstone-smartweave";
+import {
+  LoggerFactory,
+  SmartWeave,
+  SmartWeaveNodeFactory,
+} from "redstone-smartweave";
 
-const logger =
-  require("../utils/logger")("utils/arweave-proxy") as Consola;
+const logger = require("../utils/logger")("utils/arweave-proxy") as Consola;
 
 // This is a low-level "DAO" that allows to interact with Arweave blockchain
 export default class ArweaveProxy  {

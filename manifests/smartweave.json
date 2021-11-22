@@ -1,0 +1,78 @@
+{
+  "interval": 30000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "arweave"
+  ],
+  "sourceTimeout": 7000,
+  "maxPriceDeviationPercent": 25,
+  "evmChainId": 1,
+  "tokens": {
+    "BTC": {
+    },
+    "ETH": {
+      "source": [
+        "aofex",
+        "ascendex",
+        "bequant",
+        "bibox",
+        "binance",
+        "binancecoinm",
+        "binanceus",
+        "binanceusdm",
+        "bitcoincom",
+        "bitfinex",
+        "bitfinex2",
+        "bitmex",
+        "bittrex",
+        "btcturk",
+        "bw",
+        "bybit",
+        "cdax",
+        "cex",
+        "coinbase",
+        "coinex",
+        "coingecko",
+        "crex24",
+        "currencycom",
+        "delta",
+        "ftx",
+        "hitbtc",
+        "hollaex",
+        "huobipro",
+        "kraken",
+        "kucoin",
+        "lbank",
+        "liquid",
+        "oceanex",
+        "okcoin",
+        "okex5",
+        "poloniex",
+        "probit",
+        "qtrade",
+        "stex",
+        "tidebit",
+        "timex"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "USDT": {
+      "source": [
+        "binanceus",
+        "bitfinex",
+        "bitfinex2",
+        "bittrex",
+        "cex",
+        "coingecko",
+        "currencycom",
+        "ftx",
+        "kraken",
+        "kyber",
+        "okcoin",
+        "sushiswap",
+        "uniswap"
+      ],
+      "maxPriceDeviationPercent": 25
+    }
+  }
+}

@@ -34,10 +34,10 @@ export interface FetcherOpts {
   credentials: Credentials;
 };
 
-export interface Fetcher {
+export interface Fetcher<T = any> {
   fetchAll: (
     tokens: string[],
-    opts?: FetcherOpts) => Promise<PriceDataFetched[]>;
+    opts?: FetcherOpts) => Promise<DataFetched<T>[]>;
 };
 
 export interface Aggregator {
@@ -56,9 +56,11 @@ export interface PricesObj {
   [symbol: string]: number;
 };
 
-export interface PriceDataFetched {
+export type DefaultDataType = number | null | undefined | string;
+
+export interface DataFetched<T = any/*DefaultDataType*/> {
   symbol: string;
-  value: any; // usually it is a positive number, but it may also be 0, null, undefined or "error"
+  value: T; // usually it is a positive number, but it may also be 0, null, undefined or "error"
 };
 
 export interface PriceDataBeforeAggregation {

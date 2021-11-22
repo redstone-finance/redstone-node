@@ -9,7 +9,7 @@ import {
   PriceDataAfterAggregation,
   PriceDataBeforeAggregation,
   PriceDataBeforeSigning,
-  PriceDataFetched
+  DataFetched
 } from "../types";
 import {trackEnd, trackStart} from "../utils/performance-tracker";
 import {v4 as uuidv4} from 'uuid'
@@ -19,7 +19,7 @@ const VALUE_FOR_FAILED_FETCHER = "error";
 
 const logger = require("../utils/logger")("PricesFetcher") as Consola;
 
-export type PricesDataFetched = { [source: string]: PriceDataFetched[] };
+export type PricesDataFetched = { [source: string]: DataFetched[] };
 export type PricesBeforeAggregation = { [token: string]: PriceDataBeforeAggregation }
 
 export default class PricesService {
@@ -50,7 +50,7 @@ export default class PricesService {
     tokens: string[]): Promise<PricesDataFetched> {
     try {
       // Fetching
-      const pricesFromSource = await this.doFetchFromSource(source, tokens);
+      const pricesFromSource: DataFetched[] = await this.doFetchFromSource(source, tokens);
 
       return {
         [source]: pricesFromSource
@@ -78,7 +78,7 @@ export default class PricesService {
   }
 
   async doFetchFromSource(source: string, tokens: string[])
-  : Promise<PriceDataFetched[]> {
+  : Promise<DataFetched[]> {
     if (tokens.length === 0) {
        throw new ManifestConfigError(
         `${source} fetcher received an empty array of symbols`);
