@@ -84,7 +84,8 @@ describe("NodeRunner", () => {
     },
     addEvmSignature: true,
     manifestFile: "",
-    minimumArBalance: 0.2
+    minimumArBalance: 0.2,
+    enableStreamrBroadcaster: false,
   }
 
   beforeEach(() => {
