@@ -1,4 +1,5 @@
-import StreamrClient, {
+import {
+  StreamrClient,
   StorageNode,
   StreamOperation,
 } from "streamr-client";

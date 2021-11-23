@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Broadcaster } from "../Broadcaster";
 import { PriceDataSigned, SignedPricePackage } from "../../types";
 import { Consola } from "consola";

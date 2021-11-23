@@ -56,7 +56,7 @@ export default class PricesService {
         [source]: pricesFromSource
       }
 
-    } catch (e) {
+    } catch (e: any) {
       //not sure why instanceof is not working, crap.
       if (e.name == "ManifestConfigError") {
         throw e;
@@ -149,7 +149,7 @@ export default class PricesService {
             + JSON.stringify(priceAfterAggregation));
         }
         aggregatedPrices.push(priceAfterAggregation);
-      } catch (e) {
+      } catch (e: any) {
         // We use warn level instead of error because
         // price aggregation errors occur quite often
         logger.warn(e.stack);

@@ -37,7 +37,7 @@ export async function reportError(args: {
     console.log(`Reporting an error ${errorId}`, JSON.stringify(args));
     await axios.post(URL, args);
     console.log(`Error reported ${errorId}`);
-  } catch (e) {
+  } catch (e: any) {
     console.error(
       `Error occurred during error reporting ${errorId}`,
       e.stack);

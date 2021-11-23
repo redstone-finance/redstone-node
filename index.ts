@@ -11,7 +11,7 @@ const {hideBin} = require("yargs/helpers") as any;
 async function start() {
   try {
     await main();
-  } catch (e) {
+  } catch (e: any) {
     logger.error(e.stack);
     logger.info(
       "USAGE: yarn start:prod [--config <PATH_TO_CONFIG_FILE>] [--config-env <NAME_OF_ENV_VARIABLE_WITH_CONFIG>]");

@@ -86,7 +86,7 @@ export default class NodeRunner {
         logger.info("Fetching manifest data.");
         try {
           manifestData = await arweaveService.getCurrentManifest();
-        } catch (e) {
+        } catch (e: any) {
           logger.error("Initial manifest read failed.", e.stack || e);
         }
         if (manifestData !== null) {
@@ -119,7 +119,7 @@ export default class NodeRunner {
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
       setInterval(this.runIteration, this.currentManifest!.interval);
-    } catch (e) {
+    } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
     }
   }
@@ -153,7 +153,7 @@ export default class NodeRunner {
     const processingAllTrackingId = trackStart("processing-all");
     try {
       await this.doProcessTokens();
-    } catch (e) {
+    } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
     } finally {
       trackEnd(processingAllTrackingId);
@@ -167,7 +167,7 @@ export default class NodeRunner {
       if (isBalanceLow) {
         logger.warn(`AR balance is quite low: ${balance}`);
       }
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Balance checking failed", e.stack);
     } finally {
       trackEnd(balanceCheckingTrackingId);
@@ -232,7 +232,7 @@ export default class NodeRunner {
       }
       await Promise.all(promises);
       logger.info("Broadcasting completed");
-    } catch (e) {
+    } catch (e: any) {
       if (e.response !== undefined) {
         logger.error("Broadcasting failed: " + e.response.data, e.stack);
       } else {
@@ -258,7 +258,7 @@ export default class NodeRunner {
       const signedPackage = this.priceSignerService!.signPricePackage(signedPrices);
       await this.broadcastSignedPricePackage(signedPackage);
       logger.info("Package broadcasting completed");
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Package broadcasting failed", e.stack);
     } finally {
       trackEnd(packageBroadcastingTrackingId);
@@ -279,7 +279,7 @@ export default class NodeRunner {
           this.providerAddress));
       }
       await Promise.all(promises);
-    } catch (e) {
+    } catch (e: any) {
       if (e.response !== undefined) {
         logger.error(
           "Signed package broadcasting failed: " + e.response.data,
@@ -332,7 +332,7 @@ export default class NodeRunner {
           trackEnd(manifestFetchTrackingId);
         });
 
-      } catch (e) {
+      } catch (e: any) {
         logger.info("Error while calling manifest load function.")
       }
     } else {

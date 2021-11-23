@@ -3,7 +3,7 @@
 # But before running the container it must be configured to provide
 # the node config through REDSTONE_NODE_CONFIG environment variable
 
-FROM node:12.13-alpine
+FROM node:14
 
 RUN mkdir /app
 WORKDIR /app
