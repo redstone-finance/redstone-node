@@ -16,10 +16,6 @@ RUN yarn
 # Copying all files
 COPY . .
 
-# Removing public files
-RUN rm -f .secrets
-RUN rm -f .experiments
-
 # Building app
 RUN yarn build
 
@@ -27,6 +23,9 @@ RUN yarn build
 ENV MODE=PROD
 ENV ENABLE_JSON_LOGS=true
 ENV PERFORMANCE_TRACKING_LABEL_PREFIX=public
+
+# Exposing 8080 port for health checks
+EXPOSE 8080
 
 # Running redstone node
 CMD yarn start:prod --config-env REDSTONE_NODE_CONFIG
