@@ -23,6 +23,7 @@ export class ExpressAppRunner {
   }
 
   run() {
+    logger.info(`Running express server on port: ${PORT}`);
     this.app.listen(PORT, () => {
       logger.info(`Server started at http://localhost:${PORT}`);
     });

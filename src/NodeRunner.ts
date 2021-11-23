@@ -77,6 +77,11 @@ export default class NodeRunner {
     jwk: JWKInterface,
     nodeConfig: NodeConfig,
   ): Promise<NodeRunner> {
+    // Running a simple web server
+    // It should be called as early as possible
+    // Otherwise App Runner crashes ¯\_(ツ)_/¯
+    new ExpressAppRunner().run();
+
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave, nodeConfig.minimumArBalance);
@@ -116,9 +121,6 @@ export default class NodeRunner {
     `);
 
     await this.exitIfBalanceTooLow();
-
-    // Running a simple web server
-    new ExpressAppRunner().run();
 
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
