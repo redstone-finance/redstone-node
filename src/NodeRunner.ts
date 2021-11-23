@@ -2,7 +2,6 @@ import { Consola } from "consola";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
-import { HttpBroadcaster, Broadcaster } from "./broadcasters";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
@@ -18,6 +17,11 @@ import PricesService, {
   PricesBeforeAggregation,
   PricesDataFetched,
 } from "./fetchers/PricesService";
+import {
+  Broadcaster,
+  HttpBroadcaster,
+  StreamrBroadcaster,
+} from "./broadcasters";
 import {
   Manifest,
   NodeConfig,
@@ -43,7 +47,8 @@ export default class NodeRunner {
   private tokensBySource?: TokensBySource;
   private newManifest: Manifest | null = null;
   private priceSignerService?: PriceSignerService;
-  private broadcaster: Broadcaster;
+  private httpBroadcaster: Broadcaster;
+  private streamrBroadcaster: Broadcaster;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -58,7 +63,8 @@ export default class NodeRunner {
     }
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
-    this.broadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
+    this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
+    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
 
     //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     //alternatively use arrow functions...
@@ -219,7 +225,12 @@ export default class NodeRunner {
     logger.info("Broadcasting prices");
     const broadcastingTrackingId = trackStart("broadcasting");
     try {
-      await this.broadcaster.broadcast(signedPrices);
+      const promises = [];
+      promises.push(this.httpBroadcaster.broadcast(signedPrices));
+      if (this.nodeConfig.enableStreamrBroadcaster) {
+        promises.push(this.streamrBroadcaster.broadcast(signedPrices));
+      }
+      await Promise.all(promises);
       logger.info("Broadcasting completed");
     } catch (e) {
       if (e.response !== undefined) {
@@ -258,9 +269,16 @@ export default class NodeRunner {
     const signedPackageBroadcastingTrackingId =
       trackStart("signed-package-broadcasting");
     try {
-      await this.broadcaster.broadcastPricePackage(
+      const promises = [];
+      promises.push(this.httpBroadcaster.broadcastPricePackage(
         signedPackage,
-        this.providerAddress);
+        this.providerAddress));
+      if (this.nodeConfig.enableStreamrBroadcaster) {
+        promises.push(this.streamrBroadcaster.broadcastPricePackage(
+          signedPackage,
+          this.providerAddress));
+      }
+      await Promise.all(promises);
     } catch (e) {
       if (e.response !== undefined) {
         logger.error(
