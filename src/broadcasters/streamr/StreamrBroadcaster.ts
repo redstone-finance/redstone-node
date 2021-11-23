@@ -11,7 +11,6 @@ const PRICES_STREAM_NAME = "prices";
 
 export class StreamrBroadcaster implements Broadcaster {
   private streamrProxy: StreamrProxy;
-  private timer: any;
   private pricesToBroadcast: PriceDataSigned[] = [];
   private packageToBroadcast: SignedPricePackage | undefined;
 
@@ -19,6 +18,9 @@ export class StreamrBroadcaster implements Broadcaster {
     this.streamrProxy = new StreamrProxy(ethereumPrivateKey);
     this.streamrProxy.tryCreateStream(PACKAGE_STREAM_NAME);
     this.streamrProxy.tryCreateStream(PRICES_STREAM_NAME);
+    setInterval(
+      this.broadcastInternal.bind(this),
+      STREAMR_BROADCASTING_INTERVAL_MILLISECONDS)
   }
 
   private async broadcastInternal(): Promise<void> {
@@ -41,23 +43,13 @@ export class StreamrBroadcaster implements Broadcaster {
     await Promise.all(promises);
   }
 
-  private lazyEnableTimer(): void {
-    if (!this.timer) {
-      this.timer = setInterval(
-        this.broadcastInternal.bind(this),
-        STREAMR_BROADCASTING_INTERVAL_MILLISECONDS)
-    }
-  }
-
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
     this.pricesToBroadcast = prices;
-    this.lazyEnableTimer();
   }
 
   async broadcastPricePackage(
     signedData: SignedPricePackage,
     _providerAddress: string): Promise<void> {
       this.packageToBroadcast = signedData;
-      this.lazyEnableTimer();
     }
 }
