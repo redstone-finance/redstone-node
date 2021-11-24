@@ -23,6 +23,10 @@ export class ExpressAppRunner {
   }
 
   run() {
+    if (process.env.NODE_ENV === "test") {
+      logger.info(`Express server running skipped in test environment`);
+      return;
+    }
     logger.info(`Running express server on port: ${PORT}`);
     this.app.listen(PORT, () => {
       logger.info(`Server started at http://localhost:${PORT}`);
