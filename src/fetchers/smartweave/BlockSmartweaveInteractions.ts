@@ -74,7 +74,7 @@ export class BlockSmartweaveInteractions {
     blockHeight: number,
     contractsTxId: string[],
     internalWrites: boolean
-  ): Promise<GQLEdgeInterface[]> {
+  ): Promise<Map<string, GQLEdgeInterface[]>> {
     const contracts = contractsTxId.join(",");
 
     const mainTransactionsVariables: ReqVariables = {
@@ -82,10 +82,6 @@ export class BlockSmartweaveInteractions {
         {
           name: SmartWeaveTags.APP_NAME,
           values: ["SmartWeaveAction"],
-        },
-        {
-          name: SmartWeaveTags.CONTRACT_TX_ID,
-          values: [contracts],
         },
       ],
       blockFilter: {
@@ -97,27 +93,34 @@ export class BlockSmartweaveInteractions {
 
     let interactions = await this.loadPages(mainTransactionsVariables);
 
-    if (internalWrites) {
-      const innerWritesVariables: ReqVariables = {
-        tags: [
-          {
-            name: SmartWeaveTags.INTERACT_WRITE,
-            values: [contracts],
-          },
-        ],
-        blockFilter: {
-          min: blockHeight,
-          max: blockHeight,
-        },
-        first: MAX_REQUEST,
-      };
-      const innerWritesInteractions = await this.loadPages(
-        innerWritesVariables
-      );
-      interactions = interactions.concat(innerWritesInteractions);
-    }
+    const contractsTransactions = new Map<string, GQLEdgeInterface[]>();
 
-    return interactions;
+    // extract transactions per contract
+    interactions.forEach((interaction) => {
+      const contractTag = interaction.node.tags.find((t) => {
+        return t.name === SmartWeaveTags.CONTRACT_TX_ID;
+      });
+
+      // Eyes Pop - Skin Explodes - Everybody Dead
+      if (contractTag === undefined) {
+        throw new Error("Contract tag not found");
+      }
+
+      const contractTxId = contractTag.value;
+      if (!contractsTxId.includes(contractTxId)) {
+        return;
+      }
+
+      if (!contractsTransactions.has(contractTxId)) {
+        contractsTransactions.set(contractTxId, []);
+      }
+
+      contractsTransactions.get(contractTxId)?.push(interaction);
+    });
+
+    //TODO: add support for internal writes
+
+    return contractsTransactions;
   }
 
   private async loadPages(variables: ReqVariables) {

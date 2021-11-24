@@ -25,7 +25,7 @@ type ContractStatePromiseResult =
   | PromiseRejectedResult;
 
 // note: that's a structure that should be saved in a persistent storage
-type SwFetchResult = {
+export type SwFetchResult = {
   state: EvalStateResult<any>;
   blockHeight: number;
 };
@@ -41,15 +41,9 @@ export class SmartWeaveFetcher implements Fetcher<SwFetchResult> {
   private readonly blockSmartweaveInteractions: BlockSmartweaveInteractions;
   private readonly stateCache: MemBlockHeightSwCache<StateCache<unknown>>;
 
-  private constructor() {
+  private constructor(arweave: Arweave) {
     this.lastProcessedBlock = new Map<string, number>();
-    this.arweave = ArweaveMultihost.initWithDefaultHosts({
-      timeout: 60000, // Network request timeouts in milliseconds
-      logging: true, // Enable network request logging
-      onError: (...args: any) => {
-        this.logger.warn("Arweave request failed", ...args);
-      },
-    });
+    this.arweave = arweave;
 
     this.blockSmartweaveInteractions = new BlockSmartweaveInteractions(
       this.arweave
@@ -74,8 +68,11 @@ export class SmartWeaveFetcher implements Fetcher<SwFetchResult> {
       .build();
   }
 
-  async init(observedContractTxIds: string[]): Promise<Fetcher<SwFetchResult>> {
-    const fetcher = new SmartWeaveFetcher();
+  static async init(
+    observedContractTxIds: string[],
+    arweave: Arweave
+  ): Promise<Fetcher<SwFetchResult>> {
+    const fetcher = new SmartWeaveFetcher(arweave);
     await fetcher.initCache(observedContractTxIds);
     return fetcher;
   }
@@ -159,13 +156,18 @@ export class SmartWeaveFetcher implements Fetcher<SwFetchResult> {
     const contractsState = await Promise.allSettled(
       contractsNotEvaluatedInLastBlock.map(async (contractTxId) => {
         this.logger.info("Evaluating contract", contractTxId);
-        const readStateResult = await this.smartweave
-          .contract<any>(contractTxId)
-          .readState(currentBlockHeight);
-        return Promise.resolve({
-          contractTxId: contractTxId,
-          result: readStateResult,
-        });
+        try {
+          const readStateResult = await this.smartweave
+            .contract<any>(contractTxId)
+            .readState(currentBlockHeight);
+          return Promise.resolve({
+            contractTxId: contractTxId,
+            result: readStateResult,
+          });
+        } catch (e: unknown) {
+          this.logger.error(e);
+          return Promise.reject(e);
+        }
       })
     );
 
@@ -176,35 +178,16 @@ export class SmartWeaveFetcher implements Fetcher<SwFetchResult> {
     contractsEvaluatedInLastBlock: string[],
     currentBlockHeight: number
   ): Promise<DataFetched<SwFetchResult>[]> {
-    const lastBlockTransactions = await this.blockSmartweaveInteractions.load(
+    const contractsTransactions = await this.blockSmartweaveInteractions.load(
       currentBlockHeight,
       contractsEvaluatedInLastBlock,
       false
     );
 
-    const contractsTransactions = new Map<string, GQLEdgeInterface[]>();
-
-    // extract transactions per contract
-    lastBlockTransactions.forEach((interaction) => {
-      const contractTag = interaction.node.tags.find((t) => {
-        return t.name === SmartWeaveTags.CONTRACT_TX_ID;
-      });
-
-      // Eyes Pop - Skin Explodes - Everybody Dead
-      if (contractTag === undefined) {
-        throw new Error("Contract tag not found");
-      }
-
-      const contractTxId = contractTag.value;
-      if (!contractsTransactions.has(contractTxId)) {
-        contractsTransactions.set(contractTxId, []);
-      }
-
-      contractsTransactions.get(contractTxId)?.push(interaction);
-    });
+    const contractsWithTransactions = [...contractsTransactions.keys()];
 
     const contractsState = await Promise.allSettled(
-      [...contractsTransactions.keys()].map(async (contractTxId: string) => {
+      contractsWithTransactions.map(async (contractTxId: string) => {
         const interactions = contractsTransactions.get(contractTxId)!;
 
         // "inject" contract transactions into InteractionsLoader
@@ -225,6 +208,14 @@ export class SmartWeaveFetcher implements Fetcher<SwFetchResult> {
         }
       })
     );
+
+    // for contracts without interactions in this block
+    // - just mark them as evaluated
+    contractsEvaluatedInLastBlock.forEach((txId) => {
+      if (!contractsWithTransactions.includes(txId)) {
+        this.lastProcessedBlock.set(txId, currentBlockHeight);
+      }
+    });
 
     return this.mapContractsStatePromise(contractsState, currentBlockHeight);
   }
