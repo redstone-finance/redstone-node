@@ -8,6 +8,7 @@ import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import { mergeObjects, readJSON, timeout } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
+import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
   printTrackingState,
   trackEnd,
@@ -66,8 +67,8 @@ export default class NodeRunner {
     this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
     this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
 
-    //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
-    //alternatively use arrow functions...
+    // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
+    // alternatively use arrow functions...
     this.runIteration = this.runIteration.bind(this);
     this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
@@ -76,6 +77,11 @@ export default class NodeRunner {
     jwk: JWKInterface,
     nodeConfig: NodeConfig,
   ): Promise<NodeRunner> {
+    // Running a simple web server
+    // It should be called as early as possible
+    // Otherwise App Runner crashes ¯\_(ツ)_/¯
+    new ExpressAppRunner().run();
+
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave, nodeConfig.minimumArBalance);
