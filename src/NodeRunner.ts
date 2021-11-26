@@ -233,7 +233,7 @@ export default class NodeRunner {
     try {
       const promises = [];
       promises.push(this.httpBroadcaster.broadcast(signedPrices));
-      if (this.nodeConfig.enableStreamrBroadcaster) {
+      if (this.nodeConfig.enableStreamrBroadcaster && !this.nodeConfig.disableSinglePricesBroadcastingInStreamr) {
         promises.push(this.streamrBroadcaster.broadcast(signedPrices));
       }
       await Promise.all(promises);

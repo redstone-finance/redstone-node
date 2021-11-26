@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Broadcaster } from "../Broadcaster";
 import { PriceDataSigned, SignedPricePackage } from "../../types";
 import { Consola } from "consola";
@@ -11,7 +12,7 @@ const PRICES_STREAM_NAME = "prices";
 
 export class StreamrBroadcaster implements Broadcaster {
   private streamrProxy: StreamrProxy;
-  private pricesToBroadcast: PriceDataSigned[] = [];
+  private pricesToBroadcast: Partial<PriceDataSigned>[] = [];
   private packageToBroadcast: SignedPricePackage | undefined;
   private timer?: NodeJS.Timer;
 
@@ -53,7 +54,7 @@ export class StreamrBroadcaster implements Broadcaster {
   }
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
-    this.pricesToBroadcast = prices;
+    this.pricesToBroadcast = prices.map(p => _.omit(p, ["source"]));
     this.lazyEnableTimer();
   }
 

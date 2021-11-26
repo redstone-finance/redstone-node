@@ -121,4 +121,5 @@ export interface NodeConfig {
   credentials: Credentials;
   httpBroadcasterURLs?: string[];
   enableStreamrBroadcaster: boolean;
+  disableSinglePricesBroadcastingInStreamr?: boolean;
 };
