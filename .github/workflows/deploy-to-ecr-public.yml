@@ -5,13 +5,11 @@
 # Learn more: https://github.com/pahud/ecr-public-action
 
 name: Deploy to Amazon ECR Public
-
 on:
   push:
     branches:
       - main
       - push-docker-ecr-public
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
