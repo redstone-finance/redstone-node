@@ -2,13 +2,13 @@ import { Consola } from "consola";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
-import { HttpBroadcaster, Broadcaster } from "./broadcasters";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import { mergeObjects, readJSON, timeout } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
+import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
   printTrackingState,
   trackEnd,
@@ -18,6 +18,11 @@ import PricesService, {
   PricesBeforeAggregation,
   PricesDataFetched,
 } from "./fetchers/PricesService";
+import {
+  Broadcaster,
+  HttpBroadcaster,
+  StreamrBroadcaster,
+} from "./broadcasters";
 import {
   Manifest,
   NodeConfig,
@@ -43,7 +48,8 @@ export default class NodeRunner {
   private tokensBySource?: TokensBySource;
   private newManifest: Manifest | null = null;
   private priceSignerService?: PriceSignerService;
-  private broadcaster: Broadcaster;
+  private httpBroadcaster: Broadcaster;
+  private streamrBroadcaster: Broadcaster;
 
   private constructor(
     private readonly arweaveService: ArweaveService,
@@ -58,10 +64,11 @@ export default class NodeRunner {
     }
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
-    this.broadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
+    this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
+    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
 
-    //https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
-    //alternatively use arrow functions...
+    // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
+    // alternatively use arrow functions...
     this.runIteration = this.runIteration.bind(this);
     this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
@@ -70,6 +77,11 @@ export default class NodeRunner {
     jwk: JWKInterface,
     nodeConfig: NodeConfig,
   ): Promise<NodeRunner> {
+    // Running a simple web server
+    // It should be called as early as possible
+    // Otherwise App Runner crashes ¯\_(ツ)_/¯
+    new ExpressAppRunner().run();
+
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave, nodeConfig.minimumArBalance);
@@ -80,7 +92,7 @@ export default class NodeRunner {
         logger.info("Fetching manifest data.");
         try {
           manifestData = await arweaveService.getCurrentManifest();
-        } catch (e) {
+        } catch (e: any) {
           logger.error("Initial manifest read failed.", e.stack || e);
         }
         if (manifestData !== null) {
@@ -113,7 +125,7 @@ export default class NodeRunner {
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
       setInterval(this.runIteration, this.currentManifest!.interval);
-    } catch (e) {
+    } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
     }
   }
@@ -147,7 +159,7 @@ export default class NodeRunner {
     const processingAllTrackingId = trackStart("processing-all");
     try {
       await this.doProcessTokens();
-    } catch (e) {
+    } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
     } finally {
       trackEnd(processingAllTrackingId);
@@ -161,7 +173,7 @@ export default class NodeRunner {
       if (isBalanceLow) {
         logger.warn(`AR balance is quite low: ${balance}`);
       }
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Balance checking failed", e.stack);
     } finally {
       trackEnd(balanceCheckingTrackingId);
@@ -219,9 +231,14 @@ export default class NodeRunner {
     logger.info("Broadcasting prices");
     const broadcastingTrackingId = trackStart("broadcasting");
     try {
-      await this.broadcaster.broadcast(signedPrices);
+      const promises = [];
+      promises.push(this.httpBroadcaster.broadcast(signedPrices));
+      if (this.nodeConfig.enableStreamrBroadcaster && !this.nodeConfig.disableSinglePricesBroadcastingInStreamr) {
+        promises.push(this.streamrBroadcaster.broadcast(signedPrices));
+      }
+      await Promise.all(promises);
       logger.info("Broadcasting completed");
-    } catch (e) {
+    } catch (e: any) {
       if (e.response !== undefined) {
         logger.error("Broadcasting failed: " + e.response.data, e.stack);
       } else {
@@ -247,7 +264,7 @@ export default class NodeRunner {
       const signedPackage = this.priceSignerService!.signPricePackage(signedPrices);
       await this.broadcastSignedPricePackage(signedPackage);
       logger.info("Package broadcasting completed");
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Package broadcasting failed", e.stack);
     } finally {
       trackEnd(packageBroadcastingTrackingId);
@@ -258,10 +275,17 @@ export default class NodeRunner {
     const signedPackageBroadcastingTrackingId =
       trackStart("signed-package-broadcasting");
     try {
-      await this.broadcaster.broadcastPricePackage(
+      const promises = [];
+      promises.push(this.httpBroadcaster.broadcastPricePackage(
         signedPackage,
-        this.providerAddress);
-    } catch (e) {
+        this.providerAddress));
+      if (this.nodeConfig.enableStreamrBroadcaster) {
+        promises.push(this.streamrBroadcaster.broadcastPricePackage(
+          signedPackage,
+          this.providerAddress));
+      }
+      await Promise.all(promises);
+    } catch (e: any) {
       if (e.response !== undefined) {
         logger.error(
           "Signed package broadcasting failed: " + e.response.data,
@@ -314,7 +338,7 @@ export default class NodeRunner {
           trackEnd(manifestFetchTrackingId);
         });
 
-      } catch (e) {
+      } catch (e: any) {
         logger.info("Error while calling manifest load function.")
       }
     } else {

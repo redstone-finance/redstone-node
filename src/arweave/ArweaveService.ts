@@ -48,7 +48,7 @@ export default class ArweaveService {
       const isBalanceLow = balance < this.minBalance;
       logger.info(`Balance: ${balance}`);
       return {balance, isBalanceLow};
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Error while checking balance on Arweave", e.stack);
       return {balance: 0, isBalanceLow: true};
     }
@@ -64,7 +64,7 @@ export default class ArweaveService {
     try {
       await this.arweaveProxy.postTransaction(arTransaction);
       logger.info(`Transaction posted: ${arTransaction.id}`);
-    } catch (e) {
+    } catch (e: any) {
       logger.error("Error while storing prices on Arweave", e.stack);
     } finally {
       trackEnd(keepingTrackingId);

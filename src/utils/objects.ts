@@ -8,7 +8,7 @@ export function readJSON(path: string): any {
   const content = fs.readFileSync(path, "utf-8");
   try {
     return JSON.parse(content);
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`File "${path}" does not contain a valid JSON`);
   }
 }

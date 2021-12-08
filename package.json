@@ -25,6 +25,7 @@
     "Peter Pedziwiatr <peter@redstone.finance>"
   ],
   "dependencies": {
+    "@types/express": "^4.17.13",
     "arql-ops": "^1.0.0",
     "arweave": "^1.10.16",
     "arweave-multihost": "^0.1.0",
@@ -38,6 +39,7 @@
     "eth-sig-util": "^3.0.1",
     "ethereumjs-util": "^7.0.10",
     "ethers": "^5.3.0",
+    "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -45,6 +47,7 @@
     "redstone-api": "^0.4.6",
     "redstone-smartweave": "^0.3.10-alpha.1",
     "sort-deep-object-arrays": "^1.1.2",
+    "streamr-client": "^5.5.0",
     "uuid": "^8.3.2",
     "yahoo-finance": "^0.3.7",
     "yargs": "^16.2.0"

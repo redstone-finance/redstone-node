@@ -120,4 +120,6 @@ export interface NodeConfig {
   minimumArBalance: number;
   credentials: Credentials;
   httpBroadcasterURLs?: string[];
+  enableStreamrBroadcaster: boolean;
+  disableSinglePricesBroadcastingInStreamr?: boolean;
 };
