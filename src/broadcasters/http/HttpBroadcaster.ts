@@ -20,11 +20,11 @@ export class HttpBroadcaster implements Broadcaster {
     signedData: SignedPricePackage,
     providerAddress: string): Promise<void> {
       const body = {
-        timestamp: signedData.pricePackage.timestamp,
         signature: signedData.signature,
         liteSignature: signedData.liteSignature,
         signer: signedData.signer,
         provider: providerAddress,
+        ...signedData.pricePackage, // unpacking prices and timestamp
       };
 
       for (const url of this.broadcasterURLs) {

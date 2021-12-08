@@ -314,7 +314,8 @@ describe("NodeRunner", () => {
         signature: "mock_evm_signed",
         liteSignature: "mock_evm_signed_lite",
         signer: "mock_evm_signer",
-        provider: "mockArAddress"
+        provider: "mockArAddress",
+        prices: [{symbol: "BTC", value: 444.5}]
       }
     );
     expect(mockArProxy.postTransaction).not.toHaveBeenCalled();
