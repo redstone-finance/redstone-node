@@ -9209,6 +9209,12 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "ENTROPY": {
+      "source": [
+        "drand"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "JPY": {
       "source": [
         "ecb"
