@@ -27,8 +27,11 @@ export default class ArweaveService {
   ) {
   }
 
-  async prepareArweaveTransaction(prices: PriceDataAfterAggregation[], nodeVersion: string)
-    : Promise<Transaction> {
+  async prepareArweaveTransaction(
+    prices: PriceDataAfterAggregation[],
+    nodeVersion: string,
+    omitSources?: boolean,
+  ): Promise<Transaction> {
     const transactionPreparingTrackingId = trackStart("transaction-preparing");
 
     logger.info("Keeping prices on arweave blockchain - preparing transaction");
@@ -36,7 +39,18 @@ export default class ArweaveService {
 
     const tags = this.prepareTransactionTags(nodeVersion, prices);
 
-    const transaction = await this.arweaveProxy.prepareUploadTransaction(tags, prices);
+    let pricesToAttachInArweaveTx: PriceDataAfterAggregation[] = prices;
+    if (omitSources) {
+      pricesToAttachInArweaveTx = prices.map(price => {
+        price.source = {};
+        return price;
+      });
+    }
+
+    const transaction = await this.arweaveProxy.prepareUploadTransaction(
+      tags,
+      pricesToAttachInArweaveTx);
+
     trackEnd(transactionPreparingTrackingId);
 
     return transaction;

@@ -122,4 +122,5 @@ export interface NodeConfig {
   httpBroadcasterURLs?: string[];
   enableStreamrBroadcaster: boolean;
   disableSinglePricesBroadcastingInStreamr?: boolean;
+  omitSourcesInArweaveTx?: boolean;
 };

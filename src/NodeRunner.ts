@@ -187,7 +187,8 @@ export default class NodeRunner {
     const aggregatedPrices: PriceDataAfterAggregation[] = await this.fetchPrices();
     const arTransaction: Transaction = await this.arweaveService.prepareArweaveTransaction(
       aggregatedPrices,
-      this.version);
+      this.version,
+      this.nodeConfig.omitSourcesInArweaveTx);
     const pricesReadyForSigning = this.pricesService!.preparePricesForSigning(
       aggregatedPrices,
       arTransaction.id,
