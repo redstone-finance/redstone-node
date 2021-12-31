@@ -39,7 +39,7 @@ export default class ArweaveService {
 
     const tags = this.prepareTransactionTags(nodeVersion, prices);
 
-    let pricesToAttachInArweaveTx: PriceDataAfterAggregation[] = prices;
+    let pricesToAttachInArweaveTx: PriceDataAfterAggregation[] = [...prices];
     if (omitSources) {
       pricesToAttachInArweaveTx = prices.map(price => {
         price.source = {};
