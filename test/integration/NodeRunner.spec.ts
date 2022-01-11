@@ -208,17 +208,6 @@ describe("NodeRunner", () => {
     }).rejects.toThrow("minimumArBalance not defined in config file");
   });
 
-  it("should throw if Arweave balance too low on initial check", async () => {
-    // Given
-    mockArProxy.getBalance.mockResolvedValue(0.1);
-    const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
-    );
-
-    await expect(sut.run()).rejects.toThrowError("AR balance too low");
-  });
-
   it("should save 'error' value if fetcher fails", async () => {
     // Given
     mockArProxy.getBalance.mockResolvedValue(0.2);

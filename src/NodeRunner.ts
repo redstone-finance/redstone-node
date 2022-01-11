@@ -120,23 +120,13 @@ export default class NodeRunner {
       Address: ${this.providerAddress}
     `);
 
-    await this.exitIfBalanceTooLow();
+    await this.warnIfARBalanceLow();
 
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
       setInterval(this.runIteration, this.currentManifest!.interval);
     } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
-    }
-  }
-
-  private async exitIfBalanceTooLow() {
-    const {balance, isBalanceLow} = await this.arweaveService.checkBalance();
-    if (isBalanceLow) {
-      logger.fatal(
-        `You should have at least ${this.nodeConfig.minimumArBalance}
-         AR to start a node service. Current balance: ${balance}`);
-      throw new Error("AR balance too low to start node.");
     }
   }
 
