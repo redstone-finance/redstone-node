@@ -9209,6 +9209,12 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "SOS": {
+      "source": [
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "ENTROPY": {
       "source": [
         "drand"
