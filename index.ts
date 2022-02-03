@@ -41,8 +41,12 @@ async function main(): Promise<void> {
     if (!configString) {
       throw new Error(`ENV variable '${argv["config-env"]}' is empty`);
     }
+    console.log("Config string: " + configString); // TODO: will remove later (added for AWS Fargate debugging)
     config = JSON.parse(configString);
     jwk = config.arweaveKeysJWK!;
+    if (!jwk) {
+      throw new Error('arweaveKeysJWK is empty');
+    }
   }
 
   // Running limestone-node with manifest
