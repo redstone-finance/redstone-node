@@ -47,9 +47,11 @@ export default class ArweaveService {
       });
     }
 
-    const transaction = await this.arweaveProxy.prepareUploadTransaction(
-      tags,
-      pricesToAttachInArweaveTx);
+    // const transaction = await this.arweaveProxy.prepareUploadTransaction(
+    //   tags,
+    //   pricesToAttachInArweaveTx);
+
+    const transaction = await this.arweaveProxy.bundlr.prepareTx(pricesToAttachInArweaveTx);
 
     trackEnd(transactionPreparingTrackingId);
 
@@ -69,9 +71,9 @@ export default class ArweaveService {
 
   }
 
-  async storePricesOnArweave(arTransaction: Transaction) {
+  async storeDataPointsOnArweave(arTransaction: Transaction) {
     logger.info(
-      `Keeping prices on arweave blockchain - posting transaction
+      `Keeping data on arweave blockchain - posting transaction
        ${arTransaction.id}`);
     const keepingTrackingId = trackStart("keeping");
     //TODO: Handle errors in a more sensible way ;-) https://app.clickup.com/t/k38r91
@@ -79,7 +81,7 @@ export default class ArweaveService {
       await this.arweaveProxy.postTransaction(arTransaction);
       logger.info(`Transaction posted: ${arTransaction.id}`);
     } catch (e: any) {
-      logger.error("Error while storing prices on Arweave", e.stack);
+      logger.error("Error while storing datapoints on Arweave", e.stack);
     } finally {
       trackEnd(keepingTrackingId);
     }

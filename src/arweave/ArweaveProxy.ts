@@ -7,6 +7,7 @@ import { gzip } from "zlib";
 import _  from "lodash";
 import ArweaveMultihost from "arweave-multihost";
 import { SmartWeave, SmartWeaveNodeFactory, LoggerFactory } from "redstone-smartweave";
+import BundlrProxy from "./BundlrProxy";
 
 const logger =
   require("../utils/logger")("utils/arweave-proxy") as Consola;
@@ -16,6 +17,7 @@ export default class ArweaveProxy  {
   jwk: JWKInterface;
   arweave: Arweave;
   smartweave: SmartWeave;
+  bundlr: BundlrProxy;
 
   constructor(jwk: JWKInterface) {
     this.jwk = jwk;
@@ -27,6 +29,7 @@ export default class ArweaveProxy  {
         logger.warn("Arweave request failed", ...args);
       },
     });
+    this.bundlr = new BundlrProxy(jwk);
 
     LoggerFactory.INST.setOptions({
       type: "json",
@@ -90,12 +93,20 @@ export default class ArweaveProxy  {
   }
 
   async postTransaction(tx: Transaction): Promise<void> {
+
+    // V1 implementation (posting directly to Arweave)
     const uploader = await this.arweave.transactions.getUploader(tx);
 
     while (!uploader.isComplete) {
       await uploader.uploadChunk();
       logger.info(`${uploader.pctComplete}% complete, ${uploader.uploadedChunks}/${uploader.totalChunks}`);
     }
+
+    // V2 implementation (sending to bundlr)
+    const bundlrTx = await this.bundlr.uploadWithLazyFunding(tx.data);
+    console.log({bundlrTx}); // TODO: remove it later
+    console.log({bundlrTxId: bundlrTx.id}); // TODO: remove it later
+
   }
 
 };

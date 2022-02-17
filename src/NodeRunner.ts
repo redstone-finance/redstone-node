@@ -193,7 +193,7 @@ export default class NodeRunner {
     await this.broadcastEvmPricePackage(signedPrices);
 
     if (mode.isProd) {
-      await this.arweaveService.storePricesOnArweave(arTransaction);
+      await this.arweaveService.storeDataPointsOnArweave(arTransaction);
     } else {
       logger.info(
         `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
