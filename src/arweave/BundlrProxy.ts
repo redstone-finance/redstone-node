@@ -6,7 +6,7 @@ import bundlrDefaults from "./bundlr-defaults.json";
 import util from "util";
 import { gzip } from "zlib";
 
-const logger = require("./src/utils/logger")("BundlrProxy") as Consola;
+const logger = require("../utils/logger")("BundlrProxy") as Consola;
 
 export default class BundlrProxy  {
 
@@ -34,9 +34,7 @@ export default class BundlrProxy  {
   }
 
   async uploadBundlrTransaction(tx: BundlrTransaction): Promise<void> {
-    logger.info(`Uploading bundlr transaction: ${tx.id}`);
-    const receipt = await tx.upload();
-    logger.info(`Uploaded bundlr transaction: ${tx.id}. Receipt: ${JSON.stringify(receipt)}`);
+    return await tx.upload();
   }
 
   async getBalance(): Promise<number> {

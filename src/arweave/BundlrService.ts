@@ -1,11 +1,22 @@
 import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import { Consola } from "consola";
+import _ from "lodash";
 import { PriceDataAfterAggregation } from "../types";
 import { trackEnd, trackStart } from "../utils/performance-tracker";
 import BundlrProxy from "./BundlrProxy";
 
 const logger = require("../utils/logger")("BunldrService") as Consola;
+
+// We've added this interface to handle source omitting
+export interface PriceDataForPostingOnArweave {
+  id: string;
+  symbol: string;
+  source?: { [sourceName: string]: any };
+  timestamp: number;
+  version: string;
+  value: any;
+}
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
 
@@ -36,29 +47,30 @@ export class BundlrService {
     omitSources?: boolean,
   ): Promise<BundlrTransaction> {
     // Start time tracking
-    const transactionPreparingTrackingId = "transaction-preparing"
-    trackStart(transactionPreparingTrackingId);
+    const transactionPreparingTrackingId = trackStart("transaction-preparing");
 
-    logger.info("Keeping prices on arweave blockchain - preparing transaction");
-    this.checkAllPricesHaveSameTimestamp(prices);
+    try {
 
-    // Removing sources (if needed)
-    let pricesToAttachInArweaveTx: PriceDataAfterAggregation[] = [...prices];
-    if (omitSources) {
-      pricesToAttachInArweaveTx = prices.map(price => {
-        price.source = {};
-        return price;
-      });
+      logger.info("Keeping prices on arweave blockchain - preparing transaction");
+      this.checkAllPricesHaveSameTimestamp(prices);
+
+      // Removing sources (if needed)
+      let pricesToAttachInArweaveTx: PriceDataForPostingOnArweave[] = [...prices];
+      if (omitSources) {
+        pricesToAttachInArweaveTx = prices.map(price => {
+          return _.omit(price, ['source']);
+        });
+      }
+
+      // Prepare and sign bundlr transaction
+      const transaction = await this.bundlrProxy.prepareSignedTrasaction(
+        pricesToAttachInArweaveTx);
+
+      return transaction;
+    } finally {
+      // End time tracking
+      trackEnd(transactionPreparingTrackingId);
     }
-
-    // Prepare and sign bundlr transaction
-    const transaction = await this.bundlrProxy.prepareSignedTrasaction(
-      pricesToAttachInArweaveTx);
-
-    // End time tracking
-    trackEnd(transactionPreparingTrackingId);
-
-    return transaction;
   }
 
   async uploadBundlrTransaction(tx: BundlrTransaction) {
