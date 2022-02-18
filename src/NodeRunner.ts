@@ -1,6 +1,5 @@
 import { Consola } from "consola";
 import { JWKInterface } from "arweave/node/lib/wallet";
-import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
@@ -30,6 +29,8 @@ import {
   PriceDataSigned,
   SignedPricePackage,
 } from "./types";
+import { BundlrService } from "./arweave/BundlrService";
+import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -53,6 +54,7 @@ export default class NodeRunner {
 
   private constructor(
     private readonly arweaveService: ArweaveService,
+    private readonly bundlrService: BundlrService,
     private readonly providerAddress: string,
     private readonly nodeConfig: NodeConfig,
     initialManifest: Manifest,
@@ -84,7 +86,8 @@ export default class NodeRunner {
 
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
-    const arweaveService = new ArweaveService(arweave, nodeConfig.minimumArBalance);
+    const arweaveService = new ArweaveService(arweave);
+    const bundlrService = new BundlrService(jwk, nodeConfig.minimumArBalance);
 
     let manifestData = null;
     if (nodeConfig.useManifestFromSmartContract) {
@@ -106,6 +109,7 @@ export default class NodeRunner {
 
     return new NodeRunner(
       arweaveService,
+      bundlrService,
       providerAddress,
       nodeConfig,
       manifestData
@@ -159,9 +163,9 @@ export default class NodeRunner {
   private async warnIfARBalanceLow() {
     const balanceCheckingTrackingId = trackStart("balance-checking");
     try {
-      const {balance, isBalanceLow} = await this.arweaveService.checkBalance();
+      const {balance, isBalanceLow} = await this.bundlrService.checkBalance();
       if (isBalanceLow) {
-        logger.warn(`AR balance is quite low: ${balance}`);
+        logger.warn(`AR balance is quite low on bundlr wallet: ${balance}`);
       }
     } catch (e: any) {
       logger.error("Balance checking failed", e.stack);
@@ -175,13 +179,12 @@ export default class NodeRunner {
 
     // Fetching and aggregating
     const aggregatedPrices: PriceDataAfterAggregation[] = await this.fetchPrices();
-    const arTransaction: Transaction = await this.arweaveService.prepareArweaveTransaction(
+    const bundlrTx: BundlrTransaction = await this.bundlrService.prepareBundlrTransaction(
       aggregatedPrices,
-      this.version,
       this.nodeConfig.omitSourcesInArweaveTx);
     const pricesReadyForSigning = this.pricesService!.preparePricesForSigning(
       aggregatedPrices,
-      arTransaction.id,
+      bundlrTx.id,
       this.providerAddress);
 
     // Signing
@@ -193,10 +196,10 @@ export default class NodeRunner {
     await this.broadcastEvmPricePackage(signedPrices);
 
     if (mode.isProd) {
-      await this.arweaveService.storeDataPointsOnArweave(arTransaction);
+      await this.bundlrService.uploadBundlrTransaction(bundlrTx);
     } else {
       logger.info(
-        `Transaction posting skipped in non-prod env: ${arTransaction.id}`);
+        `Transaction posting skipped in non-prod env: ${bundlrTx.id}`);
     }
   }
 
@@ -362,7 +365,6 @@ export default class NodeRunner {
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
     this.priceSignerService = new PriceSignerService({
-      arweaveService: this.arweaveService,
       ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
       evmChainId: newManifest.evmChainId,
       version: this.version,

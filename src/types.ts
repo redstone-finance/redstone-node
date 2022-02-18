@@ -79,7 +79,6 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
 };
 
 export interface PriceDataSigned extends PriceDataBeforeSigning {
-  signature: string;
   evmSignature?: string;
   liteEvmSignature?: string;
 };
