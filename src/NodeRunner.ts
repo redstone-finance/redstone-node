@@ -31,7 +31,6 @@ import {
 } from "./types";
 import { BundlrService } from "./arweave/BundlrService";
 import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
-import { result } from "lodash";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
