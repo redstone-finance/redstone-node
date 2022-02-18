@@ -9,5 +9,5 @@ module.exports = function(configFile, envVarName = "REDSTONE_NODE_CONFIG") {
   console.log(`${envVarName}='${stringifiedConfig}' yarn start --config-env ${envVarName}`);
 
   console.log("\n\n=== Docker running command ===");
-  console.log(`docker run -it --env ${envVarName}='${stringifiedConfig}' ${REDSTONE_NODE_PUBLIC_IMAGE_URI}`);
+  console.log(`docker run -it -p 8080:8080 --env ${envVarName}='${stringifiedConfig}' ${REDSTONE_NODE_PUBLIC_IMAGE_URI}`);
 };

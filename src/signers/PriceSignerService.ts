@@ -1,7 +1,6 @@
 import {Consola} from "consola";
 import _ from "lodash";
 import EvmPriceSigner from "./EvmPriceSigner";
-import ArweaveService from "../arweave/ArweaveService";
 import { PriceDataBeforeSigning, PriceDataSigned, SignedPricePackage } from "../types";
 import { trackStart, trackEnd } from "../utils/performance-tracker";
 
@@ -11,20 +10,17 @@ interface PriceSignerConfig {
   version: string;
   evmChainId: number;
   ethereumPrivateKey: string;
-  arweaveService: ArweaveService;
   addEvmSignature: boolean;
 };
 
 // Business service that supplies signing operations required by Redstone-Node
 export default class PriceSignerService {
-  private arweaveService: ArweaveService;
   private evmSigner: EvmPriceSigner;
   private ethereumPrivateKey: string;
   private addEvmSignature: boolean;
 
   constructor(config: PriceSignerConfig) {
     this.evmSigner = new EvmPriceSigner(config.version, config.evmChainId);
-    this.arweaveService = config.arweaveService;
     this.ethereumPrivateKey = config.ethereumPrivateKey;
     this.addEvmSignature = config.addEvmSignature;
   }
@@ -46,20 +42,21 @@ export default class PriceSignerService {
   }
 
   async signSinglePrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
-    logger.info(`Signing price with arweave signer: ${price.id}`);
-    const signedPrice = await this.arweaveService.signPrice(price);
-
     if (this.addEvmSignature) {
       logger.info(`Signing price with evm signer: ${price.id}`);
       const packageWithSinglePrice = this.evmSigner.signPricePackage({
         prices: [_.pick(price, ["symbol", "value"])],
         timestamp: price.timestamp,
       }, this.ethereumPrivateKey);
-      signedPrice.evmSignature = packageWithSinglePrice.signature;
-      signedPrice.liteEvmSignature = packageWithSinglePrice.liteSignature;
-    }
 
-    return signedPrice;
+      return {
+        ...price,
+        evmSignature: packageWithSinglePrice.signature,
+        liteEvmSignature: packageWithSinglePrice.liteSignature,
+      }
+    } else {
+      return price; // Return unchanged
+    }
   }
 
   signPricePackage(prices: PriceDataSigned[]): SignedPricePackage {

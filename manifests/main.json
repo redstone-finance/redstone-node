@@ -9209,6 +9209,18 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "SOS": {
+      "source": [
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ENTROPY": {
+      "source": [
+        "drand"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "JPY": {
       "source": [
         "ecb"

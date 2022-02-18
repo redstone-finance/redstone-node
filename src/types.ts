@@ -79,7 +79,6 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
 };
 
 export interface PriceDataSigned extends PriceDataBeforeSigning {
-  signature: string;
   evmSignature?: string;
   liteEvmSignature?: string;
 };
@@ -120,4 +119,7 @@ export interface NodeConfig {
   minimumArBalance: number;
   credentials: Credentials;
   httpBroadcasterURLs?: string[];
+  enableStreamrBroadcaster: boolean;
+  disableSinglePricesBroadcastingInStreamr?: boolean;
+  omitSourcesInArweaveTx?: boolean;
 };
