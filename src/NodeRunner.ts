@@ -31,6 +31,7 @@ import {
 } from "./types";
 import { BundlrService } from "./arweave/BundlrService";
 import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
+import { result } from "lodash";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -230,7 +231,15 @@ export default class NodeRunner {
       if (this.nodeConfig.enableStreamrBroadcaster && !this.nodeConfig.disableSinglePricesBroadcastingInStreamr) {
         promises.push(this.streamrBroadcaster.broadcast(signedPrices));
       }
-      await Promise.all(promises);
+      const results = await Promise.allSettled(promises);
+
+      // Check if all promises resolved
+      const failedBroadcastersCount =
+        results.filter(res => res.status === "rejected").length;
+      if (failedBroadcastersCount > 0) {
+        throw new Error(`${failedBroadcastersCount} broadcasters failed`);
+      }
+
       logger.info("Broadcasting completed");
     } catch (e: any) {
       if (e.response !== undefined) {
