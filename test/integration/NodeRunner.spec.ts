@@ -13,16 +13,21 @@ import {timeout} from "../../src/utils/objects";
 
 /****** MOCKS START ******/
 const mockArProxy = {
-  getBalance: jest.fn(),
   getAddress: () => Promise.resolve("mockArAddress"),
-  prepareUploadTransaction: jest.fn().mockResolvedValue({
-    id: "mockArTransactionId"
-  }),
-  sign: jest.fn().mockResolvedValue("mock_signed"),
-  postTransaction: jest.fn()
-}
+};
 jest.mock("../../src/arweave/ArweaveProxy", () => {
   return jest.fn().mockImplementation(() => mockArProxy);
+});
+
+const mockBundlrProxy = {
+  getBalance: jest.fn(),
+  prepareSignedTrasaction: jest.fn().mockResolvedValue({
+    id: "mockBundlrTransactionId"
+  }),
+  uploadBundlrTransaction: jest.fn(),
+};
+jest.mock("../../src/arweave/BundlrProxy", () => {
+  return jest.fn().mockImplementation(() => mockBundlrProxy);
 });
 
 jest.mock("../../src/signers/EvmPriceSigner", () => {
@@ -90,9 +95,9 @@ describe("NodeRunner", () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
-    mockArProxy.getBalance.mockClear();
-    mockArProxy.prepareUploadTransaction.mockClear();
-    mockArProxy.sign.mockClear();
+    mockBundlrProxy.getBalance.mockClear();
+    mockBundlrProxy.prepareSignedTrasaction.mockClear();
+    mockBundlrProxy.uploadBundlrTransaction.mockClear();
     mockedAxios.post.mockClear();
 
     jest.spyOn(global.Date, 'now')
@@ -145,7 +150,7 @@ describe("NodeRunner", () => {
 
   it("should throw if no maxDeviationPercent configured for token", async () => {
     //given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     manifest =
       JSON.parse(`{
         "defaultSource": ["uniswap"],
@@ -183,7 +188,7 @@ describe("NodeRunner", () => {
           "ETH": {}
         }
       }`);
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
       jwk,
       nodeConfig
@@ -210,7 +215,7 @@ describe("NodeRunner", () => {
 
   it("should save 'error' value if fetcher fails", async () => {
     // Given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
       jwk,
       nodeConfig
@@ -225,31 +230,22 @@ describe("NodeRunner", () => {
     await sut.run();
 
     // Then
-    expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalledWith({
-        "app": "Redstone",
-        "type": "data",
-        "version": "0.4",
-        "Content-Type": "application/json",
-        "Content-Encoding": "gzip",
-        "timestamp": "111111111",
+    expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
+      "id": "00000000-0000-0000-0000-000000000000",
+      "source": {
+        "coinbase": "error",
+        "uniswap": 445,
       },
-      [{
-        "id": "00000000-0000-0000-0000-000000000000",
-        "source": {
-          "coinbase": "error",
-          "uniswap": 445,
-        },
-        "symbol": "BTC",
-        "timestamp": 111111111,
-        "version": "0.4",
-        "value": 445,
-      }]
-    );
+      "symbol": "BTC",
+      "timestamp": 111111111,
+      "version": "0.4",
+      "value": 445,
+    }]);
   });
 
   it("should broadcast fetched and signed prices", async () => {
     //given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     const sut = await NodeRunner.create(
       jwk,
@@ -257,27 +253,15 @@ describe("NodeRunner", () => {
     );
 
     await sut.run();
-    expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalledWith(
-      {
-        "Content-Encoding": "gzip",
-        "Content-Type": "application/json",
-        "app": "Redstone",
-        "timestamp": "111111111",
-        "type": "data",
-        "version": "0.4",
-      },
-      [{
-        "id": "00000000-0000-0000-0000-000000000000",
-        "source": {"coinbase": 444, "uniswap": 445},
-        "symbol": "BTC",
-        "timestamp": 111111111,
-        "value": 444.5,
-        "version": "0.4"
-      }],
-    );
-    expect(mockArProxy.sign).toHaveBeenCalledWith(
-      "{\"id\":\"00000000-0000-0000-0000-000000000000\",\"permawebTx\":\"mockArTransactionId\",\"provider\":\"mockArAddress\",\"source\":{\"coinbase\":444,\"uniswap\":445},\"symbol\":\"BTC\",\"timestamp\":111111111,\"value\":444.5,\"version\":\"0.4\"}"
-    );
+    expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
+      "id": "00000000-0000-0000-0000-000000000000",
+      "source": {"coinbase": 444, "uniswap": 445},
+      "symbol": "BTC",
+      "timestamp": 111111111,
+      "value": 444.5,
+      "version": "0.4"
+    }]);
+
     expect(axios.post).toHaveBeenCalledWith(
       "http://broadcast.test/prices",
       [
@@ -285,9 +269,8 @@ describe("NodeRunner", () => {
           "evmSignature": "mock_evm_signed",
           "liteEvmSignature": "mock_evm_signed_lite",
           "id": "00000000-0000-0000-0000-000000000000",
-          "permawebTx": "mockArTransactionId",
+          "permawebTx": "mockBundlrTransactionId",
           "provider": "mockArAddress",
-          "signature": "mock_signed",
           "source": {"coinbase": 444, "uniswap": 445},
           "symbol": "BTC",
           "timestamp": 111111111,
@@ -307,14 +290,14 @@ describe("NodeRunner", () => {
         prices: [{symbol: "BTC", value: 444.5}]
       }
     );
-    expect(mockArProxy.postTransaction).not.toHaveBeenCalled();
+    expect(mockBundlrProxy.uploadBundlrTransaction).not.toHaveBeenCalled();
     // TODO: cannot spy on setInterval after upgrade to jest 27.
     // expect(setInterval).toHaveBeenCalledWith(any(), manifest.interval);
   });
 
   it("should not broadcast fetched and signed prices if values deviates too much", async () => {
     //given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     manifest = {
       ...manifest,
@@ -327,13 +310,13 @@ describe("NodeRunner", () => {
     );
 
     await sut.run();
-    expect(mockArProxy.prepareUploadTransaction).not.toHaveBeenCalled();
+    expect(mockBundlrProxy.prepareSignedTrasaction).not.toHaveBeenCalled();
     expect(axios.post).not.toHaveBeenCalledWith(mode.broadcasterUrl, any());
   });
 
   it("should save transaction on Arweave in mode=PROD", async () => {
     //given
-    mockArProxy.getBalance.mockResolvedValue(0.2);
+    mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     modeMock.isProd = true;
 
     const sut = await NodeRunner.create(
@@ -356,17 +339,16 @@ describe("NodeRunner", () => {
           "timestamp": 111111111,
           "version": "0.4",
           "value": 444.5,
-          "permawebTx": "mockArTransactionId",
+          "permawebTx": "mockBundlrTransactionId",
           "provider": "mockArAddress",
-          "signature": "mock_signed",
           "evmSignature": "mock_evm_signed",
           "liteEvmSignature": "mock_evm_signed_lite"
         }
       ]
     );
 
-    expect(mockArProxy.postTransaction).toHaveBeenCalledWith({
-      "id": "mockArTransactionId"
+    expect(mockBundlrProxy.uploadBundlrTransaction).toHaveBeenCalledWith({
+      "id": "mockBundlrTransactionId",
     });
 
   });
@@ -395,9 +377,8 @@ describe("NodeRunner", () => {
           "timestamp": 111111111,
           "version": "0.4",
           "value": 444.5,
-          "permawebTx": "mockArTransactionId",
+          "permawebTx": "mockBundlrTransactionId",
           "provider": "mockArAddress",
-          "signature": "mock_signed"
         }
       ]
     );
@@ -425,7 +406,7 @@ describe("NodeRunner", () => {
       await sut.run();
 
       expect(fetchers.uniswap.fetchAll).toHaveBeenCalled();
-      expect(mockArProxy.prepareUploadTransaction).toHaveBeenCalled();
+      expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalled();
 
       arServiceSpy.mockClear();
     });
