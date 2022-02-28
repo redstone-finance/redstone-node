@@ -12,6 +12,7 @@ import { KyberFetcher } from "./kyber/KyberFetcher";
 import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
+import { BitsoFetcher } from "./bitso/BitsoFetcher";
 
 export default {
   "api-dojo-rapid": new ApiDojoRapidFetcher(),
@@ -25,6 +26,7 @@ export default {
   kyber: new KyberFetcher(),
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
+  bitso: new BitsoFetcher(),
 
   ...ccxtFetchers,
   ...pangolinFetchers,
