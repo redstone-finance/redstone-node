@@ -2,6 +2,7 @@ import _ from "lodash";
 import { PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
 import YahooFinanceProxy from "./YahooFinanceProxy";
+import symbolToYFSymbol from "./symbol-to-yf-symbol.json";
 
 export class YfUnofficialFetcher extends BaseFetcher {
   private yahooFinanceProxy: YahooFinanceProxy;
@@ -12,7 +13,17 @@ export class YfUnofficialFetcher extends BaseFetcher {
   }
 
   async fetchData(symbols: string[]) {
-    return await this.yahooFinanceProxy.getExchangeRates(symbols);
+    const mappedSymbols = symbols.map(s => {
+      const mappedSymbol = (symbolToYFSymbol as any)[s];
+      if (mappedSymbol) {
+        return mappedSymbol;
+      } else {
+        this.logger.warn(
+          `No mapping for "${s}" for ${this.name} source`);
+        return s;
+      }
+    });
+    return await this.yahooFinanceProxy.getExchangeRates(mappedSymbols);
   }
 
   async extractPrices(response: any): Promise<PricesObj> {
@@ -26,6 +37,14 @@ export class YfUnofficialFetcher extends BaseFetcher {
         value = value.raw;
       }
 
+      // I am adding more sources for CHF
+      // - currencycom
+      // - api-dojo-rapid
+      // - yf-unofficial
+      // - ecb
+      // - kraken
+
+      // TODO: implement mapping back
       pricesObj[symbol] = value;
     }
 

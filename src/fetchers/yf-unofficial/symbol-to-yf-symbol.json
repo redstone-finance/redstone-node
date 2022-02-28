@@ -47,5 +47,6 @@
   "DC=F": "DC=F",
   "GNF=F": "GNF=F",
   "CB=F": "CB=F",
-  "CSC=F": "CSC=F"
+  "CSC=F": "CSC=F",
+  "CHF": "CHF=X"
 }

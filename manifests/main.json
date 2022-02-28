@@ -9229,7 +9229,11 @@
     },
     "CHF": {
       "source": [
-        "ecb"
+        "ecb",
+        "api-dojo-rapid",
+        "currencycom",
+        "kraken",
+        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 25
     },

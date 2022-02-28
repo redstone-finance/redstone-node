@@ -2,6 +2,7 @@ import axios from "axios";
 import { BaseFetcher } from "../BaseFetcher";
 import { FetcherOpts, PricesObj } from "../../types";
 import _ from "lodash";
+import symbolToApiDojoSymbol from "./symbol-to-api-dojo-symbol.json";
 
 const RAPID_API_HOST = "yh-finance.p.rapidapi.com";
 const URL = `https://${RAPID_API_HOST}/market/v2/get-quotes`;
