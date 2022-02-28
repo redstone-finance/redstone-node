@@ -1,5 +1,5 @@
 {
-  "interval": 15000,
+  "interval": 60000,
   "priceAggregator": "median",
   "defaultSource": [
     "bitso"
@@ -8,8 +8,26 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
+    "AAVE": {},
+    "AXS": {},
     "BTC": {},
+    "CHZ": {},
+    "COMP": {},
+    "CRV": {},
+    "DYDX": {},
+    "ENJ": {},
     "ETH": {},
-    "MXNUSD=X": {}
+    "FTM": {},
+    "LINK": {},
+    "MANA": {},
+    "MATIC": {},
+    "MKR": {},
+    "MXN": {},
+    "SAND": {},
+    "SHIB": {},
+    "SNX": {},
+    "UNI": {},
+    "XRP": {},
+    "YFI": {} 
   }
 }

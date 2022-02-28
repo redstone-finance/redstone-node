@@ -2,10 +2,11 @@ import { BaseFetcher } from "../BaseFetcher";
 import BitsoProxy from "./BitsoProxy";
 import type { PricesObj } from "../../types";
 
-
+const bitsoPairToSymbol: { [symbol: string]: string } =
+  require("./bitso-pair-to-symbol.json") as any;
 
 export class BitsoFetcher extends BaseFetcher {
-  bitsoProxy: BitsoProxy;
+  private bitsoProxy: BitsoProxy;
 
   constructor() {
     super("bitso");
@@ -20,18 +21,13 @@ export class BitsoFetcher extends BaseFetcher {
     const pricesObj: { [symbol: string]: number } = {};
     const rates = response.data.payload;
     for (const entry of rates) {
-      if(entry.book === "btc_usd") {
-        pricesObj["BTC"] = +entry.vwap;
-      }
-      if(entry.book === "eth_usd") {
-        pricesObj["ETH"] = +entry.vwap;
-      }
-      if(entry.book === "usd_mxn") {
-        pricesObj["MXNUSD=X"] = 1/entry.vwap;
+      const symbol = bitsoPairToSymbol[entry.book];
+      if (symbol === "MXN") {
+        pricesObj[symbol] = 1/entry.vwap;
+      } else if (symbol) {
+        pricesObj[symbol] = +entry.vwap;
       }
     }
-
-    console.log("XOC: ", response);
 
     return pricesObj;
   }

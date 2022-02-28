@@ -1,5 +1,5 @@
 import axios from "axios";
-const api_url = "https://api.bitso.com/v3/ticker/?book=usd_mxn";
+const api_url = "https://api.bitso.com/v3/ticker/";
 
 export default class BitsoProxy {
   constructor() {}
