@@ -1,8 +1,4 @@
-import {
-  StreamrClient,
-  StorageNode,
-  StreamOperation,
-} from "streamr-client";
+import { StreamrClient, StreamPermission, STREAMR_STORAGE_NODE_GERMANY } from "streamr-client";
 import { Consola } from "consola";
 
 const logger = require("../../utils/logger")("StreamrProxy") as Consola;
@@ -42,7 +38,7 @@ export class StreamrProxy {
   }
 
   private async getStreamIdForStreamName(name: string): Promise<string> {
-    const publicAddress = await this.streamrClient.getUserId();
+    const publicAddress = await this.streamrClient.getAddress();
     const path = `/redstone-oracle/${name}`;
     return `${publicAddress}${path}`;
   }
@@ -54,16 +50,19 @@ export class StreamrProxy {
     const stream = await this.streamrClient.createStream({
       id,
       storageDays: 7,
-      requireEncryptedData: false,
+      // requireEncryptedData: false,
       requireSignedData: false,
       inactivityThresholdHours: 24 * 20, // 20 days
     });
 
     logger.info(`Stream created: ${stream.id}`);
-    await stream.addToStorageNode(StorageNode.STREAMR_GERMANY);
+    await stream.addToStorageNode(STREAMR_STORAGE_NODE_GERMANY)
     logger.info("Stream added to the storage node: STREAMR_GERMANY");
-    await stream.grantPermission(StreamOperation.STREAM_SUBSCRIBE, undefined /* anyone */);
-    await stream.grantPermission(StreamOperation.STREAM_GET, undefined /* anyone */);
+    await stream.grantPermissions({
+      public: true,
+      permissions: [StreamPermission.SUBSCRIBE],
+    });
+    // await stream.grantPermission(StreamPermission., undefined /* anyone */);
     logger.info(`Added permissions to the stream: ${stream.id}`);
 
     return stream.id;
