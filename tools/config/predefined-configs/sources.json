@@ -323,5 +323,10 @@
     "logoURI": "https://avatars.githubusercontent.com/u/82165905?s=200&v=4",
     "url": "https://www.traderjoexyz.com/",
     "color": "#e2786f"
+  },
+  "bitso": {
+    "logoURI": "https://avatars.githubusercontent.com/u/13357168?s=200&v=4",
+    "url": "https://bitso.com",
+    "color": "#4ebc42"
   }
 }

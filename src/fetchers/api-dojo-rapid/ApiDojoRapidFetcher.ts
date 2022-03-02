@@ -8,16 +8,24 @@ const URL = `https://${RAPID_API_HOST}/market/v2/get-quotes`;
 const DEFAULT_REGION = "US";
 const MAX_TOKENS_SIZE_PER_REQUEST = 50;
 
+const symbolToId: { [symbol: string]: string } =
+  require("./symbol-to-api-dojo-symbol.json") as any;
+
 export class ApiDojoRapidFetcher extends BaseFetcher {
+  private idToSymbol: { [id: string]: string } = {};
+
   constructor() {
     super("api-dojo-rapid");
   }
 
   // API docs: https://rapidapi.com/apidojo/api/yahoo-finance1/
   async fetchData(tokens: string[], opts?: FetcherOpts): Promise<any> {
+    this.updateIdToSymbolMapping(tokens);
+    const ids = Object.keys(this.idToSymbol);
     // Apidojo rapid limits tokens per request to 50
     // that's why we need to split them to chunks
-    const tokenChunks = _.chunk(tokens, MAX_TOKENS_SIZE_PER_REQUEST);
+    const tokenChunks = _.chunk(ids, MAX_TOKENS_SIZE_PER_REQUEST);
+
     const promises = tokenChunks.map(tokensInChunk => {
       return axios.get(URL, {
         params: {
@@ -43,9 +51,22 @@ export class ApiDojoRapidFetcher extends BaseFetcher {
     // Building price object
     const pricesObj: { [symbol: string]: number } = {};
     for (const quote of quotes) {
-      pricesObj[quote.symbol] = quote.regularMarketPrice;
+      const symbol = this.idToSymbol[quote.symbol] ? this.idToSymbol[quote.symbol] : quote.symbol;
+      pricesObj[symbol] = quote.regularMarketPrice;
     }
 
     return pricesObj;
+  }
+
+  private updateIdToSymbolMapping(symbols: string[]): void {
+    for (const symbol of symbols) {
+      const id = symbolToId[symbol];
+      if (id !== undefined) {
+        this.idToSymbol[id] = symbol;
+      } else {
+        this.logger.warn(
+          `No mapping for "${symbol}" for ${this.name} source`);
+      }
+    }
   }
 };
