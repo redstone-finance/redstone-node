@@ -20,7 +20,7 @@ describe("bitso fetcher", () => {
     //given
 
     //when
-    const result = await sut.fetchAll(["ETH", "BTC", "MXN"]);
+    const result = await sut.fetchAll(["ETH", "BTC", "MXN", "ARS", "BRLUSD=X"]);
 
     //then
     expect(result).toEqual([
@@ -35,7 +35,15 @@ describe("bitso fetcher", () => {
       {
         "symbol": "MXN",
         "value": 0.049057945228460416
-      }
+      },
+      {
+        "symbol": "ARS",
+        "value": 0.00489695698024985
+      },
+      {
+        "symbol": "BRLUSD=X",
+        "value": 0.19192569610248375
+      },
     ]);
 
   });
