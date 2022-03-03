@@ -6,14 +6,20 @@ import { Consola } from "consola";
 
 const logger = require("../../utils/logger")("HttpBroadcaster") as Consola;
 
+// TODO: add timeout to broadcasting
+
 export class HttpBroadcaster implements Broadcaster {
   constructor(private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]) {}
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
-    for (const url of this.broadcasterURLs) {
+    const promises = this.broadcasterURLs.map(url => {
       logger.info(`Posting prices to ${url}`);
-      await axios.post(url + '/prices', prices);
-    }
+      return axios.post(url + '/prices', prices)
+        .then(() => logger.info(`Broadcasting to ${url} completed`))
+        .catch(e => logger.error(`Broadcasting to ${url} failed: ${e.toString()}`));
+    });
+
+    await Promise.allSettled(promises);
   }
 
   async broadcastPricePackage(
@@ -27,9 +33,13 @@ export class HttpBroadcaster implements Broadcaster {
         ...signedData.pricePackage, // unpacking prices and timestamp
       };
 
-      for (const url of this.broadcasterURLs) {
+      const promises = this.broadcasterURLs.map(url => {
         logger.info(`Posting pacakages to ${url}`);
-        await axios.post(url + '/packages', body);
-      }
+        return axios.post(url + '/packages', body)
+          .then(() => logger.info(`Broadcasting package to ${url} completed`))
+          .catch(e => logger.error(`Broadcasting package to ${url} failed: ${e.toString()}`));
+      });
+
+      await Promise.allSettled(promises);
     }
 }
