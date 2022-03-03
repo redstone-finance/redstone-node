@@ -49,6 +49,14 @@ export class CcxtFetcher extends BaseFetcher {
         if (!pricesObj[symbol]) {
           pricesObj[symbol] = lastPrice * lastUsdtPrice;
         }
+      } else if (pairSymbol.startsWith("USD/")) {
+        const symbol = pairSymbol.replace("USD/", "");
+        pricesObj[symbol] = 1/lastPrice;
+      } else if (pairSymbol.startsWith("USDT/")) {
+        const symbol = pairSymbol.replace("USDT/", "");
+        if (!pricesObj[symbol]) {
+          pricesObj[symbol] = 1/(lastPrice * lastUsdtPrice);
+        }
       }
     }
 

@@ -27,9 +27,9 @@ export class BitsoFetcher extends BaseFetcher {
       // bitso gives currencies as usd_somecurrency pair,
       // in that case we take the inverse
       if (entry.book.startsWith("usd")) {
-        pricesObj[symbol] = 1/entry.vwap;
+        pricesObj[symbol] = 1/entry.last;
       } else if (symbol) {
-        pricesObj[symbol] = +entry.vwap;
+        pricesObj[symbol] = +entry.last;
       }
     }
 

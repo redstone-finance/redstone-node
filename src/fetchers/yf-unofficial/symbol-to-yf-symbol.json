@@ -52,5 +52,6 @@
   "ARS": "ARSUSD=X",
   "PEN": "PENUSD=X",
   "BRLUSD=X": "BRLUSD=X",
-  "COPUSD=X": "COPUSD=X"
+  "COPUSD=X": "COPUSD=X",
+  "CHF": "CHFUSD=X"
 }

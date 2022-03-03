@@ -28,12 +28,13 @@ describe("ccxt fetcher", () => {
 
   it("should properly fetch data", async () => {
     // When
-    const result = await sut.fetchAll(["BTC", "ETH"]);
+    const result = await sut.fetchAll(["BTC", "ETH", "CHF"]);
 
     // Then
     expect(result).toEqual([
       { symbol: "BTC", value: 32228.4 },
-      { symbol: "ETH", value: 2008.25 }
+      { symbol: "ETH", value: 2008.25 },
+      { symbol: "CHF", value: 1.0864133150815898 }
     ]);
   });
 });
