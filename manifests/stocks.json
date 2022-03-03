@@ -510,8 +510,9 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "MXNUSD=X": {
+    "MXN": {
       "source": [
+        "bitso",
         "api-dojo-rapid",
         "yf-unofficial"
       ],
@@ -519,6 +520,7 @@
     },
     "BRLUSD=X": {
       "source": [
+        "bitso",
         "api-dojo-rapid",
         "yf-unofficial"
       ],
@@ -531,14 +533,14 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "ARSUSD=X": {
+    "ARS": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
-    "PENUSD=X": {
+    "PEN": {
       "source": [
         "api-dojo-rapid",
         "yf-unofficial"
