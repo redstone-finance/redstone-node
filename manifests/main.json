@@ -1,7 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "sourceTimeout": 50000,
+  "sourceTimeout": 20000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
