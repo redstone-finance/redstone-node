@@ -1,4 +1,4 @@
-import { toBuffer, bufferToHex, keccak256 } from "ethereumjs-util";
+import { toBuffer, bufferToHex, keccak256, privateToPublic, publicToAddress } from "ethereumjs-util";
 import { ethers } from "ethers";
 import sortDeepObjectArrays from "sort-deep-object-arrays";
 import {
@@ -44,10 +44,10 @@ export default class EvmPriceSigner {
   private _domainData: object;
 
   constructor(version: string = "0.4", chainId: number = 1) {
-    this._domainData =  {
+    this._domainData = {
       name: "Redstone",
       version: version,
-      chainId : chainId,
+      chainId: chainId,
     };
   }
 
@@ -98,7 +98,7 @@ export default class EvmPriceSigner {
     // We clean and sort prices to be sure that prices
     // always have the same format
     const cleanPricesData = pricePackage.prices.map(
-      (p) => _.pick(p, ["symbol", "value"]));
+      (p: ShortSinglePrice) => _.pick(p, ["symbol", "value"]));
     const sortedPrices = sortDeepObjectArrays(cleanPricesData);
 
     return {
@@ -114,7 +114,7 @@ export default class EvmPriceSigner {
     const serializedPriceData = this.serializeToMessage(pricePackage);
     return {
       pricePackage,
-      signer: (new ethers.Wallet(privateKey)).address,
+      signerPubKey: bufferToHex(privateToPublic(toBuffer(privateKey))),
       signature: this.calculateEvmSignature(serializedPriceData, privateKey),
       liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
     };
@@ -129,7 +129,7 @@ export default class EvmPriceSigner {
       sig: signedPricePackage.signature,
     });
 
-    return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
+    return signer.toUpperCase() === this.signerPubkeyToAddress(signedPricePackage.signerPubKey).toUpperCase();
   }
 
   verifyLiteSignature(signedPricePackage: SignedPricePackage): boolean {
@@ -141,6 +141,10 @@ export default class EvmPriceSigner {
       sig: signedPricePackage.liteSignature,
     });
 
-    return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
+    return signer.toUpperCase() === this.signerPubkeyToAddress(signedPricePackage.signerPubKey).toUpperCase();
+  }
+
+  signerPubkeyToAddress(pubKey: string) {
+    return bufferToHex(publicToAddress(toBuffer(pubKey)));
   }
 }

@@ -7,7 +7,7 @@ import { Consola } from "consola";
 const logger = require("../../utils/logger")("HttpBroadcaster") as Consola;
 
 export class HttpBroadcaster implements Broadcaster {
-  constructor(private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]) {}
+  constructor(private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]) { }
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
     for (const url of this.broadcasterURLs) {
@@ -19,17 +19,17 @@ export class HttpBroadcaster implements Broadcaster {
   async broadcastPricePackage(
     signedData: SignedPricePackage,
     providerAddress: string): Promise<void> {
-      const body = {
-        signature: signedData.signature,
-        liteSignature: signedData.liteSignature,
-        signer: signedData.signer,
-        provider: providerAddress,
-        ...signedData.pricePackage, // unpacking prices and timestamp
-      };
+    const body = {
+      signature: signedData.signature,
+      liteSignature: signedData.liteSignature,
+      signerPubKey: signedData.signerPubKey,
+      provider: providerAddress,
+      ...signedData.pricePackage, // unpacking prices and timestamp
+    };
 
-      for (const url of this.broadcasterURLs) {
-        logger.info(`Posting pacakages to ${url}`);
-        await axios.post(url + '/packages', body);
-      }
+    for (const url of this.broadcasterURLs) {
+      logger.info(`Posting pacakages to ${url}`);
+      await axios.post(url + '/packages', body);
     }
+  }
 }

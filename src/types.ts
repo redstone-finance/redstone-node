@@ -42,7 +42,7 @@ export interface Fetcher {
 
 export interface Aggregator {
   getAggregatedValue:
-    (price: PriceDataBeforeAggregation, maxPriceDeviationPercent: number) => PriceDataAfterAggregation;
+  (price: PriceDataBeforeAggregation, maxPriceDeviationPercent: number) => PriceDataAfterAggregation;
 };
 
 export interface Broadcaster {
@@ -96,7 +96,7 @@ export interface PricePackage {
 
 export interface SignedPricePackage {
   pricePackage: PricePackage;
-  signer: string;
+  signerPubKey: string;
   signature: string;
   liteSignature: string;
 };
