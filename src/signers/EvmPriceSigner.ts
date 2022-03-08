@@ -1,9 +1,7 @@
 import { toBuffer, bufferToHex, keccak256 } from "ethereumjs-util";
 import { ethers } from "ethers";
 import sortDeepObjectArrays from "sort-deep-object-arrays";
-import hehe, {
-  signTypedMessage,
-  recoverTypedMessage,
+import {
   personalSign,
   recoverPersonalSignature,
   TypedMessage,
@@ -84,11 +82,6 @@ export default class EvmPriceSigner {
     return hash;
   }
 
-  calculateEvmSignature(priceData: SerializedPriceData, privateKey: string): string {
-    const data = this.getDataToSign(priceData);
-    return signTypedMessage(toBuffer(privateKey), { data }, "V4");
-  }
-
   calculateLiteEvmSignature(priceData: SerializedPriceData, privateKey: string): string {
     const data = this.getLiteDataToSign(priceData);
     return personalSign(toBuffer(privateKey), { data });
@@ -118,18 +111,6 @@ export default class EvmPriceSigner {
       liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
     };
   }
-
-  // verifySignature(signedPricePackage: SignedPricePackage): boolean {
-  //   const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
-  //   const data = this.getDataToSign(serializedPriceData);
-
-  //   const signer = recoverTypedMessage({
-  //     data,
-  //     sig: signedPricePackage.signature,
-  //   });
-
-  //   return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
-  // }
 
   verifyLiteSignature(signedPricePackage: SignedPricePackage): boolean {
     const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
