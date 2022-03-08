@@ -95,8 +95,7 @@ export interface PricePackage {
 
 export interface SignedPricePackage {
   pricePackage: PricePackage;
-  signer: string;
-  signature: string;
+  signerPublicKey: string;
   liteSignature: string;
 };
 

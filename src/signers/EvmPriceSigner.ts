@@ -1,7 +1,7 @@
 import { toBuffer, bufferToHex, keccak256 } from "ethereumjs-util";
 import { ethers } from "ethers";
 import sortDeepObjectArrays from "sort-deep-object-arrays";
-import {
+import hehe, {
   signTypedMessage,
   recoverTypedMessage,
   personalSign,
@@ -114,23 +114,22 @@ export default class EvmPriceSigner {
     const serializedPriceData = this.serializeToMessage(pricePackage);
     return {
       pricePackage,
-      signer: (new ethers.Wallet(privateKey)).address,
-      signature: this.calculateEvmSignature(serializedPriceData, privateKey),
+      signerPublicKey: (new ethers.Wallet(privateKey)).publicKey,
       liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
     };
   }
 
-  verifySignature(signedPricePackage: SignedPricePackage): boolean {
-    const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
-    const data = this.getDataToSign(serializedPriceData);
+  // verifySignature(signedPricePackage: SignedPricePackage): boolean {
+  //   const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
+  //   const data = this.getDataToSign(serializedPriceData);
 
-    const signer = recoverTypedMessage({
-      data,
-      sig: signedPricePackage.signature,
-    });
+  //   const signer = recoverTypedMessage({
+  //     data,
+  //     sig: signedPricePackage.signature,
+  //   });
 
-    return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
-  }
+  //   return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
+  // }
 
   verifyLiteSignature(signedPricePackage: SignedPricePackage): boolean {
     const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
@@ -141,6 +140,11 @@ export default class EvmPriceSigner {
       sig: signedPricePackage.liteSignature,
     });
 
-    return signer.toUpperCase() === signedPricePackage.signer.toUpperCase();
+    const signerAddressUC = signer.toUpperCase();
+    const expectedSignerAddress = ethers.utils.computeAddress(
+      signedPricePackage.signerPublicKey);
+    const expectedSignerAddressUC = expectedSignerAddress.toUpperCase();
+
+    return signerAddressUC === expectedSignerAddressUC;
   }
 }
