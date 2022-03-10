@@ -3,11 +3,21 @@ import { JWKInterface } from "arweave/node/lib/wallet";
 import { Consola } from "consola";
 import _  from "lodash";
 import ArweaveMultihost from "arweave-multihost";
-import { SmartWeave, SmartWeaveNodeFactory, LoggerFactory } from "redstone-smartweave";
+import {
+  SmartWeave,
+  SmartWeaveNodeFactory,
+  LoggerFactory,
+  SourceType,
+  MemCache,
+  RedstoneGatewayContractDefinitionLoader,
+  RedstoneGatewayInteractionsLoader,
+} from "redstone-smartweave";
 import BundlrProxy from "./BundlrProxy";
 
 const logger =
   require("../utils/logger")("utils/arweave-proxy") as Consola;
+
+const REDSTONE_GATEWAY = "https://gateway.redstone.finance";
 
 // This is a low-level "DAO" that allows to interact with Arweave blockchain
 export default class ArweaveProxy  {
@@ -35,7 +45,19 @@ export default class ArweaveProxy  {
       minLevel: "info",
     });
 
-    this.smartweave = SmartWeaveNodeFactory.memCached(this.arweave);
+    const redstoneInteractionsLoader = new RedstoneGatewayInteractionsLoader(
+      REDSTONE_GATEWAY,
+      undefined,
+      SourceType.ARWEAVE);
+    const redstoneContractDefinitionLoader = new RedstoneGatewayContractDefinitionLoader(
+      REDSTONE_GATEWAY,
+      this.arweave,
+      new MemCache());
+
+    this.smartweave = SmartWeaveNodeFactory.memCachedBased(this.arweave, 1)
+      .setInteractionsLoader(redstoneInteractionsLoader)
+      .setDefinitionLoader(redstoneContractDefinitionLoader)
+      .build();
   }
 
   async getAddress(): Promise<string> {
