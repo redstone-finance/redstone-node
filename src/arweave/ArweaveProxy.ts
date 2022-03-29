@@ -54,9 +54,8 @@ export default class ArweaveProxy  {
       this.arweave,
       new MemCache());
 
-    this.smartweave = SmartWeaveNodeFactory.memCachedBased(this.arweave, 1)
-      .setInteractionsLoader(redstoneInteractionsLoader)
-      .setDefinitionLoader(redstoneContractDefinitionLoader)
+    this.smartweave = SmartWeaveNodeFactory.memCachedBased(this.arweave)
+      .useRedStoneGateway( {confirmed: true} )
       .build();
   }
 
