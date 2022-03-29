@@ -51,7 +51,7 @@ export default class PriceSignerService {
 
       return {
         ...price,
-        evmSignature: packageWithSinglePrice.signature,
+        // evmSignature: packageWithSinglePrice.signature,
         liteEvmSignature: packageWithSinglePrice.liteSignature,
       }
     } else {
