@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 const Arweave = require("arweave/node");
 
-main();
+//main();
 
 async function main() {
   const { publicProviderDetails, config } = await generateNewRandomNodeConfig();
@@ -33,7 +33,7 @@ async function generateNewRandomNodeConfig() {
       minimumArBalance: 0.1,
       useManifestFromSmartContract: true,
       addEvmSignature: true,
-      enableStreamrBroadcaster: true,
+      enableStreamrBroadcaster: false,
       omitSourcesInArweaveTx: true,
       credentials: {
         ethereumPrivateKey: evmWallet.privateKey,
@@ -57,3 +57,5 @@ async function generateNewRandomNodeConfig() {
 function getPublicKey(jwk) {
   return jwk.n;
 }
+
+module.exports.generateNewRandomNodeConfig = generateNewRandomNodeConfig;
