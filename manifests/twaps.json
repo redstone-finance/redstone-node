@@ -2,7 +2,7 @@
   "interval": 10000,
   "priceAggregator": "median",
   "defaultSource": [
-    "twap"
+    "twap-I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0"
   ],
   "sourceTimeout": 7000,
   "maxPriceDeviationPercent": 25,
