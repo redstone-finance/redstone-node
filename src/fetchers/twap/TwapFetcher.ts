@@ -98,7 +98,7 @@ function getTwapValue(historicalPrices: HistoricalPrice[]): number {
   }
 }
 
-function getSortedPricesByTimestamp(prices: HistoricalPrices): HistoricalPrices {
+function getSortedPricesByTimestamp(prices: HistoricalPrice[]): HistoricalPrice[] {
   const sortedHistoricalPrices = [...prices];
   // TODO: check if it should not be reverted
   sortedHistoricalPrices.sort((a, b) => a.timestamp - b.timestamp);
