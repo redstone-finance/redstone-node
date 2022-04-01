@@ -5,20 +5,24 @@ import { BaseFetcher } from "../BaseFetcher";
 
 const PRICES_URL = "https://api.redstone.finance/prices";
 
+// TODO: remove comment below
 // https://api.redstone.finance/prices?symbol=BTC&provider=redstone-rapid&fromTimestamp=1648580515000&toTimestamp=1648753315867&offset=0&limit=20
 
-type HistoricalPrices = {
+interface HistoricalPrice {
   timestamp: number;
   value: number;
   liteSignature: string;
-}[];
+}
 
 interface ResponseForTwap {
-  [symbol: string]: HistoricalPrices;
+  [symbol: string]: HistoricalPrice[];
 }
 
 export class TwapFetcher extends BaseFetcher {
-  constructor(private readonly sourceProviderId: string) {
+  constructor(
+    private readonly sourceProviderId: string,
+    private readonly providerEvmAddress: string,
+  ) {
     super(`twap-${sourceProviderId}`);
   }
 
@@ -48,15 +52,29 @@ export class TwapFetcher extends BaseFetcher {
     const pricesObj: PricesObj = {};
 
     for (const [symbol, historicalPrices] of Object.entries(response)) {
+      this.verifySignatures(historicalPrices);
       const twapValue = getTwapValue(historicalPrices);
       pricesObj[symbol] = twapValue;
     }
 
     return pricesObj;
   }
+
+  async verifySignatures(prices: HistoricalPrice[]) {
+    for (const price of prices) {
+      await this.verifySignature(price);
+    }
+  }
+
+  // TODO: add real logic for signature verification
+  async verifySignature(price: HistoricalPrice) {
+    if (!price.liteSignature || !this.providerEvmAddress) {
+      throw new Error(`Invalid signature: ${JSON.stringify(price)}`);
+    }
+  }
 };
 
-function getTwapValue(historicalPrices: HistoricalPrices): number {
+function getTwapValue(historicalPrices: HistoricalPrice[]): number {
   if (historicalPrices.length === 1) {
     return historicalPrices[0].value;
   } else {
