@@ -12,7 +12,7 @@ import { KyberFetcher } from "./kyber/KyberFetcher";
 import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
-import { TwapFetcher } from "./twap/TwapFetcher";
+import twapFetchers from "./twap/all-twap-fetchers";
 
 export default {
   "api-dojo-rapid": new ApiDojoRapidFetcher(),
@@ -23,11 +23,11 @@ export default {
   coinbase: new CoinbaseFetcher(),
   uniswap: new UniswapFetcher(),
   drand: new DrandFetcher(),
-  twap: new TwapFetcher(),
   kyber: new KyberFetcher(),
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
 
   ...ccxtFetchers,
   ...pangolinFetchers,
+  ...twapFetchers,
 } as { [name: string]: Fetcher };
