@@ -32,7 +32,7 @@ export class TwapFetcher extends BaseFetcher {
     const currentTimestamp = Date.now();
     const response: ResponseForTwap = {};
 
-    // Fetching historical prices for each symbol
+    // Fetching historical prices for each symbol in parallel
     const promises: Promise<void>[] = [];
     for (const symbol of symbols) {
       const { assetSymbol, millisecondsOffset } = TwapFetcher.parseTwapSymbol(symbol);
