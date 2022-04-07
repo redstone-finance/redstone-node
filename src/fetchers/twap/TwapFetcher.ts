@@ -5,7 +5,7 @@ import { BaseFetcher } from "../BaseFetcher";
 import EvmPriceSigner from "../../signers/EvmPriceSigner";
 
 const PRICES_URL = "https://api.redstone.finance/prices";
-const BIG_LIMIT = 400;
+const MAX_LIMIT = 1000;
 const EVM_CHAIN_ID = 1;
 
 interface HistoricalPrice {
@@ -35,15 +35,15 @@ export class TwapFetcher extends BaseFetcher {
     // Fetching historical prices for each symbol
     const promises: Promise<void>[] = [];
     for (const symbol of symbols) {
-      const millisecondsOffset = TwapFetcher.getMillisecondsOffsetForSymbol(symbol);
+      const { assetSymbol, millisecondsOffset } = TwapFetcher.parseTwapSymbol(symbol);
       const fromTimestamp = currentTimestamp - millisecondsOffset;
       const fetchingPromiseForSymbol = axios.get(PRICES_URL, {
         params: {
-          symbol: TwapFetcher.extractAssetSymbol(symbol),
+          symbol: assetSymbol,
           provider: this.sourceProviderId,
           fromTimestamp,
           toTimestamp: currentTimestamp,
-          limit: BIG_LIMIT,
+          limit: MAX_LIMIT,
         },
       }).then(responseForSymbol => {
         response[symbol] = responseForSymbol.data;
@@ -86,9 +86,12 @@ export class TwapFetcher extends BaseFetcher {
       signerPublicKey: this.providerEvmPublicKey,
       liteSignature: price.liteEvmSignature,
     });
-    return isSignatureValid;
-  }
 
+    if (!isSignatureValid) {
+      throw new Error(`Received an invalid signature: `
+        + JSON.stringify(price));
+    }
+  }
 
   static getTwapValue(historicalPrices: HistoricalPrice[]): number {
     if (historicalPrices.length === 1) {
@@ -114,8 +117,12 @@ export class TwapFetcher extends BaseFetcher {
     }
   }
 
-  static extractAssetSymbol(twapSymbol: string): string {
-    return twapSymbol.split("-")[0];
+  static parseTwapSymbol(twapSymbol: string): { assetSymbol: string; millisecondsOffset: number } {
+    const chunks = twapSymbol.split("-");
+    return {
+      assetSymbol: chunks[0],
+      millisecondsOffset: Number(chunks[chunks.length - 1]) * 60 * 1000,
+    };
   }
 
   static getSortedPricesByTimestamp(prices: HistoricalPrice[]): HistoricalPrice[] {
@@ -123,12 +130,4 @@ export class TwapFetcher extends BaseFetcher {
     sortedHistoricalPrices.sort((a, b) => a.timestamp - b.timestamp);
     return sortedHistoricalPrices;
   }
-
-  // For BTC-TWAP-5 it returns 300000 (5 mins)
-  // For BTC-TWAP-60 it returns 3600000 (60 mins)
-  static getMillisecondsOffsetForSymbol(symbol: string) {
-    const chunks = symbol.split("-");
-    return Number(chunks[chunks.length - 1]) * 60 * 1000;
-  }
-
 };
