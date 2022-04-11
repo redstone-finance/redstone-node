@@ -10,8 +10,8 @@ import {
 import fs from "fs";
 import path from "path";
 import {
-  NodesDataFeedsInput,
-  NodesDataFeedsState,
+  RedstoneOraclesInput,
+  RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
 import { addFunds } from "../../../src/utils/addFunds";
 import { mineBlock } from "../../../src/utils/mineBlock";
@@ -24,8 +24,8 @@ describe("Data feeds contract - read", () => {
   let arweave: Arweave;
   let arlocal: ArLocal;
   let smartweave: SmartWeave;
-  let initialState: NodesDataFeedsState;
-  let contract: Contract<NodesDataFeedsState>;
+  let initialState: RedstoneOraclesState;
+  let contract: Contract<RedstoneOraclesState>;
 
   beforeAll(async () => {
     arlocal = new ArLocal(1822, false);
@@ -74,7 +74,7 @@ describe("Data feeds contract - read", () => {
 
   describe("listDataFeeds", () => {
     test("list all data feeds", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "listDataFeeds",
         data: {},
       });
@@ -90,7 +90,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("list data feeds limited to 2", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "listDataFeeds",
         data: {
           limit: 2,
@@ -101,7 +101,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("list data feeds after third", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "listDataFeeds",
         data: {
           startAfter: 3,
@@ -112,7 +112,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("list data feeds limited to 3 after second", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "listDataFeeds",
         data: {
           limit: 3,
@@ -126,7 +126,7 @@ describe("Data feeds contract - read", () => {
 
   describe("getDataFeedDetailsById", () => {
     test("get details of first data feed", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "getDataFeedDetailsById",
         data: {
           id: "testId1",
@@ -144,7 +144,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("get details of middle data feed", async () => {
-      const { result } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { result } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "getDataFeedDetailsById",
         data: {
           id: "testId4",
@@ -162,7 +162,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("throw error if no id in input", async () => {
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "getDataFeedDetailsById",
         data: {},
       });
@@ -170,7 +170,7 @@ describe("Data feeds contract - read", () => {
     });
 
     test("throw error if invalid id in input", async () => {
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "getDataFeedDetailsById",
         data: {
           id: "invalidId",

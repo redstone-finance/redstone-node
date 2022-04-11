@@ -1,11 +1,11 @@
-import { ContractErrorType, NodesDataFeedsState } from "../../types";
+import { ContractErrorType, RedstoneOraclesState } from "../../types";
 
 declare const ContractError: ContractErrorType;
 
 export const removeNode = (
-  state: NodesDataFeedsState,
+  state: RedstoneOraclesState,
   caller: string
-): { state: NodesDataFeedsState } => {
+): { state: RedstoneOraclesState } => {
   const currentNodeState = state.nodes[caller];
 
   if (!currentNodeState) {

@@ -1,6 +1,6 @@
 import {
-  NodesDataFeedsState,
-  NodesDataFeedsInput,
+  RedstoneOraclesState,
+  RedstoneOraclesInput,
   GetNodeDetailsInputData,
   GetNodesDetailsResult,
   ContractErrorType,
@@ -9,8 +9,8 @@ import {
 declare const ContractError: ContractErrorType;
 
 export const getNodeDetails = (
-  state: NodesDataFeedsState,
-  input: NodesDataFeedsInput
+  state: RedstoneOraclesState,
+  input: RedstoneOraclesInput
 ): GetNodesDetailsResult => {
   const data = input.data as GetNodeDetailsInputData;
   if (!data?.address) {

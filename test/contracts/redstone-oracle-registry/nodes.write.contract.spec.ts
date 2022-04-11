@@ -10,8 +10,8 @@ import {
 import fs from "fs";
 import path from "path";
 import {
-  NodesDataFeedsInput,
-  NodesDataFeedsState,
+  RedstoneOraclesInput,
+  RedstoneOraclesState,
   RegisterNodeInputData,
 } from "../../../src/contracts/redstone-oracle-registry/types";
 import { addFunds } from "../../../src/utils/addFunds";
@@ -34,8 +34,8 @@ describe("Nodes contract - write", () => {
   let arweave: Arweave;
   let arlocal: ArLocal;
   let smartweave: SmartWeave;
-  let initialState: NodesDataFeedsState;
-  let contract: Contract<NodesDataFeedsState>;
+  let initialState: RedstoneOraclesState;
+  let contract: Contract<RedstoneOraclesState>;
 
   beforeAll(async () => {
     arlocal = new ArLocal(1821, false);
@@ -94,7 +94,7 @@ describe("Nodes contract - write", () => {
 
   describe("registerNode", () => {
     test("should add new node when register", async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "registerNode",
         data: testNodeDetails,
       });
@@ -129,12 +129,12 @@ describe("Nodes contract - write", () => {
         ipAddress: "testIP",
         url: "testUrl",
       };
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "registerNode",
         data: testFirstNodeDetails,
       });
       await mineBlock(arweave);
-      const result = await contract.dryWrite<NodesDataFeedsInput>(
+      const result = await contract.dryWrite<RedstoneOraclesInput>(
         {
           function: "registerNode",
           data: testSecondNodeDetails,
@@ -156,7 +156,7 @@ describe("Nodes contract - write", () => {
         evmAddress: "testAddress",
         url: "testUrl",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "registerNode",
         data: invalidNodeDetails as RegisterNodeInputData,
       });
@@ -164,12 +164,12 @@ describe("Nodes contract - write", () => {
     });
 
     test("throw error if caller already has node", async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "registerNode",
         data: testNodeDetails,
       });
       await mineBlock(arweave);
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "registerNode",
         data: testNodeDetails,
       });
@@ -179,7 +179,7 @@ describe("Nodes contract - write", () => {
     });
 
     test("throw error if invalid data feed id", async () => {
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "registerNode",
         data: { ...testNodeDetails, dataFeedId: "invalidDataFeedId" },
       });
@@ -191,7 +191,7 @@ describe("Nodes contract - write", () => {
 
   describe("updateNodeDetails", () => {
     beforeEach(async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "registerNode",
         data: testNodeDetails,
       });
@@ -208,7 +208,7 @@ describe("Nodes contract - write", () => {
         ipAddress: "newTestIP",
         url: "newTestUrl",
       };
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "updateNodeDetails",
         data: newNodeDetails,
       });
@@ -228,7 +228,7 @@ describe("Nodes contract - write", () => {
         ipAddress: "newTestIP",
         url: "newTestUrl",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>(
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>(
         {
           function: "updateNodeDetails",
           data: newNodeDetails,
@@ -241,7 +241,7 @@ describe("Nodes contract - write", () => {
 
   describe("removeNode", () => {
     beforeEach(async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "registerNode",
         data: testNodeDetails,
       });
@@ -249,7 +249,7 @@ describe("Nodes contract - write", () => {
     });
 
     test("should remove node", async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "removeNode",
         data: {},
       });
@@ -260,7 +260,7 @@ describe("Nodes contract - write", () => {
     });
 
     test("throw error if invalid owner address", async () => {
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>(
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>(
         {
           function: "removeNode",
           data: {},

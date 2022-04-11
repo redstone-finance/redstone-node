@@ -1,4 +1,4 @@
-export interface NodesDataFeedsState {
+export interface RedstoneOraclesState {
   canEvolve: boolean;
   contractAdmins: string[];
   nodes: { [key in string]: Node };
@@ -23,12 +23,12 @@ interface DataFeed {
   admin: string;
 }
 
-export interface NodesDataFeedsAction {
-  input: NodesDataFeedsInput;
+export interface RedstoneOraclesAction {
+  input: RedstoneOraclesInput;
   caller: string;
 }
 
-export interface NodesDataFeedsInput {
+export interface RedstoneOraclesInput {
   function:
     | "listNodes"
     | "getNodeDetails"
@@ -74,7 +74,7 @@ interface NodeWithAddress extends Node {
   address: string;
 }
 
-export type NodesDataFeedsContractResult =
+export type RedstoneOraclesContractResult =
   | ListResult
   | GetNodesDetailsResult
   | GetDataFeedDetailsByIdResult;

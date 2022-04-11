@@ -11,8 +11,8 @@ import fs from "fs";
 import path from "path";
 import {
   CreateDataFeedInputDate,
-  NodesDataFeedsInput,
-  NodesDataFeedsState,
+  RedstoneOraclesInput,
+  RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
 import { addFunds } from "../../../src/utils/addFunds";
 import { mineBlock } from "../../../src/utils/mineBlock";
@@ -33,8 +33,8 @@ describe("Data feeds contract - write", () => {
   let arweave: Arweave;
   let arlocal: ArLocal;
   let smartweave: SmartWeave;
-  let initialState: NodesDataFeedsState;
-  let contract: Contract<NodesDataFeedsState>;
+  let initialState: RedstoneOraclesState;
+  let contract: Contract<RedstoneOraclesState>;
 
   beforeAll(async () => {
     arlocal = new ArLocal(1823, false);
@@ -85,7 +85,7 @@ describe("Data feeds contract - write", () => {
 
   describe("createDataFeed", () => {
     test("should add new data feed", async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testDataFeedDetails,
       });
@@ -115,12 +115,12 @@ describe("Data feeds contract - write", () => {
         description: "secondTestDescription",
         manifestTxId: "secondTestManifestId",
       };
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testFirsDataFeedDetails,
       });
       await mineBlock(arweave);
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testSecondDatafeedDetails,
       });
@@ -149,7 +149,7 @@ describe("Data feeds contract - write", () => {
         description: "testDescription",
         manifestTxId: "testManifestId",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: invalidDataFeedDetails as CreateDataFeedInputDate,
       });
@@ -163,7 +163,7 @@ describe("Data feeds contract - write", () => {
         description: "testDescription",
         manifestTxId: "testManifestId",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: invalidDataFeedDetails as CreateDataFeedInputDate,
       });
@@ -171,12 +171,12 @@ describe("Data feeds contract - write", () => {
     });
 
     test("throw error if data feed with the same id already exists", async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testDataFeedDetails,
       });
       await mineBlock(arweave);
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testDataFeedDetails,
       });
@@ -186,7 +186,7 @@ describe("Data feeds contract - write", () => {
 
   describe("updateDataFeed", () => {
     beforeEach(async () => {
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "createDataFeed",
         data: testDataFeedDetails,
       });
@@ -200,7 +200,7 @@ describe("Data feeds contract - write", () => {
         description: "newTestDescription",
         manifestTxId: "newTestManifestId",
       };
-      await contract.writeInteraction<NodesDataFeedsInput>({
+      await contract.writeInteraction<RedstoneOraclesInput>({
         function: "updateDataFeed",
         data: {
           id: testId,
@@ -223,7 +223,7 @@ describe("Data feeds contract - write", () => {
         description: "newTestDescription",
         manifestTxId: "newTestManifestId",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>({
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "updateDataFeed",
         data: {
           id: "invalidId",
@@ -240,7 +240,7 @@ describe("Data feeds contract - write", () => {
         description: "newTestDescription",
         manifestTxId: "newTestManifestId",
       };
-      const { errorMessage } = await contract.dryWrite<NodesDataFeedsInput>(
+      const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>(
         {
           function: "updateDataFeed",
           data: {

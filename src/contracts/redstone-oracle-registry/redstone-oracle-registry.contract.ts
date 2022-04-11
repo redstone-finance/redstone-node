@@ -2,9 +2,9 @@ import { listNodes } from "./nodes/read/listNodes";
 import { getNodeDetails } from "./nodes/read/getNodeDetails";
 import {
   ContractErrorType,
-  NodesDataFeedsAction,
-  NodesDataFeedsContractResult,
-  NodesDataFeedsState,
+  RedstoneOraclesAction,
+  RedstoneOraclesContractResult,
+  RedstoneOraclesState,
 } from "./types";
 import { registerNode } from "./nodes/write/registerNode";
 import { updateNodeDetails } from "./nodes/write/updateNodeDetails";
@@ -17,12 +17,12 @@ import { updateDataFeed } from "./data-feeds/write/updateDataFeed";
 declare const ContractError: ContractErrorType;
 
 type ContractResult =
-  | { state: NodesDataFeedsState }
-  | NodesDataFeedsContractResult;
+  | { state: RedstoneOraclesState }
+  | RedstoneOraclesContractResult;
 
 export const handle = async (
-  state: NodesDataFeedsState,
-  action: NodesDataFeedsAction
+  state: RedstoneOraclesState,
+  action: RedstoneOraclesAction
 ): Promise<ContractResult> => {
   const { input } = action;
 

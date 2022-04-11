@@ -1,13 +1,13 @@
 import {
-  NodesDataFeedsState,
-  NodesDataFeedsInput,
+  RedstoneOraclesState,
+  RedstoneOraclesInput,
   ListInputData,
   ListResult,
 } from "../../types";
 
 export const listNodes = (
-  state: NodesDataFeedsState,
-  input: NodesDataFeedsInput
+  state: RedstoneOraclesState,
+  input: RedstoneOraclesInput
 ): ListResult => {
   const data = input.data as ListInputData;
   let nodesArray = Object.keys(state.nodes);

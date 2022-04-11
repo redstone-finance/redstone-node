@@ -1,6 +1,6 @@
 import {
-  NodesDataFeedsState,
-  NodesDataFeedsInput,
+  RedstoneOraclesState,
+  RedstoneOraclesInput,
   GetDataFeedDetailsByIdInputData,
   GetDataFeedDetailsByIdResult,
   ContractErrorType,
@@ -9,8 +9,8 @@ import {
 declare const ContractError: ContractErrorType;
 
 export const getDataFeedDetailsById = (
-  state: NodesDataFeedsState,
-  input: NodesDataFeedsInput
+  state: RedstoneOraclesState,
+  input: RedstoneOraclesInput
 ): GetDataFeedDetailsByIdResult => {
   const data = input.data as GetDataFeedDetailsByIdInputData;
   if (!data?.id) {
