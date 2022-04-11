@@ -8,7 +8,7 @@ const PRICES_URL = "https://api.redstone.finance/prices";
 const MAX_LIMIT = 1000;
 const EVM_CHAIN_ID = 1;
 
-interface HistoricalPrice {
+export interface HistoricalPrice {
   symbol: string;
   timestamp: number;
   value: number;
@@ -111,6 +111,7 @@ export class TwapFetcher extends BaseFetcher {
           intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
         const intervalAveraveValue = (intervalStartPrice.value + intervalEndPrice.value) / 2;
         twapValue += intervalAveraveValue * intervalWeight;
+        console.log("TW: " + twapValue);
       }
 
       return twapValue;
