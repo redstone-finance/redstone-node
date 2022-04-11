@@ -108,7 +108,7 @@ export class TwapFetcher extends BaseFetcher {
         const intervalLengthInMilliseconds =
           intervalStartPrice.timestamp - intervalEndPrice.timestamp;
         const intervalWeight =
-          (intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds);
+          intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
         const intervalAveraveValue = (intervalStartPrice.value + intervalEndPrice.value) / 2;
         twapValue += intervalAveraveValue * intervalWeight;
       }
