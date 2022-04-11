@@ -27,7 +27,7 @@ const testNodeDetails = {
   url: "testUrl",
 };
 
-describe("Nodes contract - write", () => {
+describe("Redstone oracle registry contract - nodes - write", () => {
   let contractSrc: string;
   let wallet: JWKInterface;
   let walletAddress: string;
@@ -54,7 +54,6 @@ describe("Nodes contract - write", () => {
     wallet = await arweave.wallets.generate();
     await addFunds(arweave, wallet);
     walletAddress = await arweave.wallets.jwkToAddress(wallet);
-    console.log(walletAddress)
     contractSrc = fs.readFileSync(
       path.join(__dirname, "../../../dist/contracts/redstone-oracle-registry.contract.js"),
       "utf8"
@@ -64,6 +63,7 @@ describe("Nodes contract - write", () => {
   beforeEach(async () => {
     initialState = {
       canEvolve: true,
+      evolve: null,
       contractAdmins: [walletAddress],
       nodes: {},
       dataFeeds: {

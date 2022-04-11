@@ -13,6 +13,7 @@ import { listDataFeeds } from "./data-feeds/read/listDataFeeds";
 import { getDataFeedDetailsById } from "./data-feeds/read/getDataFeedDetailsById";
 import { createDataFeed } from "./data-feeds/write/createDataFeed";
 import { updateDataFeed } from "./data-feeds/write/updateDataFeed";
+import { handleEvolve } from "./handleEvolve";
 
 declare const ContractError: ContractErrorType;
 
@@ -45,7 +46,9 @@ export const handle = async (
       return createDataFeed(state, action);
     case "updateDataFeed":
       return updateDataFeed(state, action);
-    default:
+    case "evolve":
+      return handleEvolve(state, action);
+    default:  
       throw new ContractError(
         `No function supplied or function not recognized: "${input.function}"`
       );

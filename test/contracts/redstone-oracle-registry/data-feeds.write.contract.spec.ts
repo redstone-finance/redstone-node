@@ -10,7 +10,7 @@ import {
 import fs from "fs";
 import path from "path";
 import {
-  CreateDataFeedInputDate,
+  CreateDataFeedInputData,
   RedstoneOraclesInput,
   RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
@@ -26,7 +26,7 @@ const testDataFeedDetails = {
   manifestTxId: "testManifestId",
 };
 
-describe("Data feeds contract - write", () => {
+describe("Redstone oracle registry contract - data feeds - write", () => {
   let contractSrc: string;
   let wallet: JWKInterface;
   let walletAddress: string;
@@ -63,6 +63,7 @@ describe("Data feeds contract - write", () => {
   beforeEach(async () => {
     initialState = {
       canEvolve: true,
+      evolve: null,
       contractAdmins: [walletAddress],
       nodes: {},
       dataFeeds: {},
@@ -151,7 +152,7 @@ describe("Data feeds contract - write", () => {
       };
       const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "createDataFeed",
-        data: invalidDataFeedDetails as CreateDataFeedInputDate,
+        data: invalidDataFeedDetails as CreateDataFeedInputData,
       });
       expect(errorMessage).toBe("Invalid data feed data");
     });
@@ -165,7 +166,7 @@ describe("Data feeds contract - write", () => {
       };
       const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
         function: "createDataFeed",
-        data: invalidDataFeedDetails as CreateDataFeedInputDate,
+        data: invalidDataFeedDetails as CreateDataFeedInputData,
       });
       expect(errorMessage).toBe("Invalid data feed data");
     });

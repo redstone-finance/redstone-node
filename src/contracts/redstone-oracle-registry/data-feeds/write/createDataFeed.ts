@@ -1,7 +1,7 @@
 import {
   RedstoneOraclesState,
   RedstoneOraclesAction,
-  CreateDataFeedInputDate,
+  CreateDataFeedInputData,
   ContractErrorType,
 } from "../../types";
 
@@ -11,7 +11,7 @@ export const createDataFeed = (
   state: RedstoneOraclesState,
   action: RedstoneOraclesAction
 ): { state: RedstoneOraclesState } => {
-  const data = action.input.data as CreateDataFeedInputDate;
+  const data = action.input.data as CreateDataFeedInputData;
 
   const isValidData =
     data.id && data.name && data.logo && data.description && data.manifestTxId;

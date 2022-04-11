@@ -1,5 +1,7 @@
 {
   "canEvolve": true,
+  "evolve": null,
+  "contractAdmins": [],
   "nodes": {},
   "dataFeeds": {}
 }

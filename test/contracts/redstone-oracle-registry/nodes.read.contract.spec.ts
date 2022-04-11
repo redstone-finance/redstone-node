@@ -17,7 +17,7 @@ import { mockNodes } from "./mocks/nodes.mock";
 import { addFunds } from "../../../src/utils/addFunds";
 import { mineBlock } from "../../../src/utils/mineBlock";
 
-describe("Nodes contract - read", () => {
+describe("Redstone oracle registry contract - nodes - read", () => {
   let contractSrc: string;
   let wallet: JWKInterface;
   let walletAddress: string;
@@ -52,6 +52,7 @@ describe("Nodes contract - read", () => {
 
     initialState = {
       canEvolve: true,
+      evolve: null,
       contractAdmins: [walletAddress],
       nodes: mockNodes,
       dataFeeds: {},

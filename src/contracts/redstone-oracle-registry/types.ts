@@ -1,5 +1,9 @@
-export interface RedstoneOraclesState {
+export interface EvolveState {
   canEvolve: boolean;
+  evolve: string | null;
+}
+
+export interface RedstoneOraclesState extends EvolveState {
   contractAdmins: string[];
   nodes: { [key in string]: Node };
   dataFeeds: { [key in string]: DataFeed };
@@ -38,15 +42,17 @@ export interface RedstoneOraclesInput {
     | "listDataFeeds"
     | "getDataFeedDetailsById"
     | "createDataFeed"
-    | "updateDataFeed";
+    | "updateDataFeed"
+    | "evolve";
   data:
     | ListInputData
     | GetNodeDetailsInputData
     | RegisterNodeInputData
     | UpdateNodeDetailInputData
     | GetDataFeedDetailsByIdInputData
-    | CreateDataFeedInputDate
-    | UpdateDataFeedInputDate;
+    | CreateDataFeedInputData
+    | UpdateDataFeedInputData
+    | EvolveInputData;
 }
 
 export interface ListInputData {
@@ -83,11 +89,11 @@ export interface GetDataFeedDetailsByIdInputData {
   id: string;
 }
 
-export interface CreateDataFeedInputDate extends Omit<DataFeed, "admin"> {
+export interface CreateDataFeedInputData extends Omit<DataFeed, "admin"> {
   id: string;
 }
 
-export interface UpdateDataFeedInputDate {
+export interface UpdateDataFeedInputData {
   id: string;
   update: Partial<DataFeed>;
 }
@@ -101,3 +107,7 @@ interface DataFeedWithId extends DataFeed {
 }
 
 export type ContractErrorType = new (message: string) => any;
+
+export interface EvolveInputData {
+  evolveTransactionId: string;
+}
