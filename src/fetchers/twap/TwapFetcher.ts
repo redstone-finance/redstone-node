@@ -8,10 +8,13 @@ const PRICES_URL = "https://api.redstone.finance/prices";
 const MAX_LIMIT = 1000;
 const EVM_CHAIN_ID = 1;
 
-export interface HistoricalPrice {
-  symbol: string;
+interface ShortPrice {
   timestamp: number;
   value: number;
+}
+
+export interface HistoricalPrice extends ShortPrice {
+  symbol: string;
   liteEvmSignature: string;
   version: string;
 }
@@ -61,7 +64,7 @@ export class TwapFetcher extends BaseFetcher {
     for (const [symbol, historicalPrices] of Object.entries(response)) {
       this.verifySignatures(historicalPrices);
       const twapValue = TwapFetcher.getTwapValue(historicalPrices);
-      pricesObj[symbol] = twapValue;
+      pricesObj[symbol] = twapValue!;
     }
 
     return pricesObj;
@@ -93,29 +96,66 @@ export class TwapFetcher extends BaseFetcher {
     }
   }
 
-  static getTwapValue(historicalPrices: HistoricalPrice[]): number {
-    if (historicalPrices.length === 1) {
-      return historicalPrices[0].value;
+  static getTwapValue(historicalPrices: HistoricalPrice[]): number | undefined {
+    const sortedValidPrices = TwapFetcher.getSortedValidPricesByTimestamp(historicalPrices);
+    const prices = TwapFetcher.aggregatePricesWithSameTimestamps(sortedValidPrices);
+
+    if (prices.length < 2) {
+      return prices[0]?.value || undefined;
     } else {
-      const sortedPrices = TwapFetcher.getSortedPricesByTimestamp(historicalPrices);
       const totalIntervalLengthInMilliseconds =
-        sortedPrices[0].timestamp - sortedPrices[sortedPrices.length - 1].timestamp;
+        prices[0].timestamp - prices[prices.length - 1].timestamp;
       let twapValue = 0;
 
-      for (let intervalIndex = 0; intervalIndex < sortedPrices.length - 1; intervalIndex++) {
-        const intervalStartPrice = sortedPrices[intervalIndex];
-        const intervalEndPrice = sortedPrices[intervalIndex + 1];
-        const intervalLengthInMilliseconds =
-          intervalStartPrice.timestamp - intervalEndPrice.timestamp;
-        const intervalWeight =
-          intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
-        const intervalAveraveValue = (intervalStartPrice.value + intervalEndPrice.value) / 2;
+      for (let intervalIndex = 0; intervalIndex < prices.length - 1; intervalIndex++) {
+        const startPrice = prices[intervalIndex];
+        const endPrice = prices[intervalIndex + 1];
+        const intervalLengthInMilliseconds = startPrice.timestamp - endPrice.timestamp;
+        const intervalWeight = intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
+        const intervalAveraveValue = (startPrice.value + endPrice.value) / 2;
         twapValue += intervalAveraveValue * intervalWeight;
-        console.log("TW: " + twapValue);
       }
 
       return twapValue;
     }
+  }
+
+  // This function groups price objects with the same timestamps
+  // and replaces them with a single price object with avg value
+  static aggregatePricesWithSameTimestamps(sortedValidPrices: HistoricalPrice[]): ShortPrice[] {
+    const prev = {
+      timestamp: -1,
+      sum: 0,
+      count: 0,
+    };
+    const aggregatedPricesWithUniqueTimestamps = [];
+
+    for (const price of sortedValidPrices) {
+      if (prev.timestamp !== price.timestamp && prev.timestamp !== -1) {
+        // Adding new avg value to the result array
+        aggregatedPricesWithUniqueTimestamps.push({
+          value: prev.sum / prev.count,
+          timestamp: prev.timestamp,
+        });
+
+        // Resetting prev object details
+        prev.sum = 0;
+        prev.count = 0;
+      }
+
+      // Updating the prev object
+      prev.count++;
+      prev.sum += price.value;
+      prev.timestamp = price.timestamp;
+    }
+
+    // Adding the last aggregated value to the result array
+    aggregatedPricesWithUniqueTimestamps.push({
+      value: prev.sum / prev.count,
+      timestamp: prev.timestamp,
+    });
+
+    return aggregatedPricesWithUniqueTimestamps;
   }
 
   static parseTwapSymbol(twapSymbol: string): { assetSymbol: string; millisecondsOffset: number } {
@@ -126,9 +166,9 @@ export class TwapFetcher extends BaseFetcher {
     };
   }
 
-  static getSortedPricesByTimestamp(prices: HistoricalPrice[]): HistoricalPrice[] {
-    const sortedHistoricalPrices = [...prices];
-    sortedHistoricalPrices.sort((a, b) => a.timestamp - b.timestamp);
-    return sortedHistoricalPrices;
+  static getSortedValidPricesByTimestamp(prices: HistoricalPrice[]): HistoricalPrice[] {
+    const validHistoricalPrices = prices.filter(p => !isNaN(p.value));
+    validHistoricalPrices.sort((a, b) => a.timestamp - b.timestamp);
+    return validHistoricalPrices;
   }
 };
