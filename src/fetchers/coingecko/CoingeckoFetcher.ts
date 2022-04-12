@@ -3,10 +3,9 @@ import { PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
 import CoingeckoProxy from "./CoingeckoProxy";
 import { getRequiredPropValue } from "../../utils/objects";
+import symbolToId from "./coingecko-symbol-to-id.json";
 
-const symbolToId: { [symbol: string]: string } =
-  require("./coingecko-symbol-to-id.json");
-const idToSymbol: { [id: string]: string } = _.invert(symbolToId);
+const idToSymbol = _.invert(symbolToId);
 
 export class CoingeckoFetcher extends BaseFetcher {
   private coingeckoProxy: CoingeckoProxy;

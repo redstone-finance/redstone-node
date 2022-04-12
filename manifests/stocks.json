@@ -441,7 +441,8 @@
     },
     "CHF": {
       "source": [
-        "ecb"
+        "ecb",
+        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -461,12 +462,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "MXNUSD=X": {
-      "source": [
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "BRLUSD=X": {
       "source": [
         "yf-unofficial"
@@ -474,18 +469,6 @@
       "maxPriceDeviationPercent": 80
     },
     "COPUSD=X": {
-      "source": [
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ARSUSD=X": {
-      "source": [
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PENUSD=X": {
       "source": [
         "yf-unofficial"
       ],

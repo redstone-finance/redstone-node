@@ -2523,6 +2523,21 @@
       ],
       "maxPriceDeviationPercent": 25
     },
+    "ONE": {
+      "source": [
+        "ascendex",
+        "binance",
+        "binanceus",
+        "binanceusdm",
+        "cdax",
+        "coingecko",
+        "hitbtc",
+        "huobipro",
+        "kucoin",
+        "probit"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "ANKR": {
       "source": [
         "ascendex",
@@ -2650,20 +2665,6 @@
         "huobipro",
         "kraken",
         "okex5"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ONE": {
-      "source": [
-        "ascendex",
-        "binance",
-        "binanceus",
-        "binanceusdm",
-        "cdax",
-        "hitbtc",
-        "huobipro",
-        "kucoin",
-        "probit"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -7513,6 +7514,13 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "CHF": {
+      "source": [
+        "ecb",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
     "ADABEAR": {
       "source": [
         "ftx",
@@ -8885,12 +8893,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "CHF": {
-      "source": [
-        "ecb"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "STEP": {
       "source": [
         "ftx"
@@ -9965,7 +9967,19 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "MXNUSD=X": {
+    "PEN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MXN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ARS": {
       "source": [
         "yf-unofficial"
       ],
@@ -9978,18 +9992,6 @@
       "maxPriceDeviationPercent": 80
     },
     "COPUSD=X": {
-      "source": [
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ARSUSD=X": {
-      "source": [
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PENUSD=X": {
       "source": [
         "yf-unofficial"
       ],
