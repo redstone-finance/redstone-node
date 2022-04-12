@@ -23,7 +23,6 @@ export interface Credentials {
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
-  yahooFinanceRapidApiKey?: string;
 };
 
 export interface TokenConfig {
