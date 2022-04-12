@@ -1,7 +1,140 @@
 {
   "canEvolve": true,
   "evolve": null,
-  "contractAdmins": [],
-  "nodes": {},
-  "dataFeeds": {}
+  "contractAdmins": [
+    "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0",
+    "zYqPZuALSPa_f5Agvf8g2JHv94cqMn9aBtnH7GFHbuA",
+    "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc",
+    "33F0QHcb22W7LwWR1iRC8Az1ntZG09XQ03YWuw2ABqA"
+  ],
+  "nodes": {
+    "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0": {
+      "name": "redstone",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Main RedStone Provider with all available tokens.",
+      "dataFeedId": "provider_qZfxiw8Rl3ywD9e4F-nxLOCzZqU1MibNcep4DWvTgkQ",
+      "evmAddress": "0x0C39486f770B26F5527BBBf942726537986Cd7eb",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "zYqPZuALSPa_f5Agvf8g2JHv94cqMn9aBtnH7GFHbuA": {
+      "name": "redstone-rapid",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens with frequent updates",
+      "dataFeedId": "provider_gd0Vwzb2o6B5n68Sik3Lk0vv8sL2Ee1JcWn7DAx8_VY",
+      "evmAddress": "0xf786a909D559F5Dee2dc6706d8e5A81728a39aE9",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc": {
+      "name": "redstone-stocks",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Stocks, ETFs, Livestocks, Metals, Energies...",
+      "dataFeedId": "provider_LxY82d0TlGNqDf9jWSb6LlAVszL2OubAFG9QV3RiWC4",
+      "evmAddress": "0x926E370fD53c23f8B71ad2B3217b227E41A92b12",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "33F0QHcb22W7LwWR1iRC8Az1ntZG09XQ03YWuw2ABqA": {
+      "name": "redstone-dev",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Test Node",
+      "dataFeedId": "provider_khZSCTL02bIQNfx-o_pbiDjuiFBL-oyvcbAIM2DAB50",
+      "evmAddress": "",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "f1Ipos2fVPbxPVO65GBygkMyW0tkAhp2hdprRPPBBN8": {
+      "name": "redstone-avalanche",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem",
+      "dataFeedId": "provider_vNgkmusqWpE_4E8Kn1ar_GCrTBmWEH9BNcV08krPa8M",
+      "evmAddress": "0x3a7d971De367FE15D164CDD952F64205F2D9f10c",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "TEHhCDWy-vGmPSZsYJyM0aP_MM4xESgyIZdf5mVODzg": {
+      "name": "redstone-avalanche-prod-1",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem - prod node 1",
+      "dataFeedId": "provider_kKqwbcrdrmPoZLBqjM5HGmDOMEicPli0P_Z-G_Ib09w",
+      "evmAddress": "0x981bdA8276ae93F567922497153de7A5683708d3",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    },
+    "ll8DlO4xMwHK7gIMsbnOnN7Jg8Sl674Ls4G0aBfHCyk": {
+      "name": "redstone-avalanche-prod-2",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem - prod node 2",
+      "dataFeedId": "provider_fg97Q4mOS0LuiEE9TZqauOSPbgVyUo9xQtVmWhpPI9Q",
+      "evmAddress": "0x3BEFDd935b50F172e696A5187DBaCfEf0D208e48",
+      "ipAddress": "0.0.0.0",
+      "url": "https://redstone.finance"
+    }
+  },
+  "dataFeeds": {
+    "provider_qZfxiw8Rl3ywD9e4F-nxLOCzZqU1MibNcep4DWvTgkQ": {
+      "name": "RedStone",
+      "manifestTxId": "kXYM3AezlROPoEDCt_802-k9ZxeceAWzHtrERmR2zEg",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Main RedStone Provider with all available tokens.",
+      "admin": "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0"
+    },
+    "provider_gd0Vwzb2o6B5n68Sik3Lk0vv8sL2Ee1JcWn7DAx8_VY": {
+      "name": "RedStone Rapid",
+      "manifestTxId": "by76NsYK_cHy46SqG0-aPlGQ3dpTe2Y5se-wJkjX5mY",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens with frequent updates",
+      "admin": "zYqPZuALSPa_f5Agvf8g2JHv94cqMn9aBtnH7GFHbuA"
+    },
+    "provider_LxY82d0TlGNqDf9jWSb6LlAVszL2OubAFG9QV3RiWC4": {
+      "name": "RedStone Stocks",
+      "manifestTxId": "2kUb1tF0KlaN9XIBPa5WudISg7B7wf4bfUFe-kT7zOc",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Stocks, ETFs, Livestocks, Metals, Energies...",
+      "admin": "Yba8IVc_01bFxutKNJAZ7CmTD5AVi2GcWXf1NajPAsc"
+    },
+    "provider_khZSCTL02bIQNfx-o_pbiDjuiFBL-oyvcbAIM2DAB50": {
+      "name": "Test Node",
+      "manifestTxId": "g38i2cGAaJ06NlyNO9hgTy5yWLEhxsK3LR3-WTd5eJg",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Test Node",
+      "admin": "33F0QHcb22W7LwWR1iRC8Az1ntZG09XQ03YWuw2ABqA"
+    },
+    "provider_vNgkmusqWpE_4E8Kn1ar_GCrTBmWEH9BNcV08krPa8M": {
+      "name": "RedStone Avalanche",
+      "manifestTxId": "erTjNqoLYB9Jw9zZXJPYxmijE5ElEhDM_52quvK83ws",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem",
+      "admin": "f1Ipos2fVPbxPVO65GBygkMyW0tkAhp2hdprRPPBBN8"
+    },
+    "provider_vrEspHV3JLX_3BPL3Jm7ofneAdMqOJiwZvv0a2lL-rg": {
+      "name": "RedStone Avalanche 2",
+      "manifestTxId": "y7ppr6m9MuP65Fiivd9CX84qcPLoYBMifUrFK3jXw2k",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem - mirror",
+      "admin": "6bZ3yxPYy0LHPqo7MNqw0PHTeIM2PR-RmfTPYLltsfw"
+    },
+    "provider_kKqwbcrdrmPoZLBqjM5HGmDOMEicPli0P_Z-G_Ib09w": {
+      "name": "RedStone Avalanche Prod 1",
+      "manifestTxId": "y7ppr6m9MuP65Fiivd9CX84qcPLoYBMifUrFK3jXw2k",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem - prod node 1",
+      "admin": "TEHhCDWy-vGmPSZsYJyM0aP_MM4xESgyIZdf5mVODzg"
+    },
+    "provider_fg97Q4mOS0LuiEE9TZqauOSPbgVyUo9xQtVmWhpPI9Q": {
+      "name": "RedStone Avalanche Prod 2",
+      "manifestTxId": "y7ppr6m9MuP65Fiivd9CX84qcPLoYBMifUrFK3jXw2k",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem - prod node 2",
+      "admin": "ll8DlO4xMwHK7gIMsbnOnN7Jg8Sl674Ls4G0aBfHCyk"
+    },
+    "provider_SjR1m8EBcCoON0N11LEQGzqjmaJissWtoEZuuyTTRpQ": {
+      "name": "Redstone Avalanche prod 3",
+      "manifestTxId": "",
+      "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+      "description": "Most popular tokens from the Avalanche ecosystem",
+      "admin": "npkQvDT0_oN-MGfOPStbyhSnzwJgZ_OvzDENCdciJHk"
+    }
+  }
 }
