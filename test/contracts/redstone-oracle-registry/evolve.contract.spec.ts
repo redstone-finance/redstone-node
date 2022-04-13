@@ -6,6 +6,7 @@ import {
   LoggerFactory,
   SmartWeave,
   SmartWeaveNodeFactory,
+  SmartWeaveTags,
 } from "redstone-smartweave";
 import fs from "fs";
 import path from "path";
@@ -72,16 +73,49 @@ describe("Redstone oracle registry contract - evolve", () => {
     await arlocal.stop();
   });
 
-  test("update evolve state in contract", async () => {
+  test("update contract source", async () => {
+    const newSource = fs.readFileSync(path.join(__dirname, 'helpers/redstone-oracle-registry-evolve.contract.js'), 'utf8');
+    const evolveContractTx = await arweave.createTransaction({ data: newSource }, wallet);
+    evolveContractTx.addTag(SmartWeaveTags.APP_NAME, 'SmartWeaveContractSource');
+    evolveContractTx.addTag(SmartWeaveTags.APP_VERSION, '0.3.0');
+    evolveContractTx.addTag('Content-Type', 'application/javascript');
+    await arweave.transactions.sign(evolveContractTx, wallet);
+    await arweave.transactions.post(evolveContractTx);
+    await mineBlock(arweave);
+
     await contract.writeInteraction<RedstoneOraclesInput>({
       function: "evolve",
       data: {
-        evolveTransactionId: "testTransactionId"
+        evolveTransactionId: evolveContractTx.id
       },
     });
     await mineBlock(arweave);
+  
+    const testId = "testId";
+    const testDataFeedDetails = {
+      id: testId,
+      name: "testName",
+      logo: "testLogo",
+      description: "testDescription",
+      manifestTxId: "testManifestId",
+    };
+    await contract.writeInteraction<RedstoneOraclesInput>({
+      function: "createDataFeed",
+      data: testDataFeedDetails,
+    });
+    await mineBlock(arweave);
     const state = (await contract.readState()).state;
-    expect(state.evolve).toEqual("testTransactionId");
+    const dataFeed = state.dataFeeds[testId];
+    expect(state.evolve).toEqual(evolveContractTx.id);
+    expect(dataFeed).toEqual({
+      ...{
+        name: 'evolveName',
+        manifestTxId: 'evolveManifestTxId',
+        logo: 'evolveLogo',
+        description: 'evolveDescription'
+      },
+      admin: walletAddress,
+    });
   });
 
   test("throw error if invalid address in input", async () => {
