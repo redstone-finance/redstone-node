@@ -9,13 +9,12 @@ import {
 } from "redstone-smartweave";
 import fs from "fs";
 import path from "path";
+import { addFunds, mineBlock } from "../utils/smartweave-test-utils";
 import {
   CreateDataFeedInputData,
   RedstoneOraclesInput,
   RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
-import { addFunds } from "../../../src/utils/addFunds";
-import { mineBlock } from "../../../src/utils/mineBlock";
 
 const testId = "testId";
 const testDataFeedDetails = {

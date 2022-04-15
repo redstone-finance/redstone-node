@@ -2,8 +2,8 @@ import { listNodes } from "./nodes/read/listNodes";
 import { getNodeDetails } from "./nodes/read/getNodeDetails";
 import {
   ContractErrorType,
+  ContractResult,
   RedstoneOraclesAction,
-  RedstoneOraclesContractResult,
   RedstoneOraclesState,
 } from "./types";
 import { registerNode } from "./nodes/write/registerNode";
@@ -13,13 +13,9 @@ import { listDataFeeds } from "./data-feeds/read/listDataFeeds";
 import { getDataFeedDetailsById } from "./data-feeds/read/getDataFeedDetailsById";
 import { createDataFeed } from "./data-feeds/write/createDataFeed";
 import { updateDataFeed } from "./data-feeds/write/updateDataFeed";
-import { handleEvolve } from "./handleEvolve";
+import { evolve } from "./evolve";
 
 declare const ContractError: ContractErrorType;
-
-type ContractResult =
-  | { state: RedstoneOraclesState }
-  | RedstoneOraclesContractResult;
 
 export const handle = async (
   state: RedstoneOraclesState,
@@ -47,7 +43,7 @@ export const handle = async (
     case "updateDataFeed":
       return updateDataFeed(state, action);
     case "evolve":
-      return handleEvolve(state, action);
+      return evolve(state, action);
     default:  
       throw new ContractError(
         `No function supplied or function not recognized: "${input.function}"`

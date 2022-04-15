@@ -1,6 +1,10 @@
 import Arweave from "arweave";
 import { JWKInterface } from "arweave/node/lib/wallet";
 
+export const mineBlock = async (arweave: Arweave): Promise<void> => {
+  await arweave.api.get("mine");
+};
+
 export const addFunds = async (
   arweave: Arweave,
   wallet: JWKInterface

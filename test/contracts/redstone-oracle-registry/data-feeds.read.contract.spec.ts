@@ -9,12 +9,11 @@ import {
 } from "redstone-smartweave";
 import fs from "fs";
 import path from "path";
+import { addFunds, mineBlock } from "../utils/smartweave-test-utils";
 import {
   RedstoneOraclesInput,
   RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
-import { addFunds } from "../../../src/utils/addFunds";
-import { mineBlock } from "../../../src/utils/mineBlock";
 import { mockDataFeeds } from "./mocks/dataFeeds.mock";
 
 describe("Redstone oracle registry contract - data feeds - read", () => {
@@ -167,7 +166,7 @@ describe("Redstone oracle registry contract - data feeds - read", () => {
         function: "getDataFeedDetailsById",
         data: {},
       });
-      expect(errorMessage).toBe("Missing data feed id");
+      expect(errorMessage).toBe("Missing oracle identifier");
     });
 
     test("throw error if invalid id in input", async () => {
@@ -178,7 +177,7 @@ describe("Redstone oracle registry contract - data feeds - read", () => {
         },
       });
 
-      expect(errorMessage).toBe("Data feed with id invalidId does not exist");
+      expect(errorMessage).toBe("Oracle with identifier invalidId does not exist");
     });
   });
 });

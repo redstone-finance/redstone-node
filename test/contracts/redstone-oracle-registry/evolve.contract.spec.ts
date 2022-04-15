@@ -10,12 +10,11 @@ import {
 } from "redstone-smartweave";
 import fs from "fs";
 import path from "path";
+import { addFunds, mineBlock } from "../utils/smartweave-test-utils";
 import {
   RedstoneOraclesInput,
   RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
-import { addFunds } from "../../../src/utils/addFunds";
-import { mineBlock } from "../../../src/utils/mineBlock";
 
 describe("Redstone oracle registry contract - evolve", () => {
   let contractSrc: string;

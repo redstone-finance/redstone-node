@@ -9,13 +9,12 @@ import {
 } from "redstone-smartweave";
 import fs from "fs";
 import path from "path";
+import { addFunds, mineBlock } from "../utils/smartweave-test-utils";
 import {
   RedstoneOraclesInput,
   RedstoneOraclesState,
 } from "../../../src/contracts/redstone-oracle-registry/types";
 import { mockNodes } from "./mocks/nodes.mock";
-import { addFunds } from "../../../src/utils/addFunds";
-import { mineBlock } from "../../../src/utils/mineBlock";
 
 describe("Redstone oracle registry contract - nodes - read", () => {
   let contractSrc: string;
@@ -179,7 +178,7 @@ describe("Redstone oracle registry contract - nodes - read", () => {
         function: "getNodeDetails",
         data: {},
       });
-      expect(errorMessage).toBe("Missing node address");
+      expect(errorMessage).toBe("Missing oracle identifier");
     });
 
     test("throw error if invalid address in input", async () => {
@@ -191,7 +190,7 @@ describe("Redstone oracle registry contract - nodes - read", () => {
       });
 
       expect(errorMessage).toBe(
-        "Node with address invalidNodeAddress does not exist"
+        "Oracle with identifier invalidNodeAddress does not exist"
       );
     });
   });

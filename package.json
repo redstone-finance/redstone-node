@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "build:contracts": "rm -rf dist && node ./tools/contracts/build.js && npm run cp",
+    "build:contracts": "rm -rf dist && node ./tools/contracts/build.js && yarn cp",
     "cp": "copyfiles -u 1 ./src/contracts/**/*.json dist",
     "start": "MODE=PROD ts-node index.ts",
     "start:prod": "node dist/index.js",

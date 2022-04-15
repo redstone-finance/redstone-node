@@ -5,9 +5,12 @@ export interface EvolveState {
 
 export interface RedstoneOraclesState extends EvolveState {
   contractAdmins: string[];
-  nodes: { [key in string]: Node };
-  dataFeeds: { [key in string]: DataFeed };
+  nodes: Nodes
+  dataFeeds: DataFeeds
 }
+
+export type Nodes = { [key in string]: Node };
+export type DataFeeds = { [key in string]: DataFeed };
 
 interface Node {
   name: string;
@@ -76,7 +79,7 @@ export interface GetNodesDetailsResult {
   result: NodeWithAddress;
 }
 
-interface NodeWithAddress extends Node {
+export interface NodeWithAddress extends Node {
   address: string;
 }
 
@@ -102,12 +105,22 @@ export interface GetDataFeedDetailsByIdResult {
   result: DataFeedWithId;
 }
 
-interface DataFeedWithId extends DataFeed {
+export interface DataFeedWithId extends DataFeed {
   id: string;
 }
 
-export type ContractErrorType = new (message: string) => any;
-
 export interface EvolveInputData {
   evolveTransactionId: string;
+}
+
+export type ContractResult =
+  | { state: RedstoneOraclesState }
+  | RedstoneOraclesContractResult;
+
+export type ContractErrorType = new (message: string) => any;
+
+export interface GetOracleDetailsInput {
+	identifier: string,
+	state: RedstoneOraclesState,
+	oraclesType: 'nodes' | 'dataFeeds',
 }
