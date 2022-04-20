@@ -1,12 +1,12 @@
-import { ContractErrorType, GetOracleDetailsInput } from "../types";
+import { ContractErrorType, GetDetailsByIdInput } from "../types";
 
 declare const ContractError: ContractErrorType;
 
-export const getOracleDetails = ({
+export const getDetailsById = ({
 	identifier,
 	state,
 	oraclesType
-}: GetOracleDetailsInput) => {
+}: GetDetailsByIdInput) => {
   if (!identifier) {
     throw new ContractError("Missing oracle identifier");
   }

@@ -1,4 +1,4 @@
-import { getOracleDetails } from "../../common/getOracleDetails";
+import { getDetailsById } from "../../common/getDetailsById";
 import {
   RedstoneOraclesState,
   RedstoneOraclesInput,
@@ -15,7 +15,7 @@ export const getNodeDetails = (
   input: RedstoneOraclesInput
 ): GetNodesDetailsResult => {
   const data = input.data as GetNodeDetailsInputData;
-  const nodesDetails = getOracleDetails({
+  const nodesDetails = getDetailsById({
     identifier: data?.address,
     state,
     oraclesType: "nodes"

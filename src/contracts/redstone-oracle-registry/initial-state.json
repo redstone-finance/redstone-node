@@ -93,21 +93,21 @@
   },
   "dataFeeds": {
     "redstone-main-demo": {
-      "name": "RedStone",
+      "name": "RedStone Main Demo",
       "manifestTxId": "kXYM3AezlROPoEDCt_802-k9ZxeceAWzHtrERmR2zEg",
       "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
       "description": "Main RedStone Provider with all available tokens.",
       "admin": "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0"
     },
     "redstone-rapid-demo": {
-      "name": "RedStone Rapid",
+      "name": "RedStone Rapid Demo",
       "manifestTxId": "by76NsYK_cHy46SqG0-aPlGQ3dpTe2Y5se-wJkjX5mY",
       "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
       "description": "Most popular tokens with frequent updates",
       "admin": "zYqPZuALSPa_f5Agvf8g2JHv94cqMn9aBtnH7GFHbuA"
     },
     "redstone-stocks-demo": {
-      "name": "RedStone Stocks",
+      "name": "RedStone Stocks Demo",
       "manifestTxId": "2kUb1tF0KlaN9XIBPa5WudISg7B7wf4bfUFe-kT7zOc",
       "logo": "https://redstone.finance/assets/img/redstone-logo-full.svg",
       "description": "Stocks, ETFs, Livestocks, Metals, Energies...",
