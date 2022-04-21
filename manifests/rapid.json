@@ -54,7 +54,6 @@
     },
     "ETH": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "bibox",
@@ -144,7 +143,6 @@
     },
     "DOGE": {
       "source": [
-        "aofex",
         "ascendex",
         "bibox",
         "binance",
@@ -183,7 +181,6 @@
     },
     "XRP": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "bibox",
@@ -224,7 +221,6 @@
     },
     "ADA": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "binance",
@@ -258,7 +254,6 @@
     },
     "DOT": {
       "source": [
-        "aofex",
         "ascendex",
         "bibox",
         "binance",
@@ -295,7 +290,6 @@
     },
     "XLM": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "bibox",
@@ -332,7 +326,6 @@
     },
     "AR": {
       "source": [
-        "aofex",
         "binance",
         "coinex",
         "coingecko",
