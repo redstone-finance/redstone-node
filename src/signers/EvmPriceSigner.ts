@@ -122,7 +122,7 @@ export default class EvmPriceSigner {
     const serializedPriceData = this.serializeToMessage(pricePackage);
     return {
       pricePackage,
-      signerPublicKey: (new ethers.Wallet(privateKey)).publicKey,
+      signerAddress: (new ethers.Wallet(privateKey)).address,
       liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
     };
   }
@@ -137,8 +137,7 @@ export default class EvmPriceSigner {
     });
 
     const signerAddressUC = signer.toUpperCase();
-    const expectedSignerAddress = ethers.utils.computeAddress(
-      signedPricePackage.signerPublicKey);
+    const expectedSignerAddress = signedPricePackage.signerAddress;
     const expectedSignerAddressUC = expectedSignerAddress.toUpperCase();
 
     return signerAddressUC === expectedSignerAddressUC;

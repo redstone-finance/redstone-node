@@ -102,7 +102,7 @@ export interface PricePackage {
 
 export interface SignedPricePackage {
   pricePackage: PricePackage;
-  signerPublicKey: string;
+  signerAddress: string;
   liteSignature: string;
 };
 

@@ -6,7 +6,7 @@ const fetchersObj: { [name: string]: TwapFetcher } = {};
 for (const providerDetails of allSupportedProvidersForTwap) {
   const twapFetcherInstance = new TwapFetcher(
     providerDetails.id,
-    providerDetails.evmPublicKey);
+    providerDetails.evmAddress);
   fetchersObj[twapFetcherInstance.getName()] = twapFetcherInstance;
 }
 

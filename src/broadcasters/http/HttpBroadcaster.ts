@@ -26,7 +26,7 @@ export class HttpBroadcaster implements Broadcaster {
     signedData: SignedPricePackage,
     providerAddress: string): Promise<void> {
       const body = {
-        signerPublicKey: signedData.signerPublicKey,
+        signerAddress: signedData.signerAddress,
         liteSignature: signedData.liteSignature,
         provider: providerAddress,
         ...signedData.pricePackage, // unpacking prices and timestamp

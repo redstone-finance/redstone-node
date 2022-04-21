@@ -35,7 +35,7 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
     return {
       signPricePackage: (pricePackage: any) => ({
         liteSignature: "mock_evm_signed_lite",
-        signerPublicKey: "mock_evm_signer_public_key",
+        signerAddress: "mock_evm_signer_address",
         pricePackage,
       }),
     };
@@ -283,7 +283,7 @@ describe("NodeRunner", () => {
       {
         timestamp: 111111111,
         liteSignature: "mock_evm_signed_lite",
-        signerPublicKey: "mock_evm_signer_public_key",
+        signerAddress: "mock_evm_signer_address",
         provider: "mockArAddress",
         prices: [{symbol: "BTC", value: 444.5}]
       }
