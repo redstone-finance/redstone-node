@@ -86,6 +86,7 @@ export default class PricesService {
 
     const fetchPromise = fetchers[source].fetchAll(tokens, {
       credentials: this.credentials,
+      manifest: this.manifest,
     });
 
     const sourceTimeout = ManifestHelper.getTimeoutForSource(source, this.manifest);

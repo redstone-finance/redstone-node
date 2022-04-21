@@ -28,10 +28,17 @@ export interface Credentials {
 export interface TokenConfig {
   source?: string[];
   maxPriceDeviationPercent?: number;
+  customUrlsDetails?: CustomUrlsDetails;
+};
+
+export interface CustomUrlsDetails {
+  url: string;
+  jsonpath: string;
 };
 
 export interface FetcherOpts {
   credentials: Credentials;
+  manifest: Manifest;
 };
 
 export interface Fetcher {

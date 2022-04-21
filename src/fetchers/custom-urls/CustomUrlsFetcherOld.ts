@@ -1,8 +1,10 @@
 import axios from "axios";
 import _ from "lodash";
 import jp from "jsonpath";
-import { FetcherOpts, PricesObj } from "../../types";
+import { PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
+
+const SEPARATOR = "-----";
 
 // TODO: improve this implementation
 // It's just a PoC now
@@ -12,15 +14,12 @@ export class CustomUrlsFetcher extends BaseFetcher {
     super(`custom-urls`);
   }
 
-  async fetchData(ids: string[], opts: FetcherOpts) {
+  async fetchData(ids: string[]) {
     const responses: any = {};
     const promises = [];
 
     for (const id of ids) {
-      // TODO: implement hash verification later
-
-      const url = opts.manifest.tokens[id].customUrlsDetails!.url;
-
+      const [, url] = id.split(SEPARATOR);
       // TODO implement timeout for each url
       const promise = axios.get(url).then(response => {
         responses[id] = response.data;
@@ -33,16 +32,14 @@ export class CustomUrlsFetcher extends BaseFetcher {
     return responses;
   }
 
-  async extractPrices(responses: any, _ids: string[], opts: FetcherOpts): Promise<PricesObj> {
+  async extractPrices(responses: any): Promise<PricesObj> {
     const pricesObj: PricesObj = {};
     for (const [id, response] of Object.entries(responses)) {
-      const jsonpath = opts.manifest.tokens[id].customUrlsDetails!.jsonpath;
-      // TODO: remove
-      console.log({jsonpath});
-      process.exit();
-      const extractedValue = jp.query(response, jsonpath);
+      const [jsonPath] = id.split(SEPARATOR);
+      const extractedValue = jp.query(response, jsonPath);
       pricesObj[id] = extractedValue[0];
     }
     return pricesObj;
   }
+
 };
