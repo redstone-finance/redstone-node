@@ -17,11 +17,12 @@ export class CustomUrlsFetcher extends BaseFetcher {
     const promises = [];
 
     for (const id of ids) {
-      // TODO: implement hash verification later
+      // TODO: maybe implement hash verification later
 
-      const url = opts.manifest.tokens[id].customUrlsDetails!.url;
+      const url = opts.manifest.tokens[id].customUrlDetails!.url;
 
-      // TODO implement timeout for each url
+      // TODO: implement timeout for each url
+      // TODO: add error logging
       const promise = axios.get(url).then(response => {
         responses[id] = response.data;
       });
@@ -36,10 +37,7 @@ export class CustomUrlsFetcher extends BaseFetcher {
   async extractPrices(responses: any, _ids: string[], opts: FetcherOpts): Promise<PricesObj> {
     const pricesObj: PricesObj = {};
     for (const [id, response] of Object.entries(responses)) {
-      const jsonpath = opts.manifest.tokens[id].customUrlsDetails!.jsonpath;
-      // TODO: remove
-      console.log({jsonpath});
-      process.exit();
+      const jsonpath = opts.manifest.tokens[id].customUrlDetails!.jsonpath;
       const extractedValue = jp.query(response, jsonpath);
       pricesObj[id] = extractedValue[0];
     }

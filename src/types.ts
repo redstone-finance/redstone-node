@@ -28,10 +28,10 @@ export interface Credentials {
 export interface TokenConfig {
   source?: string[];
   maxPriceDeviationPercent?: number;
-  customUrlsDetails?: CustomUrlsDetails;
+  customUrlDetails?: customUrlDetails;
 };
 
-export interface CustomUrlsDetails {
+export interface customUrlDetails {
   url: string;
   jsonpath: string;
 };

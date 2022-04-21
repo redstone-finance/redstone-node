@@ -25,7 +25,7 @@ function main() {
   for (const { jsonpath, url } of CUSTOM_URLS_WITH_JSON_PATHS) {
     const symbol = ethers.utils.id(`${jsonpath}---${url}`);
     tokens[symbol] = {
-      customUrlsDetails: { url, jsonpath },
+      customUrlDetails: { url, jsonpath },
     };
   }
 

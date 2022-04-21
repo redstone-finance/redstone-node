@@ -89,8 +89,9 @@ export default class EvmPriceSigner {
 
   public static convertStringToBytes32String(str: string) {
     if (str.length > 31) {
-      // TODO: improve checking if str is a valid bytes32 string
-      if (str.length === 32 && str.startsWith("0x")) {
+      // TODO: improve checking if str is a valid bytes32 string later
+      const bytes32StringLength = 32 * 2 + 2; // 32 bytes (each byte uses 2 symbols) + 0x
+      if (str.length === bytes32StringLength && str.startsWith("0x")) {
         return str;
       } else {
         // Calculate keccak hash if string is bigger than 32 bytes
