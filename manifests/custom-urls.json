@@ -6,8 +6,8 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
-    "$.RAW.ETH.USD.PRICE///https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {},
-    "$.RAW.ETH.USD.MEDIAN///https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {},
-    "$.RAW.ETH.USD.VOLUMEDAY///https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {}
+    "$.RAW.ETH.USD.PRICE-----https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {},
+    "$.RAW.ETH.USD.MEDIAN-----https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {},
+    "$.RAW.ETH.USD.VOLUMEDAY-----https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD": {}
   }
 }

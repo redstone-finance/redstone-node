@@ -87,6 +87,15 @@ export default class EvmPriceSigner {
     return personalSign(toBuffer(privateKey), { data });
   }
 
+  public static convertSgtringToBytes32String(str: string) {
+    if (str.length > 31) {
+      // Calculate keccak hash if string is bigger than 32 bytes
+      return ethers.utils.id(str);
+    } else {
+      return ethers.utils.formatBytes32String(str);
+    }
+  }
+
   serializeToMessage(pricePackage: PricePackage): SerializedPriceData {
     // We clean and sort prices to be sure that prices
     // always have the same format
@@ -96,7 +105,7 @@ export default class EvmPriceSigner {
 
     return {
       symbols: sortedPrices.map((p: ShortSinglePrice) =>
-        ethers.utils.formatBytes32String(p.symbol)),
+        EvmPriceSigner.convertSgtringToBytes32String(p.symbol)),
       values: sortedPrices.map((p: ShortSinglePrice) =>
         serializePriceValue(p.value)),
       timestamp: pricePackage.timestamp,
