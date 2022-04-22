@@ -12,14 +12,14 @@ export const getDetailsById = ({
   }
 
   const oracleDetails = state[oraclesType][identifier];
-	
-	if (!oracleDetails) {
+  
+  if (!oracleDetails) {
     throw new ContractError(`Oracle with identifier ${identifier} does not exist`);
   }
 
-	const identifierObject = oraclesType === 'nodes'
-		? { address: identifier }
-		: { id: identifier };
+  const identifierObject = oraclesType === 'nodes'
+    ? { address: identifier }
+    : { id: identifier };
 
-	return { ...oracleDetails, ...identifierObject }
+  return { ...oracleDetails, ...identifierObject }
 };
