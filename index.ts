@@ -29,12 +29,9 @@ async function main(): Promise<void> {
   }
 
   let config: NodeConfig;
-  let jwk: JWKInterface;
-
   if (configFilePath) {
     // Loading config from file
     config = readJSON(configFilePath);
-    jwk = readJSON(config.arweaveKeysFile!);
   } else {
     // Loading config from environment variable
     const configString = process.env[argv["config-env"] as string];
@@ -42,17 +39,15 @@ async function main(): Promise<void> {
       throw new Error(`ENV variable '${argv["config-env"]}' is empty`);
     }
     config = JSON.parse(configString);
-    jwk = config.arweaveKeysJWK!;
-    if (!jwk) {
-      throw new Error('arweaveKeysJWK is empty');
-    }
+  }
+
+  const arweaveMnemonic = config.arweaveMnemonic;
+  if (!arweaveMnemonic) {
+    throw new Error('arweaveMnemonic is empty');
   }
 
   // Running limestone-node with manifest
-  const runner = await NodeRunner.create(
-    jwk,
-    config
-  );
+  const runner = await NodeRunner.create(config);
   await runner.run();
 }
 

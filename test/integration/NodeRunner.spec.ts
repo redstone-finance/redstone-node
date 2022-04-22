@@ -1,15 +1,13 @@
-import {NodeConfig} from "../../src/types";
-import NodeRunner from "../../src/NodeRunner";
-import {JWKInterface} from "arweave/node/lib/wallet";
-import {mocked} from "ts-jest/utils";
+import axios from "axios";
+import { mocked } from "ts-jest/utils";
+import { any } from "jest-mock-extended";
 import ArweaveProxy from "../../src/arweave/ArweaveProxy";
+import ArweaveService from "../../src/arweave/ArweaveService";
+import { timeout } from "../../src/utils/objects";
+import { NodeConfig } from "../../src/types";
+import NodeRunner from "../../src/NodeRunner";
 import fetchers from "../../src/fetchers";
 import mode from "../../mode";
-import axios from "axios";
-import ArweaveService from "../../src/arweave/ArweaveService";
-import {any} from "jest-mock-extended";
-import {timeout} from "../../src/utils/objects";
-
 
 /****** MOCKS START ******/
 const mockArProxy = {
@@ -72,19 +70,21 @@ jest.mock('../../src/utils/objects', () => ({
 
 jest.mock("uuid",
   () => ({v4: () => "00000000-0000-0000-0000-000000000000"}));
+
+const jwk = { e: "e", kty: "kty", n: "n" };
+jest.mock("arweave-mnemonic-keys", () => ({
+  getKeyFromMnemonic: () => jwk
+}));
 /****** MOCKS END ******/
 
 
 describe("NodeRunner", () => {
-
-  const jwk: JWKInterface = {
-    e: "e", kty: "kty", n: "n"
-  }
-
+  const mnemonic = "indoor dish desk flag debris potato excuse depart ticket judge file exit";
   const nodeConfig: NodeConfig = {
-    arweaveKeysFile: "", credentials: {
+    arweaveMnemonic: mnemonic,
+    credentials: {
       infuraProjectId: "ipid",
-      ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
+      ethereumMnemonic: mnemonic
     },
     addEvmSignature: true,
     manifestFile: "",
@@ -139,7 +139,6 @@ describe("NodeRunner", () => {
     const mockedArProxy = mocked(ArweaveProxy, true);
 
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -166,7 +165,6 @@ describe("NodeRunner", () => {
       }`)
 
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -190,7 +188,6 @@ describe("NodeRunner", () => {
       }`);
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -200,16 +197,15 @@ describe("NodeRunner", () => {
   it("should throw if minimumArBalance not defined in config file", async () => {
     await expect(async () => {
       await NodeRunner.create(
-        jwk,
-        JSON.parse(`{
-      "arweaveKeysFile": "",
-      "credentials": {
-        "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111",
-        "infuraProjectId": "ipid",
-        "covalentApiKey": "ckey"
-      },
-      "manifestFile": ""
-    }`));
+      JSON.parse(`{
+        "arweaveMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
+        "credentials": {
+          "ethereumMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
+          "infuraProjectId": "ipid",
+          "covalentApiKey": "ckey"
+        },
+        "manifestFile": ""
+      }`));
     }).rejects.toThrow("minimumArBalance not defined in config file");
   });
 
@@ -217,7 +213,6 @@ describe("NodeRunner", () => {
     // Given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
     fetchers["coinbase"] = {
@@ -248,7 +243,6 @@ describe("NodeRunner", () => {
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -303,7 +297,6 @@ describe("NodeRunner", () => {
     }
 
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -318,7 +311,6 @@ describe("NodeRunner", () => {
     modeMock.isProd = true;
 
     const sut = await NodeRunner.create(
-      jwk,
       nodeConfig
     );
 
@@ -352,7 +344,6 @@ describe("NodeRunner", () => {
 
   it("should broadcast prices without evm signature when addEvmSignature is not set", async () => {
     const sut = await NodeRunner.create(
-      jwk,
       {
         ...nodeConfig,
         addEvmSignature: false,
@@ -396,7 +387,6 @@ describe("NodeRunner", () => {
         .mockImplementation(() => Promise.resolve(manifest));
 
       const sut = await NodeRunner.create(
-        jwk,
         nodeConfigManifestFromAr
       );
 
@@ -424,7 +414,6 @@ describe("NodeRunner", () => {
           .mockImplementation(() => Promise.resolve(manifest));
       }, 100);
       const sut = await NodeRunner.create(
-        jwk,
         nodeConfigManifestFromAr
       );
       expect(sut).not.toBeNull();

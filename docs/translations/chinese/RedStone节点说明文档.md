@@ -609,14 +609,14 @@ Config file is a **private** file created by a provider. It contains the followi
 
 | 参数 Param | 可选性Optionality | 描述 Description |
 | --- | --- | --- |
-| arweaveKeysFile | 必须 required | arweave 钱包的路径（若是相对路径，则假定在项目根文件夹中）<br/>path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
+| arweaveMnemonic | 必须 required | Arweave 钱包的 12 字助记符 <br/>12 word mnemonic for Arweave wallet |
 | minimumArBalance | 必须 required | 运行节点最低需要的AR余额 <br/>minimum AR balance required to run the node |
 | useManifestFromSmartContract | 可选 optional | 如果设置为true,manifest会从Arweave的智能合约中调用 <br/>if set to true , manifest will be loaded from Arweave Smart Contracts |
-| manifestFile | 可选 optional | manifest文件的路径<br/>path to the manifest file |
-| addEvmSignature | 可选 optional | 如果设置为itrue,EVM签名将会被添加到每个资产的价格中<br/>if set to true, EVM signature will be added to each price for each asset |
-| credentials | 必须 required | 具有 API 和私钥凭据的对象<br/>object with credentials for APIs and private keys |
-| credentials.ethereumPrivateKey | 必须 required | 将用于价格数据签名的以太坊私钥<br/>Ethereum private key that will be used for price data signing |
-| credentials.yahooFinanceRapidApiKey | 可选 optional | api-dojo-rapid 获取器 的 API 密钥<br/>API key for the api-dojo-rapid fetcher |
+| manifestFile | 可选 optional | manifest文件的路径 <br/>path to the manifest file |
+| addEvmSignature | 可选 optional | 如果设置为itrue,EVM签名将会被添加到每个资产的价格中 <br/>if set to true, EVM signature will be added to each price for each asset |
+| credentials | 必须 required | 具有 API 和私钥凭据的对象 <br/>object with credentials for APIs and private keys |
+| credentials.ethereumMnemonic | 必须 required | 用于价格数据签名的以太坊钱包密钥的 12 字助记符 <br/>12 word mnemonic for Ethereum wallet key that will be used for price data signing |
+| credentials.yahooFinanceRapidApiKey | 可选 optional | api-dojo-rapid 获取器 的 API 密钥 <br/>API key for the api-dojo-rapid fetcher |
 
 You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
 

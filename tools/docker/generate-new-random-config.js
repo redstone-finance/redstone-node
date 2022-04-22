@@ -1,4 +1,5 @@
 const { ethers } = require("ethers");
+const arweaveMnemonicKeys = require("arweave-mnemonic-keys");
 const Arweave = require("arweave/node");
 
 main();
@@ -26,7 +27,8 @@ async function generateNewRandomNodeConfig() {
   });
 
   const evmWallet = ethers.Wallet.createRandom();
-  const jwk = await arweave.wallets.generate();
+  const arweaveMnemonic = await arweaveMnemonicKeys.generateMnemonic();
+  const jwk = await arweaveMnemonicKeys.getKeyFromMnemonic(arweaveMnemonic);
   const arweaveAddress = await arweave.wallets.jwkToAddress(jwk);
   const arweavePublicKey = getPublicKey(jwk);
 

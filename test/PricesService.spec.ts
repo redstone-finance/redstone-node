@@ -83,7 +83,7 @@ describe("fetchInParrallel", () => {
       evmChainId: 1,
       tokens: {}
     };
-    const credentials = { "ethereumPrivateKey": "0x0" };
+    const credentials = { "ethereumMnemonic": "0x0" };
     const priceService = new PricesService(manifest, credentials);
     priceService.doFetchFromSource = async (source: string, tokens: string[]) => {
       if (source.includes("bad")) {

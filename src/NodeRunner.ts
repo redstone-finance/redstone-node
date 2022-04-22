@@ -1,5 +1,8 @@
 import { Consola } from "consola";
 import { JWKInterface } from "arweave/node/lib/wallet";
+import { getKeyFromMnemonic } from "arweave-mnemonic-keys";
+import { Wallet } from "ethers";
+import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
@@ -67,7 +70,8 @@ export default class NodeRunner {
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
     this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
-    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
+    const ethersWallet = Wallet.fromMnemonic(nodeConfig.credentials.ethereumMnemonic);
+    this.streamrBroadcaster = new StreamrBroadcaster(ethersWallet.privateKey);
 
     // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     // alternatively use arrow functions...
@@ -75,22 +79,21 @@ export default class NodeRunner {
     this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
 
-  static async create(
-    jwk: JWKInterface,
-    nodeConfig: NodeConfig,
-  ): Promise<NodeRunner> {
+  static async create(nodeConfig: NodeConfig): Promise<NodeRunner> {
     // Running a simple web server
     // It should be called as early as possible
     // Otherwise App Runner crashes ¯\_(ツ)_/¯
     new ExpressAppRunner().run();
-
+  
+    const { arweaveMnemonic, minimumArBalance, useManifestFromSmartContract, manifestFile } = nodeConfig;
+    const jwk = await getKeyFromMnemonic(arweaveMnemonic);
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave);
     const bundlrService = new BundlrService(jwk, nodeConfig.minimumArBalance);
 
     let manifestData = null;
-    if (nodeConfig.useManifestFromSmartContract) {
+    if (useManifestFromSmartContract) {
       while (true) {
         logger.info("Fetching manifest data.");
         try {
@@ -104,7 +107,7 @@ export default class NodeRunner {
         }
       }
     } else {
-      manifestData = readJSON(nodeConfig.manifestFile!);
+      manifestData = readJSON(manifestFile!);
     }
 
     return new NodeRunner(
@@ -375,8 +378,9 @@ export default class NodeRunner {
     this.currentManifest = newManifest;
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
+    const ethersWallet = Wallet.fromMnemonic(this.nodeConfig.credentials.ethereumMnemonic);
     this.priceSignerService = new PriceSignerService({
-      ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
+      ethereumPrivateKey: ethersWallet.privateKey,
       evmChainId: newManifest.evmChainId,
       version: this.version,
       addEvmSignature: Boolean(this.nodeConfig.addEvmSignature),

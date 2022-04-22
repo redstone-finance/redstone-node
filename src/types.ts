@@ -19,7 +19,7 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
-  ethereumPrivateKey: string;
+  ethereumMnemonic: string;
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
@@ -110,8 +110,7 @@ export interface ArweaveTransactionTags {
 };
 
 export interface NodeConfig {
-  arweaveKeysFile?: string;
-  arweaveKeysJWK?: JWKInterface; // it must be specified when we pass config through an env variable
+  arweaveMnemonic: string;
   useManifestFromSmartContract?: boolean;
   addEvmSignature?: boolean;
   manifestFile: string;

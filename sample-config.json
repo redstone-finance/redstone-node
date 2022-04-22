@@ -1,6 +1,6 @@
 {
-  "arweaveKeysFile": "./sample-jwk.json",
-  "manifestFile": "./manifests/dev.json",
+  "arweaveMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
+  "manifestFile": "./manifests/rapid.json",
   "minimumArBalance": 0,
   "addEvmSignature": true,
   "enableStreamrBroadcaster": false,
@@ -8,6 +8,6 @@
   "omitSourcesInArweaveTx": true,
   "httpBroadcasterURLs": ["https://httpbin.org/anything"],
   "credentials": {
-    "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111"
+    "ethereumMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit"
   }
 }
