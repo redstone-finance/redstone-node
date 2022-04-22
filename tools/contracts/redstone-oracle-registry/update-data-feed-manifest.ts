@@ -1,0 +1,41 @@
+import prompts from "prompts";
+import { getOracleRegistryContract } from "./arweave-utils";
+import { RedstoneOraclesInput } from "../../../src/contracts/redstone-oracle-registry/types";
+
+export const updateDataFeedManifest = async () => {
+  const response = await prompts([
+    {
+      type: "text",
+      name: "id",
+      message: "Provide id of data feed",
+      validate: value => !value ? "Id is required" : true
+    },
+    {
+      type: "text",
+      name: "manifestTransactionId",
+      message: "Provide the manifest transaction id",
+      validate: value => !value ? "Manifest transaction id is required" : true
+    },
+    {
+      type: "text",
+      name: "walletFilePath",
+      message: "Provide absolute path to wallet file",
+      validate: value => !value ? "Wallet file is required" : true
+    }
+  ]);
+
+  const contract = getOracleRegistryContract(response.walletFilePath);
+
+  const dataFeedData = {
+    id: response.id,
+    update: {
+      manifestTxId: response.manifestTransactionId,
+      name: "newTest"
+    }
+  };
+  const updateDataFeedTransactionId = await contract.writeInteraction<RedstoneOraclesInput>({
+    function: "updateDataFeed",
+    data: dataFeedData
+  });
+  console.log(`Update data feed manifest transaction id: ${updateDataFeedTransactionId}`);
+};

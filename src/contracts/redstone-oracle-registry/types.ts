@@ -5,8 +5,8 @@ export interface EvolveState {
 
 export interface RedstoneOraclesState extends EvolveState {
   contractAdmins: string[];
-  nodes: Nodes
-  dataFeeds: DataFeeds
+  nodes: Nodes;
+  dataFeeds: DataFeeds;
 }
 
 export type Nodes = { [key in string]: Node };
