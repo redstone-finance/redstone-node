@@ -7,8 +7,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install modules
         run: yarn
-      # Commented to disable CI before tomorrow
-      # - name: Run tests
-      #   run: yarn test:ci
-      #   env:
-      #     NODE_ENV: test
+      - name: Build contracts
+        run: yarn build:contracts
+      - name: Run tests
+        run: yarn test:ci
+        env:
+          NODE_ENV: test
