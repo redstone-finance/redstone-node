@@ -195,12 +195,15 @@ export default class NodeRunner {
     await this.broadcastPrices(signedPrices);
     await this.broadcastEvmPricePackage(signedPrices);
 
-    if (mode.isProd) {
+    if (this.shouldBackupOnArweave()) {
       await this.bundlrService.uploadBundlrTransaction(bundlrTx);
     } else {
-      logger.info(
-        `Transaction posting skipped in non-prod env: ${bundlrTx.id}`);
+      logger.info(`Arweave (bundlr) tx posting skipped: ${bundlrTx.id}`);
     }
+  }
+
+  private shouldBackupOnArweave() {
+    return mode.isProd && this.currentManifest?.enableArweaveBackup;
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {

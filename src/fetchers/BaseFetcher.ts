@@ -23,6 +23,10 @@ export abstract class BaseFetcher implements Fetcher {
     return response !== undefined;
   }
 
+  getName(): string {
+    return this.name;
+  }
+
   async fetchAll(
     symbols: string[],
     opts?: FetcherOpts): Promise<PriceDataFetched[]> {

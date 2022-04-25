@@ -9,6 +9,9 @@ async function main() {
   console.log(`\n\n== Public provider details ==\n`);
   console.log(JSON.stringify(publicProviderDetails, null, 2));
 
+  console.log(`\n\n== Provider JWK ==\n`);
+  console.log(JSON.stringify(config.arweaveKeysJWK));
+
   console.log(`\n\n== Private provider config ==\n`);
   console.log(JSON.stringify(config));
 }

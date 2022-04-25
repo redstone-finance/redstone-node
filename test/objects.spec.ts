@@ -1,7 +1,7 @@
 import { mergeObjects } from "../src/utils/objects";
 
 it('should merge array of objects into one object', () => {
-  //given
+  // given
   const prices = [
     {
       "source1": [
@@ -35,10 +35,10 @@ it('should merge array of objects into one object', () => {
     }
   ]
 
-  //when
+  // when
   const result = mergeObjects(prices);
 
-  //then
+  // then
   expect(result).toEqual({
     "source1": [
       {

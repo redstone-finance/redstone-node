@@ -9,6 +9,7 @@ export interface Manifest {
   maxPriceDeviationPercent: number,
   evmChainId: number,
   tokens: { [symbol: string]: TokenConfig };
+  enableArweaveBackup?: boolean;
 };
 
 export interface SourceTimeout {
