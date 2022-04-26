@@ -30,7 +30,6 @@ export const updateDataFeedManifest = async () => {
     id: response.id,
     update: {
       manifestTxId: response.manifestTransactionId,
-      name: "newTest"
     }
   };
   const updateDataFeedTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
