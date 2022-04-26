@@ -59,7 +59,7 @@ export const updateRedstoneNode = async () => {
     ...(!!ipAddress && { ipAddress }),
     ...(!!url && { url })
   };
-  const updateNodeTransactionId = await contract.writeInteraction<RedstoneOraclesInput>({
+  const updateNodeTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "updateNodeDetails",
     data: nodeDetails
   });

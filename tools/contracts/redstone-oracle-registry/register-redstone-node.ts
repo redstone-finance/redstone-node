@@ -65,7 +65,7 @@ const response = await prompts([
     ipAddress,
     ...(!!url && { url })
   };
-  const registerNodeTransactionId = await contract.writeInteraction<RedstoneOraclesInput>({
+  const registerNodeTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "registerNode",
     data: nodeDetails
   });

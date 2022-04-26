@@ -51,7 +51,7 @@ export const registerDataFeed = async () => {
     logo: response.logo,
     description: response.description
   };
-  const createDataFeedTransactionId = await contract.writeInteraction<RedstoneOraclesInput>({
+  const createDataFeedTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "createDataFeed",
     data: dataFeedData
   });

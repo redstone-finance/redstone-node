@@ -33,7 +33,7 @@ export const updateDataFeedManifest = async () => {
       name: "newTest"
     }
   };
-  const updateDataFeedTransactionId = await contract.writeInteraction<RedstoneOraclesInput>({
+  const updateDataFeedTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "updateDataFeed",
     data: dataFeedData
   });
