@@ -11,7 +11,6 @@ Config file is a **private** file created by provider. It contains the following
 | addEvmSignature | optional | if set to true, EVM signature will be added to each price for each asset |
 | credentials | required | object with credentials for APIs and private keys |
 | credentials.ethereumPrivateKey | required | Ethereum private key that will be used for price data signing |
-| credentials.yahooFinanceRapidApiKey | optional | API key for the api-dojo-rapid fetcher |
 
 Check out the [sample-config.json](../sample-config.json)
 
