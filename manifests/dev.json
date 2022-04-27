@@ -2,12 +2,15 @@
   "interval": 10000,
   "priceAggregator": "median",
   "defaultSource": [
-    "kraken"
+    "binance",
+    "currencycom",
+    "coingecko"
   ],
-  "sourceTimeout": 50000,
+  "sourceTimeout": 8000,
   "maxPriceDeviationPercent": 25,
   "tokens": {
-    "COMP": {},
-    "AAVE": {}
+    "BTC": {},
+    "ETH": {},
+    "BNB": {}
   }
 }
