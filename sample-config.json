@@ -1,17 +1,13 @@
 {
-  "arweaveKeysJWK": {"TODO": "TODO"},
-  "minimumArBalance": 0.1,
-  "useManifestFromSmartContract": true,
-  "enableStreamrBroadcaster": false,
-  "disableSinglePricesBroadcastingInStreamr": false,
+  "arweaveKeysFile": "./sample-jwk.json",
+  "manifestFile": "./manifests/dev.json",
+  "minimumArBalance": 0,
   "addEvmSignature": true,
+  "enableStreamrBroadcaster": false,
+  "disableSinglePricesBroadcastingInStreamr": true,
   "omitSourcesInArweaveTx": true,
+  "httpBroadcasterURLs": ["https://httpbin.org/anything"],
   "credentials": {
-    "ethereumPrivateKey": "TODO_ADD"
-  },
-  "httpBroadcasterURLs": [
-    "https://api.redstone.finance",
-    "https://vwx3eni8c7.eu-west-1.awsapprunner.com",
-    "https://container-service-1.dv9sai71f4rsq.eu-central-1.cs.amazonlightsail.com"
-  ]
+    "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111"
+  }
 }

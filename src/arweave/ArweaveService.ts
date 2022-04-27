@@ -1,47 +1,44 @@
-import { Consola } from "consola";
 import { Manifest } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
+import contracts from "../../src/config/contracts.json";
+import {
+  DataFeedWithId,
+  NodeWithAddress,
+  RedstoneOraclesInput,
+} from "../contracts/redstone-oracle-registry/types";
+
+const oracleRegistryContractId = contracts["oracle-registry"];
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
 
 // Business service that supplies operations required by Redstone-Node.
 export default class ArweaveService {
 
-  private static readonly CONTRACT_REGISTRY_TX_ID: string = "XQkGzXG6YknJyy-YbakEZvQKAWkW2_aPRhc3ShC8lyA";
-  private static readonly PROVIDERS_REGISTRY_CONTRACT: string = "providers-registry";
-
   constructor(private readonly arweaveProxy: ArweaveProxy) {}
 
   async getCurrentManifest(): Promise<Manifest> {
     const jwkAddress = await this.arweaveProxy.getAddress();
-
-    // Getting contract tx id for providers registry contract
-    const contractRegistryContract = this.arweaveProxy.smartweave
-      .contract(ArweaveService.CONTRACT_REGISTRY_TX_ID)
+    const oracleRegistryContract = this.arweaveProxy.smartweave
+      .contract(oracleRegistryContractId)
       .connect(this.arweaveProxy.jwk);
-
-    const { result: contractRegistry } = await contractRegistryContract.viewState<any, any>({
-      function: "contractsCurrentTxId",
+    const node = (await oracleRegistryContract.viewState<RedstoneOraclesInput, NodeWithAddress>({
+      function: "getNodeDetails",
       data: {
-        contractNames: [ArweaveService.PROVIDERS_REGISTRY_CONTRACT]
+        address: jwkAddress,
       }
-    });
+    })).result;
 
-    const providersRegistryContractTxId = contractRegistry[ArweaveService.PROVIDERS_REGISTRY_CONTRACT];
-
-    // Getting the latest manifest for current provider
-    const providersRegistryContract = this.arweaveProxy.smartweave
-      .contract(providersRegistryContractTxId)
-      .connect(this.arweaveProxy.jwk);
-
-    const { result } = await providersRegistryContract.viewState<any, any>({
-      function: "activeManifest",
+    const dataFeed = (await oracleRegistryContract.viewState<RedstoneOraclesInput, DataFeedWithId>({
+      function: "getDataFeedDetailsById",
       data: {
-        providerId: jwkAddress,
-        eagerManifestLoad: true
+        id: node.dataFeedId,
       }
-    });
+    })).result;
 
-    return result.manifest.activeManifestContent;
+    const manifestContent = await this.arweaveProxy.arweave.transactions.getData(
+      dataFeed.manifestTxId,
+      { decode: true, string: true }
+    );
+    return JSON.parse(manifestContent as string);
   }
 }

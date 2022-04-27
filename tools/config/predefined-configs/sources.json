@@ -49,11 +49,6 @@
     "url": "https://www.aaxpro.com",
     "color": "#327aee"
   },
-  "aofex": {
-    "logoURI": "https://pbs.twimg.com/profile_images/1159350138898272257/wHHcxAWV_400x400.jpg",
-    "url": "https://aofex.com",
-    "color": "#e4653d"
-  },
   "ascendex": {
     "logoURI": "https://static1.asdxstatic.com/web/m/static/ssr/img/download_icon.9366d91.png",
     "url": "https://ascendex.com",
@@ -220,11 +215,6 @@
     "color": "#305ddc"
   },
   "okex": {
-    "logoURI": "https://cryptologos.cc/logos/okb-okb-logo.svg",
-    "url": "https://www.okex.com",
-    "color": "#4071df"
-  },
-  "okex3": {
     "logoURI": "https://cryptologos.cc/logos/okb-okb-logo.svg",
     "url": "https://www.okex.com",
     "color": "#4071df"

@@ -10,7 +10,6 @@
   "tokens": {
     "ETH": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "bibox",
@@ -86,7 +85,6 @@
     },
     "AVAX": {
       "source": [
-        "aofex",
         "binance",
         "binanceusdm",
         "bitfinex",
@@ -115,7 +113,6 @@
     },
     "LINK": {
       "source": [
-        "aofex",
         "ascendex",
         "bequant",
         "bibox",

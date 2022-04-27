@@ -49,11 +49,6 @@
     "url": "https://www.ecb.europa.eu/home/html/index.en.html",
     "color": "#10338e"
   },
-  "aofex": {
-    "logoURI": "https://cdn.redstone.finance/sources/aofex.jpg",
-    "url": "https://aofex.com",
-    "color": "#e4653d"
-  },
   "ascendex": {
     "logoURI": "https://cdn.redstone.finance/sources/ascendex.png",
     "url": "https://ascendex.com",
@@ -221,11 +216,6 @@
   },
   "okex": {
     "logoURI": "https://cdn.redstone.finance/sources/okex.svg",
-    "url": "https://www.okex.com",
-    "color": "#4071df"
-  },
-  "okex3": {
-    "logoURI": "https://cdn.redstone.finance/sources/okex3.svg",
     "url": "https://www.okex.com",
     "color": "#4071df"
   },
