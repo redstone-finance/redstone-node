@@ -1,7 +1,11 @@
 import _ from "lodash";
 import { PricesObj } from "../../types";
+import { getRequiredPropValue } from "../../utils/objects";
 import { BaseFetcher } from "../BaseFetcher";
 import YahooFinanceProxy from "./YahooFinanceProxy";
+import symbolToId from "./yf-symbol-to-id.json";
+
+const idToSymbol = _.invert(symbolToId);
 
 export class YfUnofficialFetcher extends BaseFetcher {
   private yahooFinanceProxy: YahooFinanceProxy;
@@ -9,6 +13,14 @@ export class YfUnofficialFetcher extends BaseFetcher {
   constructor() {
     super("yf-unofficial");
     this.yahooFinanceProxy = new YahooFinanceProxy();
+  }
+
+  override convertIdToSymbol(id: string) {
+    return getRequiredPropValue(idToSymbol, id);
+  }
+
+  override convertSymbolToId(symbol: string) {
+    return getRequiredPropValue(symbolToId, symbol);
   }
 
   async fetchData(symbols: string[]) {

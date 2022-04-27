@@ -16,13 +16,13 @@ export class DexFetcher extends BaseFetcher {
       super(name);
     }
 
-  async fetchData(symbols: string[]) {
-    const ids = this.convertSymbolsToPairIds(
-      symbols,
+  async fetchData(ids: string[]) {
+    const pairIds = this.convertSymbolsToPairIds(
+      ids,
       this.symbolToPairIdObj);
 
     const query = `{
-      pairs(where: { id_in: ${JSON.stringify(ids)} }) {
+      pairs(where: { id_in: ${JSON.stringify(pairIds)} }) {
         id
         token0 {
           symbol
@@ -45,16 +45,16 @@ export class DexFetcher extends BaseFetcher {
     return response !== undefined && response.data !== undefined;
   }
 
-  async extractPrices(response: any, symbols: string[]): Promise<PricesObj> {
+  async extractPrices(response: any, assetIds: string[]): Promise<PricesObj> {
     const pricesObj: { [symbol: string]: number } = {};
 
-    for (const currentSymbol of symbols) {
-      const pairId = this.symbolToPairIdObj[currentSymbol];
+    for (const currentAssetId of assetIds) {
+      const pairId = this.symbolToPairIdObj[currentAssetId];
       const pair = response.data.pairs.find((p: any) => p.id === pairId);
 
       if (!pair) {
         this.logger.warn(
-          `Pair is not in response. Id: ${pairId}. Symbol: ${currentSymbol}. Source: ${this.name}`);
+          `Pair is not in response. Id: ${pairId}. Symbol: ${currentAssetId}. Source: ${this.name}`);
       } else {
         const symbol0 = pair.token0.symbol;
         const symbol1 = pair.token1.symbol;
@@ -62,10 +62,10 @@ export class DexFetcher extends BaseFetcher {
         const reserve1 = parseFloat(pair.reserve1);
         const reserveUSD = parseFloat(pair.reserveUSD);
 
-        if (symbol0 === currentSymbol) {
-          pricesObj[currentSymbol] = reserveUSD / (2 * reserve0);
-        } else if (symbol1 === currentSymbol) {
-          pricesObj[currentSymbol] = reserveUSD / (2 * reserve1);
+        if (symbol0 === currentAssetId) {
+          pricesObj[currentAssetId] = reserveUSD / (2 * reserve0);
+        } else if (symbol1 === currentAssetId) {
+          pricesObj[currentAssetId] = reserveUSD / (2 * reserve1);
         }
       }
     }

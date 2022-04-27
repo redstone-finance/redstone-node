@@ -31,14 +31,14 @@ export class TwapFetcher extends BaseFetcher {
     super(`twap-${sourceProviderId}`);
   }
 
-  async fetchData(symbols: string[]) {
+  async fetchData(ids: string[]) {
     const currentTimestamp = Date.now();
     const response: ResponseForTwap = {};
 
-    // Fetching historical prices for each symbol in parallel
+    // Fetching historical prices for each asset in parallel
     const promises: Promise<void>[] = [];
-    for (const symbol of symbols) {
-      const { assetSymbol, millisecondsOffset } = TwapFetcher.parseTwapSymbol(symbol);
+    for (const id of ids) {
+      const { assetSymbol, millisecondsOffset } = TwapFetcher.parseTwapAssetId(id);
       const fromTimestamp = currentTimestamp - millisecondsOffset;
       const fetchingPromiseForSymbol = axios.get(PRICES_URL, {
         params: {
@@ -49,7 +49,7 @@ export class TwapFetcher extends BaseFetcher {
           limit: MAX_LIMIT,
         },
       }).then(responseForSymbol => {
-        response[symbol] = responseForSymbol.data;
+        response[id] = responseForSymbol.data;
       });
       promises.push(fetchingPromiseForSymbol);
     }
@@ -158,7 +158,7 @@ export class TwapFetcher extends BaseFetcher {
     return aggregatedPricesWithUniqueTimestamps;
   }
 
-  static parseTwapSymbol(twapSymbol: string): { assetSymbol: string; millisecondsOffset: number } {
+  static parseTwapAssetId(twapSymbol: string): { assetSymbol: string; millisecondsOffset: number } {
     const chunks = twapSymbol.split("-");
     return {
       assetSymbol: chunks[0],

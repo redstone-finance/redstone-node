@@ -2523,6 +2523,21 @@
       ],
       "maxPriceDeviationPercent": 25
     },
+    "ONE": {
+      "source": [
+        "ascendex",
+        "binance",
+        "binanceus",
+        "binanceusdm",
+        "cdax",
+        "coingecko",
+        "hitbtc",
+        "huobipro",
+        "kucoin",
+        "probit"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "ANKR": {
       "source": [
         "ascendex",
@@ -2650,20 +2665,6 @@
         "huobipro",
         "kraken",
         "okex5"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ONE": {
-      "source": [
-        "ascendex",
-        "binance",
-        "binanceus",
-        "binanceusdm",
-        "cdax",
-        "hitbtc",
-        "huobipro",
-        "kucoin",
-        "probit"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -3810,66 +3811,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "TSLA": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "AAPL": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "AMZN": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "FB": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "NFLX": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SPY": {
-      "source": [
-        "api-dojo-rapid",
-        "bittrex",
-        "currencycom",
-        "ftx",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "GT": {
       "source": [
         "ascendex",
@@ -4756,6 +4697,60 @@
         "bitfinex2",
         "kucoin",
         "okex5"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "AAPL": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "AMZN": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "FB": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "NFLX": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SPY": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "TSLA": {
+      "source": [
+        "bittrex",
+        "currencycom",
+        "ftx",
+        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -6032,342 +6027,6 @@
       "source": [
         "aofex",
         "ascendex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "IBM": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GOOG": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "COST": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "DIS": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "MA": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "MSFT": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "NKE": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PINS": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SHOP": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SPOT": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "TDOC": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "QQQ": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ONEQ": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "IWM": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "EFA": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "VGK": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "INDA": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "RSX": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZC=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZS=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZM=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZW=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "KE=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZO=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ZR=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "CL=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "RB=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "NG=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "QA=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "EH=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GC=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SI=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "HG=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PL=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PA=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "LE=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GF=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "HE=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PRK=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "DC=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GNF=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "CB=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "CSC=F": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "MXNUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "BRLUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "COPUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ARSUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PENUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -7855,6 +7514,13 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "CHF": {
+      "source": [
+        "ecb",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
     "ADABEAR": {
       "source": [
         "ftx",
@@ -9227,12 +8893,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "CHF": {
-      "source": [
-        "ecb"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "STEP": {
       "source": [
         "ftx"
@@ -10046,6 +9706,294 @@
     "XYZ": {
       "source": [
         "verto"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "IBM": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "GOOG": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "COST": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "DIS": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MA": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MSFT": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "NKE": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PINS": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SHOP": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SPOT": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "TDOC": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "QQQ": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ONEQ": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "IWM": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "EFA": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "VGK": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "INDA": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "RSX": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZC=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZS=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZM=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZW=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "KE=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZO=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ZR=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "CL=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "RB=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "NG=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "QA=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "EH=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "GC=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SI=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "HG=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PL=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PA=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "LE=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "GF=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "HE=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PRK=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "DC=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "GNF=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "CB=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "CSC=F": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PEN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MXN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ARS": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "BRLUSD=X": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "COPUSD=X": {
+      "source": [
+        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     }

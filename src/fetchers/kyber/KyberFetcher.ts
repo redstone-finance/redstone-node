@@ -15,16 +15,16 @@ export class KyberFetcher extends BaseFetcher {
     return await axios.get(ETH_PAIRS_URL);
   }
 
-  async extractPrices(response: any, symbols: string[]): Promise<PricesObj> {
+  async extractPrices(response: any, ids: string[]): Promise<PricesObj> {
     const lastEthPrice = (await redstone.getPrice("ETH")).value;
 
     const pricesObj: PricesObj = {};
 
     const pairs = response.data;
-    for (const symbol of symbols) {
-      const pair = pairs["ETH_" + symbol];
+    for (const id of ids) {
+      const pair = pairs["ETH_" + id];
       if (pair !== undefined) {
-        pricesObj[symbol] = lastEthPrice * pair.currentPrice;
+        pricesObj[id] = lastEthPrice * pair.currentPrice;
       }
     }
 

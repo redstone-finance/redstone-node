@@ -14,8 +14,8 @@ export class VertoFetcher extends BaseFetcher {
     super("verto");
   }
 
-  async fetchData(symbols: string[]): Promise<any> {
-    const tokenPromises = symbols.map(s =>
+  async fetchData(ids: string[]): Promise<any> {
+    const tokenPromises = ids.map(s =>
       axios.get(`${BASE_URL}/token/${vertoSymbolToId[s]}/price`));
 
     return await Promise.all(tokenPromises);
@@ -24,7 +24,7 @@ export class VertoFetcher extends BaseFetcher {
   async extractPrices(responses: any): Promise<PricesObj> {
     const lastArPrice = (await redstone.getPrice("AR")).value;
 
-    const pricesObj: { [symbol: string]: number } = {};
+    const pricesObj: { [id: string]: number } = {};
 
     for (const response of responses) {
       if (response && response.data) {
