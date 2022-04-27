@@ -47,5 +47,12 @@
   "DC=F": "DC=F",
   "GNF=F": "GNF=F",
   "CB=F": "CB=F",
-  "CSC=F": "CSC=F"
+  "CSC=F": "CSC=F",
+
+  "CHF": "CHFUSD=X",
+  "MXN": "MXNUSD=X",
+  "ARS": "ARSUSD=X",
+  "PEN": "PENUSD=X",
+  "COPUSD=X": "COPUSD=X",
+  "BRLUSD=X": "BRLUSD=X"
 }

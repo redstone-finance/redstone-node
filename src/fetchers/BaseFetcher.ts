@@ -23,12 +23,17 @@ export abstract class BaseFetcher implements Fetcher {
     return response !== undefined;
   }
 
+  getName(): string {
+    return this.name;
+  }
+
   async fetchAll(
     symbols: string[],
     opts?: FetcherOpts): Promise<PriceDataFetched[]> {
       // Fetching data
       const fetchStartTime = Date.now();
-      let response = await this.fetchData(symbols, opts);
+      const ids = symbols.map(symbol => this.convertSymbolToId(symbol));
+      let response = await this.fetchData(ids, opts);
 
       // Retrying data fetching if needed
       const shouldRetry =
@@ -37,7 +42,7 @@ export abstract class BaseFetcher implements Fetcher {
         && Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
       if (shouldRetry) {
         this.logger.info("Retrying to fetch data");
-        response = await this.fetchData(symbols, opts);
+        response = await this.fetchData(ids, opts);
       }
 
       // Validating response
@@ -47,22 +52,36 @@ export abstract class BaseFetcher implements Fetcher {
       }
 
       // Extracting prices from response
-      const pricesObj = await this.extractPrices(response, symbols);
-      return this.convertPricesObjToPriceArray(pricesObj, symbols);
+      const pricesObj = await this.extractPrices(response, ids);
+      return this.convertPricesObjToResultPriceArray(pricesObj, ids);
     }
 
-  private convertPricesObjToPriceArray(
+  // This method converts internal asset id (asset identifier on fetcher level)
+  // to an asset symbol (asset identifier on manifest level)
+  // It can be overriden by any fetcher
+  protected convertIdToSymbol(id: string): string {
+    return id;
+  }
+
+  // This method converts asset symbol (asset identifier on manifest level)
+  // to an internal asset id (asset identifier on fetcher level)
+  // It can be overriden by any fetcher
+  protected convertSymbolToId(symbol: string): string {
+    return symbol;
+  }
+
+  private convertPricesObjToResultPriceArray(
     pricesObj: PricesObj,
-    requiredSymbols: string[]): PriceDataFetched[] {
+    requiredIds: string[]): PriceDataFetched[] {
       const prices = [];
-      for (const symbol of requiredSymbols) {
-        if (pricesObj[symbol] === undefined) {
+      for (const id of requiredIds) {
+        if (pricesObj[id] === undefined) {
           this.logger.warn(
-            `Symbol ${symbol} is not included in response for: ${this.name}`);
+            `Id ${id} is not included in response for: ${this.name}`);
         } else {
           prices.push({
-            symbol,
-            value: pricesObj[symbol],
+            symbol: this.convertIdToSymbol(id),
+            value: pricesObj[id],
           });
         }
       }

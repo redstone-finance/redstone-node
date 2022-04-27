@@ -20,6 +20,9 @@ lib
 
 dist
 
-Dockerfile.redstone-dev
 yarn-error.log
 .clinic/
+
+# Private dockerfiles
+Dockerfile
+Dockerfile.redstone-dev

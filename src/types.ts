@@ -9,6 +9,7 @@ export interface Manifest {
   maxPriceDeviationPercent: number,
   evmChainId: number,
   tokens: { [symbol: string]: TokenConfig };
+  enableArweaveBackup?: boolean;
 };
 
 export interface SourceTimeout {
@@ -22,7 +23,6 @@ export interface Credentials {
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
-  yahooFinanceRapidApiKey?: string;
 };
 
 export interface TokenConfig {
@@ -79,7 +79,6 @@ export interface PriceDataBeforeSigning extends PriceDataAfterAggregation {
 };
 
 export interface PriceDataSigned extends PriceDataBeforeSigning {
-  signature: string;
   evmSignature?: string;
   liteEvmSignature?: string;
 };
@@ -96,8 +95,7 @@ export interface PricePackage {
 
 export interface SignedPricePackage {
   pricePackage: PricePackage;
-  signer: string;
-  signature: string;
+  signerPublicKey: string;
   liteSignature: string;
 };
 

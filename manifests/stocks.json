@@ -109,7 +109,6 @@
     },
     "TSLA": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -119,7 +118,6 @@
     },
     "AAPL": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -129,14 +127,12 @@
     },
     "IBM": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "AMZN": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -146,28 +142,24 @@
     },
     "GOOG": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "COST": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "DIS": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "FB": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -177,21 +169,18 @@
     },
     "MA": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "MSFT": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "NFLX": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -201,42 +190,36 @@
     },
     "NKE": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "PINS": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "SHOP": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "SPOT": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "TDOC": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "SPY": {
       "source": [
-        "api-dojo-rapid",
         "bittrex",
         "currencycom",
         "ftx",
@@ -246,224 +229,192 @@
     },
     "QQQ": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ONEQ": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "IWM": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "EFA": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "VGK": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "INDA": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "RSX": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZC=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZS=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZM=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZW=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "KE=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZO=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "ZR=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "CL=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "RB=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "NG=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "QA=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "EH=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "GC=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "SI=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "HG=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "PL=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "PA=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "LE=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "GF=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "HE=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "PRK=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "DC=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "GNF=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "CB=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "CSC=F": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
@@ -489,7 +440,8 @@
     },
     "CHF": {
       "source": [
-        "ecb"
+        "ecb",
+        "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -509,37 +461,14 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "MXNUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "BRLUSD=X": {
       "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80
     },
     "COPUSD=X": {
       "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ARSUSD=X": {
-      "source": [
-        "api-dojo-rapid",
-        "yf-unofficial"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PENUSD=X": {
-      "source": [
-        "api-dojo-rapid",
         "yf-unofficial"
       ],
       "maxPriceDeviationPercent": 80

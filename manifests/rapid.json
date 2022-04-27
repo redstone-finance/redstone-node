@@ -333,6 +333,36 @@
         "huobipro"
       ],
       "maxPriceDeviationPercent": 25
+    },
+    "CELO": {
+      "source": [
+        "binance",
+        "bittrex",
+        "kucoin",
+        "okcoin",
+        "okex5"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "AVAX": {
+      "source": [
+        "aofex",
+        "binance",
+        "binanceusdm",
+        "bitfinex",
+        "bitfinex2",
+        "bittrex",
+        "btcturk",
+        "coinex",
+        "coingecko",
+        "delta",
+        "huobipro",
+        "kucoin",
+        "lbank",
+        "okcoin",
+        "okex5"
+      ],
+      "maxPriceDeviationPercent": 25
     }
   }
 }

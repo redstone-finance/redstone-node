@@ -9,7 +9,8 @@ const manifestsToExclude = [
   "rapid.json",
   "stocks.json",
   "avalanche.json",
-  "dev.json"
+  "twaps.json",
+  "dev.json",
 ];
 
 main();

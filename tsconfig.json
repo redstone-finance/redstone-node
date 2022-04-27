@@ -8,6 +8,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "lib": ["es2021"],
     "allowJs": true
   },
   "ts-node": {

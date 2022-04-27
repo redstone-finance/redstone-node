@@ -24,7 +24,7 @@ function getDeviationForToken(symbol) {
   }
 }
 
-function generateManifest({ tokens, interval = 60000, sourceTimeout = 50000 }) {
+function generateManifest({ tokens, interval = 60000, sourceTimeout = 20000 }) {
   return {
     interval,
     priceAggregator: "median",
