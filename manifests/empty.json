@@ -1,0 +1,12 @@
+{
+  "interval": 1000000000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "coingecko"
+  ],
+  "sourceTimeout": 50000,
+  "maxPriceDeviationPercent": 25,
+  "enableArweaveBackup": false,
+  "evmChainId": 1,
+  "tokens": {}
+}

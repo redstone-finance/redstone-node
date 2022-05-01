@@ -110,6 +110,7 @@ export interface ArweaveTransactionTags {
 };
 
 export interface NodeConfig {
+  enableRoutesForCustomUrlsProxy?: boolean;
   arweaveKeysFile?: string;
   arweaveKeysJWK?: JWKInterface; // it must be specified when we pass config through an env variable
   useManifestFromSmartContract?: boolean;
