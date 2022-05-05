@@ -1,13 +1,10 @@
 {
-  "arweaveMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
+  "mnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
   "manifestFile": "./manifests/rapid.json",
   "minimumArBalance": 0,
   "addEvmSignature": true,
   "enableStreamrBroadcaster": false,
   "disableSinglePricesBroadcastingInStreamr": true,
   "omitSourcesInArweaveTx": true,
-  "httpBroadcasterURLs": ["https://httpbin.org/anything"],
-  "credentials": {
-    "ethereumMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit"
-  }
+  "httpBroadcasterURLs": ["https://httpbin.org/anything"]
 }

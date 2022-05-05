@@ -81,10 +81,9 @@ jest.mock("arweave-mnemonic-keys", () => ({
 describe("NodeRunner", () => {
   const mnemonic = "indoor dish desk flag debris potato excuse depart ticket judge file exit";
   const nodeConfig: NodeConfig = {
-    arweaveMnemonic: mnemonic,
+    mnemonic,
     credentials: {
-      infuraProjectId: "ipid",
-      ethereumMnemonic: mnemonic
+      infuraProjectId: "ipid"
     },
     addEvmSignature: true,
     manifestFile: "",
@@ -198,9 +197,8 @@ describe("NodeRunner", () => {
     await expect(async () => {
       await NodeRunner.create(
       JSON.parse(`{
-        "arweaveMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
+        "mnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
         "credentials": {
-          "ethereumMnemonic": "indoor dish desk flag debris potato excuse depart ticket judge file exit",
           "infuraProjectId": "ipid",
           "covalentApiKey": "ckey"
         },

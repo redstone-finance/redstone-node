@@ -41,9 +41,9 @@ async function main(): Promise<void> {
     config = JSON.parse(configString);
   }
 
-  const arweaveMnemonic = config.arweaveMnemonic;
-  if (!arweaveMnemonic) {
-    throw new Error('arweaveMnemonic is empty');
+  const mnemonic = config.mnemonic;
+  if (!mnemonic) {
+    throw new Error('mnemonic is empty');
   }
 
   // Running limestone-node with manifest

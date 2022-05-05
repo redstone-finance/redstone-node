@@ -1,8 +1,6 @@
 import { Consola } from "consola";
-import { JWKInterface } from "arweave/node/lib/wallet";
 import { getKeyFromMnemonic } from "arweave-mnemonic-keys";
 import { Wallet } from "ethers";
-import Transaction from "arweave/node/lib/transaction";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import mode from "../mode";
@@ -70,7 +68,7 @@ export default class NodeRunner {
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
     this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
-    const ethersWallet = Wallet.fromMnemonic(nodeConfig.credentials.ethereumMnemonic);
+    const ethersWallet = Wallet.fromMnemonic(nodeConfig.mnemonic);
     this.streamrBroadcaster = new StreamrBroadcaster(ethersWallet.privateKey);
 
     // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
@@ -85,8 +83,8 @@ export default class NodeRunner {
     // Otherwise App Runner crashes ¯\_(ツ)_/¯
     new ExpressAppRunner().run();
   
-    const { arweaveMnemonic, minimumArBalance, useManifestFromSmartContract, manifestFile } = nodeConfig;
-    const jwk = await getKeyFromMnemonic(arweaveMnemonic);
+    const { mnemonic, useManifestFromSmartContract, manifestFile } = nodeConfig;
+    const jwk = await getKeyFromMnemonic(mnemonic);
     const arweave = new ArweaveProxy(jwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave);
@@ -378,7 +376,7 @@ export default class NodeRunner {
     this.currentManifest = newManifest;
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
-    const ethersWallet = Wallet.fromMnemonic(this.nodeConfig.credentials.ethereumMnemonic);
+    const ethersWallet = Wallet.fromMnemonic(this.nodeConfig.mnemonic);
     this.priceSignerService = new PriceSignerService({
       ethereumPrivateKey: ethersWallet.privateKey,
       evmChainId: newManifest.evmChainId,

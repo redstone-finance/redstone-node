@@ -19,7 +19,6 @@ export interface SourceTimeout {
 
 export interface Credentials {
   infuraProjectId?: string;
-  ethereumMnemonic: string;
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
@@ -110,7 +109,7 @@ export interface ArweaveTransactionTags {
 };
 
 export interface NodeConfig {
-  arweaveMnemonic: string;
+  mnemonic: string;
   useManifestFromSmartContract?: boolean;
   addEvmSignature?: boolean;
   manifestFile: string;
