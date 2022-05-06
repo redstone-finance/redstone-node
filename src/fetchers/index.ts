@@ -10,6 +10,7 @@ import { UniswapFetcher } from "./uniswap/UniswapFetcher";
 import { KyberFetcher } from "./kyber/KyberFetcher";
 import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
+import { TwelvedataFetcher } from "./twelvedata/TwelvedataFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
 import twapFetchers from "./twap/all-twap-fetchers";
 
@@ -24,6 +25,7 @@ export default {
   kyber: new KyberFetcher(),
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
+  twelvedata: new TwelvedataFetcher(),
 
   ...ccxtFetchers,
   ...pangolinFetchers,
