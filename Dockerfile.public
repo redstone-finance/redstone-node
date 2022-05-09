@@ -3,7 +3,7 @@
 # But before running the container it must be configured to provide
 # the node config through REDSTONE_NODE_CONFIG environment variable
 
-FROM node:16.14
+FROM node:16
 
 RUN mkdir /app
 WORKDIR /app
@@ -23,6 +23,7 @@ RUN yarn build
 ENV MODE=PROD
 ENV ENABLE_JSON_LOGS=true
 ENV PERFORMANCE_TRACKING_LABEL_PREFIX=public
+ENV REDSTONE_NODE_CONFIG=
 
 # Exposing 8080 port for health checks
 EXPOSE 8080

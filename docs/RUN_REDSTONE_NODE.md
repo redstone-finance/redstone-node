@@ -1,7 +1,7 @@
 # Run node locally
 
 ## Prerequisites
-- Node.js (v14 or higher) and `yarn`
+- Node.js (v16 or higher) and `yarn`
 - Arweave wallet (> 0.1AR)
 
 ## Prepare
@@ -50,9 +50,9 @@ ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node
 ```
 
 ### Run in docker
-You can run a local redstone-node in docker.
+You can run a local redstone-node in docker. Instead of config file you should use REDSTONE_NODE_CONFIG environment variable. The value should be stringified json and the only difference comparing to [config json file](./PREPARE_CONFIG.md) `arweaveKeysJWK` is required instead of `arweaveKeysFile` [read this guide](./PREPARE_CONFIG_VARIABLE.md)
 
-1. Prepare your Dockerfile based on [./Dockerfile](../Dockerfile).
+1. Prepare your Dockerfile based on [./Dockerfile](../Dockerfile.public).
 Name it `Dockerfile.my-redstone-node` and place in the project root folder.
 
 2. Build a docker container with redstone-node
@@ -113,7 +113,6 @@ You can simply open this URL [https://api.redstone.finance/prices?provider=YOUR_
       "coingecko":41.41,
       "hitbtc":41.83028667225191,
       "huobipro":40.85182207094863,
-      "aofex":40.85542194071326
     },
     "symbol":"AR",
     "timestamp":1632229811658,

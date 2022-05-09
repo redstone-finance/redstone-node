@@ -2,6 +2,7 @@ import { Fetcher } from "../types";
 import ccxtFetchers from "./ccxt/all-ccxt-fetchers";
 import pangolinFetchers from "./pangolin/all-pangolin-fetchers";
 import { YfUnofficialFetcher } from "./yf-unofficial/YfUnofficialFetcher";
+import { CustomUrlsFetcher } from "./custom-urls/CustomUrlsFetcher";
 import { TraderJoeFetcher } from "./trader-joe/TraderJoeFetcher";
 import { CoingeckoFetcher } from "./coingecko/CoingeckoFetcher";
 import { SushiswapFetcher } from "./sushiswap/SushiswapFetcher";
@@ -12,7 +13,6 @@ import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
 import twapFetchers from "./twap/all-twap-fetchers";
-import { CustomUrlsFetcher } from "./custom-urls/CustomUrlsFetcher";
 
 export default {
   "yf-unofficial": new YfUnofficialFetcher(),
