@@ -8651,6 +8651,24 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "0x031f7bcd73d9f5edf2a568ce68a1fa12eb5446979aa153dd8782030373c49b04": {
+      "source": [
+        "custom-urls"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "0xffe45ffaf671f5639376511d38fec72826638665701dafbcdb49ee1da0168ad5": {
+      "source": [
+        "custom-urls"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "0xd8e28697d41536a1cf9eaa7399232033d30cbc3ab08ce055fb3184fa2df599a6": {
+      "source": [
+        "custom-urls"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "ENTROPY": {
       "source": [
         "drand"

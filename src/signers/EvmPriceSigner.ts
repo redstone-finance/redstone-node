@@ -87,6 +87,21 @@ export default class EvmPriceSigner {
     return personalSign(toBuffer(privateKey), { data });
   }
 
+  public static convertStringToBytes32String(str: string) {
+    if (str.length > 31) {
+      // TODO: improve checking if str is a valid bytes32 string later
+      const bytes32StringLength = 32 * 2 + 2; // 32 bytes (each byte uses 2 symbols) + 0x
+      if (str.length === bytes32StringLength && str.startsWith("0x")) {
+        return str;
+      } else {
+        // Calculate keccak hash if string is bigger than 32 bytes
+        return ethers.utils.id(str);
+      }
+    } else {
+      return ethers.utils.formatBytes32String(str);
+    }
+  }
+
   serializeToMessage(pricePackage: PricePackage): SerializedPriceData {
     // We clean and sort prices to be sure that prices
     // always have the same format
@@ -96,7 +111,7 @@ export default class EvmPriceSigner {
 
     return {
       symbols: sortedPrices.map((p: ShortSinglePrice) =>
-        ethers.utils.formatBytes32String(p.symbol)),
+        EvmPriceSigner.convertStringToBytes32String(p.symbol)),
       values: sortedPrices.map((p: ShortSinglePrice) =>
         serializePriceValue(p.value)),
       timestamp: pricePackage.timestamp,
@@ -107,7 +122,7 @@ export default class EvmPriceSigner {
     const serializedPriceData = this.serializeToMessage(pricePackage);
     return {
       pricePackage,
-      signerPublicKey: (new ethers.Wallet(privateKey)).publicKey,
+      signerAddress: (new ethers.Wallet(privateKey)).address,
       liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
     };
   }
@@ -122,8 +137,7 @@ export default class EvmPriceSigner {
     });
 
     const signerAddressUC = signer.toUpperCase();
-    const expectedSignerAddress = ethers.utils.computeAddress(
-      signedPricePackage.signerPublicKey);
+    const expectedSignerAddress = signedPricePackage.signerAddress;
     const expectedSignerAddressUC = expectedSignerAddress.toUpperCase();
 
     return signerAddressUC === expectedSignerAddressUC;

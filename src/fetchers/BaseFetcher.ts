@@ -15,8 +15,12 @@ export abstract class BaseFetcher implements Fetcher {
   };
 
   // All the abstract methods below must be implemented in fetchers
-  abstract fetchData(symbols: string[], opts?: FetcherOpts): Promise<any>;
-  abstract extractPrices(response: any, symbols?: string[]): Promise<PricesObj>;
+  abstract fetchData(ids: string[], opts?: FetcherOpts): Promise<any>;
+  abstract extractPrices(
+    response: any,
+    ids?: string[],
+    opts?: FetcherOpts
+  ): Promise<PricesObj>;
 
   // This method may be overridden to extend validation
   validateResponse(response: any): boolean {
@@ -52,7 +56,8 @@ export abstract class BaseFetcher implements Fetcher {
       }
 
       // Extracting prices from response
-      const pricesObj = await this.extractPrices(response, ids);
+      const pricesObj = await this.extractPrices(response, ids, opts);
+
       return this.convertPricesObjToResultPriceArray(pricesObj, ids);
     }
 

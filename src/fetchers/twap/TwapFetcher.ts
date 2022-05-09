@@ -26,7 +26,7 @@ interface ResponseForTwap {
 export class TwapFetcher extends BaseFetcher {
   constructor(
     private readonly sourceProviderId: string,
-    private readonly providerEvmPublicKey: string,
+    private readonly providerEvmAddress: string,
   ) {
     super(`twap-${sourceProviderId}`);
   }
@@ -86,7 +86,7 @@ export class TwapFetcher extends BaseFetcher {
         }],
         timestamp: price.timestamp,
       },
-      signerPublicKey: this.providerEvmPublicKey,
+      signerAddress: this.providerEvmAddress,
       liteSignature: price.liteEvmSignature,
     });
 
