@@ -8,6 +8,7 @@ import {
 
 // DEN = distributed execution network
 const SMARTWEAVE_DEN_NODE_URL = "https://d2rkt3biev1br2.cloudfront.net/state";
+const ARWEAVE_URL = "https://arweave.net";
 const oracleRegistryContractId = contracts["oracle-registry"];
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
@@ -27,22 +28,22 @@ export default class ArweaveService {
   }
 
   async getCurrentManifest(): Promise<Manifest> {
-    const oracleRegistry = await this.getOracleRegistryContractState();
-
     if (!this.arweaveProxy) {
       throw new Error(`getCurrentManifest requires defined arweaveProxy`);
     }
 
+    // Fetching oracle registry contract state
+    const oracleRegistry = await this.getOracleRegistryContractState();
+
+    // Extracting current manifest tx id
     const jwkAddress = await this.arweaveProxy.getAddress();
     const currentDataFeedId = oracleRegistry.nodes[jwkAddress].dataFeedId;
     const currentDataFeed = oracleRegistry.dataFeeds[currentDataFeedId];
     const manifestTxId = currentDataFeed.manifestTxId;
 
-    const manifestContent = await this.arweaveProxy.arweave.transactions.getData(
-      manifestTxId,
-      { decode: true, string: true }
-    );
-    const parsedManifest = JSON.parse(manifestContent as string);
+    // Fetching manifest content from Arwevae
+    const response = await axios.get(`${ARWEAVE_URL}/${manifestTxId}`);
+    const parsedManifest = response.data;
 
     return parsedManifest;
   }
