@@ -23,13 +23,13 @@ main();
 function main() {
   const tokens = {};
   for (const { jsonpath, url } of CUSTOM_URLS_WITH_JSON_PATHS) {
-    const symbol = ethers.utils.id(`${jsonpath}---${url}`);
+    const symbol = ethers.utils.id(`${jsonpath}---${url}`).slice(0, 18);
     tokens[symbol] = {
       customUrlDetails: { url, jsonpath },
     };
   }
 
-  const manifest = generateManifest({ tokens });
+  const manifest = generateManifest({ tokens, maxPriceDeviationPercent: 100 });
   manifest.defaultSource = ["custom-urls"];
 
   // Saving manifest to the output file

@@ -24,12 +24,17 @@ function getDeviationForToken(symbol) {
   }
 }
 
-function generateManifest({ tokens, interval = 60000, sourceTimeout = 20000 }) {
+function generateManifest({
+  tokens,
+  interval = 60000,
+  sourceTimeout = 20000,
+  maxPriceDeviationPercent = DEFAULT_MAX_DEVIATION,
+}) {
   return {
     interval,
     priceAggregator: "median",
     sourceTimeout,
-    maxPriceDeviationPercent: DEFAULT_MAX_DEVIATION,
+    maxPriceDeviationPercent,
     evmChainId: 1,
     tokens: getTokensConfig(tokens),
   };

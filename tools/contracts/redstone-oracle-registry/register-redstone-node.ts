@@ -1,9 +1,10 @@
+import util from "util";
 import prompts from "prompts";
 import { getOracleRegistryContract } from "./arweave-utils";
 import { RedstoneOraclesInput } from "../../../src/contracts/redstone-oracle-registry/types";
 
 export const registerRedstoneNode = async () => {
-const response = await prompts([
+  const response = await prompts([
     {
       type: "text",
       name: "name",
@@ -56,7 +57,7 @@ const response = await prompts([
   const contract = getOracleRegistryContract(response.walletFilePath);
 
   const { name, logo, description, dataFeedId, evmAddress, ipAddress, url } = response;
-  const nodeDetails = { 
+  const nodeDetails = {
     name,
     logo,
     description,
@@ -65,9 +66,13 @@ const response = await prompts([
     ipAddress,
     ...(!!url && { url })
   };
-  const registerNodeTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
+  const registerNodeTransactionDetails = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "registerNode",
     data: nodeDetails
   });
-  console.log(`Register redstone node transaction id: ${registerNodeTransactionId}`);
+  console.log(`Sent register redstone node transaction`);
+  console.log(util.inspect(registerNodeTransactionDetails, {
+    depth: null,
+    colors: true
+  }));
 };
