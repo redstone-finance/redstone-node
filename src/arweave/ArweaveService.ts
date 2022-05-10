@@ -1,12 +1,13 @@
+import axios from "axios";
 import { Manifest } from "../types";
 import ArweaveProxy from "./ArweaveProxy";
 import contracts from "../../src/config/contracts.json";
 import {
-  DataFeedWithId,
-  NodeWithAddress,
-  RedstoneOraclesInput,
+  RedstoneOraclesState,
 } from "../contracts/redstone-oracle-registry/types";
 
+// DEN = distributed execution network
+const SMARTWEAVE_DEN_NODE_URL = "https://d2rkt3biev1br2.cloudfront.net/state";
 const oracleRegistryContractId = contracts["oracle-registry"];
 
 export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
@@ -14,31 +15,35 @@ export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
 // Business service that supplies operations required by Redstone-Node.
 export default class ArweaveService {
 
-  constructor(private readonly arweaveProxy: ArweaveProxy) {}
+  constructor(private readonly arweaveProxy?: ArweaveProxy) {}
+
+  // TODO: maybe implement fallback with timeouts:
+  // DEN -> Redstone Gateway -> Arweave directly (arweave.net)
+  async getOracleRegistryContractState(): Promise<RedstoneOraclesState> {
+    const response = await axios.get(SMARTWEAVE_DEN_NODE_URL, {
+      params: { id: oracleRegistryContractId },
+    });
+    return response.data.state;
+  }
 
   async getCurrentManifest(): Promise<Manifest> {
-    const jwkAddress = await this.arweaveProxy.getAddress();
-    const oracleRegistryContract = this.arweaveProxy.smartweave
-      .contract(oracleRegistryContractId)
-      .connect(this.arweaveProxy.jwk);
-    const node = (await oracleRegistryContract.viewState<RedstoneOraclesInput, NodeWithAddress>({
-      function: "getNodeDetails",
-      data: {
-        address: jwkAddress,
-      }
-    })).result;
+    const oracleRegistry = await this.getOracleRegistryContractState();
 
-    const dataFeed = (await oracleRegistryContract.viewState<RedstoneOraclesInput, DataFeedWithId>({
-      function: "getDataFeedDetailsById",
-      data: {
-        id: node.dataFeedId,
-      }
-    })).result;
+    if (!this.arweaveProxy) {
+      throw new Error(`getCurrentManifest requires defined arweaveProxy`);
+    }
+
+    const jwkAddress = await this.arweaveProxy.getAddress();
+    const currentDataFeedId = oracleRegistry.nodes[jwkAddress].dataFeedId;
+    const currentDataFeed = oracleRegistry.dataFeeds[currentDataFeedId];
+    const manifestTxId = currentDataFeed.manifestTxId;
 
     const manifestContent = await this.arweaveProxy.arweave.transactions.getData(
-      dataFeed.manifestTxId,
+      manifestTxId,
       { decode: true, string: true }
     );
-    return JSON.parse(manifestContent as string);
+    const parsedManifest = JSON.parse(manifestContent as string);
+
+    return parsedManifest;
   }
 }

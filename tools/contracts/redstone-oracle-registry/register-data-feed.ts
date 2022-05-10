@@ -1,6 +1,7 @@
 import prompts from "prompts";
 import { getOracleRegistryContract } from "./arweave-utils";
 import { RedstoneOraclesInput } from "../../../src/contracts/redstone-oracle-registry/types";
+import niceLogger from "../../../src/utils/nice-logger";
 
 export const registerDataFeed = async () => {
   const response = await prompts([
@@ -51,9 +52,10 @@ export const registerDataFeed = async () => {
     logo: response.logo,
     description: response.description
   };
-  const createDataFeedTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
+  const createDataFeedTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "createDataFeed",
     data: dataFeedData
   });
-  console.log(`Create data feed transaction id: ${createDataFeedTransactionId}`);
+  console.log(`Create data feed transaction sent`);
+  niceLogger.log(createDataFeedTransaction);
 };

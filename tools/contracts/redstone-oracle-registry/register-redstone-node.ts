@@ -1,7 +1,7 @@
-import util from "util";
 import prompts from "prompts";
 import { getOracleRegistryContract } from "./arweave-utils";
 import { RedstoneOraclesInput } from "../../../src/contracts/redstone-oracle-registry/types";
+import niceLogger from "../../../src/utils/nice-logger";
 
 export const registerRedstoneNode = async () => {
   const response = await prompts([
@@ -66,13 +66,10 @@ export const registerRedstoneNode = async () => {
     ipAddress,
     ...(!!url && { url })
   };
-  const registerNodeTransactionDetails = await contract.bundleInteraction<RedstoneOraclesInput>({
+  const registerNodeTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "registerNode",
     data: nodeDetails
   });
   console.log(`Sent register redstone node transaction`);
-  console.log(util.inspect(registerNodeTransactionDetails, {
-    depth: null,
-    colors: true
-  }));
+  niceLogger.log(registerNodeTransaction);
 };

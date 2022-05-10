@@ -1,6 +1,7 @@
 import prompts from "prompts";
 import { getOracleRegistryContract } from "./arweave-utils";
 import { RedstoneOraclesInput } from "../../../src/contracts/redstone-oracle-registry/types";
+import niceLogger from "../../../src/utils/nice-logger";
 
 export const updateRedstoneNode = async () => {
   const response = await prompts([
@@ -50,7 +51,7 @@ export const updateRedstoneNode = async () => {
   const contract = getOracleRegistryContract(response.walletFilePath);
 
   const { name, logo, description, dataFeedId, evmAddress, ipAddress, url } = response;
-  const nodeDetails = { 
+  const nodeDetails = {
     ...(!!name && { name }),
     ...(!!logo && { logo }),
     ...(!!description && { description }),
@@ -59,9 +60,10 @@ export const updateRedstoneNode = async () => {
     ...(!!ipAddress && { ipAddress }),
     ...(!!url && { url })
   };
-  const updateNodeTransactionId = await contract.bundleInteraction<RedstoneOraclesInput>({
+  const updateNodeTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({
     function: "updateNodeDetails",
     data: nodeDetails
   });
-  console.log(`Update redstone node transaction id: ${updateNodeTransactionId}`);
+  console.log(`Update redstone node transaction sent`);
+  niceLogger.log(updateNodeTransaction);
 };
