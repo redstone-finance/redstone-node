@@ -1,7 +1,7 @@
 import { JWKInterface } from "arweave/node/lib/wallet";
 
 export interface Manifest {
-  txId?: string; // note: this fiels is set by smart contract while downloading active manifest content
+  txId: string; // Note, you need to set this field manually (after downloading the manifest data)
   interval: number;
   priceAggregator: string;
   defaultSource?: string[];

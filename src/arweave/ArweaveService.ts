@@ -44,6 +44,7 @@ export default class ArweaveService {
     // Fetching manifest content from Arwevae
     const response = await axios.get(`${ARWEAVE_URL}/${manifestTxId}`);
     const parsedManifest = response.data;
+    parsedManifest.txId = manifestTxId;
 
     return parsedManifest;
   }
