@@ -1,7 +1,7 @@
 import { JWKInterface } from "arweave/node/lib/wallet";
 
 export interface Manifest {
-  txId: string; // Note, you need to set this field manually (after downloading the manifest data)
+  txId?: string; // Note, you need to set this field manually (after downloading the manifest data)
   interval: number;
   priceAggregator: string;
   defaultSource?: string[];
