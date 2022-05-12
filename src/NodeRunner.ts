@@ -39,6 +39,7 @@ const pjson = require("../package.json") as any;
 
 export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
+const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
 
 export default class NodeRunner {
   private readonly version: string;
@@ -120,6 +121,7 @@ export default class NodeRunner {
 
   async run(): Promise<void> {
     this.printInitialNodeDetails();
+    this.maybeRunDiagnosticInfoPrinting();
 
     await this.warnIfARBalanceLow();
 
@@ -149,9 +151,30 @@ export default class NodeRunner {
       } else {
         logger.info(
           `Git details: ${commit.hash} (latest commit), `
-          + `${commit.branch} (branch)`);
+          + `${commit.branch} (branch), `
+          + `${commit.subject} (latest commit message)`);
       }
     });
+  }
+
+  private maybeRunDiagnosticInfoPrinting() {
+    if (process.env.PRINT_DIAGNOSTIC_INFO) {
+      const printDiagnosticInfo = () => {
+        const memoryUsage = process.memoryUsage();
+        const activeRequests = (process as any)._getActiveRequests();
+        const activeHandles = (process as any)._getActiveHandles();
+        logger.info(`Diagnostic info: `
+          + `Active requests count: ${activeRequests.length}. `
+          + `Active handles count: ${activeHandles.length}. `
+          + `Memory usage: ${JSON.stringify(memoryUsage)}. `
+        );
+        // logger.info(JSON.stringify({activeHandles, activeRequests})); // TODO: maybe remove later
+        console.log({activeRequests});
+      };
+
+      printDiagnosticInfo();
+      setInterval(printDiagnosticInfo, DIAGNOSTIC_INFO_PRINTING_INTERVAL);
+    }
   }
 
   private async runIteration() {
