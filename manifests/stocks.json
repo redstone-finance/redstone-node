@@ -461,6 +461,24 @@
       ],
       "maxPriceDeviationPercent": 25
     },
+    "MXN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "ARS": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PEN": {
+      "source": [
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "BRLUSD=X": {
       "source": [
         "yf-unofficial"
