@@ -20,4 +20,3 @@ export = (moduleName: string) => {
     ],
   }).withTag(moduleName);
 }
-

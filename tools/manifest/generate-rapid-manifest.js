@@ -12,6 +12,8 @@ const SYMBOLS = [
   "DOT",
   "XLM",
   "AR",
+  "CELO",
+  "AVAX"
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);

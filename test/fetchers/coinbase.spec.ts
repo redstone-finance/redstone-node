@@ -17,12 +17,12 @@ describe("coinbase fetcher", () => {
   const sut = fetchers["coinbase"];
 
   it('should properly fetch data', async () => {
-    //given
+    // given
 
-    //when
+    // when
     const result = await sut.fetchAll(["AR", "ETH", "BTC"]);
 
-    //then
+    // then
     expect(result).toEqual([
       {
         "symbol": "ETH",

@@ -1,7 +1,7 @@
 import { JWKInterface } from "arweave/node/lib/wallet";
 
 export interface Manifest {
-  txId?: string; // note: this fiels is set by smart contract while downloading active manifest content
+  txId?: string; // Note, you need to set this field manually (after downloading the manifest data)
   interval: number;
   priceAggregator: string;
   defaultSource?: string[];
@@ -9,6 +9,7 @@ export interface Manifest {
   maxPriceDeviationPercent: number,
   evmChainId: number,
   tokens: { [symbol: string]: TokenConfig };
+  enableArweaveBackup?: boolean;
 };
 
 export interface SourceTimeout {
@@ -22,16 +23,22 @@ export interface Credentials {
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
-  yahooFinanceRapidApiKey?: string;
 };
 
 export interface TokenConfig {
   source?: string[];
   maxPriceDeviationPercent?: number;
+  customUrlDetails?: CustomUrlDetails;
+};
+
+export interface CustomUrlDetails {
+  url: string;
+  jsonpath: string;
 };
 
 export interface FetcherOpts {
   credentials: Credentials;
+  manifest: Manifest;
 };
 
 export interface Fetcher {
@@ -95,7 +102,7 @@ export interface PricePackage {
 
 export interface SignedPricePackage {
   pricePackage: PricePackage;
-  signerPublicKey: string;
+  signerAddress: string;
   liteSignature: string;
 };
 

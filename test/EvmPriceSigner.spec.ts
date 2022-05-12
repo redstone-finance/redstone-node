@@ -87,7 +87,7 @@ describe('evmSignPricesAndVerify', () => {
     // then
     expect(evmSigner.verifyLiteSignature({
       ...signedPricesData,
-      signerPublicKey: "0x1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+      signerAddress: "0x1111111111111111111111111111111111111111",
     })).toEqual(false);
   });
 

@@ -12,12 +12,12 @@ describe("ecb fetcher", () => {
   const sut = fetchers["ecb"];
 
   it('should properly fetch data', async () => {
-    //given
+    // given
 
-    //when
+    // when
     const result = await sut.fetchAll(["EUR", "JPY", "GBP"]);
 
-    //then
+    // then
     expect(result).toEqual([
       {
         "symbol": "EUR",

@@ -35,7 +35,7 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
     return {
       signPricePackage: (pricePackage: any) => ({
         liteSignature: "mock_evm_signed_lite",
-        signerPublicKey: "mock_evm_signer_public_key",
+        signerAddress: "mock_evm_signer_address",
         pricePackage,
       }),
     };
@@ -120,6 +120,7 @@ describe("NodeRunner", () => {
       priceAggregator: "median",
       sourceTimeout: 2000,
       evmChainId: 1,
+      enableArweaveBackup: true,
       tokens: {
         "BTC": {
           source: ["coinbase"]
@@ -134,7 +135,7 @@ describe("NodeRunner", () => {
   });
 
   it("should create node instance", async () => {
-    //given
+    // given
     const mockedArProxy = mocked(ArweaveProxy, true);
 
     const sut = await NodeRunner.create(
@@ -142,13 +143,13 @@ describe("NodeRunner", () => {
       nodeConfig
     );
 
-    //then
+    // then
     expect(sut).not.toBeNull();
     expect(mockedArProxy).toHaveBeenCalledWith(jwk)
   });
 
   it("should throw if no maxDeviationPercent configured for token", async () => {
-    //given
+    // given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     manifest =
       JSON.parse(`{
@@ -173,7 +174,7 @@ describe("NodeRunner", () => {
   });
 
   it("should throw if no sourceTimeout", async () => {
-    //given
+    // given
     manifest = JSON.parse(`{
         "defaultSource": ["uniswap"],
         "interval": 0,
@@ -243,7 +244,7 @@ describe("NodeRunner", () => {
   });
 
   it("should broadcast fetched and signed prices", async () => {
-    //given
+    // given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     const sut = await NodeRunner.create(
@@ -282,7 +283,7 @@ describe("NodeRunner", () => {
       {
         timestamp: 111111111,
         liteSignature: "mock_evm_signed_lite",
-        signerPublicKey: "mock_evm_signer_public_key",
+        signerAddress: "mock_evm_signer_address",
         provider: "mockArAddress",
         prices: [{symbol: "BTC", value: 444.5}]
       }
@@ -293,7 +294,7 @@ describe("NodeRunner", () => {
   });
 
   it("should not broadcast fetched and signed prices if values deviates too much", async () => {
-    //given
+    // given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     manifest = {
@@ -312,7 +313,7 @@ describe("NodeRunner", () => {
   });
 
   it("should save transaction on Arweave in mode=PROD", async () => {
-    //given
+    // given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     modeMock.isProd = true;
 
@@ -390,7 +391,7 @@ describe("NodeRunner", () => {
     });
 
     it("should download prices when manifest is available", async () => {
-      //given
+      // given
       const arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
         .mockImplementation(() => Promise.resolve(manifest));
 
@@ -408,7 +409,7 @@ describe("NodeRunner", () => {
     });
 
     it("should not create NodeRunner instance until manifest is available", async () => {
-      //given
+      // given
       jest.useRealTimers();
       let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
         .mockImplementation(async () => {

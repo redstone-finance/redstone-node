@@ -15,11 +15,11 @@ export class PangolinFetcher extends BaseFetcher {
       super(name);
     }
 
-  async fetchData(symbols: string[]) {
-    const ids = this.getPairIdsForSymbols(symbols);
+  async fetchData(ids: string[]) {
+    const pairIds = this.getPairIdsForAssetIds(ids);
 
     const query = `{
-      pairs(where: { id_in: ${JSON.stringify(ids)} }) {
+      pairs(where: { id_in: ${JSON.stringify(pairIds)} }) {
         token0 {
           symbol
         }
@@ -63,15 +63,15 @@ export class PangolinFetcher extends BaseFetcher {
     return pricesObj;
   }
 
-  private getPairIdsForSymbols(symbols: string[]): string[] {
+  private getPairIdsForAssetIds(assetIds: string[]): string[] {
     const pairIds = [];
 
     for (const pair of pangolinPairs) {
       const symbol0 = pair.token0.symbol;
       const symbol1 = pair.token1.symbol;
       const pairIdShouldBeIncluded =
-        (symbol0 == this.baseTokenSymbol && symbols.includes(symbol1))
-        || (symbol1 == this.baseTokenSymbol && symbols.includes(symbol0));
+        (symbol0 == this.baseTokenSymbol && assetIds.includes(symbol1))
+        || (symbol1 == this.baseTokenSymbol && assetIds.includes(symbol0));
       if (pairIdShouldBeIncluded) {
         pairIds.push(pair.id);
       }

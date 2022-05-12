@@ -8,6 +8,7 @@ const SYMBOL_TO_ID_PATH = "./src/fetchers/coingecko/coingecko-symbol-to-id.json"
 const hardcodedValues = {
   "QI": "benqi",
   "SOS": "opendao",
+  "ONE": "harmony",
 };
 
 main();

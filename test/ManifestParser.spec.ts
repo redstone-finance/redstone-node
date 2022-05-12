@@ -11,7 +11,7 @@ describe("groupTokenBySource", () => {
   };
 
   it("should properly assign tokens to sources", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       tokens: {
@@ -36,10 +36,10 @@ describe("groupTokenBySource", () => {
       }
     };
 
-    //when
+    // when
     const result = ManifestHelper.groupTokensBySource(manifest);
 
-    //then
+    // then
     expect(result).toEqual({
       "bitfinex": ["BTC", "ETH"],
       "ftx": ["BTC", "USDT"],
@@ -48,7 +48,7 @@ describe("groupTokenBySource", () => {
   });
 
   it("should use default source, if no source for given token is defined", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       defaultSource: ["kraken"],
@@ -68,10 +68,10 @@ describe("groupTokenBySource", () => {
       }
     };
 
-    //when
+    // when
     const result = ManifestHelper.groupTokensBySource(manifest);
 
-    //then
+    // then
     expect(result).toEqual({
       "bitfinex": ["BTC"],
       "kraken": ["ETH"],
@@ -80,7 +80,7 @@ describe("groupTokenBySource", () => {
   });
 
   it("should use default source if token has defined empty source", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       defaultSource: ["kraken"],
@@ -102,10 +102,10 @@ describe("groupTokenBySource", () => {
       }
     };
 
-    //when
+    // when
     const result = ManifestHelper.groupTokensBySource(manifest);
 
-    //then
+    // then
     expect(result).toEqual({
       "bitfinex": ["BTC"],
       "kraken": ["ETH"],
@@ -114,7 +114,7 @@ describe("groupTokenBySource", () => {
   });
 
   it("should throw error if neither source for token nor default source are defined", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       tokens: {
@@ -126,9 +126,9 @@ describe("groupTokenBySource", () => {
         }
       }
     };
-    //when
+    // when
 
-    //then
+    // then
     expect(() => ManifestHelper.groupTokensBySource(manifest)).toThrow(/global source is not defined/);
   });
 });
@@ -150,7 +150,7 @@ describe("getTimeoutForSource", () => {
   }
 
   it("should throw if source is empty", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       sourceTimeout: 5000,
@@ -160,26 +160,26 @@ describe("getTimeoutForSource", () => {
   });
 
   it("should use default timeout (simple notation)", () => {
-    //given
+    // given
     const manifest: Manifest = {
       ...baseManifest,
       sourceTimeout: 5000,
     };
 
-    //then
+    // then
     expect(ManifestHelper.getTimeoutForSource("ftx", manifest)).toEqual(5000);
     expect(ManifestHelper.getTimeoutForSource("binance", manifest)).toEqual(5000);
     expect(ManifestHelper.getTimeoutForSource("bitfinex", manifest)).toEqual(5000);
   });
 
   it("should return null sourceTimeout is not a number", () => {
-    //given
+    // given
     const manifest: any = {
       ...baseManifest,
       sourceTimeout: "5s",
     };
 
-    //then
+    // then
     expect(ManifestHelper.getTimeoutForSource("ftx", manifest)).toBeNull();
   });
 
@@ -193,7 +193,7 @@ describe("getMaxDeviationForSymbol", () => {
   }
 
   it("should get default value, if no value for token available", () => {
-    //given
+    // given
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
@@ -207,14 +207,14 @@ describe("getMaxDeviationForSymbol", () => {
       }
     }
 
-    //then
+    // then
     expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(15);
     expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(15);
     expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(5);
   });
 
   it("should get value specific for token if available", () => {
-    //given
+    // given
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
@@ -232,14 +232,14 @@ describe("getMaxDeviationForSymbol", () => {
       }
     }
 
-    //then
+    // then
     expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(34);
     expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(23);
     expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(5);
   });
 
   it("should return null if checking for unknown token", () => {
-    //given
+    // given
     const manifest = {
       ...baseManifest,
       maxPriceDeviationPercent: 15,
@@ -257,14 +257,14 @@ describe("getMaxDeviationForSymbol", () => {
       }
     }
 
-    //then
+    // then
     expect(ManifestHelper.getMaxDeviationForSymbol("DOGE", manifest)).toBeNull();
     expect(ManifestHelper.getMaxDeviationForSymbol("USD", manifest)).toBeNull();
     expect(ManifestHelper.getMaxDeviationForSymbol("UNI", manifest)).toBeNull();
   });
 
   it("should return undefined if checking for unknown token", () => {
-    //given
+    // given
     const manifest = JSON.parse(`{
       "interval": 2000,
       "priceAggregator": "median",
@@ -283,7 +283,7 @@ describe("getMaxDeviationForSymbol", () => {
       }
     }`);
 
-    //then
+    // then
     expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toBeNull();
     expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toBeNull();
   });

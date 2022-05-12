@@ -408,7 +408,6 @@ Config file is a **private** file created by a provider. It contains the followi
 | addEvmSignature                     |  optional   | if set to true, EVM signature will be added to each price for each asset                           |
 | credentials                         |  required   | object with credentials for APIs and private keys                                                  |
 | credentials.ethereumPrivateKey      |  required   | Ethereum private key that will be used for price data signing                                      |
-| credentials.yahooFinanceRapidApiKey |  optional   | API key for the api-dojo-rapid fetcher                                                             |
 
 You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
 

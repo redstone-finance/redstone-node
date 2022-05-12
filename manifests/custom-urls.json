@@ -1,0 +1,33 @@
+{
+  "interval": 60000,
+  "priceAggregator": "median",
+  "sourceTimeout": 20000,
+  "maxPriceDeviationPercent": 100,
+  "evmChainId": 1,
+  "tokens": {
+    "0x031f7bcd73d9f5ed": {
+      "customUrlDetails": {
+        "url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD",
+        "jsonpath": "$.RAW.ETH.USD.PRICE"
+      },
+      "maxPriceDeviationPercent": 80
+    },
+    "0xffe45ffaf671f563": {
+      "customUrlDetails": {
+        "url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD",
+        "jsonpath": "$.RAW.ETH.USD.MEDIAN"
+      },
+      "maxPriceDeviationPercent": 80
+    },
+    "0xd8e28697d41536a1": {
+      "customUrlDetails": {
+        "url": "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD",
+        "jsonpath": "$.RAW.ETH.USD.VOLUMEDAY"
+      },
+      "maxPriceDeviationPercent": 80
+    }
+  },
+  "defaultSource": [
+    "custom-urls"
+  ]
+}

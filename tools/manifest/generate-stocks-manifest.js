@@ -76,11 +76,11 @@ const SYMBOLS = [
   "JPY",
 
   // Latin american currencies
-  "MXNUSD=X",
+  "MXN",
+  "ARS",
+  "PEN",
   "BRLUSD=X",
   "COPUSD=X",
-  "ARSUSD=X",
-  "PENUSD=X"
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH, {
