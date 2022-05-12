@@ -31,6 +31,8 @@ import {
 } from "./types";
 import { BundlrService } from "./arweave/BundlrService";
 import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
+import git from "git-last-commit";
+import { ethers } from "ethers";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -117,12 +119,7 @@ export default class NodeRunner {
   }
 
   async run(): Promise<void> {
-    logger.info(
-      `Running redstone-node with manifest:
-      ${JSON.stringify(this.currentManifest)}
-      Version: ${this.version}
-      Address: ${this.providerAddress}
-    `);
+    this.printInitialNodeDetails();
 
     await this.warnIfARBalanceLow();
 
@@ -132,6 +129,29 @@ export default class NodeRunner {
     } catch (e: any) {
       NodeRunner.reThrowIfManifestConfigError(e);
     }
+  }
+
+  private printInitialNodeDetails() {
+    const evmPrivateKey = this.nodeConfig.credentials.ethereumPrivateKey;
+    const evmAddress = new ethers.Wallet(evmPrivateKey).address;
+    logger.info(`Node evm address: ${evmAddress}`);
+    logger.info(`Node arweave address: ${this.providerAddress}`);
+    logger.info(`Version from package.json: ${this.version}`);
+    logger.info(
+      `Initial node manifest:
+      ${JSON.stringify(this.currentManifest)}
+    `);
+
+    // Printing git details
+    git.getLastCommit((err, commit) => {
+      if (err) {
+        logger.error(err);
+      } else {
+        logger.info(
+          `Git details: ${commit.hash} (latest commit), `
+          + `${commit.branch} (branch)`);
+      }
+    });
   }
 
   private async runIteration() {
