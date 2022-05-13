@@ -42,7 +42,7 @@ jest.mock("../../src/signers/EvmPriceSigner", () => {
   })
 });
 
-jest.mock("../../src/fetchers/coinbase/CoinbaseFetcher");
+jest.mock("../../src/fetchers/coingecko/CoingeckoFetcher");
 jest.mock("../../src/fetchers/uniswap/UniswapFetcher");
 
 jest.mock("axios");
@@ -102,7 +102,7 @@ describe("NodeRunner", () => {
     jest.spyOn(global.Date, 'now')
       .mockImplementation(() => 111111111);
 
-    fetchers["coinbase"] = {
+    fetchers["coingecko"] = {
       fetchAll: jest.fn().mockResolvedValue([
         {symbol: "BTC", value: 444}
       ])
@@ -123,7 +123,7 @@ describe("NodeRunner", () => {
       enableArweaveBackup: true,
       tokens: {
         "BTC": {
-          source: ["coinbase"]
+          source: ["coingecko"]
         },
         "ETH": {}
       }
@@ -159,7 +159,7 @@ describe("NodeRunner", () => {
         "sourceTimeout": 2000,
         "tokens": {
           "BTC": {
-           "source": ["coinbase"]
+           "source": ["coingecko"]
           },
           "ETH": {}
         }
@@ -183,7 +183,7 @@ describe("NodeRunner", () => {
         "evmChainId": 1,
         "tokens": {
           "BTC": {
-           "source": ["coinbase"]
+           "source": ["coingecko"]
           },
           "ETH": {}
         }
@@ -220,9 +220,9 @@ describe("NodeRunner", () => {
       jwk,
       nodeConfig
     );
-    fetchers["coinbase"] = {
+    fetchers["coingecko"] = {
       fetchAll: jest.fn(() => {
-        throw new Error("test-error-coinbase");
+        throw new Error("test-error-coingecko");
       }),
     };
 
@@ -233,7 +233,7 @@ describe("NodeRunner", () => {
     expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
       "id": "00000000-0000-0000-0000-000000000000",
       "source": {
-        "coinbase": "error",
+        "coingecko": "error",
         "uniswap": 445,
       },
       "symbol": "BTC",
@@ -255,7 +255,7 @@ describe("NodeRunner", () => {
     await sut.run();
     expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
       "id": "00000000-0000-0000-0000-000000000000",
-      "source": {"coinbase": 444, "uniswap": 445},
+      "source": {"coingecko": 444, "uniswap": 445},
       "symbol": "BTC",
       "timestamp": 111111111,
       "value": 444.5,
@@ -270,7 +270,7 @@ describe("NodeRunner", () => {
           "id": "00000000-0000-0000-0000-000000000000",
           "permawebTx": "mockBundlrTransactionId",
           "provider": "mockArAddress",
-          "source": {"coinbase": 444, "uniswap": 445},
+          "source": {"coingecko": 444, "uniswap": 445},
           "symbol": "BTC",
           "timestamp": 111111111,
           "value": 444.5,
@@ -330,7 +330,7 @@ describe("NodeRunner", () => {
         {
           "id": "00000000-0000-0000-0000-000000000000",
           "source": {
-            "coinbase": 444,
+            "coingecko": 444,
             "uniswap": 445
           },
           "symbol": "BTC",
@@ -367,7 +367,7 @@ describe("NodeRunner", () => {
         {
           "id": "00000000-0000-0000-0000-000000000000",
           "source": {
-            "coinbase": 444,
+            "coingecko": 444,
             "uniswap": 445
           },
           "symbol": "BTC",

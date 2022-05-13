@@ -5,7 +5,7 @@ import {
   personalSign,
   recoverPersonalSignature,
   TypedMessage,
-} from "eth-sig-util";
+} from "@metamask/eth-sig-util";
 import {
   PricePackage,
   ShortSinglePrice,
@@ -84,7 +84,7 @@ export default class EvmPriceSigner {
 
   calculateLiteEvmSignature(priceData: SerializedPriceData, privateKey: string): string {
     const data = this.getLiteDataToSign(priceData);
-    return personalSign(toBuffer(privateKey), { data });
+    return personalSign({ privateKey: toBuffer(privateKey), data });
   }
 
   public static convertStringToBytes32String(str: string) {
@@ -133,7 +133,7 @@ export default class EvmPriceSigner {
 
     const signer = recoverPersonalSignature({
       data,
-      sig: signedPricePackage.liteSignature,
+      signature: signedPricePackage.liteSignature,
     });
 
     const signerAddressUC = signer.toUpperCase();
