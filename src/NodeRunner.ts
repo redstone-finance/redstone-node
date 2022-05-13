@@ -37,7 +37,9 @@ import { ethers } from "ethers";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-export const MANIFEST_REFRESH_INTERVAL = 120 * 1000;
+export const MANIFEST_REFRESH_INTERVAL = process.env.MANIFEST_REFRESH_INTERVAL 
+  ? Number(process.env.MANIFEST_REFRESH_INTERVAL) 
+  : 120 * 1000;
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
 

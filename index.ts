@@ -48,7 +48,7 @@ async function main(): Promise<void> {
     }
   }
 
-  // Running limestone-node with manifest
+  // Running RedStone node with manifest
   const runner = await NodeRunner.create(
     jwk,
     config
