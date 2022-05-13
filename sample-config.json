@@ -1,6 +1,6 @@
 {
   "arweaveKeysFile": "./sample-jwk.json",
-  "manifestFile": "./manifests/main.json",
+  "manifestFile": "./manifests/dev.json",
   "minimumArBalance": 0,
   "addEvmSignature": true,
   "enableStreamrBroadcaster": false,
