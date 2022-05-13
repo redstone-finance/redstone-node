@@ -27,8 +27,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinbase",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -48,8 +46,7 @@
         "probit",
         "qtrade",
         "stex",
-        "tidebit",
-        "timex"
+        "tidebit"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -64,7 +61,6 @@
         "currencycom",
         "ftx",
         "kraken",
-        "kyber",
         "okcoin",
         "sushiswap",
         "uniswap"
@@ -91,7 +87,6 @@
         "bitfinex2",
         "bittrex",
         "btcturk",
-        "coinex",
         "coingecko",
         "delta",
         "huobipro",
@@ -129,8 +124,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinbase",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -140,7 +133,6 @@
         "huobipro",
         "kraken",
         "kucoin",
-        "kyber",
         "lbank",
         "liquid",
         "oceanex",
@@ -149,7 +141,6 @@
         "poloniex",
         "probit",
         "sushiswap",
-        "timex",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -173,8 +164,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinbase",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -193,8 +182,7 @@
         "poloniex",
         "probit",
         "qtrade",
-        "stex",
-        "timex"
+        "stex"
       ],
       "maxPriceDeviationPercent": 25
     },

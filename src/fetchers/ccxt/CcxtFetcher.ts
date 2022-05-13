@@ -2,6 +2,8 @@ import { BaseFetcher } from "../BaseFetcher";
 import { PricesObj } from "../../types";
 import redstone from "redstone-api";
 import ccxt, { Exchange, Ticker } from "ccxt";
+import { getRequiredPropValue } from "../../utils/objects";
+import symbolToId from "./symbol-to-id/index";
 
 const CCXT_FETCHER_MAX_REQUEST_TIMEOUT_MS = 120000;
 
@@ -23,13 +25,43 @@ export class CcxtFetcher extends BaseFetcher {
     }) as Exchange;
   }
 
-  async fetchData(): Promise<any> {
+  override convertIdToSymbol(id: string) {
+    if (id.endsWith("/USD")) {
+      return id.replace("/USD", "");
+    } else if (id.endsWith("/USDT")) {
+      return id.replace("/USDT", "");
+    } else {
+      throw new Error(
+        `Unsupported option for pair name (${this.name}): ${id}`);
+    }
+  }
+
+  override convertSymbolToId(symbol: string) {
+    const mapping = this.tryGetSymbolToIdMapping();
+    if (!!mapping) {
+      return getRequiredPropValue(mapping, symbol);
+    } else {
+      return symbol;
+    }
+  }
+
+  private tryGetSymbolToIdMapping(): { [id: string]: string } | undefined {
+    return symbolToId[this.name as ccxt.ExchangeId];
+  }
+
+  async fetchData(ids: string[]): Promise<any> {
     if (!this.exchange.has["fetchTickers"]) {
       throw new Error(
         `Exchange ${this.name} doesn't support fetchTickers method`);
     }
 
-    return await this.exchange.fetchTickers();
+    const tickerSymbols = !!this.tryGetSymbolToIdMapping()
+      ? ids
+      : undefined;
+
+    // If we pass undefined as tickerSymbols then all available tickers will be loaded
+    // But some exchanges (like kraken) do not support this anymore
+    return await this.exchange.fetchTickers(tickerSymbols);
   }
 
   async extractPrices(response: any): Promise<PricesObj> {
@@ -42,12 +74,10 @@ export class CcxtFetcher extends BaseFetcher {
       const lastPrice = ticker.last as number;
 
       if (pairSymbol.endsWith("/USD")) {
-        const symbol = pairSymbol.replace("/USD", "");
-        pricesObj[symbol] = lastPrice;
+        pricesObj[pairSymbol] = lastPrice;
       } else if (pairSymbol.endsWith("/USDT")) {
-        const symbol = pairSymbol.replace("/USDT", "");
-        if (!pricesObj[symbol]) {
-          pricesObj[symbol] = lastPrice * lastUsdtPrice;
+        if (!pricesObj[pairSymbol]) {
+          pricesObj[pairSymbol] = lastPrice * lastUsdtPrice;
         }
       }
     }

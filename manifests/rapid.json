@@ -27,7 +27,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -46,8 +45,7 @@
         "poloniex",
         "probit",
         "qtrade",
-        "stex",
-        "timex"
+        "stex"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -70,7 +68,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -90,8 +87,7 @@
         "probit",
         "qtrade",
         "stex",
-        "tidebit",
-        "timex"
+        "tidebit"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -106,7 +102,6 @@
         "currencycom",
         "ftx",
         "kraken",
-        "kyber",
         "okcoin",
         "sushiswap",
         "uniswap"
@@ -125,7 +120,6 @@
         "bitmex",
         "bybit",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "delta",
@@ -157,7 +151,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -195,7 +188,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -212,8 +204,7 @@
         "okex5",
         "poloniex",
         "probit",
-        "stex",
-        "timex"
+        "stex"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -235,7 +226,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "delta",
@@ -267,7 +257,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "delta",
@@ -304,7 +293,6 @@
         "bw",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "delta",
@@ -324,7 +312,6 @@
     "AR": {
       "source": [
         "binance",
-        "coinex",
         "coingecko",
         "hitbtc",
         "huobipro"
@@ -349,7 +336,6 @@
         "bitfinex2",
         "bittrex",
         "btcturk",
-        "coinex",
         "coingecko",
         "delta",
         "huobipro",

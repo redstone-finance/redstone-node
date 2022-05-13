@@ -27,7 +27,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -46,8 +45,7 @@
         "poloniex",
         "probit",
         "qtrade",
-        "stex",
-        "timex"
+        "stex"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -70,7 +68,6 @@
         "bybit",
         "cdax",
         "cex",
-        "coinex",
         "coingecko",
         "crex24",
         "currencycom",
@@ -90,8 +87,7 @@
         "probit",
         "qtrade",
         "stex",
-        "tidebit",
-        "timex"
+        "tidebit"
       ],
       "maxPriceDeviationPercent": 25
     },
