@@ -1,5 +1,5 @@
 import ccxt from "ccxt";
-import kraken from "./kraken.json";
+import exchanges from "../all-supported-exchanges.json";
 
 type MappingsForCCXT = Partial<{
   [exchangeId in ccxt.ExchangeId]: {
@@ -7,6 +7,10 @@ type MappingsForCCXT = Partial<{
   };
 }>;
 
-export default {
-  kraken,
-} as MappingsForCCXT;
+const mappings: MappingsForCCXT = {};
+
+for (const exchangeId of exchanges) {
+  mappings[exchangeId as ccxt.ExchangeId] = require(`./${exchangeId}.json`);
+}
+
+export default mappings;

@@ -1,17 +1,26 @@
-const prompts = require("prompts");
+// const prompts = require("prompts");
 const ccxt = require("ccxt");
 const fs = require("fs");
+const supportedExchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
 
 const OUTPUT_FOLDER = "./src/fetchers/ccxt/symbol-to-id";
 
 main();
 
 async function main() {
-  const { exchangeId } = await prompts({
-    type: "text",
-    name: "exchangeId",
-    message: "Provide exchange id",
-  });
+  // const { exchangeId } = await prompts({
+  //   type: "text",
+  //   name: "exchangeId",
+  //   message: "Provide exchange id",
+  // });
+
+  for (const exchangeId of supportedExchanges) {
+    await generateMappingForEchange(exchangeId);
+  }
+}
+
+async function generateMappingForEchange(exchangeId) {
+  console.log(`\n\n== Generating mapping for: ${exchangeId} ==`);
 
   // Loading current manifest from file
   const currentManifest = require(`../../manifests/${exchangeId}.json`);
@@ -26,16 +35,16 @@ async function main() {
   const symbolToId = {};
   for (const market of markets) {
     const symbol = market.symbol;
-    if (symbol.endsWith("USD")) {
-      const baseAsset = market.base;
-      symbolToId[baseAsset] = market.symbol;
+    if (symbol.endsWith("/USD") || (symbol.endsWith("/USDT") && !symbolToId[market.base])) {
+      symbolToId[market.base] = market.symbol;
     }
   }
 
   // Mapping validation
   for (const symbol of Object.keys(currentManifest.tokens)) {
     if (!symbolToId[symbol]) {
-      console.warn(`[WARN]: ${symbol} is not in the mapping`);
+      // throw new Error(`Symbol ${symbol} is not in the mapping`);
+      console.warn(`[WARN]: Symbol ${symbol} is not in the mapping`);
     }
   }
 
