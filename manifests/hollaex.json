@@ -8,19 +8,19 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
-    "XRP": {},
-    "TRX": {},
-    "UNI": {},
     "DOGE": {},
-    "XLM": {},
-    "ETH": {},
-    "DOT": {},
-    "BCH": {},
-    "ADA": {},
     "BTC": {},
+    "XRP": {},
+    "BCH": {},
     "LTC": {},
-    "XMR": {},
+    "UNI": {},
+    "ETH": {},
+    "XLM": {},
+    "DOT": {},
+    "TRX": {},
+    "ADA": {},
     "XTZ": {},
+    "XMR": {},
     "XHT": {}
   }
 }

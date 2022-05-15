@@ -23,8 +23,8 @@ export class YfUnofficialFetcher extends BaseFetcher {
     return getRequiredPropValue(symbolToId, symbol);
   }
 
-  async fetchData(symbols: string[]) {
-    return await this.yahooFinanceProxy.getExchangeRates(symbols);
+  async fetchData(ids: string[]) {
+    return await this.yahooFinanceProxy.getExchangeRates(ids);
   }
 
   async extractPrices(response: any): Promise<PricesObj> {

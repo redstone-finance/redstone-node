@@ -8,7 +8,7 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
-    "ETH": {},
-    "BTC": {}
+    "BTC": {},
+    "ETH": {}
   }
 }

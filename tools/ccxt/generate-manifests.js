@@ -45,7 +45,10 @@ async function getTickersForExchange(exchangeName) {
 
   // Fetch data
   const exchange = new ccxt[exchangeName];
-  const tickers = await exchange.fetchTickers();
+
+  // A small hack for kraken (as it stopped to support fetching all tickers)
+  const krakenTickers = Object.values(require("../../src/fetchers/ccxt/symbol-to-id/kraken.json"));
+  const tickers = await exchange.fetchTickers(exchangeName == "kraken" ? krakenTickers : undefined);
 
   // Parse response
   for (const ticker of Object.values(tickers)) {

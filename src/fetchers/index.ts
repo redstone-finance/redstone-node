@@ -6,7 +6,6 @@ import { CustomUrlsFetcher } from "./custom-urls/CustomUrlsFetcher";
 import { TraderJoeFetcher } from "./trader-joe/TraderJoeFetcher";
 import { CoingeckoFetcher } from "./coingecko/CoingeckoFetcher";
 import { SushiswapFetcher } from "./sushiswap/SushiswapFetcher";
-import { CoinbaseFetcher } from "./coinbase/CoinbaseFetcher";
 import { UniswapFetcher } from "./uniswap/UniswapFetcher";
 import { KyberFetcher } from "./kyber/KyberFetcher";
 import { VertoFetcher } from "./verto/VertoFetcher";
@@ -20,7 +19,6 @@ export default {
   "trader-joe": new TraderJoeFetcher(),
   coingecko: new CoingeckoFetcher(),
   sushiswap: new SushiswapFetcher(),
-  coinbase: new CoinbaseFetcher(),
   uniswap: new UniswapFetcher(),
   drand: new DrandFetcher(),
   kyber: new KyberFetcher(),
