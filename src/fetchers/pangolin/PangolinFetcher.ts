@@ -4,7 +4,7 @@ import pangolinPairs from "./pangolin-pairs.json";
 import graphProxy from "../../utils/graph-proxy";
 
 const PANGOLIN_SUBGRAPH_FETCHER = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
-const MIN_RESERVE_USD = 10;
+const MIN_RESERVE_USD = 1000;
 
 export class PangolinFetcher extends BaseFetcher {
   protected retryForInvalidResponse: boolean = true;
