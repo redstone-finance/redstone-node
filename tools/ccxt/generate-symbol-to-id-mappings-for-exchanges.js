@@ -1,4 +1,3 @@
-// const prompts = require("prompts");
 const ccxt = require("ccxt");
 const fs = require("fs");
 const supportedExchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
@@ -8,12 +7,6 @@ const OUTPUT_FOLDER = "./src/fetchers/ccxt/symbol-to-id";
 main();
 
 async function main() {
-  // const { exchangeId } = await prompts({
-  //   type: "text",
-  //   name: "exchangeId",
-  //   message: "Provide exchange id",
-  // });
-
   for (const exchangeId of supportedExchanges) {
     await generateMappingForEchange(exchangeId);
   }

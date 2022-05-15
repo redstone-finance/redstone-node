@@ -168,7 +168,6 @@ export default class NodeRunner {
           + `Active handles count: ${activeHandles.length}. `
           + `Memory usage: ${JSON.stringify(memoryUsage)}. `
         );
-        // logger.info(JSON.stringify({activeHandles, activeRequests})); // TODO: maybe remove later
         console.log({activeRequests});
       };
 
