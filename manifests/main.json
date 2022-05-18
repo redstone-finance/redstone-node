@@ -2470,6 +2470,28 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "EUR": {
+      "source": [
+        "binance",
+        "currencycom",
+        "ecb",
+        "ftx",
+        "kraken",
+        "twelvedata"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "GBP": {
+      "source": [
+        "binance",
+        "currencycom",
+        "ecb",
+        "ftx",
+        "kraken",
+        "twelvedata"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
     "DCR": {
       "source": [
         "binance",
@@ -2653,16 +2675,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "EUR": {
-      "source": [
-        "binance",
-        "currencycom",
-        "ecb",
-        "ftx",
-        "kraken"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "WRX": {
       "source": [
         "binance",
@@ -2693,13 +2705,13 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "GBP": {
+    "AUD": {
       "source": [
         "binance",
         "currencycom",
         "ecb",
-        "ftx",
-        "kraken"
+        "kraken",
+        "twelvedata"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -3141,15 +3153,6 @@
         "oceanex"
       ],
       "maxPriceDeviationPercent": 80
-    },
-    "AUD": {
-      "source": [
-        "binance",
-        "currencycom",
-        "ecb",
-        "kraken"
-      ],
-      "maxPriceDeviationPercent": 25
     },
     "KMD": {
       "source": [
@@ -4266,6 +4269,14 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "CHF": {
+      "source": [
+        "ecb",
+        "twelvedata",
+        "yf-unofficial"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
     "BAO": {
       "source": [
         "ftx",
@@ -5365,10 +5376,10 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "CHF": {
+    "JPY": {
       "source": [
         "ecb",
-        "yf-unofficial"
+        "twelvedata"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -6814,12 +6825,6 @@
         "drand"
       ],
       "maxPriceDeviationPercent": 80
-    },
-    "JPY": {
-      "source": [
-        "ecb"
-      ],
-      "maxPriceDeviationPercent": 25
     },
     "ALCX": {
       "source": [

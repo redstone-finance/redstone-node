@@ -12,6 +12,7 @@ import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
 import twapFetchers from "./twap/all-twap-fetchers";
+import { TwelvedataFetcher } from "./twelvedata/TwelvedataFetcher";
 
 export default {
   "yf-unofficial": new YfUnofficialFetcher(),
@@ -24,6 +25,7 @@ export default {
   kyber: new KyberFetcher(),
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
+  twelvedata: new TwelvedataFetcher(),
 
   ...ccxtFetchers,
   ...pangolinFetchers,
