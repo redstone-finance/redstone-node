@@ -3,9 +3,9 @@ import _ from "lodash";
 import jp from "jsonpath";
 import { FetcherOpts, PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
+import { stringifyError } from "../../utils/error-stringifier";
 
-// TODO: improve this implementation
-// It's just a PoC now
+const CUSTOM_URL_REQUEST_TIMEOUT_MILLISECONDS = 10000;
 
 export class CustomUrlsFetcher extends BaseFetcher {
   constructor() {
@@ -21,11 +21,19 @@ export class CustomUrlsFetcher extends BaseFetcher {
 
       const url = opts.manifest.tokens[id].customUrlDetails!.url;
 
-      // TODO: implement timeout for each url
-      // TODO: add error logging
-      const promise = axios.get(url).then(response => {
-        responses[id] = response.data;
-      });
+      const promise = axios
+        .get(url, {
+          timeout: CUSTOM_URL_REQUEST_TIMEOUT_MILLISECONDS,
+        })
+        .then((response) => {
+          responses[id] = response.data;
+        })
+        .catch((err) => {
+          const errMsg = stringifyError(err);
+          this.logger.error(
+            `Request to url failed. Url: ${url} Error: ${errMsg}`
+          );
+        });
       promises.push(promise);
     }
 
@@ -34,7 +42,11 @@ export class CustomUrlsFetcher extends BaseFetcher {
     return responses;
   }
 
-  async extractPrices(responses: any, _ids: string[], opts: FetcherOpts): Promise<PricesObj> {
+  async extractPrices(
+    responses: any,
+    _ids: string[],
+    opts: FetcherOpts
+  ): Promise<PricesObj> {
     const pricesObj: PricesObj = {};
     for (const [id, response] of Object.entries(responses)) {
       const jsonpath = opts.manifest.tokens[id].customUrlDetails!.jsonpath;
@@ -43,4 +55,4 @@ export class CustomUrlsFetcher extends BaseFetcher {
     }
     return pricesObj;
   }
-};
+}
