@@ -1,5 +1,7 @@
 import { Consola } from "consola";
-import exprress from "express";
+import express from "express";
+import { setExpressRoutes } from "./routes/index";
+import { NodeConfig } from "./types";
 
 const logger = require("./utils/logger")("express") as Consola;
 
@@ -12,14 +14,11 @@ const PORT = 8080;
 // This class will be extended in future and will be used for
 // communication between nodes
 export class ExpressAppRunner {
-  private app: exprress.Application;
+  private app: express.Application;
 
-  constructor() {
-    this.app = exprress();
-
-    this.app.get("/", (_req, res) => {
-      res.send("Hello App Runner. My name is RedStone node and I am doing good ;)");
-    });
+  constructor(private nodeConfig: NodeConfig) {
+    this.app = express();
+    setExpressRoutes(this.app, this.nodeConfig);
   }
 
   run() {
