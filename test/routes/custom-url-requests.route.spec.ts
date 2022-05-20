@@ -20,7 +20,7 @@ mockedAxios.get.mockResolvedValue({ data: exampleResponse });
 // Mock current timestamp
 Date.now = jest.fn(() => 1652662184000);
 
-describe("Home route", () => {
+describe("Custom URL requests route", () => {
   test("Should send correct response ", async () => {
     const customUrlRequestConfigBase64 = toBase64(
       JSON.stringify({

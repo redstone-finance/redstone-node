@@ -12,10 +12,11 @@ import { stringifyError } from "../utils/error-stringifier";
 const EVM_CHAIN_ID = 1;
 const QUERY_PARAM_NAME = "custom-url-request-config-base64";
 const DEFAULT_TIMEOUT_MILLISECONDS = 10000;
+const EVM_SIGNER_VERSION = "0.4";
 const logger = require("../utils/logger")(
   "custom-url-requests-route"
 ) as Consola;
-const evmSigner = new EvmPriceSigner("0.4", EVM_CHAIN_ID);
+const evmSigner = new EvmPriceSigner(EVM_SIGNER_VERSION, EVM_CHAIN_ID);
 
 export default function (app: express.Application, nodeConfig: NodeConfig) {
   app.get("/custom-url-requests", async (req, res) => {
@@ -38,7 +39,11 @@ export default function (app: express.Application, nodeConfig: NodeConfig) {
 
       // Extracting value
       logger.info(`Extracting data using jsonpath: ${jsonpath}`);
-      const extractedValue = jp.query(fetchedData, jsonpath)[0];
+      const extractedValueArr = jp.query(fetchedData, jsonpath);
+      if (extractedValueArr.length !== 1) {
+        throw new Error(`Extracted value must be a single number`);
+      }
+      const extractedValue = extractedValueArr[0];
       if (isNaN(extractedValue)) {
         throw new Error(`Extracted value is not a number: ${extractedValue}`);
       }
