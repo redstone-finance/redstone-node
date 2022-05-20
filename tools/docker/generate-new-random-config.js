@@ -51,6 +51,7 @@ async function generateNewRandomNodeConfig() {
       address: arweaveAddress,
       publicKey: arweavePublicKey,
       evmAddress: evmWallet.address,
+      ecdsaPublicKey: evmWallet.publicKey,
     },
   };
 }
