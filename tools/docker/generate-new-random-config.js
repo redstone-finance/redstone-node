@@ -33,10 +33,10 @@ async function generateNewRandomNodeConfig() {
   return {
     config: {
       arweaveKeysJWK: jwk,
-      minimumArBalance: 0.1,
+      minimumArBalance: 0,
       useManifestFromSmartContract: true,
       addEvmSignature: true,
-      enableStreamrBroadcaster: true,
+      enableStreamrBroadcaster: false,
       omitSourcesInArweaveTx: true,
       credentials: {
         ethereumPrivateKey: evmWallet.privateKey,
@@ -51,6 +51,7 @@ async function generateNewRandomNodeConfig() {
       address: arweaveAddress,
       publicKey: arweavePublicKey,
       evmAddress: evmWallet.address,
+      ecdsaPublicKey: evmWallet.publicKey,
     },
   };
 }

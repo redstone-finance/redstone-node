@@ -12,6 +12,7 @@ const SYMBOLS = [
   "FRAX",
   "YAK",
   "QI",
+  "USDC",
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
