@@ -1,12 +1,17 @@
-import fetchers from "../../src/fetchers/index"
+import fetchers from "../../src/fetchers/index";
 import { mockFetcherResponse } from "./_helpers";
-import { TwapFetcher, HistoricalPrice } from "../../src/fetchers/twap/TwapFetcher";
+import {
+  TwapFetcher,
+  HistoricalPrice,
+} from "../../src/fetchers/twap/TwapFetcher";
 
 const pathToExampleResponse = "../../src/fetchers/twap/example-response.json";
-const expectedTwapFetcherResult = [{
-  symbol: "BTC-TWAP-60",
-  value: 43292.29198643936,
-}];
+const expectedTwapFetcherResult = [
+  {
+    symbol: "BTC-TWAP-60",
+    value: 43292.29198643936,
+  },
+];
 const defaultPriceValues = {
   symbol: "",
   timestamp: 0,
@@ -87,11 +92,13 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap value for a single price", () => {
     // Given
-    const prices = [{
-      ...defaultPriceValues,
-      value: 4,
-      timestamp: 20,
-    }];
+    const prices = [
+      {
+        ...defaultPriceValues,
+        value: 4,
+        timestamp: 20,
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -102,15 +109,18 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap value for the same price at two given time points", () => {
     // Given
-    const prices = [{
-      ...defaultPriceValues,
-      value: 1,
-      timestamp: 0,
-    }, {
-      ...defaultPriceValues,
-      value: 1,
-      timestamp: 1,
-    }];
+    const prices = [
+      {
+        ...defaultPriceValues,
+        value: 1,
+        timestamp: 0,
+      },
+      {
+        ...defaultPriceValues,
+        value: 1,
+        timestamp: 1,
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -121,20 +131,23 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap value with 0 price", () => {
     // Given
-    const prices = [{
-      ...defaultPriceValues,
-      value: 0,
-      timestamp: 0,
-    }, {
-      ...defaultPriceValues,
-      value: 0,
-      timestamp: 1,
-    },
-    {
-      ...defaultPriceValues,
-      value: 1,
-      timestamp: 2,
-    }];
+    const prices = [
+      {
+        ...defaultPriceValues,
+        value: 0,
+        timestamp: 0,
+      },
+      {
+        ...defaultPriceValues,
+        value: 0,
+        timestamp: 1,
+      },
+      {
+        ...defaultPriceValues,
+        value: 1,
+        timestamp: 2,
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -190,15 +203,18 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap value for two prices at the same timestamp", () => {
     // Given
-    const prices = [{
-      ...defaultPriceValues,
-      value: 4,
-      timestamp: 20,
-    }, {
-      ...defaultPriceValues,
-      value: 4,
-      timestamp: 20,
-    }];
+    const prices = [
+      {
+        ...defaultPriceValues,
+        value: 4,
+        timestamp: 20,
+      },
+      {
+        ...defaultPriceValues,
+        value: 4,
+        timestamp: 20,
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -209,11 +225,13 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap ignoring corrupted values", () => {
     // Given
-    const prices = [{
+    const prices = [
+      {
         ...defaultPriceValues,
         value: 1,
         timestamp: 1,
-      }, {
+      },
+      {
         ...defaultPriceValues,
         value: 3,
         timestamp: 2,
@@ -222,7 +240,8 @@ describe("twap fetcher", () => {
         ...defaultPriceValues,
         value: NaN,
         timestamp: 3,
-      }];
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -233,11 +252,13 @@ describe("twap fetcher", () => {
 
   it("should properly calculate twap value for multiple prices at the same timestamp", () => {
     // Given
-    const prices = [{
+    const prices = [
+      {
         ...defaultPriceValues,
         value: 1,
         timestamp: 1,
-      }, {
+      },
+      {
         ...defaultPriceValues,
         value: 2,
         timestamp: 2,
@@ -246,7 +267,8 @@ describe("twap fetcher", () => {
         ...defaultPriceValues,
         value: 4,
         timestamp: 2,
-      }];
+      },
+    ];
 
     // When
     const twapValue = TwapFetcher.getTwapValue(prices);
@@ -265,6 +287,4 @@ describe("twap fetcher", () => {
     // Then
     expect(twapValue).toBe(undefined);
   });
-
-
 });
