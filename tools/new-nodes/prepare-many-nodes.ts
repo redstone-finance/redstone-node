@@ -112,7 +112,6 @@ async function registerNewNodeInOracleRegistry(
 ) {
   console.log(`Registering new node in oracle registry`);
   const oracleRegistryContractAddress = contractAddresses["oracle-registry"];
-  console.log({ oracleRegistryContractAddress }); // TODO: remove
   const contract = SmartWeaveNodeFactory.memCached(arweave, 1)
     .contract(oracleRegistryContractAddress)
     .connect(jwk);
