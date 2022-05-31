@@ -35,7 +35,13 @@ export class YfUnofficialFetcher extends BaseFetcher {
 
       let value: any = details.price.regularMarketPrice;
       if (isNaN(value)) {
-        value = value.raw;
+        if (!!value && value.raw) {
+          value = value.raw;
+        } else {
+          this.logger.warn(
+            `Empty regular market price: ${JSON.stringify(details.price)}`
+          );
+        }
       }
 
       pricesObj[symbol] = value;
@@ -43,5 +49,4 @@ export class YfUnofficialFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-
-};
+}
