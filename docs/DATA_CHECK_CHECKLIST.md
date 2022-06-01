@@ -2,6 +2,8 @@
 
 - Review charts and stats from monitoring service
 
+- Review memory and CPU utilisation on redstone nodes (in AWS)
+
 - Run main node locally (maybe clean incorrect sources and assets)
 
 - Run tests for each single source
