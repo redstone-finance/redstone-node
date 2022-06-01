@@ -36,7 +36,7 @@
     "arweave": "^1.10.23",
     "arweave-multihost": "^0.1.0",
     "axios": "^0.21.1",
-    "ccxt": "^1.82.22",
+    "ccxt": "^1.84.60",
     "coinbase-pro-node": "^4.0.0",
     "coingecko-api": "^1.0.10",
     "consola": "^2.15.3",
