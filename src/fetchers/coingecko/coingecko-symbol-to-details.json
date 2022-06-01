@@ -59956,5 +59956,11 @@
       "id": "zzz-finance-v2",
       "name": "zzz.finance v2"
     }
+  ],
+  "GLMR": [
+    {
+      "id": "moonbeam",
+      "name": "Moonbeam"
+    }
   ]
 }

@@ -2331,6 +2331,18 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "GLMR": {
+      "source": [
+        "binance",
+        "coingecko",
+        "ftx",
+        "huobipro",
+        "kucoin",
+        "lbank",
+        "okex5"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "LEO": {
       "source": [
         "bitfinex",
