@@ -1248,9 +1248,7 @@
         "liquid",
         "okex5",
         "poloniex",
-        "probit",
-        "sushiswap",
-        "uniswap"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -1489,7 +1487,6 @@
         "kucoin",
         "okex5",
         "poloniex",
-        "probit",
         "sushiswap",
         "uniswap"
       ],
@@ -1592,7 +1589,6 @@
         "ftx",
         "kraken",
         "okcoin",
-        "sushiswap",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -2824,7 +2820,6 @@
         "bitcoincom",
         "hitbtc",
         "probit",
-        "sushiswap",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -3519,7 +3514,6 @@
     },
     "SHERPA": {
       "source": [
-        "pangolin-wavax",
         "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
@@ -4229,8 +4223,7 @@
     "UST": {
       "source": [
         "coingecko",
-        "sushiswap",
-        "uniswap"
+        "sushiswap"
       ],
       "maxPriceDeviationPercent": 25
     },
