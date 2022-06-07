@@ -37,9 +37,10 @@ import { ethers } from "ethers";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-export const MANIFEST_REFRESH_INTERVAL = process.env.MANIFEST_REFRESH_INTERVAL 
-  ? Number(process.env.MANIFEST_REFRESH_INTERVAL) 
-  : 120 * 1000;
+const DEFAULT_MANIFEST_REFRESH_INTERVAL = 120 * 1000;
+export const MANIFEST_REFRESH_INTERVAL = process.env.MANIFEST_REFRESH_INTERVAL
+  ? Number(process.env.MANIFEST_REFRESH_INTERVAL)
+  : DEFAULT_MANIFEST_REFRESH_INTERVAL;
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
 
@@ -170,7 +171,7 @@ export default class NodeRunner {
           + `Active handles count: ${activeHandles.length}. `
           + `Memory usage: ${JSON.stringify(memoryUsage)}. `
         );
-        console.log({activeRequests});
+        console.log({ activeRequests });
       };
 
       printDiagnosticInfo();
@@ -207,7 +208,7 @@ export default class NodeRunner {
   private async warnIfARBalanceLow() {
     const balanceCheckingTrackingId = trackStart("balance-checking");
     try {
-      const {balance, isBalanceLow} = await this.bundlrService.checkBalance();
+      const { balance, isBalanceLow } = await this.bundlrService.checkBalance();
       if (isBalanceLow) {
         logger.warn(`AR balance is quite low on bundlr wallet: ${balance}`);
       }
