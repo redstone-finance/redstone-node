@@ -18,11 +18,7 @@ export interface SourceTimeout {
 }
 
 export interface Credentials {
-  infuraProjectId?: string;
   ethereumPrivateKey: string;
-  barchartApiKey?: string;
-  barchartUsername?: string;
-  barchartPassword?: string;
   twelveDataRapidApiKey?: string;
 }
 

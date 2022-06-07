@@ -1,14 +1,14 @@
-import {NodeConfig} from "../../src/types";
+import { NodeConfig } from "../../src/types";
 import NodeRunner from "../../src/NodeRunner";
-import {JWKInterface} from "arweave/node/lib/wallet";
-import {mocked} from "ts-jest/utils";
+import { JWKInterface } from "arweave/node/lib/wallet";
+import { mocked } from "ts-jest/utils";
 import ArweaveProxy from "../../src/arweave/ArweaveProxy";
 import fetchers from "../../src/fetchers";
 import mode from "../../mode";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
-import {any} from "jest-mock-extended";
-import {timeout} from "../../src/utils/objects";
+import { any } from "jest-mock-extended";
+import { timeout } from "../../src/utils/objects";
 
 
 /****** MOCKS START ******/
@@ -71,7 +71,7 @@ jest.mock('../../src/utils/objects', () => ({
 }));
 
 jest.mock("uuid",
-  () => ({v4: () => "00000000-0000-0000-0000-000000000000"}));
+  () => ({ v4: () => "00000000-0000-0000-0000-000000000000" }));
 /****** MOCKS END ******/
 
 
@@ -83,7 +83,6 @@ describe("NodeRunner", () => {
 
   const nodeConfig: NodeConfig = {
     arweaveKeysFile: "", credentials: {
-      infuraProjectId: "ipid",
       ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
     },
     addEvmSignature: true,
@@ -104,12 +103,12 @@ describe("NodeRunner", () => {
 
     fetchers["coingecko"] = {
       fetchAll: jest.fn().mockResolvedValue([
-        {symbol: "BTC", value: 444}
+        { symbol: "BTC", value: 444 }
       ])
     };
     fetchers["uniswap"] = {
       fetchAll: jest.fn().mockResolvedValue([
-        {symbol: "BTC", value: 445}
+        { symbol: "BTC", value: 445 }
       ])
     };
 
@@ -205,7 +204,6 @@ describe("NodeRunner", () => {
       "arweaveKeysFile": "",
       "credentials": {
         "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111",
-        "infuraProjectId": "ipid",
         "covalentApiKey": "ckey"
       },
       "manifestFile": ""
@@ -255,7 +253,7 @@ describe("NodeRunner", () => {
     await sut.run();
     expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
       "id": "00000000-0000-0000-0000-000000000000",
-      "source": {"coingecko": 444, "uniswap": 445},
+      "source": { "coingecko": 444, "uniswap": 445 },
       "symbol": "BTC",
       "timestamp": 111111111,
       "value": 444.5,
@@ -270,7 +268,7 @@ describe("NodeRunner", () => {
           "id": "00000000-0000-0000-0000-000000000000",
           "permawebTx": "mockBundlrTransactionId",
           "provider": "mockArAddress",
-          "source": {"coingecko": 444, "uniswap": 445},
+          "source": { "coingecko": 444, "uniswap": 445 },
           "symbol": "BTC",
           "timestamp": 111111111,
           "value": 444.5,
@@ -285,7 +283,7 @@ describe("NodeRunner", () => {
         liteSignature: "mock_evm_signed_lite",
         signerAddress: "mock_evm_signer_address",
         provider: "mockArAddress",
-        prices: [{symbol: "BTC", value: 444.5}]
+        prices: [{ symbol: "BTC", value: 444.5 }]
       }
     );
     expect(mockBundlrProxy.uploadBundlrTransaction).not.toHaveBeenCalled();

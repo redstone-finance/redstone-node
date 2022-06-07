@@ -1,7 +1,7 @@
 # Docker container built using this Dockerfile
 # can be published to the public docker registry
 # But before running the container it must be configured to provide
-# the node config through REDSTONE_NODE_CONFIG environment variable
+# the node config through environment variables
 
 FROM node:16
 
@@ -25,10 +25,20 @@ ENV ENABLE_JSON_LOGS=true
 ENV PRINT_DIAGNOSTIC_INFO=true
 ENV PERFORMANCE_TRACKING_LABEL_PREFIX=public
 ENV MANIFEST_REFRESH_INTERVAL=120000
-ENV REDSTONE_NODE_CONFIG=
+ENV ARWEAVE_KEYS_FILE_PATH=
+ENV ARWEAVE_KEYS_JWK=
+ENV USE_MANIFEST_FROM_SMART_CONTRACT= 
+ENV MANIFEST_FILE_PATH=
+ENV MINIMUM_AR_BALANCE=0.1
+ENV ADD_EVM_SIGNATURE=true
+ENV ETHEREUM_PRIVATE_KEY=
+ENV HTTP_BROADCASTER_URLS=
+ENV ENABLE_STREAMR_BROADCASTER=
+ENV DISABLE_SINGLE_PRICE_BROADCASTING_IN_STREAMR=
+ENV OMIT_SOURCES_ARWEAVE_TX=
 
 # Exposing 8080 port for health checks
 EXPOSE 8080
 
 # Running redstone node
-CMD yarn start:prod --config-env REDSTONE_NODE_CONFIG
+CMD yarn start:prod

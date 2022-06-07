@@ -397,21 +397,28 @@ You can find a list of available sources along with its stability details in the
 
 <img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/sources-screenshot.png?raw=true" width="800" />
 
-##### 3. Prepare config file
+##### 3. Prepare env variables
 
-Config file is a **private** file created by a provider. It contains the following details required by the redstone-node:
+| Param                                        |                      Optionality                      | Description                                                                                        |
+| -------------------------------------------- | :---------------------------------------------------: | -------------------------------------------------------------------------------------------------- |
+| ENABLE_JSON_LOGS                             |                       optional                        | if set to true, logging in JSON format will be enabled                                             |
+| PRINT_DIAGNOSTIC_INFO                        |                       optional                        | if set to true, additional info with diagnostics information will be logged                        |
+| PERFORMANCE_TRACKING_LABEL_PREFIX            |                       optional                        | if set to true, human-friendly name that will be appended to the performance tracking labels       |
+| ARWEAVE_KEYS_FILE_PATH                       |       required if ARWEAVE_KEYS_JWK not provided       | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
+| ARWEAVE_KEYS_JWK                             |    required if ARWEAVE_KEYS_FILE_PATH not provided    | JWK of arweave wallet (helpful with Docker)                                                        |
+| MANIFEST_FILE_PATH                           | required if USE_MANIFEST_FROM_SMART_CONTRACT not true | path to the manifest file                                                                          |
+| USE_MANIFEST_FROM_SMART_CONTRACT             |      required if MANIFEST_FILE_PATH not provided      | if set to true, manifest will be loaded from Arweave Smart Contracts                               |
+| MANIFEST_REFRESH_INTERVAL                    |                       optional                        | if manifest is loaded from smart contracts it defines how often node will check for new manifest   |
+| MINIMUM_AR_BALANCE                           |                       required                        | minimum AR balance required to run the node                                                        |
+| ADD_EVM_SIGNATURE                            |                       optional                        | if set to true, EVM signature will be added to each price for each asset                           |
+| ETHEREUM_PRIVATE_KEY                         |                       required                        | Ethereum private key that will be used for price data signing                                      |
+| ETHEREUM_PRIVATE_KEY                         |                       required                        | Ethereum private key that will be used for price data signing                                      |
+| HTTP_BROADCASTER_URLS                        |                       optional                        | array of urls for broadcasters to which prices should be sent                                      |
+| ENABLE_STREAMR_BROADCASTER                   |                       required                        | if set to true, single prices and prices packages will be sent to Streamr                          |
+| DISABLE_SINGLE_PRICE_BROADCASTING_IN_STREAMR |                       optional                        | if set to true, single prices will not be sent to Streamr                                          |
+| OMIT_SOURCES_ARWEAVE_TX                      |                       optional                        | if set to true, single source will not be attached to bundlr transaction                           |
 
-| Param                          | Optionality | Description                                                                                        |
-| ------------------------------ | :---------: | -------------------------------------------------------------------------------------------------- |
-| arweaveKeysFile                |  required   | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
-| minimumArBalance               |  required   | minimum AR balance required to run the node                                                        |
-| useManifestFromSmartContract   |  optional   | if set to true , manifest will be loaded from Arweave Smart Contracts                              |
-| manifestFile                   |  optional   | path to the manifest file                                                                          |
-| addEvmSignature                |  optional   | if set to true, EVM signature will be added to each price for each asset                           |
-| credentials                    |  required   | object with credentials for APIs and private keys                                                  |
-| credentials.ethereumPrivateKey |  required   | Ethereum private key that will be used for price data signing                                      |
-
-You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
+Check out the [.env.example](../.env.example)
 
 #### Run
 
@@ -421,20 +428,20 @@ Please note, the instruction below is for Unix operating systems (like Linux or 
 If you use Windows, we recommend running the redstone node in a Docker container.
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG
+yarn start
 ```
 
 We recommend redirecting output to some log file(s), for example:
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
+yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 You can also enable JSON mode for logs to simplify the log analysing later.
 To do this append `ENABLE_JSON_LOGS=true` to the node running command:
 
 ```bash
-ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
+ENABLE_JSON_LOGS=true yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ##### Run in docker
