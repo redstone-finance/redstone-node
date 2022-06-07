@@ -144,11 +144,6 @@
     "url": "https://www.coinex.com",
     "color": "#68d9b6"
   },
-  "crex24": {
-    "logoURI": "https://cdn.redstone.finance/sources/crex24.svg",
-    "url": "https://crex24.com",
-    "color": "#4a9b9a"
-  },
   "currencycom": {
     "logoURI": "https://cdn.redstone.finance/sources/currencycom.png",
     "url": "https://www.currency.com",
