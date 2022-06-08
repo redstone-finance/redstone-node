@@ -33,6 +33,7 @@ import { BundlrService } from "./arweave/BundlrService";
 import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
 import git from "git-last-commit";
 import { ethers } from "ethers";
+import { fetchIp } from "./utils/ip-fetcher";
 
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
@@ -123,7 +124,7 @@ export default class NodeRunner {
   }
 
   async run(): Promise<void> {
-    this.printInitialNodeDetails();
+    await this.printInitialNodeDetails();
     this.maybeRunDiagnosticInfoPrinting();
 
     await this.warnIfARBalanceLow();
@@ -136,12 +137,14 @@ export default class NodeRunner {
     }
   }
 
-  private printInitialNodeDetails() {
+  private async printInitialNodeDetails() {
     const evmPrivateKey = this.nodeConfig.credentials.ethereumPrivateKey;
     const evmAddress = new ethers.Wallet(evmPrivateKey).address;
+    const ipAddress = await fetchIp();
     logger.info(`Node evm address: ${evmAddress}`);
     logger.info(`Node arweave address: ${this.providerAddress}`);
     logger.info(`Version from package.json: ${this.version}`);
+    logger.info(`Node's IP address: ${ipAddress}`);
     logger.info(
       `Initial node manifest:
       ${JSON.stringify(this.currentManifest)}
