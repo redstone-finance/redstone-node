@@ -12,11 +12,13 @@ import { VertoFetcher } from "./verto/VertoFetcher";
 import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
 import twapFetchers from "./twap/all-twap-fetchers";
+import { TwelveDataFetcher } from "./twelve-data/TwelveDataFetcher";
 
 export default {
   "yf-unofficial": new YfUnofficialFetcher(),
   "custom-urls": new CustomUrlsFetcher(),
   "trader-joe": new TraderJoeFetcher(),
+  "twelve-data": new TwelveDataFetcher(),
   coingecko: new CoingeckoFetcher(),
   sushiswap: new SushiswapFetcher(),
   uniswap: new UniswapFetcher(),

@@ -1,0 +1,16 @@
+{
+  "interval": 10000,
+  "priceAggregator": "median",
+  "defaultSource": [
+    "twelve-data"
+  ],
+  "sourceTimeout": 8000,
+  "maxPriceDeviationPercent": 25,
+  "tokens": {
+    "CHF": {},
+    "GBP": {},
+    "EUR": {},
+    "JPY": {},
+    "AUD": {}
+  }
+}

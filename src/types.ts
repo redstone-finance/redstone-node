@@ -23,6 +23,7 @@ export interface Credentials {
   barchartApiKey?: string;
   barchartUsername?: string;
   barchartPassword?: string;
+  twelveDataRapidApiKey?: string;
 }
 
 export interface TokenConfig {
