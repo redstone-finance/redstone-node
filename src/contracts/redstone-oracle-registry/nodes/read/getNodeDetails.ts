@@ -4,11 +4,8 @@ import {
   RedstoneOraclesInput,
   GetNodeDetailsInputData,
   GetNodesDetailsResult,
-  ContractErrorType,
   NodeWithAddress,
 } from "../../types";
-
-declare const ContractError: ContractErrorType;
 
 export const getNodeDetails = (
   state: RedstoneOraclesState,

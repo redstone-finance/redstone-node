@@ -101,6 +101,8 @@ async function registerNewNode(
       evmAddress,
       url: DEFAULT_NODE_URL,
       ipAddress: DEFAULT_IP_ADDRESS,
+      ecdsaPublicKey: evmPublicKey,
+      arweavePublicKey: arweavePublicKey
     },
     jwk
   );
