@@ -1,4 +1,4 @@
-import NodeRunner from "../../src/NodeRunner";
+import * as NodeRunnerModule from "../../src/NodeRunner";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import { mocked } from "ts-jest/utils";
 import ArweaveProxy from "../../src/arweave/ArweaveProxy";
@@ -7,7 +7,6 @@ import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import { any } from "jest-mock-extended";
 import { timeout } from "../../src/utils/objects";
-import { MOCK_NODE_CONFIG } from "../helpers";
 
 /****** MOCKS START ******/
 const mockArProxy = {
@@ -62,8 +61,12 @@ jest.mock("../../src/utils/objects", () => ({
   readJSON: () => null,
 }));
 
-jest.mock("uuid", () => ({ v4: () => "00000000-0000-0000-0000-000000000000" }));
+jest.mock("uuid",
+  () => ({ v4: () => "00000000-0000-0000-0000-000000000000" }));
 /****** MOCKS END ******/
+
+
+const NodeRunner = NodeRunnerModule.default;
 
 describe("NodeRunner", () => {
   const jwk: JWKInterface = {
@@ -84,10 +87,14 @@ describe("NodeRunner", () => {
     jest.spyOn(global.Date, "now").mockImplementation(() => 111111111);
 
     fetchers["coingecko"] = {
-      fetchAll: jest.fn().mockResolvedValue([{ symbol: "BTC", value: 444 }]),
+      fetchAll: jest.fn().mockResolvedValue([
+        { symbol: "BTC", value: 444 }
+      ])
     };
     fetchers["uniswap"] = {
-      fetchAll: jest.fn().mockResolvedValue([{ symbol: "BTC", value: 445 }]),
+      fetchAll: jest.fn().mockResolvedValue([
+        { symbol: "BTC", value: 445 }
+      ])
     };
 
     manifest = {
@@ -220,7 +227,33 @@ describe("NodeRunner", () => {
     });
 
     await sut.run();
-    expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([
+    expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalledWith([{
+      "id": "00000000-0000-0000-0000-000000000000",
+      "source": { "coingecko": 444, "uniswap": 445 },
+      "symbol": "BTC",
+      "timestamp": 111111111,
+      "value": 444.5,
+      "version": "0.4"
+    }]);
+
+    expect(axios.post).toHaveBeenCalledWith(
+      "http://broadcast.test/prices",
+      [
+        {
+          "liteEvmSignature": "mock_evm_signed_lite",
+          "id": "00000000-0000-0000-0000-000000000000",
+          "permawebTx": "mockBundlrTransactionId",
+          "provider": "mockArAddress",
+          "source": { "coingecko": 444, "uniswap": 445 },
+          "symbol": "BTC",
+          "timestamp": 111111111,
+          "value": 444.5,
+          "version": "0.4"
+        }
+      ]
+    );
+    expect(axios.post).toHaveBeenCalledWith(
+      "http://broadcast.test/packages",
       {
         id: "00000000-0000-0000-0000-000000000000",
         source: { coingecko: 444, uniswap: 445 },
@@ -237,20 +270,9 @@ describe("NodeRunner", () => {
         id: "00000000-0000-0000-0000-000000000000",
         permawebTx: "mockBundlrTransactionId",
         provider: "mockArAddress",
-        source: { coingecko: 444, uniswap: 445 },
-        symbol: "BTC",
-        timestamp: 111111111,
-        value: 444.5,
-        version: "0.4",
-      },
-    ]);
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:9000/packages", {
-      timestamp: 111111111,
-      liteSignature: "mock_evm_signed_lite",
-      signerAddress: "mock_evm_signer_address",
-      provider: "mockArAddress",
-      prices: [{ symbol: "BTC", value: 444.5 }],
-    });
+        prices: [{ symbol: "BTC", value: 444.5 }]
+      }
+    );
     expect(mockBundlrProxy.uploadBundlrTransaction).not.toHaveBeenCalled();
     // TODO: cannot spy on setInterval after upgrade to jest 27.
     // expect(setInterval).toHaveBeenCalledWith(any(), manifest.interval);
@@ -358,5 +380,27 @@ describe("NodeRunner", () => {
       arServiceSpy.mockClear();
       jest.useFakeTimers();
     });
+
+    it("should continue working when update manifest fails", async () => {
+      // given
+      (NodeRunnerModule.MANIFEST_REFRESH_INTERVAL as number) = 0;
+      let arServiceSpy = jest.spyOn(ArweaveService.prototype, 'getCurrentManifest')
+        .mockResolvedValueOnce(manifest)
+        .mockRejectedValue("timeout");
+
+      const sut = await NodeRunner.create(
+        jwk,
+        nodeConfigManifestFromAr
+      );
+
+      await sut.run();
+
+      expect(sut).not.toBeNull();
+      expect(ArweaveService.prototype.getCurrentManifest).toHaveBeenCalledTimes(2);
+      expect(fetchers.uniswap.fetchAll).toHaveBeenCalled();
+      expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalled();
+      arServiceSpy.mockClear();
+    });
+
   });
 });

@@ -379,28 +379,27 @@ export default class NodeRunner {
       timeDiff,
       manifestRefreshInterval: this.nodeConfig.manifestRefreshInterval,
     });
-
     if (timeDiff >= this.nodeConfig.manifestRefreshInterval) {
       this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
-      try {
-        // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
-        // block standard node processing for so long (especially for nodes with low "interval" value)
-        Promise.race([
-          this.arweaveService.getCurrentManifest(),
-          timeout(MANIFEST_LOAD_TIMEOUT_MS),
-        ]).then((value) => {
+      // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
+      // block standard node processing for so long (especially for nodes with low "interval" value)
+      Promise.race([
+        this.arweaveService.getCurrentManifest(),
+        timeout(MANIFEST_LOAD_TIMEOUT_MS),
+      ])
+        .then((value) => {
           if (value === "timeout") {
             logger.warn("Manifest load promise timeout");
           } else {
             this.handleLoadedManifest(value);
           }
           trackEnd(manifestFetchTrackingId);
+        })
+        .catch(() => {
+          logger.info("Error while calling manifest load function.");
         });
-      } catch (e: any) {
-        logger.info("Error while calling manifest load function.");
-      }
     } else {
       logger.info("Skipping manifest download in this iteration run.");
     }
