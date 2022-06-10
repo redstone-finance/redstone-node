@@ -7,16 +7,17 @@ As you already know, we at RedStone build the new generation of oracles. The mai
 
 ### Scalability challenge
 Note, that current RedStone nodes are independent, which means that they don't communicate with each other.
-So, if you want to require at least 5 independetnt data signers in your smart contract, then each user transactions should contain at least 5 signed data packages. Unfortunately, gas calculation algorithm in EVM works makes this approach too expensive, because gas consumption grows much faster than linearly comparing to the number of data packages.
+So, if you want to require at least X independetnt data signers in your smart contract, then each user transaction must contain at least X signed data packages. Unfortunately, gas calculation algorithm in EVM makes this approach too expensive, because gas consumption grows much faster than linearly relatively to the number of data packages.
 
 ### Proposed solution - the oracle network
-We want to resolve the scalability issue by creating a real oracle network with the nodes that communicate with each other and repeatedly (in each epoch) caclulate the consolidated value. After calculating the consolidated value, each node should independently sign it and broadcast to the decentralized cache layer. Thanks to this, users will be able to send transactions (that require X unique signers of oracle data) attaching only one data package and X unique signatures. It will decrease the gas costs and make the solution much more scalable.
+We want to resolve this scalability issue by creating an network with the nodes that communicate with each other, and repeatedly (in each epoch) propose values and caclulate the consolidated value (median value of all proposed values). After calculating the consolidated value, each node should independently sign it and broadcast to the decentralized cache layer. Thanks to this, users will be able to send transactions (that require X unique signers of oracle data) attaching only one data package and X unique signatures. It will decrease the gas costs and make the solution much more scalable.
 
 ## Specification of the oracle network
 
 ### Main assumptions
 - Each node has its private key
 - Each node knows public keys and ip addresses of all other nodes in the network
+- Each node should propose its value for each epoch
 - The oracle network should calculate the consolidated value for each epoch
 - Each epoch time is 10 seconds (epoch start times can be described using cron schedule expressions as `"*/10 * * * * *"`)
 - Consolidated value for a given epoch is the median value of all valid proposed values for the given epoch from all nodes in the network. E.g. if in the 42th epoch, node 1 proposed value 99, node 2 - value 101, and node 3 - value 100, then the aggregated value for the 42th epoch is 100
@@ -27,7 +28,9 @@ We want to resolve the scalability issue by creating a real oracle network with 
 - The network should be resistant to DDoS attacks
 - The oracle network should be stable (should work correctly even if some nodes stop working)
 - The oracle network should be secure (should work correctly even if <50% nodes act as adversaries)
-- It should be possible to prove that some node misbehaved at some time (stopped working or started malicious activities). This prove will be used for the reputation calculation
+- It should be possible to prove that some node misbehaved at some time (stopped working or started malicious activities). These proofs will be later used for the nodes reputation calculation and potential punishments
+- Nodes should not have high hardware requirements
+- The network should not be a blockchain (if possible) :)
 
 ## Task description
 
@@ -50,11 +53,11 @@ You can contact me:
 By the end of the second step you should be able to answer the following questions:
 - What protocols should be used for the communication between nodes?
 - How should the networking algorithm work?
-- How to satisfy all the provided requirements for the network?
+- How to satisfy all the given requirement?
 
 ### 3. Implement a Proof of Concept
 In the final step of the task you should implement an extremely simplified proof of concept. Majority of things (cryptography, proposed value fetching, data broadcasting, nodes details fetching) can be mocked in the proof of concept, but the main logic of the network operation should be implemented. You can use any technology you want for the PoC, but we'd prefer Node.js or Rust.
 
-There will be bonus points for implementing tests for the proof of concept :)
+There are bonus points for implementing tests for the proof of concept :)
 
 Good luck!
