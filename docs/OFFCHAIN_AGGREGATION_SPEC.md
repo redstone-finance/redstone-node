@@ -10,7 +10,7 @@ Note, that current RedStone nodes are independent, which means that they don't c
 So, if you want to require at least X independetnt data signers in your smart contract, then each user transaction must contain at least X signed data packages. Unfortunately, gas calculation algorithm in EVM makes this approach too expensive, because gas consumption grows much faster than linearly relatively to the number of data packages.
 
 ### Proposed solution - the oracle network
-We want to resolve this scalability issue by creating an network with the nodes that communicate with each other, and repeatedly (in each epoch) propose values and caclulate the consolidated value (median value of all proposed values). After calculating the consolidated value, each node should independently sign it and broadcast to the decentralized cache layer. Thanks to this, users will be able to send transactions (that require X unique signers of oracle data) attaching only one data package and X unique signatures. It will decrease the gas costs and make the solution much more scalable.
+We want to resolve this scalability issue by creating a network with the nodes that communicate with each other. The nodes should repeatedly (in each epoch) propose values and caclulate the consolidated value (median value of all proposed values). The network should produce the consolidated value for each epoch along with the cryptograpic proof that the majority of nodes agree with it. Thanks to this, users will be able to send transactions (that require X unique signers of oracle data) attaching only one data package and X unique signatures. It will decrease the gas costs and make the solution much more scalable.
 
 ## Specification of the oracle network
 
@@ -21,7 +21,7 @@ We want to resolve this scalability issue by creating an network with the nodes 
 - The oracle network should calculate the consolidated value for each epoch
 - Each epoch time is 10 seconds (epoch start times can be described using cron schedule expressions as `"*/10 * * * * *"`)
 - Consolidated value for a given epoch is the median value of all valid proposed values for the given epoch from all nodes in the network. E.g. if in the 42th epoch, node 1 proposed value 99, node 2 - value 101, and node 3 - value 100, then the aggregated value for the 42th epoch is 100
-- As the end goal, the network should produce the consolidated median value and the cryptographic proof that the majority of nodes agree with it
+- Before the end of each epoch, the network should produce the consolidated median value and the cryptographic proof that the majority of nodes agree with it
 
 ### Requirements
 - Communication between nodes should be secure
@@ -53,7 +53,7 @@ You can contact me:
 By the end of the second step you should be able to answer the following questions:
 - What protocols should be used for the communication between nodes?
 - How should the networking algorithm work?
-- How to satisfy all the given requirement?
+- How to satisfy all the given requirements?
 
 ### 3. Implement a Proof of Concept
 In the final step of the task you should implement an extremely simplified proof of concept. Majority of things (cryptography, proposed value fetching, data broadcasting, nodes details fetching) can be mocked in the proof of concept, but the main logic of the network operation should be implemented. You can use any technology you want for the PoC, but we'd prefer Node.js or Rust.
