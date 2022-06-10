@@ -21,7 +21,7 @@ We want to resolve this scalability issue by creating an network with the nodes 
 - The oracle network should calculate the consolidated value for each epoch
 - Each epoch time is 10 seconds (epoch start times can be described using cron schedule expressions as `"*/10 * * * * *"`)
 - Consolidated value for a given epoch is the median value of all valid proposed values for the given epoch from all nodes in the network. E.g. if in the 42th epoch, node 1 proposed value 99, node 2 - value 101, and node 3 - value 100, then the aggregated value for the 42th epoch is 100
-- After the consolidated value calculation, each node should know it, then each node should sign it using its private key and broadcast it to the Decentralized Cache layer
+- As the end goal, the network should produce the consolidated median value and the cryptographic proof that the majority of nodes agree with it
 
 ### Requirements
 - Communication between nodes should be secure
