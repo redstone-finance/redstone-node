@@ -3,7 +3,7 @@
 ## Intro
 
 ### RedStone oracles
-As you already know, we at RedStone build the new generation of oracles. The main difference between RedStone and other oracles is based on the data delivery model. Instead of repeatedly pushing data to blockchains, RedStone nodes (data providers) sign data using their private keys and broadcast them to the decentralized cache layer. Then, any user, which wants to send a contract interation that relies on RedStone data, needs to pull data from the decentralized cache layer and attach it to their blockchain transaction. You can find more info here: https://github.com/redstone-finance/redstone-evm-connector/blob/master/README.md
+As you already know, we at RedStone build the new generation of oracles. The main difference between RedStone and other oracles is based on the data delivery model. Instead of repeatedly pushing data to blockchains, RedStone nodes (data providers) sign data using their private keys and broadcast the signed data packages to the decentralized cache layer (e.g. [streamr network](https://streamr.network/)). Then, any user, which wants to send a contract interation that relies on RedStone data, needs to pull data from the decentralized cache layer and attach it to their blockchain transaction. A contract can verify the data integrity using cryptographic signatures and the timestamp. You can find much more info here: https://github.com/redstone-finance/redstone-evm-connector/blob/master/README.md
 
 ### Scalability challenge
 Note, that current RedStone nodes are independent, which means that they don't communicate with each other.
