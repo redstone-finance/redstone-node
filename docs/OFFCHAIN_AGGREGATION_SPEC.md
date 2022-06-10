@@ -1,4 +1,4 @@
-# Offchain aggregation task specification
+# Offchain aggregation specification
 
 ## Intro
 
@@ -7,31 +7,27 @@ As you already know, we at RedStone build the new generation of oracles. The mai
 
 ### Scalability challenge
 Note, that current RedStone nodes are independent, which means that they don't communicate with each other.
-
-- TODO: describe more on-chain aggregation
-- TODO: describe problems with rapidly growing gas costs
+So, if you want to require at least 5 independetnt data signers in your smart contract, then each user transactions should contain at least 5 signed data packages. Unfortunately, gas calculation algorithm in EVM works makes this approach too expensive, because gas consumption grows much faster than linearly comparing to the number of data packages.
 
 ### Proposed solution - the oracle network
-
-- TODO: Nodes can communicate and aggregate data
-
+We want to resolve the scalability issue by creating a real oracle network with the nodes that communicate with each other and repeatedly (in each epoch) caclulate the consolidated value. After calculating the consolidated value, each node should independently sign it and broadcast to the decentralized cache layer. Thanks to this, users will be able to send transactions (that require X unique signers of oracle data) attaching only one data package and X unique signatures. It will decrease the gas costs and make the solution much more scalable.
 
 ## Specification of the oracle network
 
 ### Main assumptions
 - Each node has its private key
 - Each node knows public keys and ip addresses of all other nodes in the network
-- We'll ensure secure communication between nodes (e.g. by using handshake mechanism similar to the one used in TLS protocol)
 - The oracle network should calculate the consolidated value for each epoch
-- Each epoch time is 10 seconds (epoch start times can be described using cron schedule expressions as "*/10 * * * * *")
-- Consolidated value for a given epoch is the median value of all valid proposed values for the given epoch from all nodes in the network. E.g. if in the 42th epoch, node 1 proposed value 99, node 2 - value 101, and node 3 - value 100. Then the aggregated value for the 42th epoch is 100
-- After the consolidated value calculation, each node should sign it using its private key and broadcast to the Decentralized Cache layer
+- Each epoch time is 10 seconds (epoch start times can be described using cron schedule expressions as `"*/10 * * * * *"`)
+- Consolidated value for a given epoch is the median value of all valid proposed values for the given epoch from all nodes in the network. E.g. if in the 42th epoch, node 1 proposed value 99, node 2 - value 101, and node 3 - value 100, then the aggregated value for the 42th epoch is 100
+- After the consolidated value calculation, each node should know it, then each node should sign it using its private key and broadcast it to the Decentralized Cache layer
 
 ### Requirements
+- Communication between nodes should be secure
+- The network should be resistant to DDoS attacks
 - The oracle network should be stable (should work correctly even if some nodes stop working)
 - The oracle network should be secure (should work correctly even if <50% nodes act as adversaries)
 - It should be possible to prove that some node misbehaved at some time (stopped working or started malicious activities). This prove will be used for the reputation calculation
-
 
 ## Task description
 
@@ -40,24 +36,25 @@ Our main goal with this task is to simulate the real work, which means that afte
 The task can be splitted in the following steps.
 
 ### 1. Research
-You are able to do any research and analyze similar projects or already existing solutions.
-- TODO: Analyze existing similar solutions
-- TODO: Bonus points for finding new requirements
-- TODO: Why: because in the real work, you are open to use any public information and research
+During the real work, you are open to use any public information, so now you can also do any research and analyze similar projects or already existing solutions. There are bonus points for finding new requirements, that are missed in your opinion :)
 
 ### 2. Finalize the specification (discuss it with us)
 In the next step you should finalize the specification and describe the network algorithm in details. 
-- TODO: let's do it "together"
-- TODO: let's do with iterations model
-- TODO: let's try to challenge and find potential weaknesses
 
-You can contact us
+Ideally, if during this step we can communicate and will go through few iterations until finding the best solution.
+
+You can contact me:
 - On discord: https://redstone.finance/discord (the best and the most responsive way)
 - Or via email: alex@redstone.finance
 
-### 3. Implement a Proof of Concept
-In the final step of the task you should implement an extremely simplified proof of concept. Majority of things (cryptography, proposed value fetching) can be mocked in the proof of concept, but the main logic of the network operation should be implemented. You can use any technology you want for the PoC, but we'd prefer Node.js or Rust.
+By the end of the second step you should be able to answer the following questions:
+- What protocols should be used for the communication between nodes?
+- How should the networking algorithm work?
+- How to satisfy all the provided requirements for the network?
 
-There are bonus points for implementing tests for the proof of concept :)
+### 3. Implement a Proof of Concept
+In the final step of the task you should implement an extremely simplified proof of concept. Majority of things (cryptography, proposed value fetching, data broadcasting, nodes details fetching) can be mocked in the proof of concept, but the main logic of the network operation should be implemented. You can use any technology you want for the PoC, but we'd prefer Node.js or Rust.
+
+There will be bonus points for implementing tests for the proof of concept :)
 
 Good luck!
