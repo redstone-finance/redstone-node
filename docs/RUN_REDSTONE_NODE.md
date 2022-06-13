@@ -49,13 +49,6 @@ We recommend redirecting output to some log file(s), for example:
 yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
-You can also enable JSON mode for logs to simplify the log analysing later.
-To do this append `ENABLE_JSON_LOGS=true` to the node running command:
-
-```bash
-ENABLE_JSON_LOGS=true yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
-```
-
 ### Run in docker
 
 You can run a local redstone-node in docker. Instead of config file you should use REDSTONE_NODE_CONFIG environment variable. The value should be stringified json and the only difference comparing to [config json file](./PREPARE_CONFIG.md) `arweaveKeysJWK` is required instead of `arweaveKeysFile` [read this guide](./PREPARE_CONFIG_VARIABLE.md)

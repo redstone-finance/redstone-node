@@ -1,7 +1,7 @@
 import { Consola } from "consola"
 import NodeRunner from "./src/NodeRunner";
-import { getConfigFromEnv } from "./src/config/getConfigFromEnv";
-import { getArweaveWallet } from "./src/config/getArweaveWallet";
+import { getConfigFromEnv } from "./src/config/get-config-from-env";
+import { getArweaveWallet } from "./src/config/get-arweave-wallet";
 
 const logger = require("./src/utils/logger")("index") as Consola;
 

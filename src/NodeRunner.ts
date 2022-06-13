@@ -38,10 +38,6 @@ import { fetchIp } from "./utils/ip-fetcher";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-const DEFAULT_MANIFEST_REFRESH_INTERVAL = 120 * 1000;
-export const MANIFEST_REFRESH_INTERVAL = process.env.MANIFEST_REFRESH_INTERVAL
-  ? Number(process.env.MANIFEST_REFRESH_INTERVAL)
-  : DEFAULT_MANIFEST_REFRESH_INTERVAL;
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
 
@@ -164,7 +160,7 @@ export default class NodeRunner {
   }
 
   private maybeRunDiagnosticInfoPrinting() {
-    if (process.env.PRINT_DIAGNOSTIC_INFO) {
+    if (this.nodeConfig.printDiagnosticInfo) {
       const printDiagnosticInfo = () => {
         const memoryUsage = process.memoryUsage();
         const activeRequests = (process as any)._getActiveRequests();
@@ -369,10 +365,10 @@ export default class NodeRunner {
     const timeDiff = now - this.lastManifestLoadTimestamp!;
     logger.info("Checking time since last manifest load", {
       timeDiff,
-      "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL
+      "manifestRefreshInterval": this.nodeConfig.manifestRefreshInterval
     })
 
-    if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
+    if (timeDiff >= this.nodeConfig.manifestRefreshInterval) {
       this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
       const manifestFetchTrackingId = trackStart("Fetching manifest.");

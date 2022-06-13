@@ -119,15 +119,19 @@ export interface ArweaveTransactionTags {
 }
 
 export interface NodeConfig {
+  enableJsonLogs: boolean;
+  printDiagnosticInfo: boolean;
+  performanceTrackingLabelPrefix: string;
+  manifestRefreshInterval: number;
   arweaveKeysFile?: string;
-  arweaveKeysJWK?: JWKInterface; // it must be specified when we pass config through an env variable
-  useManifestFromSmartContract?: boolean;
-  addEvmSignature?: boolean;
+  arweaveKeysJWK?: JWKInterface;
+  useManifestFromSmartContract: boolean;
+  addEvmSignature: boolean;
   manifestFile: string;
   minimumArBalance: number;
   credentials: Credentials;
-  httpBroadcasterURLs?: string[];
+  httpBroadcasterURLs: string[];
   enableStreamrBroadcaster: boolean;
-  disableSinglePricesBroadcastingInStreamr?: boolean;
-  omitSourcesInArweaveTx?: boolean;
+  disableSinglePricesBroadcastingInStreamr: boolean;
+  omitSourcesInArweaveTx: boolean;
 }

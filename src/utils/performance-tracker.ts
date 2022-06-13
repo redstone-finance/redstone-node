@@ -2,13 +2,16 @@ import { performance } from "perf_hooks";
 import axios from "axios";
 import { Consola } from "consola";
 import mode from "../../mode";
+import { getConfigFromEnv } from "../config/get-config-from-env";
 
 const logger = require("./logger")("utils/performance-tracker") as Consola;
 const URL = "https://api.redstone.finance/metrics";
-const tasks: { [trackingId: string]: {
-  label: string;
-  startTime: number;
-} } = {};
+const tasks: {
+  [trackingId: string]: {
+    label: string;
+    startTime: number;
+  }
+} = {};
 
 export function trackStart(label: string): string {
   if (label === "") {
@@ -59,8 +62,8 @@ export function printTrackingState() {
 }
 
 async function saveMetric(label: string, value: number): Promise<void> {
-  const prefix = process.env.PERFORMANCE_TRACKING_LABEL_PREFIX || "local";
-  const labelWithPrefix = `${prefix}-${label}`;
+  const { performanceTrackingLabelPrefix } = getConfigFromEnv();
+  const labelWithPrefix = `${performanceTrackingLabelPrefix}-${label}`;
 
   if (mode.isProd) {
     await axios.post(URL, {
