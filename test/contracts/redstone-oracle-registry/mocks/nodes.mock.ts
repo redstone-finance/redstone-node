@@ -7,8 +7,8 @@ export const mockNodes = [...Array(6).keys()].reduce((mockNodes, currentIndex) =
       dataFeedId: "testId",
       evmAddress: "testAddress",
       ipAddress: "testIpAddress",
-      ecdsaPublicKey: "testPublicKey",
-      arweavePublicKey: "testPublicKey",
+      ecdsaPublicKey: "testECDSAPublicKey",
+      arweavePublicKey: "testArweavePubicKey",
       url: "testUrl",
     }
   }
