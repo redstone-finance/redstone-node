@@ -31,6 +31,9 @@ function getSourcesConfig() {
 
 function getSourceDetails(sourceName) {
   let details = {};
+  if (sourceName.includes("twap")) {
+    return details;
+  }
 
   if (predefinedSourcesConfig[sourceName]) {
     details = predefinedSourcesConfig[sourceName];

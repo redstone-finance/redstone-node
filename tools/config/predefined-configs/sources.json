@@ -24,6 +24,16 @@
     "url": "https://www.coinbase.com/",
     "color": "#2a67d0"
   },
+  "coinbaseprime": {
+    "logoURI": "https://images.ctfassets.net/q5ulk4bp65r7/1rFQCqoq8hipvVJSKdU3fQ/21ab733af7a8ab404e29b873ffb28348/coinbase-icon2.svg",
+    "url": "https://exchange.coinbase.com",
+    "color": "#2a67d0"
+  },
+  "coinbasepro": {
+    "logoURI": "https://images.ctfassets.net/q5ulk4bp65r7/1rFQCqoq8hipvVJSKdU3fQ/21ab733af7a8ab404e29b873ffb28348/coinbase-icon2.svg",
+    "url": "https://pro.coinbase.com/",
+    "color": "#2a67d0"
+  },
   "uniswap": {
     "logoURI": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Uniswap_Logo.svg/1026px-Uniswap_Logo.svg.png",
     "url": "https://uniswap.org/",
@@ -283,5 +293,15 @@
     "logoURI": "https://avatars.githubusercontent.com/u/82165905?s=200&v=4",
     "url": "https://www.traderjoexyz.com/",
     "color": "#e2786f"
+  },
+  "custom-urls": {
+    "logoURI": "https://redstone.finance/assets/img/redstone-logo-full.svg",
+    "url": "https://redstone.finance/",
+    "color": "#FD627A"
+  },
+  "drand": {
+    "logoURI": "https://drand.love/images/logo-drand-text-bottom-dark.svg",
+    "url": "https://drand.love/",
+    "color": "#4d9fd1"
   }
 }

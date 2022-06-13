@@ -24,8 +24,8 @@ async function shouldExchangeBeSupported(exchangeName) {
   if (exchange.has["fetchTickers"]) {
     try {
       const tickers = Object.values(await exchange.fetchTickers());
-      const tickersWithUsdt = tickers.filter(t => t.symbol.endsWith("/USDT"));
-      const tickersWithUsd = tickers.filter(t => t.symbol.endsWith("/USD"));
+      const tickersWithUsdt = tickers.filter((t) => t.symbol.endsWith("/USDT"));
+      const tickersWithUsd = tickers.filter((t) => t.symbol.endsWith("/USD"));
       const supported =
         tickersWithUsdt.length + tickersWithUsd.length > MIN_SUPPORTED_TICKERS;
       console.log({
