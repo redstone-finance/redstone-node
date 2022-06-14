@@ -704,34 +704,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "USDC": {
-      "source": [
-        "ascendex",
-        "binance",
-        "binanceus",
-        "bitfinex",
-        "bitfinex2",
-        "bittrex",
-        "btcturk",
-        "cex",
-        "coinbase",
-        "coingecko",
-        "crex24",
-        "currencycom",
-        "huobipro",
-        "kraken",
-        "kucoin",
-        "lbank",
-        "liquid",
-        "oceanex",
-        "okcoin",
-        "okex5",
-        "probit",
-        "sushiswap",
-        "uniswap"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "OMG": {
       "source": [
         "bequant",
@@ -811,6 +783,33 @@
         "okex5",
         "poloniex",
         "probit",
+        "uniswap"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "USDC": {
+      "source": [
+        "ascendex",
+        "binance",
+        "binanceus",
+        "bitfinex",
+        "bitfinex2",
+        "bittrex",
+        "btcturk",
+        "cex",
+        "coingecko",
+        "crex24",
+        "currencycom",
+        "huobipro",
+        "kraken",
+        "kucoin",
+        "lbank",
+        "liquid",
+        "oceanex",
+        "okcoin",
+        "okex5",
+        "probit",
+        "sushiswap",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -1002,7 +1001,6 @@
         "bitfinex2",
         "bittrex",
         "cex",
-        "coinbase",
         "coinbaseprime",
         "coinbasepro",
         "coingecko",
@@ -1012,6 +1010,28 @@
         "kraken",
         "lbank",
         "okcoin",
+        "okex5",
+        "poloniex",
+        "probit",
+        "sushiswap",
+        "uniswap"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "BAND": {
+      "source": [
+        "ascendex",
+        "binance",
+        "binanceus",
+        "binanceusdm",
+        "bitfinex",
+        "bitfinex2",
+        "bittrex",
+        "cex",
+        "coingecko",
+        "ftx",
+        "hitbtc",
+        "huobipro",
         "okex5",
         "poloniex",
         "probit",
@@ -1031,8 +1051,8 @@
         "bittrex",
         "btcturk",
         "cex",
-        "coingecko",
-        "ftx",
+        "coinbaseprime",
+        "coinbasepro",
         "hitbtc",
         "huobipro",
         "kraken",
@@ -1042,29 +1062,6 @@
         "probit"
       ],
       "maxPriceDeviationPercent": 80
-    },
-    "BAND": {
-      "source": [
-        "ascendex",
-        "binance",
-        "binanceus",
-        "binanceusdm",
-        "bitfinex",
-        "bitfinex2",
-        "bittrex",
-        "cex",
-        "coinbaseprime",
-        "coinbasepro",
-        "currencycom",
-        "ftx",
-        "huobipro",
-        "okex5",
-        "poloniex",
-        "probit",
-        "sushiswap",
-        "uniswap"
-      ],
-      "maxPriceDeviationPercent": 25
     },
     "ENJ": {
       "source": [
@@ -1545,26 +1542,6 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "USDT": {
-      "source": [
-        "binanceus",
-        "bitfinex",
-        "bitfinex2",
-        "bittrex",
-        "cex",
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro",
-        "coingecko",
-        "currencycom",
-        "ftx",
-        "kraken",
-        "okcoin",
-        "sushiswap",
-        "uniswap"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "XEM": {
       "source": [
         "ascendex",
@@ -1657,6 +1634,25 @@
         "lbank",
         "okex5",
         "stex"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "USDT": {
+      "source": [
+        "binanceus",
+        "bitfinex",
+        "bitfinex2",
+        "bittrex",
+        "cex",
+        "coinbaseprime",
+        "coinbasepro",
+        "coingecko",
+        "currencycom",
+        "ftx",
+        "kraken",
+        "okcoin",
+        "sushiswap",
+        "uniswap"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -1765,6 +1761,23 @@
         "probit"
       ],
       "maxPriceDeviationPercent": 80
+    },
+    "BUSD": {
+      "source": [
+        "binance",
+        "binanceus",
+        "bitcoincom",
+        "cex",
+        "coinbaseprime",
+        "coinbasepro",
+        "coingecko",
+        "crex24",
+        "hitbtc",
+        "lbank",
+        "oceanex",
+        "poloniex"
+      ],
+      "maxPriceDeviationPercent": 25
     },
     "DGB": {
       "source": [
@@ -2089,21 +2102,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "PERP": {
-      "source": [
-        "binance",
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro",
-        "ftx",
-        "kraken",
-        "lbank",
-        "okex5",
-        "sushiswap",
-        "uniswap"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
     "MIR": {
       "source": [
         "binance",
@@ -2230,6 +2228,20 @@
         "lbank"
       ],
       "maxPriceDeviationPercent": 80
+    },
+    "PERP": {
+      "source": [
+        "binance",
+        "coinbaseprime",
+        "coinbasepro",
+        "ftx",
+        "kraken",
+        "lbank",
+        "okex5",
+        "sushiswap",
+        "uniswap"
+      ],
+      "maxPriceDeviationPercent": 25
     },
     "FORTH": {
       "source": [
@@ -2443,19 +2455,6 @@
         "okex5"
       ],
       "maxPriceDeviationPercent": 80
-    },
-    "PAX": {
-      "source": [
-        "bitfinex",
-        "bitfinex2",
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro",
-        "coingecko",
-        "huobipro",
-        "poloniex"
-      ],
-      "maxPriceDeviationPercent": 25
     },
     "GLM": {
       "source": [
@@ -2695,6 +2694,18 @@
         "hitbtc",
         "okex5",
         "probit"
+      ],
+      "maxPriceDeviationPercent": 25
+    },
+    "PAX": {
+      "source": [
+        "bitfinex",
+        "bitfinex2",
+        "coinbaseprime",
+        "coinbasepro",
+        "coingecko",
+        "huobipro",
+        "poloniex"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -3767,15 +3778,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "LQTY": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro",
-        "poloniex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "QNT": {
       "source": [
         "coinbaseprime",
@@ -4589,62 +4591,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "DDX": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "AVT": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "MUSD": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "PRO": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "IMX": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "SYN": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GMT": {
-      "source": [
-        "coinbase",
-        "coinbaseprime",
-        "coinbasepro"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "LOOM": {
       "source": [
         "coinbaseprime",
@@ -4698,6 +4644,14 @@
         "coinbaseprime",
         "coinbasepro",
         "ftx"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "LQTY": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro",
+        "poloniex"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -5742,6 +5696,55 @@
       "source": [
         "cex",
         "okex5"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "DDX": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "AVT": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MUSD": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PRO": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "IMX": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "SYN": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "GMT": {
+      "source": [
+        "coinbaseprime",
+        "coinbasepro"
       ],
       "maxPriceDeviationPercent": 80
     },

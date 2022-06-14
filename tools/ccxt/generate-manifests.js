@@ -60,8 +60,7 @@ async function getTickersForExchange(exchangeName) {
     if (pairSymbol) {
       if (pairSymbol.endsWith("/USD")) {
         const symbol = pairSymbol.replace("/USD", "");
-        supportedTickers[symbol] =
-          exchangeName === "coinbase" ? ticker.info : ticker.last;
+        supportedTickers[symbol] = ticker.last;
       } else if (pairSymbol.endsWith("/USDT")) {
         const symbol = pairSymbol.replace("/USDT", "");
         if (!supportedTickers[symbol]) {

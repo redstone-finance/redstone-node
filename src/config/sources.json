@@ -119,11 +119,6 @@
     "url": "https://cex.io",
     "color": "#53b1b0"
   },
-  "coinbase": {
-    "logoURI": "https://cdn.redstone.finance/sources/coinbase.svg",
-    "url": "https://www.coinbase.com/",
-    "color": "#2a67d0"
-  },
   "coinbaseprime": {
     "logoURI": "https://cdn.redstone.finance/sources/coinbaseprime.svg",
     "url": "https://exchange.coinbase.com",

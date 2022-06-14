@@ -19,11 +19,6 @@
     "url": "https://sushi.com/",
     "color": "#e45d9d"
   },
-  "coinbase": {
-    "logoURI": "https://images.ctfassets.net/q5ulk4bp65r7/1rFQCqoq8hipvVJSKdU3fQ/21ab733af7a8ab404e29b873ffb28348/coinbase-icon2.svg",
-    "url": "https://www.coinbase.com/",
-    "color": "#2a67d0"
-  },
   "coinbaseprime": {
     "logoURI": "https://images.ctfassets.net/q5ulk4bp65r7/1rFQCqoq8hipvVJSKdU3fQ/21ab733af7a8ab404e29b873ffb28348/coinbase-icon2.svg",
     "url": "https://exchange.coinbase.com",
