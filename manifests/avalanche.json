@@ -25,7 +25,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -65,10 +64,6 @@
     "PNG": {
       "source": [
         "coingecko",
-        "pangolin-pefi",
-        "pangolin-snob",
-        "pangolin-spore",
-        "pangolin-usdt",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -94,7 +89,6 @@
     "XAVA": {
       "source": [
         "kucoin",
-        "pangolin-png",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -116,7 +110,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -152,7 +145,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -192,7 +184,6 @@
     "QI": {
       "source": [
         "coingecko",
-        "pangolin-png",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -209,7 +200,6 @@
         "btcturk",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "huobipro",
         "kraken",

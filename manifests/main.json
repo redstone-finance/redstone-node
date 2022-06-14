@@ -22,7 +22,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -59,7 +58,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -96,7 +94,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -130,7 +127,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -165,7 +161,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -233,7 +228,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hollaex",
@@ -265,7 +259,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "ftx",
         "hitbtc",
@@ -328,7 +321,6 @@
         "bw",
         "cdax",
         "coingecko",
-        "crex24",
         "hitbtc",
         "huobipro",
         "kraken",
@@ -358,7 +350,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "hitbtc",
         "hollaex",
         "huobipro",
@@ -386,7 +377,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "hitbtc",
         "hollaex",
         "huobipro",
@@ -419,7 +409,6 @@
         "cdax",
         "cex",
         "coingecko",
-        "crex24",
         "hitbtc",
         "hollaex",
         "huobipro",
@@ -546,7 +535,6 @@
     },
     "USDC": {
       "source": [
-        "ascendex",
         "binance",
         "binanceus",
         "bitfinex",
@@ -555,7 +543,6 @@
         "btcturk",
         "cex",
         "coingecko",
-        "crex24",
         "currencycom",
         "huobipro",
         "kraken",
@@ -865,7 +852,6 @@
         "bitfinex2",
         "cdax",
         "coingecko",
-        "crex24",
         "hitbtc",
         "huobipro",
         "kraken",
@@ -978,7 +964,6 @@
         "bitcoincom",
         "cex",
         "coingecko",
-        "crex24",
         "ftx",
         "hitbtc",
         "kucoin",
@@ -1224,7 +1209,6 @@
         "bitfinex2",
         "cdax",
         "coingecko",
-        "crex24",
         "hitbtc",
         "hollaex",
         "huobipro",
@@ -1249,9 +1233,7 @@
         "liquid",
         "okex5",
         "poloniex",
-        "probit",
-        "sushiswap",
-        "uniswap"
+        "probit"
       ],
       "maxPriceDeviationPercent": 25
     },
@@ -1265,7 +1247,6 @@
         "bittrex",
         "cdax",
         "coingecko",
-        "crex24",
         "hitbtc",
         "huobipro",
         "kucoin",
@@ -1490,7 +1471,6 @@
         "kucoin",
         "okex5",
         "poloniex",
-        "probit",
         "sushiswap",
         "uniswap"
       ],
@@ -1593,7 +1573,6 @@
         "ftx",
         "kraken",
         "okcoin",
-        "sushiswap",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -1681,7 +1660,6 @@
       "source": [
         "ascendex",
         "binance",
-        "binanceusdm",
         "bitcoincom",
         "cex",
         "ftx",
@@ -1759,7 +1737,6 @@
         "bitfinex2",
         "bittrex",
         "cex",
-        "crex24",
         "lbank",
         "okex5",
         "poloniex",
@@ -1819,7 +1796,6 @@
         "bitcoincom",
         "cex",
         "coingecko",
-        "crex24",
         "hitbtc",
         "lbank",
         "oceanex",
@@ -1877,7 +1853,6 @@
         "ascendex",
         "bitfinex",
         "bitfinex2",
-        "coingecko",
         "huobipro",
         "kucoin",
         "lbank",
@@ -2274,7 +2249,6 @@
     "DODO": {
       "source": [
         "binance",
-        "binanceusdm",
         "bitcoincom",
         "ftx",
         "hitbtc",
@@ -2382,7 +2356,6 @@
     "NFT": {
       "source": [
         "cdax",
-        "crex24",
         "hitbtc",
         "huobipro",
         "kucoin",
@@ -2394,10 +2367,6 @@
     "PNG": {
       "source": [
         "coingecko",
-        "pangolin-pefi",
-        "pangolin-snob",
-        "pangolin-spore",
-        "pangolin-usdt",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -2406,11 +2375,6 @@
     "SNOB": {
       "source": [
         "coingecko",
-        "pangolin-aablock",
-        "pangolin-pefi",
-        "pangolin-png",
-        "pangolin-spore",
-        "pangolin-wavax",
         "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
@@ -2604,7 +2568,6 @@
     },
     "ZKS": {
       "source": [
-        "coingecko",
         "huobipro",
         "lbank",
         "okex5",
@@ -2627,7 +2590,6 @@
     "STAKE": {
       "source": [
         "ascendex",
-        "huobipro",
         "poloniex",
         "sushiswap",
         "uniswap"
@@ -2839,7 +2801,6 @@
         "bitcoincom",
         "hitbtc",
         "probit",
-        "sushiswap",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 25
@@ -2869,7 +2830,6 @@
         "bitfinex",
         "bitfinex2",
         "coingecko",
-        "huobipro",
         "poloniex"
       ],
       "maxPriceDeviationPercent": 25
@@ -2927,8 +2887,6 @@
     "SPORE": {
       "source": [
         "coingecko",
-        "pangolin-png",
-        "pangolin-snob",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -3390,7 +3348,6 @@
     "REV": {
       "source": [
         "bittrex",
-        "crex24",
         "hitbtc",
         "probit"
       ],
@@ -3435,8 +3392,6 @@
     "DYP": {
       "source": [
         "coingecko",
-        "pangolin-png",
-        "pangolin-wavax",
         "uniswap"
       ],
       "maxPriceDeviationPercent": 80
@@ -3444,7 +3399,6 @@
     "FRAX": {
       "source": [
         "coingecko",
-        "pangolin-wavax",
         "sushiswap",
         "uniswap"
       ],
@@ -3453,7 +3407,6 @@
     "QI": {
       "source": [
         "coingecko",
-        "pangolin-png",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -3534,7 +3487,6 @@
     "XAVA": {
       "source": [
         "kucoin",
-        "pangolin-png",
         "pangolin-wavax",
         "trader-joe"
       ],
@@ -3542,9 +3494,6 @@
     },
     "SHERPA": {
       "source": [
-        "pangolin-ave",
-        "pangolin-png",
-        "pangolin-wavax",
         "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
@@ -3639,7 +3588,6 @@
     },
     "ABBC": {
       "source": [
-        "ascendex",
         "bw",
         "kucoin"
       ],
@@ -3655,7 +3603,6 @@
     },
     "IBVOL": {
       "source": [
-        "ascendex",
         "ftx",
         "poloniex"
       ],
@@ -4160,7 +4107,6 @@
     "HMR": {
       "source": [
         "bw",
-        "crex24",
         "stex"
       ],
       "maxPriceDeviationPercent": 80
@@ -4256,15 +4202,13 @@
     "UST": {
       "source": [
         "coingecko",
-        "sushiswap",
-        "uniswap"
+        "sushiswap"
       ],
       "maxPriceDeviationPercent": 25
     },
     "JOE": {
       "source": [
         "coingecko",
-        "pangolin-wavax",
         "trader-joe"
       ],
       "maxPriceDeviationPercent": 80
@@ -4426,7 +4370,6 @@
     },
     "ADEL": {
       "source": [
-        "ascendex",
         "poloniex"
       ],
       "maxPriceDeviationPercent": 80
@@ -4517,7 +4460,6 @@
     },
     "MITX": {
       "source": [
-        "ascendex",
         "kucoin"
       ],
       "maxPriceDeviationPercent": 80
@@ -4691,13 +4633,6 @@
       "maxPriceDeviationPercent": 80
     },
     "SUPERBID": {
-      "source": [
-        "bitcoincom",
-        "hitbtc"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "BCVT": {
       "source": [
         "bitcoincom",
         "hitbtc"
@@ -5847,7 +5782,6 @@
     },
     "AVME": {
       "source": [
-        "pangolin-png",
         "pangolin-wavax"
       ],
       "maxPriceDeviationPercent": 80
@@ -5860,13 +5794,6 @@
       "maxPriceDeviationPercent": 80
     },
     "CREAM": {
-      "source": [
-        "sushiswap",
-        "uniswap"
-      ],
-      "maxPriceDeviationPercent": 25
-    },
-    "ESD": {
       "source": [
         "sushiswap",
         "uniswap"
@@ -5938,12 +5865,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "AGS": {
-      "source": [
-        "ascendex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "JRT": {
       "source": [
         "ascendex"
@@ -5969,18 +5890,6 @@
       "maxPriceDeviationPercent": 80
     },
     "PHX": {
-      "source": [
-        "ascendex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "UNN": {
-      "source": [
-        "ascendex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "DFD": {
       "source": [
         "ascendex"
       ],
@@ -6112,12 +6021,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "SDT": {
-      "source": [
-        "bittrex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "SG": {
       "source": [
         "bittrex"
@@ -6203,12 +6106,6 @@
       "maxPriceDeviationPercent": 80
     },
     "AGET": {
-      "source": [
-        "coingecko"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "AGRS": {
       "source": [
         "coingecko"
       ],
@@ -6491,12 +6388,6 @@
       "maxPriceDeviationPercent": 80
     },
     "ME": {
-      "source": [
-        "coingecko"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "ALH": {
       "source": [
         "coingecko"
       ],
@@ -7168,12 +7059,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "PORNROCKET": {
-      "source": [
-        "lbank"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "SKILL": {
       "source": [
         "lbank"
@@ -7678,25 +7563,7 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "KICK": {
-      "source": [
-        "stex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "PLEX": {
-      "source": [
-        "stex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "GERA": {
-      "source": [
-        "stex"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "BANANA": {
       "source": [
         "stex"
       ],

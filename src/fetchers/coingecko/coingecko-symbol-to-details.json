@@ -2645,16 +2645,6 @@
       "name": "Advertise Coin"
     }
   ],
-  "AGS": [
-    {
-      "id": "aegis",
-      "name": "Aegis"
-    },
-    {
-      "id": "collector-coin",
-      "name": "Collector Coin"
-    }
-  ],
   "AGSPAD": [
     {
       "id": "aegis-launchpad",
@@ -2915,12 +2905,6 @@
     {
       "id": "aggregator-network",
       "name": "Aggregator Network"
-    }
-  ],
-  "AGRS": [
-    {
-      "id": "agoras",
-      "name": "Agoras"
     }
   ],
   "AGU": [
@@ -3509,12 +3493,6 @@
     {
       "id": "all-me",
       "name": "All.me"
-    }
-  ],
-  "ALH": [
-    {
-      "id": "allohash",
-      "name": "AlloHash"
     }
   ],
   "XAO": [
@@ -4227,20 +4205,6 @@
     {
       "id": "ape-stax",
       "name": "Ape Stax"
-    }
-  ],
-  "BANANA": [
-    {
-      "id": "apeswap-finance",
-      "name": "ApeSwap Finance"
-    },
-    {
-      "id": "banana",
-      "name": "Banana"
-    },
-    {
-      "id": "banana-finance",
-      "name": "Banana Finance"
     }
   ],
   "APET": [
@@ -8793,12 +8757,6 @@
       "name": "Bitcoin Volatility Index Token"
     }
   ],
-  "BCVT": [
-    {
-      "id": "bitcoinvend",
-      "name": "BitcoinVend"
-    }
-  ],
   "BCX": [
     {
       "id": "bitcoinx",
@@ -9247,12 +9205,6 @@
     {
       "id": "bittokens",
       "name": "BitTokens"
-    }
-  ],
-  "BTT": [
-    {
-      "id": "bittorrent-2",
-      "name": "BitTorrent"
     }
   ],
   "BTTR": [
@@ -16629,12 +16581,6 @@
       "name": "Demeter USD"
     }
   ],
-  "DFD": [
-    {
-      "id": "defidollar-dao",
-      "name": "DefiDollar DAO"
-    }
-  ],
   "DROPS": [
     {
       "id": "defidrop",
@@ -20059,12 +20005,6 @@
     {
       "id": "empower-network",
       "name": "Empower Network"
-    }
-  ],
-  "ESD": [
-    {
-      "id": "empty-set-dollar",
-      "name": "Empty Set Dollar"
     }
   ],
   "ESS": [
@@ -24367,12 +24307,6 @@
     {
       "id": "geodb",
       "name": "GeoDB"
-    }
-  ],
-  "GERA": [
-    {
-      "id": "gera-coin",
-      "name": "Gera Coin"
     }
   ],
   "GCX": [
@@ -30001,16 +29935,6 @@
     {
       "id": "kichicoin",
       "name": "KichiCoin"
-    }
-  ],
-  "KICK": [
-    {
-      "id": "kick",
-      "name": "Kick"
-    },
-    {
-      "id": "kick-io",
-      "name": "KICK.IO"
     }
   ],
   "KPAD": [
@@ -42169,12 +42093,6 @@
       "name": "Porkchop"
     }
   ],
-  "PORNROCKET": [
-    {
-      "id": "pornrocket",
-      "name": "PornRocket"
-    }
-  ],
   "KIAN": [
     {
       "id": "porta",
@@ -49637,20 +49555,6 @@
       "name": "Stable 1inch"
     }
   ],
-  "SDT": [
-    {
-      "id": "stabledoc-token",
-      "name": "Stabledoc Token"
-    },
-    {
-      "id": "stake-dao",
-      "name": "Stake DAO"
-    },
-    {
-      "id": "terra-sdt",
-      "name": "Terra SDT"
-    }
-  ],
   "ONEFIL": [
     {
       "id": "stable-fil",
@@ -54535,12 +54439,6 @@
     {
       "id": "unimex-network",
       "name": "UniMex Network"
-    }
-  ],
-  "UNN": [
-    {
-      "id": "union-protocol-governance-token",
-      "name": "UNION Protocol Governance Token"
     }
   ],
   "PILOT": [
@@ -59743,12 +59641,6 @@
     {
       "id": "zkchaos",
       "name": "ZKCHAOS"
-    }
-  ],
-  "ZKS": [
-    {
-      "id": "zkswap",
-      "name": "ZKSwap"
     }
   ],
   "ZKT": [

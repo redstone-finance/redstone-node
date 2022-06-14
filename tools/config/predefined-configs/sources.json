@@ -144,11 +144,6 @@
     "url": "https://www.coinex.com",
     "color": "#68d9b6"
   },
-  "crex24": {
-    "logoURI": "https://crex24.com/assets/gfx/crex24_logo.svg",
-    "url": "https://crex24.com",
-    "color": "#4a9b9a"
-  },
   "currencycom": {
     "logoURI": "https://tokenhell.com/wp-content/uploads/Currency.com-Logotype.png",
     "url": "https://www.currency.com",
@@ -274,40 +269,15 @@
     "url": "https://pangolin.exchange/",
     "color": "#4fb1e8"
   },
-  "pangolin-ave": {
-    "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
-    "url": "https://pangolin.exchange/",
-    "color": "#000000"
-  },
   "pangolin-wavax": {
     "logoURI": "https://cdn.redstone.finance/sources/pangolin-png.png",
     "url": "https://pangolin.exchange/",
     "color": "#000000"
   },
-  "pangolin-aablock": {
-    "logoURI": "https://cdn.redstone.finance/sources/pangolin-aablock.png",
-    "url": "https://pangolin.exchange/",
-    "color": "#265fb0"
-  },
-  "pangolin-spore": {
-    "logoURI": "https://cdn.redstone.finance/sources/pangolin-spore.png",
-    "url": "https://pangolin.exchange/",
-    "color": "#424a88"
-  },
   "pangolin-usdt": {
     "logoURI": "https://cdn.redstone.finance/sources/pangolin-usdt.png",
     "url": "https://pangolin.exchange/",
     "color": "#48a07c"
-  },
-  "pangolin-pefi": {
-    "logoURI": "https://cdn.redstone.finance/sources/pangolin-pefi.png",
-    "url": "https://pangolin.exchange/",
-    "color": "#e74342"
-  },
-  "pangolin-snob": {
-    "logoURI": "https://cdn.redstone.finance/sources/pangolin-snob.png",
-    "url": "https://pangolin.exchange/",
-    "color": "#4aa8f8"
   },
   "trader-joe": {
     "logoURI": "https://avatars.githubusercontent.com/u/82165905?s=200&v=4",

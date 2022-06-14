@@ -8,13 +8,6 @@
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
   "tokens": {
-    "WAVAX": {},
-    "SNOB": {},
-    "DYP": {},
-    "SPORE": {},
-    "XAVA": {},
-    "SHERPA": {},
-    "AVME": {},
-    "QI": {}
+    "WAVAX": {}
   }
 }
