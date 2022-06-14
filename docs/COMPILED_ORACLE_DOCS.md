@@ -121,6 +121,7 @@ RedStone is a data ecosystem that delivers fast and accurate financial informati
 #### Solution
 
 RedStone offers a radically different design of Oracles catering for the needs of modern Defi protocols.
+
 - Leverage Arweave blockchain as a cheap and permanent storage
 - Use token incentives to motivate data providers to maintain data integrity and the uninterrupted service
 - Use signed meta-transactions to deliver prices on-chain
@@ -129,6 +130,7 @@ RedStone offers a radically different design of Oracles catering for the needs o
 #### Oracles landscape
 
 Initially, the most commonly utilised form for Oracle operations were the “two phase approach”:
+
 1. A contract submits a request for data to an Oracle Service;
 2. An Oracle Service sends back a response with data.
 
@@ -137,7 +139,7 @@ This simple and flexible solution was pioneered by Oraclize (now Provable) and C
 Currently, the most popular approach taken by blockchains in an attempt to address the aforementioned issues is to persist all data directly on-chain, so that the information is available in the context of a single transaction. Protocols have also formed syndicates around the most popular oracles using common standardized configuration. Here, we listed some of popular Oracle solutions:
 
 | Name of Project                       | Redstone | Chainlink | Band Protocol                                       | DIA                                            | API3                   | Flux    | Pyth    |
-|---------------------------------------|----------|-----------|-----------------------------------------------------|------------------------------------------------|------------------------|---------|---------|
+| ------------------------------------- | -------- | --------- | --------------------------------------------------- | ---------------------------------------------- | ---------------------- | ------- | ------- |
 | Blockchain of data storage            | Arweave  | Ethereum  | Cosmos                                              | Database host with oracles on different chains | DAO on Ethereum        | NEAR    | Solana  |
 | Number of assets supported            | 1084     | 79        | 175                                                 | 50                                             | No Info                | No Info | No Info |
 | Decentralised Governance              | Yes      | No        | Yes                                                 | No                                             | Yes                    | Yes     | No      |
@@ -340,7 +342,7 @@ We encrypt transaction data using the [gzip algorithm](https://www.gzip.org/) to
 
 #### Node operating costs
 
-- **Arweave storage** - an average node spends **~0.00003AR/iteration**, resulting in 0.00003 * 60 * 24 * 30 = **1.296AR/month** assuming that the data fetching interval is 60 seconds. With the current AR price it is **~$55/month**
+- **Arweave storage** - an average node spends **~0.00003AR/iteration**, resulting in 0.00003 _ 60 _ 24 \* 30 = **1.296AR/month** assuming that the data fetching interval is 60 seconds. With the current AR price it is **~$55/month**
 - **Node infrastructure** - depending on a selected infrastructure and logs retention policy the Node infrastructure costs may be in the range from **~$10/month** (simple EC2 machine on AWS) to **~$70/month** (ECS cluster with connected Cloudwatch for logs querying)
 - **Cache layer** - a provider can also configure their cache layer, wchich costs **~$5/month** on AWS
 
@@ -374,7 +376,7 @@ For example:
 
 - [main.json](../manifests/main.json) - 1000+ tokens, used by the main redstone provider
 - [rapid.json](../manifests/rapid.json) - 10 most popular tokens, used by `redstone-rapid` provider
-- [coinbase.json](../manifests/coinbase.json) - 20 tokens, uses only coinbase fetcher
+- [coingecko.json](../manifests/coingecko.json) - 203 tokens, uses only coingecko fetcher
 
 You can also prepare your own manifest and place it inside the `manifests` folder. The manifest file should be named using kebab case, i.e: `manifest.json`, `good-manifest.json`, or `your-source.json`.
 
@@ -399,15 +401,15 @@ You can find a list of available sources along with its stability details in the
 
 Config file is a **private** file created by a provider. It contains the following details required by the redstone-node:
 
-| Param                               | Optionality | Description                                                                                        |
-| ----------------------------------- | :---------: | -------------------------------------------------------------------------------------------------- |
-| arweaveKeysFile                     |  required   | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
-| minimumArBalance                    |  required   | minimum AR balance required to run the node                                                        |
-| useManifestFromSmartContract        |  optional   | if set to true , manifest will be loaded from Arweave Smart Contracts                              |
-| manifestFile                        |  optional   | path to the manifest file                                                                          |
-| addEvmSignature                     |  optional   | if set to true, EVM signature will be added to each price for each asset                           |
-| credentials                         |  required   | object with credentials for APIs and private keys                                                  |
-| credentials.ethereumPrivateKey      |  required   | Ethereum private key that will be used for price data signing                                      |
+| Param                          | Optionality | Description                                                                                        |
+| ------------------------------ | :---------: | -------------------------------------------------------------------------------------------------- |
+| arweaveKeysFile                |  required   | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
+| minimumArBalance               |  required   | minimum AR balance required to run the node                                                        |
+| useManifestFromSmartContract   |  optional   | if set to true , manifest will be loaded from Arweave Smart Contracts                              |
+| manifestFile                   |  optional   | path to the manifest file                                                                          |
+| addEvmSignature                |  optional   | if set to true, EVM signature will be added to each price for each asset                           |
+| credentials                    |  required   | object with credentials for APIs and private keys                                                  |
+| credentials.ethereumPrivateKey |  required   | Ethereum private key that will be used for price data signing                                      |
 
 You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
 
@@ -559,7 +561,7 @@ Source name must be unique, because it will unambiguously identify your source.
 ###### Implement source (fetcher)
 
 Create a folder with a name of your fetcher in [src/fetchers](../src/fetchers).
-Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coinbase](../src/fetchers/coinbase), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
+Place the code of your fetcher inside of this folder and update [src/fetchers/index.ts](../src/fetchers/index.ts) file to export your source. For more information check out [BaseFetcher](../src/fetchers/BaseFetcher.ts) code and implementation of other fetchers, like [coingecko](../src/fetchers/coingecko/CoingeckoFetcher.ts), [coingecko fetcher](/src/fetchers/coingecko/CoingeckoFetcher.ts), and [ecb](../src/fetchers/ecb/EcbFetcher.ts).
 
 ###### Implement tests
 
@@ -590,7 +592,7 @@ Sources config file is used in the RedStone web app. If you want your source to 
 
 #### Add new asset
 
-Tokens config file, which is located in `src/config/tokens.json`, is used in the RedStone web app and `redstone-api`. If you want your token to be accessible through  the `redstone-api` npm module you should add it to the config.
+Tokens config file, which is located in `src/config/tokens.json`, is used in the RedStone web app and `redstone-api`. If you want your token to be accessible through the `redstone-api` npm module you should add it to the config.
 
 ##### How to add a token
 
@@ -765,7 +767,7 @@ Here is the flowchart showing the dispute flow:
 The list below contains system parameters used to manage the dispute resolution process. The values are based on the similar existing models and simulations, therefore they might require tuning after the deployment in the real-world environment. The update could be managed by decentralised governance in the form of token weighted voting by all the stakeholders.
 
 | Parameter         | Default value                 | Description                                                                                        |
-|-------------------|-------------------------------|----------------------------------------------------------------------------------------------------|
+| ----------------- | ----------------------------- | -------------------------------------------------------------------------------------------------- |
 | voting duration   | 7 days                        | A period when jurors are able to vote on the dispute                                               |
 | appeal window     | 3 days                        | A time when the losing side could submit an appeal                                                 |
 | base quorum       | 5%                            | A minimum percentage of total token supply that needs to be staked during the voting               |
@@ -773,7 +775,6 @@ The list below contains system parameters used to manage the dispute resolution 
 | min challenge fee | $100 worth of Redstone Tokens | A minimum amount of tokens that need to be staked by the watcher (challenger)                      |
 | judgement fee     | 20%                           | Part of the voting stake (from challenger or provider) that is redistributed to the jurors         |
 | voting penalty    | 10%                           | Part of the losing jurors’ stake that is redistributed to the one who supported the final verdict. |
-
 
 ### Architecture
 
@@ -812,6 +813,7 @@ Jurors benefit from participating in the judgement, therefore there may be a tou
 In most of the cases, public voting will be sufficient and the most cost-effective method to judge the dispute. However, in special cases involving high-stake or confidential content, there could be a need for a privacy-preserving process. We could easily extend the voting mechanism implemented by the Tribunal contract to support either a two-phase commit-reveal process or use zero-knowledge proofs of jurors’ decision.
 
 ### Disputes reasoning
+
 RedStone data providers have an obligation to keep the broadcasted data on the Arweave blockchain to guarantee the data accessibility and power the dispute resolution mechanism. The signature that is attached to the broadcasted data allows to prove the data ownership.
 
 Therefore, if there is a data package that is signed by a data provider and not persisted on the Arweave blockchain, a dispute can be raised.
@@ -828,6 +830,7 @@ Putting data directly into storage is the easiest way to make information access
 `redstone-flash-storage` implements an alternative design of providing data to smart contracts. Instead of constantly persisting data on EVM storage, the information is brought on-chain only when needed (**on-demand fetching**). Until that moment, the data remains available in the [Arweave](https://www.arweave.org/) blockchain where data providers are incentivised to keep information accurate and up to date. Data is transferred to EVM via a mechanism based on a [meta-transaction pattern](https://medium.com/@austin_48503/ethereum-meta-transactions-90ccf0859e84) and the information integrity is verified on-chain through signature checking.
 
 #### How it works
+
 At a top level, transferring data to an EVM environment requires packing an extra payload to a user's transaction and processing the message on-chain.
 
 <img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-flowchart.png?raw=true" />
@@ -841,7 +844,7 @@ At a top level, transferring data to an EVM environment requires packing an extr
 
 3. The package is appended to the original transaction message, signed and submitted to the network
 
-*All of the steps are executed automatically by the ContractWrapper and transparent to the end-user*
+_All of the steps are executed automatically by the ContractWrapper and transparent to the end-user_
 
 ##### Data unpacking (on-chain data verification)
 
@@ -850,14 +853,13 @@ At a top level, transferring data to an EVM environment requires packing an extr
 3. The timestamp is also verified checking if the information is not obsolete
 4. The value that matches a given symbol is extracted from the data package
 
-*This logic is executed in the on-chain environment and we optimised the execution using a low-level assembly code to reduce gas consumption to the absolute minimum*
+_This logic is executed in the on-chain environment and we optimised the execution using a low-level assembly code to reduce gas consumption to the absolute minimum_
 
 ##### Benchmarks
 
 We work hard to optimise the code using solidity assembly and reduce the gas costs of our contracts. Below there is a comparison of the read operation gas costs using the most popular Chainlink Reference Data, the standard version of Redstone PriceAware contract and the optimised version where provider address is inlined at the compilation time. The [scripts](https://github.com/redstone-finance/redstone-flash-storage/tree/price-aware/scripts) which generated the data together with [results](https://github.com/redstone-finance/redstone-flash-storage/blob/price-aware/benchmarks.txt) and transactions details could be found in our repository.
 
 <img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/redstone-flash-storage-competitors.png?raw=true" />
-
 
 #### Usage
 
@@ -950,27 +952,34 @@ Example query to fetch RedStone transactions IDs and tags
 You can learn more about fetching data from the Arweave blockchain at: https://gql-guide.vercel.app/
 
 ## Use cases for RedStone oracle
+
 Thanks to its scalability, the RedStone protocol creates unlimited possibilities for the DeFi protocols. You can find some common use cases for the RedStone data ecosystem below.
 
 ### Less popular tokens
+
 Less popular tokens face difficulties trying to provide their price data on-chain. It doesn't make an economical sense for today's oracles, because the revenue from the provided data would be lower than its providing costs.
 
 RedStone already provides data for more than 1000 different crypto assets. Yet our technology allows to provide even 5 times more data spending just a small part of the other oracle's operating costs.
 
 ### Advanced financial data
+
 Thanks to its scalability and much lower storage costs, RedStone protocol makes it possible to improve current DeFi protocols using more advanced financial data, like:
+
 - interest rates
 - volatility
 - liquidity
 - and many more
 
 ### Historical data
+
 Historical data have lower economical value for DeFi protocols than the real-time data. That's why they are not supported by most of today's oracles. Fortunately, the RedStone protocol allows to use them on-chain as well.
 
 ### Other data types
+
 There are unlimited possibilities for the data types that can be provided on-chain through the RedStone protocol, including financial derivatives, voting data, political decisions, climate conditions, sport competition results, and much more.
 
 RedStone-stocks provider is a good example, as it already provides versatile data, including pricing data for:
+
 - Stocks
 - Currencies
 - ETFs
@@ -982,30 +991,31 @@ RedStone-stocks provider is a good example, as it already provides versatile dat
 ## Roadmap
 
 You can find the estimated plan of Redstone oracle development activities with the corresponding timing in the table below. We don’t include a few things that we do continuously:
+
 - Improving the codebase stability
 - Extending monitoring scripts and error reporting
 - Stress testing infrastructure with load and PEN tests
 - Connecting new sources and data feeds based on the feedback from users and stakeholders (for example NFT pricing, advanced financial data, voting results, climate data, sport…)
 
-| Description | Timing | Notes |
-|---|---|---|
-| Support for multiple broadcasters | Q4 2021 | The data signed by a provider will be broadcasted to multiple cache layers in order to ensure data accessibility and to keep the whole system more decentralised, stable and resistant to DDOS attacks. |
-| Backup nodes | Q4 2021 | To ensure node stability we’ll prepare implementation of backup nodes. A backup node will be running independently from the master node. It will repeatedly check if the main node is working properly and if not - it will switch to the “master” mode and will start to operate as a standard node until the original node comes back. |
-| Encrypted content | Q4 2021 | We’ll add the ability to persist encrypted content allowing providers to deliver non-public information.  |
-| Auditing redstone-flash-storage | Q4 2021 | We’ll invest significant resources to ensure the security of the redstone-flash-storage module (e.g. ordering independent smart contracts audits) |
-| Onboarding at least 5 data providers (node operators) | Q4 2022 | Growth |
-| Integrate with at least 5 data consuming protocols to pilot the solution | Q4 2022 | Growth |
-| Scaling supported assets to 5K | Q1 2022 | At 08.10.2021 the Redstone oracle supported ~1.1K assets. By enabling support for 5K assets, RedStone will become the confident leader in the oracle space in terms of the data amounts, outrunning the current leader (umbrella network that supports 1200 data pairs) |
-| Improving the aggregator mechanism | Q1 2022 | Implementing a weight-median-aggregator (weighted by source trust) |
-| UI for no-code node configuration | Q1 2022 | The idea is similar to the Mongo Atlas. We’ll offer some kind of RNAAS (Redstone node as a service). People will be able to run their nodes by configuring it in the browser and paying some required stake. We’ll try to design it in a way where we won’t have access to their private keys. |
-| Allowing to provide any kind of data | Q1 2022 | We’ll extend our infrastructure to process complex data structures apart from simple pricing information |
-| Allowing to “connect any API to blockchain” | Q1 2022 | We’ll implement a UI for running a simple node based on the provided API url and some transformation. The UI will create under the hood a standalone node with a new fetcher that will fetch data from the provided API URL and transform the data using the provided transformation. |
-| Connecting api responses proof mechanism (e.g. using TLS Notary) | Q2 2022 | We’ll research the mechanism of proving the received responses from external APIs using TLS protocol. So that a data provider will be able to prove that he/she has got a given response from a given url at a given timestamp. This proof may help the data provider in disputes later. Of course, it will work only for urls that start from https. |
-| Implementing the dispute protocol | Q2 2022 | We’ll implement the SmartWeave contracts and the UI for the dispute resolution protocol. We’ll invest significant resources to ensure the contracts security by ordering independent audits and scrupulous testing. |
-| Onboarding at least 10 data providers (node operators) | Q2 2022 | Growth |
-| Integrate with at least 10 data consuming protocols to pilot the solution | Q2 2022 | Growth |
-| Onboarding at least 10 independent broadcaster operators | Q3 2022 | Decentralisation |
-| Making the node running process as easy as possible (Preparing AWS / GCP / Azure / Heroku configuration templates, preparing the first-class documentation, continuous interaction with the community and rewarding the most active community members) | Q4 2022 | Decentralisation |
+| Description                                                                                                                                                                                                                                            | Timing  | Notes                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Support for multiple broadcasters                                                                                                                                                                                                                      | Q4 2021 | The data signed by a provider will be broadcasted to multiple cache layers in order to ensure data accessibility and to keep the whole system more decentralised, stable and resistant to DDOS attacks.                                                                                                                                               |
+| Backup nodes                                                                                                                                                                                                                                           | Q4 2021 | To ensure node stability we’ll prepare implementation of backup nodes. A backup node will be running independently from the master node. It will repeatedly check if the main node is working properly and if not - it will switch to the “master” mode and will start to operate as a standard node until the original node comes back.              |
+| Encrypted content                                                                                                                                                                                                                                      | Q4 2021 | We’ll add the ability to persist encrypted content allowing providers to deliver non-public information.                                                                                                                                                                                                                                              |
+| Auditing redstone-flash-storage                                                                                                                                                                                                                        | Q4 2021 | We’ll invest significant resources to ensure the security of the redstone-flash-storage module (e.g. ordering independent smart contracts audits)                                                                                                                                                                                                     |
+| Onboarding at least 5 data providers (node operators)                                                                                                                                                                                                  | Q4 2022 | Growth                                                                                                                                                                                                                                                                                                                                                |
+| Integrate with at least 5 data consuming protocols to pilot the solution                                                                                                                                                                               | Q4 2022 | Growth                                                                                                                                                                                                                                                                                                                                                |
+| Scaling supported assets to 5K                                                                                                                                                                                                                         | Q1 2022 | At 08.10.2021 the Redstone oracle supported ~1.1K assets. By enabling support for 5K assets, RedStone will become the confident leader in the oracle space in terms of the data amounts, outrunning the current leader (umbrella network that supports 1200 data pairs)                                                                               |
+| Improving the aggregator mechanism                                                                                                                                                                                                                     | Q1 2022 | Implementing a weight-median-aggregator (weighted by source trust)                                                                                                                                                                                                                                                                                    |
+| UI for no-code node configuration                                                                                                                                                                                                                      | Q1 2022 | The idea is similar to the Mongo Atlas. We’ll offer some kind of RNAAS (Redstone node as a service). People will be able to run their nodes by configuring it in the browser and paying some required stake. We’ll try to design it in a way where we won’t have access to their private keys.                                                        |
+| Allowing to provide any kind of data                                                                                                                                                                                                                   | Q1 2022 | We’ll extend our infrastructure to process complex data structures apart from simple pricing information                                                                                                                                                                                                                                              |
+| Allowing to “connect any API to blockchain”                                                                                                                                                                                                            | Q1 2022 | We’ll implement a UI for running a simple node based on the provided API url and some transformation. The UI will create under the hood a standalone node with a new fetcher that will fetch data from the provided API URL and transform the data using the provided transformation.                                                                 |
+| Connecting api responses proof mechanism (e.g. using TLS Notary)                                                                                                                                                                                       | Q2 2022 | We’ll research the mechanism of proving the received responses from external APIs using TLS protocol. So that a data provider will be able to prove that he/she has got a given response from a given url at a given timestamp. This proof may help the data provider in disputes later. Of course, it will work only for urls that start from https. |
+| Implementing the dispute protocol                                                                                                                                                                                                                      | Q2 2022 | We’ll implement the SmartWeave contracts and the UI for the dispute resolution protocol. We’ll invest significant resources to ensure the contracts security by ordering independent audits and scrupulous testing.                                                                                                                                   |
+| Onboarding at least 10 data providers (node operators)                                                                                                                                                                                                 | Q2 2022 | Growth                                                                                                                                                                                                                                                                                                                                                |
+| Integrate with at least 10 data consuming protocols to pilot the solution                                                                                                                                                                              | Q2 2022 | Growth                                                                                                                                                                                                                                                                                                                                                |
+| Onboarding at least 10 independent broadcaster operators                                                                                                                                                                                               | Q3 2022 | Decentralisation                                                                                                                                                                                                                                                                                                                                      |
+| Making the node running process as easy as possible (Preparing AWS / GCP / Azure / Heroku configuration templates, preparing the first-class documentation, continuous interaction with the community and rewarding the most active community members) | Q4 2022 | Decentralisation                                                                                                                                                                                                                                                                                                                                      |
 
 ## Need help?
 
