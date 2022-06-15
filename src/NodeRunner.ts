@@ -1,9 +1,14 @@
+import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
+import git from "git-last-commit";
+import { ethers } from "ethers";
 import { Consola } from "consola";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
-import { mergeObjects, timeout } from "./utils/objects";
+import { BundlrService } from "./arweave/BundlrService";
+import { promiseTimeout } from "./utils/promise-timeout";
+import { mergeObjects } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
@@ -27,10 +32,6 @@ import {
   PriceDataSigned,
   SignedPricePackage,
 } from "./types";
-import { BundlrService } from "./arweave/BundlrService";
-import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
-import git from "git-last-commit";
-import { ethers } from "ethers";
 import { fetchIp } from "./utils/ip-fetcher";
 
 const logger = require("./utils/logger")("runner") as Consola;
@@ -385,21 +386,22 @@ export default class NodeRunner {
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
       // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
       // block standard node processing for so long (especially for nodes with low "interval" value)
-      Promise.race([
-        this.arweaveService.getCurrentManifest(),
-        timeout(MANIFEST_LOAD_TIMEOUT_MS),
-      ])
-        .then((value) => {
-          if (value === "timeout") {
-            logger.warn("Manifest load promise timeout");
-          } else {
-            this.handleLoadedManifest(value);
-          }
-          trackEnd(manifestFetchTrackingId);
-        })
-        .catch(() => {
-          logger.info("Error while calling manifest load function.");
-        });
+      const getCurrentManifestCallback = (value: Manifest | string) => {
+        if (value === "timeout") {
+          logger.warn("Manifest load promise timeout");
+        } else {
+          this.handleLoadedManifest(value as Manifest);
+        }
+        trackEnd(manifestFetchTrackingId);
+      };
+      const getCurrentManifestOnError = () =>
+        logger.info("Error while calling manifest load function.");
+      promiseTimeout(
+        [this.arweaveService.getCurrentManifest()],
+        MANIFEST_LOAD_TIMEOUT_MS,
+        getCurrentManifestCallback,
+        getCurrentManifestOnError
+      );
     } else {
       logger.info("Skipping manifest download in this iteration run.");
     }

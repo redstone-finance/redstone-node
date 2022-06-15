@@ -1,5 +1,5 @@
 import { Consola } from "consola";
-import { timeout } from "promise-timeout";
+import { v4 as uuidv4 } from "uuid";
 import fetchers from "./index";
 import ManifestHelper, { TokensBySource } from "../manifest/ManifestParser";
 import {
@@ -12,8 +12,8 @@ import {
   PriceDataFetched,
 } from "../types";
 import { trackEnd, trackStart } from "../utils/performance-tracker";
-import { v4 as uuidv4 } from "uuid";
 import ManifestConfigError from "../manifest/ManifestConfigError";
+import { promiseTimeout } from "../utils/promise-timeout";
 
 const VALUE_FOR_FAILED_FETCHER = "error";
 
@@ -104,11 +104,11 @@ export default class PricesService {
     const trackingId = trackStart(`fetching-${source}`);
     try {
       // Fail if there is no response after given timeout
-      const prices = await timeout(fetchPromise, sourceTimeout);
+      const prices = await promiseTimeout([fetchPromise], sourceTimeout);
       logger.info(
-        `Fetched prices in USD for ${prices.length} ` +
-          `currencies from source: "${source}"`
+        `Fetched prices in USD for ${prices.length} currencies from source: "${source}"`
       );
+
       return prices;
     } finally {
       trackEnd(trackingId);
