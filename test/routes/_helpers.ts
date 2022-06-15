@@ -1,16 +1,6 @@
 import express from "express";
 import { setExpressRoutes } from "../../src/routes/index";
-
-const MOCK_NODE_CONFIG = {
-  arweaveKeysFile: "",
-  credentials: {
-    ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
-  },
-  addEvmSignature: true,
-  manifestFile: "",
-  minimumArBalance: 0.2,
-  enableStreamrBroadcaster: false,
-};
+import { MOCK_NODE_CONFIG } from "../helpers";
 
 export function getApp() {
   const app = express();

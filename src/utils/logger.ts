@@ -1,5 +1,5 @@
 import consola from "consola";
-import { getConfigFromEnv } from "../config/get-config-from-env";
+import { config } from "../config/config";
 import { ConsolaErrorReporter } from "./error-reporter";
 
 export = (moduleName: string) => {
@@ -7,7 +7,7 @@ export = (moduleName: string) => {
   let mainReporter = new (consola as any).FancyReporter();
 
   // Currently we can set reporters using env variables
-  const { enableJsonLogs } = getConfigFromEnv();
+  const { enableJsonLogs } = config;
   if (enableJsonLogs) {
     mainReporter = new (consola as any).JSONReporter();
   }

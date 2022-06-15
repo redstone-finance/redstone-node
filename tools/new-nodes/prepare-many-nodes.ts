@@ -130,7 +130,6 @@ function prepareNewConfig(jwk: JWKInterface, ethereumPrivateKey: string) {
     arweaveKeysJWK: jwk,
     minimumArBalance: 0,
     useManifestFromSmartContract: true,
-    addEvmSignature: true,
     enableStreamrBroadcaster: false,
     omitSourcesInArweaveTx: true,
     credentials: {

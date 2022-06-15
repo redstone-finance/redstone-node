@@ -1,7 +1,6 @@
 import { Consola } from "consola"
 import NodeRunner from "./src/NodeRunner";
-import { getConfigFromEnv } from "./src/config/get-config-from-env";
-import { getArweaveWallet } from "./src/config/get-arweave-wallet";
+import { config } from "./src/config/config";
 
 const logger = require("./src/utils/logger")("index") as Consola;
 
@@ -16,14 +15,8 @@ async function start() {
 }
 
 async function main(): Promise<void> {
-  const jwk = getArweaveWallet();
-  const config = getConfigFromEnv();
-
   // Running RedStone node with manifest
-  const runner = await NodeRunner.create(
-    jwk,
-    config
-  );
+  const runner = await NodeRunner.create(config);
   await runner.run();
 }
 

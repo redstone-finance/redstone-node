@@ -1,15 +1,13 @@
-import { NodeConfig } from "../../src/types";
 import NodeRunner from "../../src/NodeRunner";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import { mocked } from "ts-jest/utils";
 import ArweaveProxy from "../../src/arweave/ArweaveProxy";
 import fetchers from "../../src/fetchers";
-import mode from "../../mode";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import { any } from "jest-mock-extended";
 import { timeout } from "../../src/utils/objects";
-
+import { MOCK_NODE_CONFIG } from "../helpers";
 
 /****** MOCKS START ******/
 const mockArProxy = {
@@ -48,26 +46,18 @@ jest.mock("../../src/fetchers/uniswap/UniswapFetcher");
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 mockedAxios.post.mockImplementation((url) => {
-  if (url.startsWith(mode.broadcasterUrl) || url == "https://api.redstone.finance/metrics") {
+  if (url == "https://api.redstone.finance/metrics") {
     return Promise.resolve();
   }
   return Promise.reject(`mock for ${url} not available and should not be called`);
 });
-
-const modeMock = jest.requireMock("../../mode");
-jest.mock("../../mode", () => ({
-  isProd: false,
-  broadcasterUrl: "http://broadcast.test"
-}));
 
 let manifest: any = null;
 
 jest.mock('../../src/utils/objects', () => ({
   // @ts-ignore
   ...(jest.requireActual('../../src/utils/objects')),
-  readJSON: () => {
-    return manifest;
-  }
+  readJSON: () => null
 }));
 
 jest.mock("uuid",
@@ -81,15 +71,7 @@ describe("NodeRunner", () => {
     e: "e", kty: "kty", n: "n"
   }
 
-  const nodeConfig: NodeConfig = {
-    arweaveKeysFile: "", credentials: {
-      ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
-    },
-    addEvmSignature: true,
-    manifestFile: "",
-    minimumArBalance: 0.2,
-    enableStreamrBroadcaster: false,
-  }
+  const nodeConfig = MOCK_NODE_CONFIG;
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -138,8 +120,7 @@ describe("NodeRunner", () => {
     const mockedArProxy = mocked(ArweaveProxy, true);
 
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest }
     );
 
     // then
@@ -165,8 +146,7 @@ describe("NodeRunner", () => {
       }`)
 
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest }
     );
 
     await expect(sut.run()).rejects.toThrowError("Could not determine maxPriceDeviationPercent");
@@ -189,8 +169,7 @@ describe("NodeRunner", () => {
       }`);
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest }
     );
 
     await expect(sut.run()).rejects.toThrowError("No timeout configured for");
@@ -199,15 +178,13 @@ describe("NodeRunner", () => {
   it("should throw if minimumArBalance not defined in config file", async () => {
     await expect(async () => {
       await NodeRunner.create(
-        jwk,
         JSON.parse(`{
-      "arweaveKeysFile": "",
-      "credentials": {
-        "ethereumPrivateKey": "0x1111111111111111111111111111111111111111111111111111111111111111",
-        "covalentApiKey": "ckey"
-      },
-      "manifestFile": ""
-    }`));
+          "manifestFromFile":"./manifests/dev.json",
+          "privateKeys":{
+            "arweaveJwk":{"e":"e","kty":"kty","n":"n"},
+            "ethereumPrivateKey":"0x1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        }`));
     }).rejects.toThrow("minimumArBalance not defined in config file");
   });
 
@@ -215,8 +192,7 @@ describe("NodeRunner", () => {
     // Given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest, omitSourcesInArweaveTx: false }
     );
     fetchers["coingecko"] = {
       fetchAll: jest.fn(() => {
@@ -246,8 +222,7 @@ describe("NodeRunner", () => {
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
 
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest, omitSourcesInArweaveTx: false }
     );
 
     await sut.run();
@@ -261,7 +236,7 @@ describe("NodeRunner", () => {
     }]);
 
     expect(axios.post).toHaveBeenCalledWith(
-      "http://broadcast.test/prices",
+      "http://localhost:9000/prices",
       [
         {
           "liteEvmSignature": "mock_evm_signed_lite",
@@ -277,7 +252,7 @@ describe("NodeRunner", () => {
       ]
     );
     expect(axios.post).toHaveBeenCalledWith(
-      "http://broadcast.test/packages",
+      "http://localhost:9000/packages",
       {
         timestamp: 111111111,
         liteSignature: "mock_evm_signed_lite",
@@ -301,29 +276,26 @@ describe("NodeRunner", () => {
     }
 
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest }
     );
 
     await sut.run();
     expect(mockBundlrProxy.prepareSignedTrasaction).not.toHaveBeenCalled();
-    expect(axios.post).not.toHaveBeenCalledWith(mode.broadcasterUrl, any());
+    expect(axios.post).not.toHaveBeenCalledWith(nodeConfig.httpBroadcasterURLs[0], any());
   });
 
   it("should save transaction on Arweave in mode=PROD", async () => {
     // given
     mockBundlrProxy.getBalance.mockResolvedValue(0.2);
-    modeMock.isProd = true;
 
     const sut = await NodeRunner.create(
-      jwk,
-      nodeConfig
+      { ...nodeConfig, manifestFromFile: manifest, isProd: true }
     );
 
     await sut.run();
 
     expect(axios.post).toHaveBeenCalledWith(
-      mode.broadcasterUrl + "/prices",
+      nodeConfig.httpBroadcasterURLs[0] + "/prices",
       [
         {
           "id": "00000000-0000-0000-0000-000000000000",
@@ -345,38 +317,6 @@ describe("NodeRunner", () => {
     expect(mockBundlrProxy.uploadBundlrTransaction).toHaveBeenCalledWith({
       "id": "mockBundlrTransactionId",
     });
-
-  });
-
-  it("should broadcast prices without evm signature when addEvmSignature is not set", async () => {
-    const sut = await NodeRunner.create(
-      jwk,
-      {
-        ...nodeConfig,
-        addEvmSignature: false,
-      }
-    );
-
-    await sut.run();
-
-    expect(axios.post).toHaveBeenCalledWith(
-      mode.broadcasterUrl + "/prices",
-      [
-        {
-          "id": "00000000-0000-0000-0000-000000000000",
-          "source": {
-            "coingecko": 444,
-            "uniswap": 445
-          },
-          "symbol": "BTC",
-          "timestamp": 111111111,
-          "version": "0.4",
-          "value": 444.5,
-          "permawebTx": "mockBundlrTransactionId",
-          "provider": "mockArAddress",
-        }
-      ]
-    );
   });
 
   describe("when useManifestFromSmartContract flag is set", () => {
@@ -394,7 +334,6 @@ describe("NodeRunner", () => {
         .mockImplementation(() => Promise.resolve(manifest));
 
       const sut = await NodeRunner.create(
-        jwk,
         nodeConfigManifestFromAr
       );
 
@@ -422,7 +361,6 @@ describe("NodeRunner", () => {
           .mockImplementation(() => Promise.resolve(manifest));
       }, 100);
       const sut = await NodeRunner.create(
-        jwk,
         nodeConfigManifestFromAr
       );
       expect(sut).not.toBeNull();

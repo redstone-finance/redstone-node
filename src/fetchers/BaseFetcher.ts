@@ -33,33 +33,34 @@ export abstract class BaseFetcher implements Fetcher {
 
   async fetchAll(
     symbols: string[],
-    opts?: FetcherOpts): Promise<PriceDataFetched[]> {
-      // Fetching data
-      const fetchStartTime = Date.now();
-      const ids = symbols.map(symbol => this.convertSymbolToId(symbol));
-      let response = await this.fetchData(ids, opts);
+    opts?: FetcherOpts
+  ): Promise<PriceDataFetched[]> {
+    // Fetching data
+    const fetchStartTime = Date.now();
+    const ids = symbols.map(symbol => this.convertSymbolToId(symbol));
+    let response = await this.fetchData(ids, opts);
 
-      // Retrying data fetching if needed
-      const shouldRetry =
-        !this.validateResponse(response)
-        && this.retryForInvalidResponse
-        && Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
-      if (shouldRetry) {
-        this.logger.info("Retrying to fetch data");
-        response = await this.fetchData(ids, opts);
-      }
-
-      // Validating response
-      const isValid = this.validateResponse(response);
-      if (!isValid) {
-        throw new Error(`Response is invalid: ` + JSON.stringify(response));
-      }
-
-      // Extracting prices from response
-      const pricesObj = await this.extractPrices(response, ids, opts);
-
-      return this.convertPricesObjToResultPriceArray(pricesObj, ids);
+    // Retrying data fetching if needed
+    const shouldRetry =
+      !this.validateResponse(response)
+      && this.retryForInvalidResponse
+      && Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
+    if (shouldRetry) {
+      this.logger.info("Retrying to fetch data");
+      response = await this.fetchData(ids, opts);
     }
+
+    // Validating response
+    const isValid = this.validateResponse(response);
+    if (!isValid) {
+      throw new Error(`Response is invalid: ` + JSON.stringify(response));
+    }
+
+    // Extracting prices from response
+    const pricesObj = await this.extractPrices(response, ids, opts);
+
+    return this.convertPricesObjToResultPriceArray(pricesObj, ids);
+  }
 
   // This method converts internal asset id (asset identifier on fetcher level)
   // to an asset symbol (asset identifier on manifest level)
@@ -78,18 +79,18 @@ export abstract class BaseFetcher implements Fetcher {
   private convertPricesObjToResultPriceArray(
     pricesObj: PricesObj,
     requiredIds: string[]): PriceDataFetched[] {
-      const prices = [];
-      for (const id of requiredIds) {
-        if (pricesObj[id] === undefined) {
-          this.logger.warn(
-            `Id ${id} is not included in response for: ${this.name}`);
-        } else {
-          prices.push({
-            symbol: this.convertIdToSymbol(id),
-            value: pricesObj[id],
-          });
-        }
+    const prices = [];
+    for (const id of requiredIds) {
+      if (pricesObj[id] === undefined) {
+        this.logger.warn(
+          `Id ${id} is not included in response for: ${this.name}`);
+      } else {
+        prices.push({
+          symbol: this.convertIdToSymbol(id),
+          value: pricesObj[id],
+        });
       }
-      return prices;
-    };
+    }
+    return prices;
+  };
 };

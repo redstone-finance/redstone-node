@@ -1,7 +1,7 @@
-import {Consola} from "consola";
-import {timeout} from "promise-timeout";
+import { Consola } from "consola";
+import { timeout } from "promise-timeout";
 import fetchers from "./index";
-import ManifestHelper, {TokensBySource} from "../manifest/ManifestParser";
+import ManifestHelper, { TokensBySource } from "../manifest/ManifestParser";
 import {
   Aggregator,
   Credentials,
@@ -11,8 +11,8 @@ import {
   PriceDataBeforeSigning,
   PriceDataFetched
 } from "../types";
-import {trackEnd, trackStart} from "../utils/performance-tracker";
-import {v4 as uuidv4} from 'uuid'
+import { trackEnd, trackStart } from "../utils/performance-tracker";
+import { v4 as uuidv4 } from 'uuid'
 import ManifestConfigError from "../manifest/ManifestConfigError";
 
 const VALUE_FOR_FAILED_FETCHER = "error";
@@ -78,9 +78,9 @@ export default class PricesService {
   }
 
   async doFetchFromSource(source: string, tokens: string[])
-  : Promise<PriceDataFetched[]> {
+    : Promise<PriceDataFetched[]> {
     if (tokens.length === 0) {
-       throw new ManifestConfigError(
+      throw new ManifestConfigError(
         `${source} fetcher received an empty array of symbols`);
     }
 
@@ -163,18 +163,18 @@ export default class PricesService {
     prices: PriceDataAfterAggregation[],
     idArTransaction: string,
     providerAddress: string): PriceDataBeforeSigning[] {
-      const pricesBeforeSigning: PriceDataBeforeSigning[] = [];
+    const pricesBeforeSigning: PriceDataBeforeSigning[] = [];
 
-      for (const price of prices) {
-        pricesBeforeSigning.push({
-          ...price,
-          permawebTx: idArTransaction,
-          provider: providerAddress,
-        });
-      }
-
-      return pricesBeforeSigning;
+    for (const price of prices) {
+      pricesBeforeSigning.push({
+        ...price,
+        permawebTx: idArTransaction,
+        provider: providerAddress,
+      });
     }
+
+    return pricesBeforeSigning;
+  }
 
   private maxPriceDeviationPercent(priceSymbol: string): number {
     const result = ManifestHelper.getMaxDeviationForSymbol(priceSymbol, this.manifest);

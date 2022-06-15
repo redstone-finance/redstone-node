@@ -1,11 +1,9 @@
 import { Consola } from "consola";
-import { JWKInterface } from "arweave/node/lib/wallet";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import mode from "../mode";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
-import { mergeObjects, readJSON, timeout } from "./utils/objects";
+import { mergeObjects, timeout } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
@@ -70,7 +68,7 @@ export default class NodeRunner {
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
     this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
-    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
+    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.privateKeys.ethereumPrivateKey);
 
     // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     // alternatively use arrow functions...
@@ -79,7 +77,6 @@ export default class NodeRunner {
   }
 
   static async create(
-    jwk: JWKInterface,
     nodeConfig: NodeConfig,
   ): Promise<NodeRunner> {
     // Running a simple web server
@@ -87,10 +84,10 @@ export default class NodeRunner {
     // Otherwise App Runner crashes ¯\_(ツ)_/¯
     new ExpressAppRunner(nodeConfig).run();
 
-    const arweave = new ArweaveProxy(jwk);
+    const arweave = new ArweaveProxy(nodeConfig.privateKeys.arweaveJwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave);
-    const bundlrService = new BundlrService(jwk, nodeConfig.minimumArBalance);
+    const bundlrService = new BundlrService(nodeConfig.privateKeys.arweaveJwk, nodeConfig.minimumArBalance);
 
     let manifestData = null;
     if (nodeConfig.useManifestFromSmartContract) {
@@ -106,8 +103,10 @@ export default class NodeRunner {
           break;
         }
       }
+    } else if (nodeConfig.manifestFromFile) {
+      manifestData = nodeConfig.manifestFromFile;
     } else {
-      manifestData = readJSON(nodeConfig.manifestFile!);
+      throw Error("No manifest source defined");
     }
 
     return new NodeRunner(
@@ -134,7 +133,7 @@ export default class NodeRunner {
   }
 
   private async printInitialNodeDetails() {
-    const evmPrivateKey = this.nodeConfig.credentials.ethereumPrivateKey;
+    const evmPrivateKey = this.nodeConfig.privateKeys.ethereumPrivateKey;
     const evmAddress = new ethers.Wallet(evmPrivateKey).address;
     const ipAddress = await fetchIp();
     logger.info(`Node evm address: ${evmAddress}`);
@@ -247,7 +246,7 @@ export default class NodeRunner {
   }
 
   private shouldBackupOnArweave() {
-    return mode.isProd && this.currentManifest?.enableArweaveBackup;
+    return this.nodeConfig.isProd && this.currentManifest?.enableArweaveBackup;
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {
@@ -420,10 +419,9 @@ export default class NodeRunner {
     this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
     this.priceSignerService = new PriceSignerService({
-      ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
+      ethereumPrivateKey: this.nodeConfig.privateKeys.ethereumPrivateKey,
       evmChainId: newManifest.evmChainId,
       version: this.version,
-      addEvmSignature: Boolean(this.nodeConfig.addEvmSignature),
     });
     this.newManifest = null;
   }

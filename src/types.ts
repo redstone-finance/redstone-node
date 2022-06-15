@@ -18,7 +18,6 @@ export interface SourceTimeout {
 }
 
 export interface Credentials {
-  ethereumPrivateKey: string;
   twelveDataRapidApiKey?: string;
 }
 
@@ -118,20 +117,24 @@ export interface ArweaveTransactionTags {
   [tag: string]: string;
 }
 
+export interface PrivateKeys {
+  arweaveJwk: JWKInterface;
+  ethereumPrivateKey: string;
+}
+
 export interface NodeConfig {
+  isProd: boolean,
   enableJsonLogs: boolean;
   printDiagnosticInfo: boolean;
   performanceTrackingLabelPrefix: string;
   manifestRefreshInterval: number;
-  arweaveKeysFile?: string;
-  arweaveKeysJWK?: JWKInterface;
   useManifestFromSmartContract: boolean;
-  addEvmSignature: boolean;
-  manifestFile: string;
+  manifestFromFile: Manifest | null;
   minimumArBalance: number;
   credentials: Credentials;
   httpBroadcasterURLs: string[];
   enableStreamrBroadcaster: boolean;
   disableSinglePricesBroadcastingInStreamr: boolean;
   omitSourcesInArweaveTx: boolean;
+  privateKeys: PrivateKeys
 }
