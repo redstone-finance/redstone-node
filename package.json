@@ -76,6 +76,7 @@
     "esbuild": "^0.14.34",
     "jest": "^27.0.4",
     "jest-mock-extended": "^1.0.16",
+    "msw": "^0.42.1",
     "open": "^8.0.4",
     "plotly": "^1.0.6",
     "prettier": "^2.6.2",
