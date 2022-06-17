@@ -3,23 +3,23 @@ export const timeout = (ms: number): Promise<any> => {
 }
 
 export const promiseTimeout = async (
-  promisesArray: Promise<any>[],
+  promisesArray: () => Promise<any>,
   timeoutInMilliseconds: number,
   callback?: (value: any) => void,
   onError?: () => void
 ) => {
   try {
     const value = await Promise.race([
-      ...promisesArray,
+      promisesArray(),
       timeout(timeoutInMilliseconds)
     ]);
     if (callback) {
-      callback(value);
+      return callback(value);
     }
     return value;
   } catch {
     if (onError) {
-      onError();
+      return onError();
     }
   }
 };

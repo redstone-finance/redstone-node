@@ -85,10 +85,11 @@ export default class PricesService {
       );
     }
 
-    const fetchPromise = fetchers[source].fetchAll(tokens, {
-      credentials: this.credentials,
-      manifest: this.manifest,
-    });
+    const fetchPromise = () =>
+      fetchers[source].fetchAll(tokens, {
+        credentials: this.credentials,
+        manifest: this.manifest,
+      });
 
     const sourceTimeout = ManifestHelper.getTimeoutForSource(
       source,
@@ -104,7 +105,7 @@ export default class PricesService {
     const trackingId = trackStart(`fetching-${source}`);
     try {
       // Fail if there is no response after given timeout
-      const prices = await promiseTimeout([fetchPromise], sourceTimeout);
+      const prices = await promiseTimeout(() => fetchPromise(), sourceTimeout);
       logger.info(
         `Fetched prices in USD for ${prices.length} currencies from source: "${source}"`
       );

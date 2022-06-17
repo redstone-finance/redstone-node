@@ -6,7 +6,7 @@ import fetchers from "../../src/fetchers";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import { any } from "jest-mock-extended";
-import { timeout } from "../../src/utils/objects";
+import { timeout } from "../../src/utils/promise-timeout";
 
 /****** MOCKS START ******/
 const mockArProxy = {

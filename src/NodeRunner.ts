@@ -397,7 +397,7 @@ export default class NodeRunner {
       const getCurrentManifestOnError = () =>
         logger.info("Error while calling manifest load function.");
       promiseTimeout(
-        [this.arweaveService.getCurrentManifest()],
+        () => this.arweaveService.getCurrentManifest(),
         MANIFEST_LOAD_TIMEOUT_MS,
         getCurrentManifestCallback,
         getCurrentManifestOnError
