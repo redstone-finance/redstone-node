@@ -19,7 +19,7 @@ async function generateMappingForEchange(exchangeId) {
   const currentManifest = require(`../../manifests/${exchangeId}.json`);
 
   // Loading markets for the given exchnage
-  const exchange = new ccxt[exchangeId];
+  const exchange = new ccxt[exchangeId]();
   console.log(`Loading markets list...`);
   const markets = Object.values(await exchange.loadMarkets());
   console.log(`Loaded ${markets.length} markets`);
@@ -28,7 +28,10 @@ async function generateMappingForEchange(exchangeId) {
   const symbolToId = {};
   for (const market of markets) {
     const symbol = market.symbol;
-    if (symbol.endsWith("/USD") || (symbol.endsWith("/USDT") && !symbolToId[market.base])) {
+    if (
+      symbol.endsWith("/USD") ||
+      (symbol.endsWith("/USDT") && !symbolToId[market.base])
+    ) {
       symbolToId[market.base] = market.symbol;
     }
   }

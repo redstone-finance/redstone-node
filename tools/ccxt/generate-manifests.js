@@ -44,11 +44,15 @@ async function getTickersForExchange(exchangeName) {
   const supportedTickers = {};
 
   // Fetch data
-  const exchange = new ccxt[exchangeName];
+  const exchange = new ccxt[exchangeName]();
 
   // A small hack for kraken (as it stopped to support fetching all tickers)
-  const krakenTickers = Object.values(require("../../src/fetchers/ccxt/symbol-to-id/kraken.json"));
-  const tickers = await exchange.fetchTickers(exchangeName == "kraken" ? krakenTickers : undefined);
+  const krakenTickers = Object.values(
+    require("../../src/fetchers/ccxt/symbol-to-id/kraken.json")
+  );
+  const tickers = await exchange.fetchTickers(
+    exchangeName == "kraken" ? krakenTickers : undefined
+  );
 
   // Parse response
   for (const ticker of Object.values(tickers)) {
@@ -97,14 +101,16 @@ function mergeTickers(newTickers, exchangeName, prevResult) {
 // value is similar to majority of prices from other exchanges that
 // support this symbol
 function getSupportedTokensForExchange(exchange, aggregatedTickers) {
-  return Object.keys(aggregatedTickers).filter(symbol => {
+  return Object.keys(aggregatedTickers).filter((symbol) => {
     const pricesWithSources = aggregatedTickers[symbol];
     const priceValues = Object.values(pricesWithSources);
     const price = pricesWithSources[exchange];
-    const shouldBeIncluded = price > 0
-      && priceValues.length >= MIN_NUMBER_OF_SUPPORTED_EXCHANGES
-      && (!DONT_ADD_NEW_TOKENS || isTokenIncludedInCurrentManifest({ exchange, symbol }))
-      && isPriceSimilarWithMajority(price, priceValues);
+    const shouldBeIncluded =
+      price > 0 &&
+      priceValues.length >= MIN_NUMBER_OF_SUPPORTED_EXCHANGES &&
+      (!DONT_ADD_NEW_TOKENS ||
+        isTokenIncludedInCurrentManifest({ exchange, symbol })) &&
+      isPriceSimilarWithMajority(price, priceValues);
 
     return shouldBeIncluded;
   });
@@ -116,7 +122,7 @@ function isTokenIncludedInCurrentManifest({ exchange, symbol }) {
 }
 
 function isPriceSimilarWithMajority(price, prices) {
-  const similarPrices = prices.filter(p => arePricesSimilar(p, price))
+  const similarPrices = prices.filter((p) => arePricesSimilar(p, price));
   const similarPricesPercentage = (similarPrices.length / prices.length) * 100;
   return similarPricesPercentage >= MIN_SIMILAR_VALUES_PERCENTAGE;
 }
@@ -139,9 +145,7 @@ function saveManifestToFile({ tokens, exchange }) {
   const manifest = {
     interval: 60000,
     priceAggregator: "median",
-    defaultSource: [
-      exchange,
-    ],
+    defaultSource: [exchange],
     sourceTimeout: 50000,
     maxPriceDeviationPercent: 25,
     evmChainId: 1,

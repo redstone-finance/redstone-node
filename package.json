@@ -37,7 +37,6 @@
     "arweave-multihost": "^0.1.0",
     "axios": "^0.21.1",
     "ccxt": "^1.85.3",
-    "coinbase-pro-node": "^4.0.0",
     "coingecko-api": "^1.0.10",
     "consola": "^2.15.3",
     "deep-sort-object": "^1.0.2",

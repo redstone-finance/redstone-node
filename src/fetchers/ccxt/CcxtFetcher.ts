@@ -57,7 +57,6 @@ export class CcxtFetcher extends BaseFetcher {
     for (const ticker of Object.values(response) as Ticker[]) {
       const pairSymbol = ticker.symbol;
       const lastPrice = ticker.last as number;
-
       if (pairSymbol.endsWith("/USD")) {
         pricesObj[pairSymbol] = lastPrice;
       } else if (pairSymbol.endsWith("/USDT")) {
@@ -66,7 +65,6 @@ export class CcxtFetcher extends BaseFetcher {
         }
       }
     }
-
     return pricesObj;
   }
 };
