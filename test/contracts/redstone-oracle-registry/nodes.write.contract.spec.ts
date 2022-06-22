@@ -23,6 +23,8 @@ const testNodeDetails = {
   dataFeedId: "testId",
   evmAddress: "testAddress",
   ipAddress: "testIP",
+  ecdsaPublicKey: "testECDSAPublicKey",
+  arweavePublicKey: "testArweavePubicKey",
   url: "testUrl",
 };
 
@@ -116,6 +118,8 @@ describe("Redstone oracle registry contract - nodes - write", () => {
         dataFeedId: "testId",
         evmAddress: "testAddress1",
         ipAddress: "testIP",
+        ecdsaPublicKey: "testECDSAPublicKey",
+        arweavePublicKey: "testArweavePubicKey",
         url: "testUrl",
       };
 
@@ -126,6 +130,8 @@ describe("Redstone oracle registry contract - nodes - write", () => {
         dataFeedId: "testId",
         evmAddress: "testAddress2",
         ipAddress: "testIP",
+        ecdsaPublicKey: "testECDSAPublicKey",
+        arweavePublicKey: "testArweavePubicKey",
         url: "testUrl",
       };
       await contract.writeInteraction<RedstoneOraclesInput>({
@@ -205,6 +211,8 @@ describe("Redstone oracle registry contract - nodes - write", () => {
         dataFeedId: "newTestId",
         evmAddress: "testAddress",
         ipAddress: "newTestIP",
+        ecdsaPublicKey: "newTestECDSAPublicKey",
+        arweavePublicKey: "newTestArweavePubicKey",
         url: "newTestUrl",
       };
       await contract.writeInteraction<RedstoneOraclesInput>({

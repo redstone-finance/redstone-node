@@ -148,6 +148,8 @@ describe("Redstone oracle registry contract - nodes - read", () => {
         dataFeedId: "testId",
         evmAddress: "testAddress",
         ipAddress: "testIpAddress",
+        ecdsaPublicKey: "testECDSAPublicKey",
+        arweavePublicKey: "testArweavePubicKey",
         url: "testUrl",
       };
       expect(result).toEqual(expectedNodeDetails);
@@ -168,6 +170,8 @@ describe("Redstone oracle registry contract - nodes - read", () => {
         dataFeedId: "testId",
         evmAddress: "testAddress",
         ipAddress: "testIpAddress",
+        ecdsaPublicKey: "testECDSAPublicKey",
+        arweavePublicKey: "testArweavePubicKey",
         url: "testUrl",
       };
       expect(result).toEqual(expectedNodeDetails);

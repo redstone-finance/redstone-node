@@ -37,6 +37,16 @@ export const updateRedstoneNode = async () => {
     },
     {
       type: "text",
+      name: "ecdsaPublicKey",
+      message: "Provide ECDSA public key of redstone node",
+    },
+    {
+      type: "text",
+      name: "arweavePublicKey",
+      message: "Provide Arweave public key of redstone node",
+    },
+    {
+      type: "text",
       name: "url",
       message: "Provide URL of redstone node",
     },
@@ -50,7 +60,17 @@ export const updateRedstoneNode = async () => {
 
   const contract = getOracleRegistryContract(response.walletFilePath);
 
-  const { name, logo, description, dataFeedId, evmAddress, ipAddress, url } = response;
+  const {
+    name,
+    logo,
+    description,
+    dataFeedId,
+    evmAddress,
+    ipAddress,
+    ecdsaPublicKey,
+    arweavePublicKey,
+    url
+  } = response;
   const nodeDetails = {
     ...(!!name && { name }),
     ...(!!logo && { logo }),
@@ -58,6 +78,8 @@ export const updateRedstoneNode = async () => {
     ...(!!dataFeedId && { dataFeedId }),
     ...(!!evmAddress && { evmAddress }),
     ...(!!ipAddress && { ipAddress }),
+    ...(!!ecdsaPublicKey && { ecdsaPublicKey }),
+    ...(!!arweavePublicKey && { arweavePublicKey }),
     ...(!!url && { url })
   };
   const updateNodeTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({

@@ -20,7 +20,9 @@ export const registerNode = (
     data.description &&
     data.dataFeedId &&
     data.evmAddress &&
-    data.ipAddress;
+    data.ipAddress &&
+    data.ecdsaPublicKey &&
+    data.arweavePublicKey;
 
   if (!isValidData) {
     throw new ContractError("Invalid node data");
