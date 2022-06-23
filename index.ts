@@ -10,7 +10,7 @@ async function start() {
   } catch (e: any) {
     logger.error(e.stack);
     logger.info(
-      "USAGE: yarn start:prod");
+      "Please find details about the correct node running at https://github.com/redstone-finance/redstone-node/blob/main/docs/PREPARE_ENV_VARIABLES.md");
   }
 }
 
