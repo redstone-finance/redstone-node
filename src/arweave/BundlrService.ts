@@ -18,53 +18,36 @@ export interface PriceDataForPostingOnArweave {
   value: any;
 }
 
-export type BalanceCheckResult = { balance: number, isBalanceLow: boolean }
+export type BalanceCheckResult = { balance: number; isBalanceLow: boolean };
 
 export class BundlrService {
   private readonly bundlrProxy;
 
-  constructor(
-    jwk: JWKInterface,
-    private readonly minBalance: number
-  ) {
+  constructor(jwk: JWKInterface) {
     this.bundlrProxy = new BundlrProxy(jwk);
   }
 
-  async checkBalance(): Promise<BalanceCheckResult> {
-    try {
-      const balance = await this.bundlrProxy.getBalance();
-      const isBalanceLow = balance < this.minBalance;
-      logger.info(`Balance on bundlr: ${balance}`);
-      return { balance, isBalanceLow };
-    } catch (e: any) {
-      logger.error("Error while checking Bundlr balance", e.stack);
-      return { balance: 0, isBalanceLow: true };
-    }
-  }
-
   async prepareBundlrTransaction(
-    prices: PriceDataAfterAggregation[],
-    omitSources?: boolean,
+    prices: PriceDataAfterAggregation[]
   ): Promise<BundlrTransaction> {
     // Start time tracking
     const transactionPreparingTrackingId = trackStart("transaction-preparing");
 
     try {
-
-      logger.info("Keeping prices on arweave blockchain - preparing transaction");
+      logger.info(
+        "Keeping prices on arweave blockchain - preparing transaction"
+      );
       this.checkAllPricesHaveSameTimestamp(prices);
 
       // Removing sources (if needed)
-      let pricesToAttachInArweaveTx: PriceDataForPostingOnArweave[] = [...prices];
-      if (omitSources) {
-        pricesToAttachInArweaveTx = prices.map(price => {
-          return _.omit(price, ['source']);
-        });
-      }
+      let pricesToAttachInArweaveTx: PriceDataForPostingOnArweave[] = [
+        ...prices,
+      ];
 
       // Prepare and sign bundlr transaction
       const transaction = await this.bundlrProxy.prepareSignedTrasaction(
-        pricesToAttachInArweaveTx);
+        pricesToAttachInArweaveTx
+      );
 
       return transaction;
     } finally {
@@ -74,7 +57,9 @@ export class BundlrService {
   }
 
   async uploadBundlrTransaction(tx: BundlrTransaction) {
-    logger.info(`Keeping data on arweave blockchain - posting transaction ${tx.id}`);
+    logger.info(
+      `Keeping data on arweave blockchain - posting transaction ${tx.id}`
+    );
     const keepingTrackingId = trackStart("keeping");
 
     try {
@@ -92,7 +77,7 @@ export class BundlrService {
       throw new Error("Can not keep empty array of prices in Arweave");
     }
 
-    const differentTimestamps = new Set(prices.map(price => price.timestamp));
+    const differentTimestamps = new Set(prices.map((price) => price.timestamp));
     if (differentTimestamps.size !== 1) {
       throw new Error(`All prices should have same timestamps.
      Found ${differentTimestamps.size} different timestamps.`);

@@ -9,6 +9,9 @@ export interface Manifest {
   maxPriceDeviationPercent: number;
   evmChainId: number;
   tokens: { [symbol: string]: TokenConfig };
+  httpBroadcasterURLs?: string[];
+  enableStreamrBroadcaster?: boolean;
+  disableSinglePricesBroadcastingInStreamr?: boolean;
   enableArweaveBackup?: boolean;
 }
 
@@ -123,18 +126,11 @@ export interface PrivateKeys {
 }
 
 export interface NodeConfig {
-  isProd: boolean,
   enableJsonLogs: boolean;
+  enablePerformanceTracking: boolean;
   printDiagnosticInfo: boolean;
-  performanceTrackingLabelPrefix: string;
   manifestRefreshInterval: number;
-  useManifestFromSmartContract: boolean;
-  manifestFromFile: Manifest | null;
-  minimumArBalance: number;
   credentials: Credentials;
-  httpBroadcasterURLs: string[];
-  enableStreamrBroadcaster: boolean;
-  disableSinglePricesBroadcastingInStreamr: boolean;
-  omitSourcesInArweaveTx: boolean;
-  privateKeys: PrivateKeys
+  privateKeys: PrivateKeys;
+  overrideManifestUsingFile?: Manifest;
 }

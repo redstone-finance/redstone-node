@@ -4,48 +4,37 @@ const baseManifest = {
   sourceTimeout: 3000,
   maxPriceDeviationPercent: 25,
   evmChainId: 1,
+  httpBroadcasterURLs: ["http://localhost:9000"],
+  enableStreamrBroadcaster: true,
+  disableSinglePricesBroadcastingInStreamr: false,
+  enableArweaveBackup: false,
 };
 
 export const MOCK_MANIFEST = {
   ...baseManifest,
   tokens: {
-    "BTC": {
-      "source": [
-        "bitfinex",
-        "ftx"
-      ]
+    BTC: {
+      source: ["bitfinex", "ftx"],
     },
-    "ETH": {
-      "source": [
-        "binance",
-        "bitfinex"
-      ]
+    ETH: {
+      source: ["binance", "bitfinex"],
     },
-    "USDT": {
-      "source": [
-        "ftx",
-        "binance"
-      ]
-    }
-  }
+    USDT: {
+      source: ["ftx", "binance"],
+    },
+  },
 };
 
 export const MOCK_NODE_CONFIG = {
-  isProd: false,
   enableJsonLogs: false,
+  enablePerformanceTracking: false,
   printDiagnosticInfo: false,
-  performanceTrackingLabelPrefix: "public",
   manifestRefreshInterval: 120000,
-  useManifestFromSmartContract: false,
-  manifestFromFile: MOCK_MANIFEST,
+  overrideManifestUsingFile: MOCK_MANIFEST,
   privateKeys: {
     arweaveJwk: { e: "e", kty: "kty", n: "n" },
-    ethereumPrivateKey: "0x1111111111111111111111111111111111111111111111111111111111111111"
+    ethereumPrivateKey:
+      "0x1111111111111111111111111111111111111111111111111111111111111111",
   },
-  minimumArBalance: 0.2,
-  enableStreamrBroadcaster: false,
-  httpBroadcasterURLs: ["http://localhost:9000"],
-  disableSinglePricesBroadcastingInStreamr: true,
-  omitSourcesInArweaveTx: true,
-  credentials: {}
+  credentials: {},
 };
