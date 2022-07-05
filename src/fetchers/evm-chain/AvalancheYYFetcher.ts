@@ -17,7 +17,7 @@ export class AvalancheYYFetcher extends EvmChainFetcher {
       abiUrl,
       connection,
       contractAddress,
-      (contract: any) => this.extractPricesFromContract(contract)
+      (contract: Contract) => this.extractPricesFromContract(contract)
     );
     this.symbol = symbol;
   }

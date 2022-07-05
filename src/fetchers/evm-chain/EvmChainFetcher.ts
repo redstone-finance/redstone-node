@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ethers } from "ethers";
+import { Contract, ethers } from "ethers";
 import { PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
 
@@ -7,14 +7,14 @@ export class EvmChainFetcher extends BaseFetcher {
   abiUrl: string;
   connection: string | ethers.utils.ConnectionInfo;
   contractAddress: string;
-  extractPrices: (contract: any) => Promise<PricesObj>;
+  extractPrices: (contract: Contract) => Promise<PricesObj>;
 
   constructor(
     name: string,
     abiUrl: string,
     connection: string | ethers.utils.ConnectionInfo,
     contractAddress: string,
-    extractPrices: (contract: any) => Promise<PricesObj>
+    extractPrices: (contract: Contract) => Promise<PricesObj>
   ) {
     super(name);
     this.abiUrl = abiUrl;
@@ -23,7 +23,7 @@ export class EvmChainFetcher extends BaseFetcher {
     this.extractPrices = extractPrices;
   }
 
-  async fetchData(): Promise<any> {
+  async fetchData(): Promise<Contract> {
     let abi;
     try {
       const abiResponse = await axios.get(this.abiUrl);

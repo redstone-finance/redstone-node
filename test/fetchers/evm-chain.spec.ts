@@ -23,7 +23,7 @@ describe("EVM chain fetcher", () => {
       "http://abiTest.com",
       provider.connection,
       contract.address,
-      async (contract) => ({ test: contract.address })
+      async () => ({ test: 11 })
     );
   });
 
@@ -40,9 +40,7 @@ describe("EVM chain fetcher", () => {
   it("Should properly fetch data", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: { result: [] } });
     const result = await fetcher.fetchAll(["test"]);
-    expect(result).toEqual([
-      { symbol: "test", value: "0xA193E42526F1FEA8C99AF609dcEabf30C1c29fAA" },
-    ]);
+    expect(result).toEqual([{ symbol: "test", value: 11 }]);
   });
 
   it("Should throw error if cannot fetch abi", async () => {
