@@ -3,33 +3,43 @@ import { JWKInterface } from "arweave/node/lib/wallet";
 import { Manifest, NodeConfig } from "./types";
 import { readJSON } from "./utils/objects";
 
-const DEFAULT_ENABLE_PERFORMANCE_TRACKING = true;
-const DEFAULT_ENABLE_JSON_LOGS = true;
-const DEFAULT_PRINT_DIAGNOSTIC_INFO = true;
-const DEFAULT_MANIFEST_REFRESH_INTERVAL = 120000;
+const DEFAULT_ENABLE_PERFORMANCE_TRACKING = "true";
+const DEFAULT_ENABLE_JSON_LOGS = "true";
+const DEFAULT_PRINT_DIAGNOSTIC_INFO = "true";
+const DEFAULT_MANIFEST_REFRESH_INTERVAL = "120000";
 const DEFAULT_TWELVE_DATA_RAPID_API_KEY = "";
 
-const getFromEnv = <T>(envName: string, defaultValue?: any): T => {
-  let valueFromEnv = process.env[envName];
-  if (!valueFromEnv && defaultValue === undefined) {
-    throw new Error(`Env ${envName} must be specified`);
-  }
-  return valueFromEnv
-    ? parseBooleanEnvValueIfBooleanString(valueFromEnv)
-    : defaultValue;
-};
-
-const parseBooleanEnvValueIfBooleanString = (valueFromEnv: string) => {
-  if (valueFromEnv === "true" || valueFromEnv === "false") {
-    return valueFromEnv === "true";
+const getFromEnv = (envName: string, defaultValue?: string): string => {
+  const valueFromEnv = process.env[envName];
+  if (!valueFromEnv) {
+    if (defaultValue === undefined) {
+      throw new Error(`Env ${envName} must be specified`);
+    }
+    return defaultValue;
   }
   return valueFromEnv;
 };
 
+const parserFromString = {
+  number(value: string): number {
+    const numberValue = Number(value);
+    if (isNaN(numberValue)) {
+      throw new Error(`Invalid number value: ${numberValue}`);
+    }
+    return numberValue;
+  },
+  boolean(value: string): boolean {
+    if (!(value === "true" || value === "false")) {
+      throw new Error(`Invalid boolean value: ${value}`);
+    }
+    return value === "true";
+  },
+};
+
 const getOptionallyManifestData = () => {
-  const overrideManifestUsingFile = getFromEnv<string>(
+  const overrideManifestUsingFile = getFromEnv(
     "OVERRIDE_MANIFEST_USING_FILE",
-    null
+    ""
   );
   if (!!overrideManifestUsingFile) {
     return readJSON(overrideManifestUsingFile) as Manifest;
@@ -51,33 +61,30 @@ export const getArweaveWallet = (): JWKInterface => {
 };
 
 export const config: NodeConfig = Object.freeze({
-  enableJsonLogs: getFromEnv<boolean>(
-    "ENABLE_JSON_LOGS",
-    DEFAULT_ENABLE_JSON_LOGS
+  enableJsonLogs: parserFromString.boolean(
+    getFromEnv("ENABLE_JSON_LOGS", DEFAULT_ENABLE_JSON_LOGS)
   ),
-  enablePerformanceTracking: getFromEnv<boolean>(
-    "ENABLE_PERFORMANCE_TRACKING",
-    DEFAULT_ENABLE_PERFORMANCE_TRACKING
-  ),
-  printDiagnosticInfo: getFromEnv<boolean>(
-    "PRINT_DIAGNOSTIC_INFO",
-    DEFAULT_PRINT_DIAGNOSTIC_INFO
-  ),
-  manifestRefreshInterval: Number(
-    getFromEnv<number>(
-      "MANIFEST_REFRESH_INTERVAL",
-      DEFAULT_MANIFEST_REFRESH_INTERVAL
+  enablePerformanceTracking: parserFromString.boolean(
+    getFromEnv(
+      "ENABLE_PERFORMANCE_TRACKING",
+      DEFAULT_ENABLE_PERFORMANCE_TRACKING
     )
+  ),
+  printDiagnosticInfo: parserFromString.boolean(
+    getFromEnv("PRINT_DIAGNOSTIC_INFO", DEFAULT_PRINT_DIAGNOSTIC_INFO)
+  ),
+  manifestRefreshInterval: parserFromString.number(
+    getFromEnv("MANIFEST_REFRESH_INTERVAL", DEFAULT_MANIFEST_REFRESH_INTERVAL)
   ),
   overrideManifestUsingFile: getOptionallyManifestData(),
   credentials: {
-    twelveDataRapidApiKey: getFromEnv<string>(
+    twelveDataRapidApiKey: getFromEnv(
       "TWELVE_DATA_RAPID_API_KEY",
       DEFAULT_TWELVE_DATA_RAPID_API_KEY
     ),
   },
   privateKeys: {
     arweaveJwk: getArweaveWallet(),
-    ethereumPrivateKey: getFromEnv<string>("ETHEREUM_PRIVATE_KEY"),
+    ethereumPrivateKey: getFromEnv("ETHEREUM_PRIVATE_KEY", "string"),
   },
 });
