@@ -394,7 +394,7 @@ export default class NodeRunner {
           this.handleLoadedManifest(value as Manifest);
         })
         .catch((error) => {
-          if (error == TimeoutError) {
+          if (error instanceof TimeoutError) {
             logger.warn("Manifest load promise timeout");
           } else {
             logger.info("Error while calling manifest load function");
