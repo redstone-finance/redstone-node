@@ -1,37 +1,26 @@
-import axios from "axios";
-import { Contract, ethers } from "ethers";
+import { Contract, ContractInterface, ethers } from "ethers";
 import { PricesObj } from "../../types";
 import { BaseFetcher } from "../BaseFetcher";
 
-export class EvmChainFetcher extends BaseFetcher {
-  abiUrl: string;
-  connection: string | ethers.utils.ConnectionInfo;
-  contractAddress: string;
-  extractPrices: (contract: Contract) => Promise<PricesObj>;
+export abstract class EvmChainFetcher extends BaseFetcher {
+  connection: string;
+  extractPrices: (_: any, ids: string[]) => Promise<PricesObj>;
 
   constructor(
     name: string,
-    abiUrl: string,
-    connection: string | ethers.utils.ConnectionInfo,
-    contractAddress: string,
-    extractPrices: (contract: Contract) => Promise<PricesObj>
+    connection: string,
+    extractPrices: (_: any, ids: string[]) => Promise<PricesObj>
   ) {
     super(name);
-    this.abiUrl = abiUrl;
     this.connection = connection;
-    this.contractAddress = contractAddress;
     this.extractPrices = extractPrices;
   }
 
-  async fetchData(): Promise<Contract> {
-    let abi;
-    try {
-      const abiResponse = await axios.get(this.abiUrl);
-      abi = abiResponse.data.result;
-    } catch (error) {
-      throw Error(`Cannot fetch contract ABI: ${error}`);
-    }
+  async getContractInstance(
+    abi: ContractInterface,
+    contractAddress: string
+  ): Promise<Contract> {
     const provider = new ethers.providers.JsonRpcProvider(this.connection);
-    return new ethers.Contract(this.contractAddress, abi, provider);
+    return new ethers.Contract(contractAddress, abi, provider);
   }
 }

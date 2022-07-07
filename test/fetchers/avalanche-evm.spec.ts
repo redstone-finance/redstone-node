@@ -2,7 +2,9 @@ import axios from "axios";
 import { ethers, Contract, BigNumber } from "ethers";
 import { MockProvider } from "ethereum-waffle";
 import { deployMockContract } from "@ethereum-waffle/mock-contract";
-import { AvalancheYYFetcher } from "../../src/fetchers/evm-chain/AvalancheYYFetcher";
+import { AvalancheEvmFetcher } from "../../src/fetchers/evm-chain/AvalancheEvmFetcher";
+
+jest.setTimeout(10000);
 
 jest.spyOn(ethers, "Contract").mockReturnValue({
   totalDeposits: () => BigNumber.from("0xa8d1e1eef9e3ae3cdc98"),
@@ -12,26 +14,33 @@ jest.spyOn(ethers, "Contract").mockReturnValue({
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe("Avalanche YY fetcher", () => {
-  it("Should properly fetch data", async () => {
-    const provider = new MockProvider();
+describe("Avalanche EVM fetcher", () => {
+  let provider: MockProvider;
+
+  beforeAll(async () => {
+    provider = new MockProvider();
+    await provider.ready;
     const [wallet] = provider.getWallets();
     const contract = await deployMockContract(wallet, []);
 
-    const fetcher = new AvalancheYYFetcher(
-      "http://abiTest.com",
-      provider.connection,
-      contract.address,
-      "testSymbol"
+    jest.mock(
+      "../../src/fetchers/evm-chain/contracts-details/yield-yak/index.ts",
+      () => ({
+        address: contract.address,
+        abi: [],
+      })
     );
+  });
 
-    mockedAxios.get.mockResolvedValueOnce({ data: { result: [] } });
+  test("Should properly fetch data", async () => {
+    const fetcher = new AvalancheEvmFetcher(provider.connection.url);
+
     mockedAxios.get.mockResolvedValueOnce({
       data: [{ value: 16.942986798458783 }],
     });
-    const result = await fetcher.fetchAll(["testSymbol"]);
+    const result = await fetcher.fetchAll(["$YYAV3SA1"]);
     expect(result).toEqual([
-      { symbol: "testSymbol", value: 17.22793285180235 },
+      { symbol: "$YYAV3SA1", value: 17.227932764426185 },
     ]);
   });
 });

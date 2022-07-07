@@ -13,7 +13,7 @@ import { EcbFetcher } from "./ecb/EcbFetcher";
 import { DrandFetcher } from "./drand/DrandFetcher";
 import twapFetchers from "./twap/all-twap-fetchers";
 import { TwelveDataFetcher } from "./twelve-data/TwelveDataFetcher";
-import { AvalancheYYFetcher } from "./evm-chain/AvalancheYYFetcher";
+import { AvalancheEvmFetcher } from "./evm-chain/AvalancheEvmFetcher";
 
 export default {
   "yf-unofficial": new YfUnofficialFetcher(),
@@ -27,13 +27,9 @@ export default {
   kyber: new KyberFetcher(),
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
-  avalancheYyFetcher$YYAV3SA1: new AvalancheYYFetcher(
-    "https://api.snowtrace.io/api?module=contract&action=getabi&address=0xaAc0F2d0630d1D09ab2B5A400412a4840B866d95&format=json",
-    "https://api.avax.network/ext/bc/C/rpc",
-    "0xaAc0F2d0630d1D09ab2B5A400412a4840B866d95",
-    "$YYAV3SA1"
+  "avalanche-evm-fetcher": new AvalancheEvmFetcher(
+    "https://api.avax.network/ext/bc/C/rpc"
   ),
-
   ...ccxtFetchers,
   ...pangolinFetchers,
   ...twapFetchers,

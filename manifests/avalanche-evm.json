@@ -7,5 +7,5 @@
   "tokens": {
     "$YYAV3SA1": {}
   },
-  "defaultSource": ["avalancheYyFetcher$YYAV3SA1"]
+  "defaultSource": ["avalanche-evm-fetcher"]
 }
