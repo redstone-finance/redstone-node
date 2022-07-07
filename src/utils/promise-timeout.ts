@@ -1,25 +1,31 @@
-export const timeout = (ms: number): Promise<any> => {
-  return new Promise(resolve => setTimeout(() => resolve('timeout'), ms));
+export class TimeoutError extends Error {
+  constructor() {
+    super();
+    this.name = "ValidationError";
+    this.message = "TimeoutError";
+  }
 }
+
+export const timeout = (ms: number): Promise<any> => {
+  return new Promise((_, reject) =>
+    setTimeout(() => reject(new TimeoutError()), ms)
+  );
+};
 
 export const promiseTimeout = async (
   promisesArray: () => Promise<any>,
   timeoutInMilliseconds: number,
-  callback?: (value: any) => void,
-  onError?: () => void
+  onError?: (error: any) => void
 ) => {
   try {
-    const value = await Promise.race([
+    return await Promise.race([
       promisesArray(),
-      timeout(timeoutInMilliseconds)
+      timeout(timeoutInMilliseconds),
     ]);
-    if (callback) {
-      return callback(value);
-    }
-    return value;
-  } catch {
+  } catch (error: any) {
     if (onError) {
-      return onError();
+      return onError(error);
     }
+    throw error;
   }
 };

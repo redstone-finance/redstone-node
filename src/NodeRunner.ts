@@ -7,8 +7,8 @@ import ArweaveProxy from "./arweave/ArweaveProxy";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import { BundlrService } from "./arweave/BundlrService";
-import { promiseTimeout } from "./utils/promise-timeout";
-import { mergeObjects } from "./utils/objects";
+import { promiseTimeout, TimeoutError } from "./utils/promise-timeout";
+import { mergeObjects, readJSON } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
@@ -386,22 +386,20 @@ export default class NodeRunner {
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
       // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
       // block standard node processing for so long (especially for nodes with low "interval" value)
-      const getCurrentManifestCallback = (value: Manifest | string) => {
-        if (value === "timeout") {
-          logger.warn("Manifest load promise timeout");
-        } else {
-          this.handleLoadedManifest(value as Manifest);
-        }
-        trackEnd(manifestFetchTrackingId);
-      };
       const getCurrentManifestOnError = () =>
         logger.info("Error while calling manifest load function.");
       promiseTimeout(
         () => this.arweaveService.getCurrentManifest(),
         MANIFEST_LOAD_TIMEOUT_MS,
-        getCurrentManifestCallback,
         getCurrentManifestOnError
-      );
+      ).then((value) => {
+        if (value == TimeoutError) {
+          logger.warn("Manifest load promise timeout");
+        } else {
+          this.handleLoadedManifest(value as Manifest);
+        }
+        trackEnd(manifestFetchTrackingId);
+      });
     } else {
       logger.info("Skipping manifest download in this iteration run.");
     }

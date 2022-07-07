@@ -1,4 +1,4 @@
-import { promiseTimeout } from "../../src/utils/promise-timeout";
+import { promiseTimeout, TimeoutError } from "../../src/utils/promise-timeout";
 
 describe("promiseTimeout", () => {
   test("should returns resolved value", async () => {
@@ -7,39 +7,21 @@ describe("promiseTimeout", () => {
     expect(resolvedValue).toBe("I am resolved");
   });
 
-  test("should return timeout string", async () => {
-    const promise = () => new Promise(resolve => setTimeout(() => resolve('timeout'), 1));
-    const resolvedValue = await promiseTimeout(() => promise(), 0);
-    expect(resolvedValue).toBe("timeout");
-  });
-
-  test("should call callback when resolved", async () => {
-    const resolvedPromise = () => Promise.resolve("I am resolved");
-    let callbackValue = "";
-    const callback = (resolveValue: string) => {
-      callbackValue = resolveValue
-    };
-    await promiseTimeout(resolvedPromise, 0, callback);
-    expect(callbackValue).toBe("I am resolved");
-  });
-
-  test("should call callback when timeout", async () => {
-    const promise = () => new Promise(resolve => setTimeout(() => resolve('timeout'), 1));
-    let callbackValue = "";
-    const callback = (resolveValue: string) => {
-      callbackValue = resolveValue
-    };
-    await promiseTimeout(() => promise(), 0, callback);
-    expect(callbackValue).toBe("timeout");
+  test("should throw timeout error", async () => {
+    const promise = () =>
+      new Promise((resolve) => setTimeout(() => resolve("I am resolved"), 10));
+    await expect(promiseTimeout(promise, 0)).rejects.toThrowError(
+      new TimeoutError()
+    );
   });
 
   test("should call onError if promise rejected", async () => {
-    const rejectPromise = () => Promise.reject("Error");
+    const rejectPromise = () => Promise.reject(new Error("Rejected promise"));
     let errorValue = "";
-    const onError = () => {
-      errorValue = "Rejected promise"
+    const onError = (error: Error) => {
+      errorValue = error.message;
     };
-    await promiseTimeout(() => rejectPromise(), 0, () => { }, onError);
+    await promiseTimeout(rejectPromise, 0, onError);
     expect(errorValue).toBe("Rejected promise");
   });
 });
