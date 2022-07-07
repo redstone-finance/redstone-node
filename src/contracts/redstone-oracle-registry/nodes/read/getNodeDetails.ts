@@ -15,7 +15,7 @@ export const getNodeDetails = (
   const nodesDetails = getDetailsById({
     identifier: data?.address,
     state,
-    oraclesType: "nodes"
+    oraclesType: "nodes",
   }) as NodeWithAddress;
   return { result: nodesDetails };
 };

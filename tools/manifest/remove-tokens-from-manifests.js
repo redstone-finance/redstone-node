@@ -39,5 +39,8 @@ const tokensToRemove = [
 for (const source of sources) {
   const sourceConfig = require(`../../manifests/${source}.json`);
   sourceConfig.tokens = _.omit(sourceConfig.tokens, tokensToRemove);
-  fs.writeFileSync(`${source}.json`, JSON.stringify(sourceConfig, null, 2) + "\n");
+  fs.writeFileSync(
+    `${source}.json`,
+    JSON.stringify(sourceConfig, null, 2) + "\n"
+  );
 }

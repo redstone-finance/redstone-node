@@ -3,17 +3,16 @@ import { PricesObj } from "../../types";
 import pangolinPairs from "./pangolin-pairs.json";
 import graphProxy from "../../utils/graph-proxy";
 
-const PANGOLIN_SUBGRAPH_FETCHER = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
+const PANGOLIN_SUBGRAPH_FETCHER =
+  "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
 const MIN_RESERVE_USD = 50000;
 
 export class PangolinFetcher extends BaseFetcher {
   protected retryForInvalidResponse: boolean = true;
 
-  constructor(
-    name: string,
-    private readonly baseTokenSymbol: string) {
-      super(name);
-    }
+  constructor(name: string, private readonly baseTokenSymbol: string) {
+    super(name);
+  }
 
   async fetchData(ids: string[]) {
     const pairIds = this.getPairIdsForAssetIds(ids);
@@ -32,9 +31,7 @@ export class PangolinFetcher extends BaseFetcher {
       }
     }`;
 
-    return await graphProxy.executeQuery(
-      PANGOLIN_SUBGRAPH_FETCHER,
-      query);
+    return await graphProxy.executeQuery(PANGOLIN_SUBGRAPH_FETCHER, query);
   }
 
   validateResponse(response: any): boolean {
@@ -70,8 +67,8 @@ export class PangolinFetcher extends BaseFetcher {
       const symbol0 = pair.token0.symbol;
       const symbol1 = pair.token1.symbol;
       const pairIdShouldBeIncluded =
-        (symbol0 == this.baseTokenSymbol && assetIds.includes(symbol1))
-        || (symbol1 == this.baseTokenSymbol && assetIds.includes(symbol0));
+        (symbol0 == this.baseTokenSymbol && assetIds.includes(symbol1)) ||
+        (symbol1 == this.baseTokenSymbol && assetIds.includes(symbol0));
       if (pairIdShouldBeIncluded) {
         pairIds.push(pair.id);
       }
@@ -79,4 +76,4 @@ export class PangolinFetcher extends BaseFetcher {
 
     return pairIds;
   }
-};
+}

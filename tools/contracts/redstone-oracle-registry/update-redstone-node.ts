@@ -54,8 +54,8 @@ export const updateRedstoneNode = async () => {
       type: "text",
       name: "walletFilePath",
       message: "Provide absolute path to wallet file",
-      validate: value => !value ? "Wallet file is required" : true
-    }
+      validate: (value) => (!value ? "Wallet file is required" : true),
+    },
   ]);
 
   const contract = getOracleRegistryContract(response.walletFilePath);
@@ -69,7 +69,7 @@ export const updateRedstoneNode = async () => {
     ipAddress,
     ecdsaPublicKey,
     arweavePublicKey,
-    url
+    url,
   } = response;
   const nodeDetails = {
     ...(!!name && { name }),
@@ -80,12 +80,13 @@ export const updateRedstoneNode = async () => {
     ...(!!ipAddress && { ipAddress }),
     ...(!!ecdsaPublicKey && { ecdsaPublicKey }),
     ...(!!arweavePublicKey && { arweavePublicKey }),
-    ...(!!url && { url })
+    ...(!!url && { url }),
   };
-  const updateNodeTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({
-    function: "updateNodeDetails",
-    data: nodeDetails
-  });
+  const updateNodeTransaction =
+    await contract.bundleInteraction<RedstoneOraclesInput>({
+      function: "updateNodeDetails",
+      data: nodeDetails,
+    });
   console.log(`Update redstone node transaction sent`);
   niceLogger.log(updateNodeTransaction);
 };

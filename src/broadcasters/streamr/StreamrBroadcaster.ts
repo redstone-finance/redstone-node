@@ -24,12 +24,13 @@ export class StreamrBroadcaster implements Broadcaster {
   }
 
   private lazyEnableTimer() {
-    const haveDataToBroadcast = this.packageToBroadcast
-      || this.pricesToBroadcast.length > 0;
+    const haveDataToBroadcast =
+      this.packageToBroadcast || this.pricesToBroadcast.length > 0;
     if (!this.timer && haveDataToBroadcast) {
       this.timer = setInterval(
         this.broadcastInternal.bind(this),
-        STREAMR_BROADCASTING_INTERVAL_MILLISECONDS);
+        STREAMR_BROADCASTING_INTERVAL_MILLISECONDS
+      );
     }
   }
 
@@ -54,14 +55,15 @@ export class StreamrBroadcaster implements Broadcaster {
   }
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
-    this.pricesToBroadcast = prices.map(p => _.omit(p, ["source"]));
+    this.pricesToBroadcast = prices.map((p) => _.omit(p, ["source"]));
     this.lazyEnableTimer();
   }
 
   async broadcastPricePackage(
     signedData: SignedPricePackage,
-    _providerAddress: string): Promise<void> {
-      this.packageToBroadcast = signedData;
-      this.lazyEnableTimer();
-    }
+    _providerAddress: string
+  ): Promise<void> {
+    this.packageToBroadcast = signedData;
+    this.lazyEnableTimer();
+  }
 }

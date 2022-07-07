@@ -44,7 +44,7 @@ export const handle = async (
       return updateDataFeed(state, action);
     case "evolve":
       return evolve(state, action);
-    default:  
+    default:
       throw new ContractError(
         `No function supplied or function not recognized: "${input.function}"`
       );

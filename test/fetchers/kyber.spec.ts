@@ -1,5 +1,5 @@
 import axios from "axios";
-import fetchers from "../../src/fetchers/index"
+import fetchers from "../../src/fetchers/index";
 import { mockFetcherResponse, mockRedstoneApiPrice } from "./_helpers";
 
 jest.mock("axios");
@@ -21,17 +21,17 @@ describe("kyber fetcher", () => {
     // Then
     expect(result).toEqual([
       {
-        "symbol": "MKR",
-        "value": 3387.053316881745
+        symbol: "MKR",
+        value: 3387.053316881745,
       },
       {
-        "symbol": "UNI",
-        "value": 25.728675847614895
+        symbol: "UNI",
+        value: 25.728675847614895,
       },
       {
-        "symbol": "SUSHI",
-        "value": 11.281276604715393
-      }
+        symbol: "SUSHI",
+        value: 11.281276604715393,
+      },
     ]);
   });
 });

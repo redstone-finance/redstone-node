@@ -31,5 +31,4 @@ export class ExpressAppRunner {
       logger.info(`Server started at http://localhost:${PORT}`);
     });
   }
-
 }

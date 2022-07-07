@@ -1,28 +1,32 @@
-import fetchers from "../../src/fetchers/index"
-import { mockFetcherResponse, mockFetcherResponseWithFunction } from "./_helpers";
+import fetchers from "../../src/fetchers/index";
+import {
+  mockFetcherResponse,
+  mockFetcherResponseWithFunction,
+} from "./_helpers";
 
-const pathToExampleResponse = "../../src/fetchers/uniswap/example-response.json";
+const pathToExampleResponse =
+  "../../src/fetchers/uniswap/example-response.json";
 const expectedResult = [
   {
-    "symbol": "CREAM",
-    "value": 164.73043095163868
+    symbol: "CREAM",
+    value: 164.73043095163868,
   },
   {
-    "symbol": "SAND",
-    "value": 1.043162053163669
+    symbol: "SAND",
+    value: 1.043162053163669,
   },
   {
-    "symbol": "YFI",
-    "value": 37730.70165985392
+    symbol: "YFI",
+    value: 37730.70165985392,
   },
   {
-    "symbol": "KP3R",
-    "value": 289.0442359730218
+    symbol: "KP3R",
+    value: 289.0442359730218,
   },
   {
-    "symbol": "XOR",
-    "value": 290.10178576836563
-  }
+    symbol: "XOR",
+    value: 290.10178576836563,
+  },
 ];
 
 jest.mock("axios");
@@ -41,7 +45,7 @@ describe("uniswap fetcher", () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it ("should retry data fetching", async () => {
+  it("should retry data fetching", async () => {
     // Given
     const exampleResponse = require(pathToExampleResponse);
     let tryCounter = 0;
@@ -52,7 +56,7 @@ describe("uniswap fetcher", () => {
       } else {
         return undefined;
       }
-    }
+    };
     mockFetcherResponseWithFunction(getResponse);
 
     // When

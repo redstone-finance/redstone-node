@@ -23,20 +23,20 @@ async function testCompressions(price) {
   const gzipDecompressedBytes =
     compressions.gzip.decompress(gzipCompressedBytes);
   if (Buffer.compare(pureBytes, gzipDecompressedBytes) !== 0) {
-    throw new Error(
-      "Gzip decompressed value and precompressed value differ");
+    throw new Error("Gzip decompressed value and precompressed value differ");
   }
 
   // Deflate compression
   const deflateCompressedBytes = compressions.deflate.compress(pureBytes);
   const deflateCompressedBytesSize = deflateCompressedBytes.length;
-  const deflateDecompressedBytes =
-    compressions.deflate.decompress(deflateCompressedBytes);
+  const deflateDecompressedBytes = compressions.deflate.decompress(
+    deflateCompressedBytes
+  );
   if (Buffer.compare(pureBytes, deflateDecompressedBytes) !== 0) {
     throw new Error(
-      "Deflate decompressed value and precompressed value differ");
+      "Deflate decompressed value and precompressed value differ"
+    );
   }
-
 
   console.log({
     initialSize,

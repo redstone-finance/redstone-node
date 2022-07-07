@@ -5,8 +5,9 @@ import {
   PriceDataBeforeAggregation,
 } from "../types";
 
-const logger =
-  require("../utils/logger")("aggregators/median-aggregator") as Consola;
+const logger = require("../utils/logger")(
+  "aggregators/median-aggregator"
+) as Consola;
 
 const medianAggregator: Aggregator = {
   getAggregatedValue(
@@ -14,7 +15,9 @@ const medianAggregator: Aggregator = {
     maxPriceDeviationPercent: number
   ): PriceDataAfterAggregation {
     const symbol = price.symbol;
-    const validValues = Object.values(price.source).filter(v => !isNaN(v) && v > 0);
+    const validValues = Object.values(price.source).filter(
+      (v) => !isNaN(v) && v > 0
+    );
     if (validValues.length === 0) {
       throw new Error(`No valid values for symbol: ${price.symbol}`);
     }
@@ -24,26 +27,31 @@ const medianAggregator: Aggregator = {
     const stableValues = [];
     for (const sourceName of Object.keys(price.source)) {
       const value = price.source[sourceName];
-      const deviation =
-        (Math.abs(value - initialMedian) / initialMedian) * 100;
+      const deviation = (Math.abs(value - initialMedian) / initialMedian) * 100;
       if (isNaN(value)) {
         // We don't log warnings for "error" values
         // because these values represent fetching fails
         // which should already be logged as warning
         if (value !== "error") {
           logger.warn(
-            `Incorrect price value (NaN) for source: ${sourceName}. `
-            + `Symbol: ${symbol}. Value: ${value}`, price);
+            `Incorrect price value (NaN) for source: ${sourceName}. ` +
+              `Symbol: ${symbol}. Value: ${value}`,
+            price
+          );
         }
       } else if (value <= 0) {
         logger.warn(
-          `Incorrect price value (<= 0) for source: ${sourceName}. `
-          + `Symbol: ${symbol}. Value: ${value}`, price);
+          `Incorrect price value (<= 0) for source: ${sourceName}. ` +
+            `Symbol: ${symbol}. Value: ${value}`,
+          price
+        );
       } else if (deviation > maxPriceDeviationPercent) {
         logger.info(
-          `Value ${value} has too big deviation for symbol: ${symbol} `
-          + `and source: ${sourceName}. Deviation: (${deviation})%. `
-          + `Skipping...`, price);
+          `Value ${value} has too big deviation for symbol: ${symbol} ` +
+            `and source: ${sourceName}. Deviation: (${deviation})%. ` +
+            `Skipping...`,
+          price
+        );
       } else {
         stableValues.push(value);
       }
@@ -51,7 +59,8 @@ const medianAggregator: Aggregator = {
 
     if (stableValues.length === 0) {
       throw new Error(
-        `All values have too big deviation for symbol: ${price.symbol}`);
+        `All values have too big deviation for symbol: ${price.symbol}`
+      );
     }
 
     return {

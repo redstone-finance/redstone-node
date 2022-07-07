@@ -9,9 +9,7 @@ const logger = require("../../utils/logger")("HttpBroadcaster") as Consola;
 // TODO: add timeout to broadcasting
 
 export class HttpBroadcaster implements Broadcaster {
-  constructor(
-    private readonly broadcasterURLs: string[]
-  ) { }
+  constructor(private readonly broadcasterURLs: string[]) {}
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
     const promises = this.broadcasterURLs.map((url) => {

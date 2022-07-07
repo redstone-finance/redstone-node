@@ -45,7 +45,10 @@ describe("Redstone oracle registry contract - data feeds - read", () => {
     walletAddress = await arweave.wallets.jwkToAddress(wallet);
 
     contractSrc = fs.readFileSync(
-      path.join(__dirname, "../../../dist/contracts/redstone-oracle-registry.contract.js"),
+      path.join(
+        __dirname,
+        "../../../dist/contracts/redstone-oracle-registry.contract.js"
+      ),
       "utf8"
     );
 
@@ -177,7 +180,9 @@ describe("Redstone oracle registry contract - data feeds - read", () => {
         },
       });
 
-      expect(errorMessage).toBe("Oracle with identifier invalidId does not exist");
+      expect(errorMessage).toBe(
+        "Oracle with identifier invalidId does not exist"
+      );
     });
   });
 });

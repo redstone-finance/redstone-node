@@ -14,14 +14,15 @@ export function readJSON(path: string): any {
 }
 
 export function timeout(ms: number): Promise<any> {
-  return new Promise(resolve => setTimeout(() => resolve('timeout'), ms));
+  return new Promise((resolve) => setTimeout(() => resolve("timeout"), ms));
 }
 
 export function getRequiredPropValue(obj: any, prop: string): any {
   if (obj[prop] === undefined) {
     throw new Error(
-      `Object does not contain required property "${prop}". Obj: `
-      + JSON.stringify(obj));
+      `Object does not contain required property "${prop}". Obj: ` +
+        JSON.stringify(obj)
+    );
   }
 
   return obj[prop];

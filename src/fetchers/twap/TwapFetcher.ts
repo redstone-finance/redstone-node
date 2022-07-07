@@ -26,7 +26,7 @@ interface ResponseForTwap {
 export class TwapFetcher extends BaseFetcher {
   constructor(
     private readonly sourceProviderId: string,
-    private readonly providerEvmAddress: string,
+    private readonly providerEvmAddress: string
   ) {
     super(`twap-${sourceProviderId}`);
   }
@@ -38,19 +38,22 @@ export class TwapFetcher extends BaseFetcher {
     // Fetching historical prices for each asset in parallel
     const promises: Promise<void>[] = [];
     for (const id of ids) {
-      const { assetSymbol, millisecondsOffset } = TwapFetcher.parseTwapAssetId(id);
+      const { assetSymbol, millisecondsOffset } =
+        TwapFetcher.parseTwapAssetId(id);
       const fromTimestamp = currentTimestamp - millisecondsOffset;
-      const fetchingPromiseForSymbol = axios.get(PRICES_URL, {
-        params: {
-          symbol: assetSymbol,
-          provider: this.sourceProviderId,
-          fromTimestamp,
-          toTimestamp: currentTimestamp,
-          limit: MAX_LIMIT,
-        },
-      }).then(responseForSymbol => {
-        response[id] = responseForSymbol.data;
-      });
+      const fetchingPromiseForSymbol = axios
+        .get(PRICES_URL, {
+          params: {
+            symbol: assetSymbol,
+            provider: this.sourceProviderId,
+            fromTimestamp,
+            toTimestamp: currentTimestamp,
+            limit: MAX_LIMIT,
+          },
+        })
+        .then((responseForSymbol) => {
+          response[id] = responseForSymbol.data;
+        });
       promises.push(fetchingPromiseForSymbol);
     }
     await Promise.all(promises);
@@ -80,10 +83,12 @@ export class TwapFetcher extends BaseFetcher {
     const evmSigner = new EvmPriceSigner(price.version, EVM_CHAIN_ID);
     const isSignatureValid = evmSigner.verifyLiteSignature({
       pricePackage: {
-        prices: [{
-          symbol: price.symbol,
-          value: price.value,
-        }],
+        prices: [
+          {
+            symbol: price.symbol,
+            value: price.value,
+          },
+        ],
         timestamp: price.timestamp,
       },
       signerAddress: this.providerEvmAddress,
@@ -91,14 +96,17 @@ export class TwapFetcher extends BaseFetcher {
     });
 
     if (!isSignatureValid) {
-      throw new Error(`Received an invalid signature: `
-        + JSON.stringify(price));
+      throw new Error(
+        `Received an invalid signature: ` + JSON.stringify(price)
+      );
     }
   }
 
   static getTwapValue(historicalPrices: HistoricalPrice[]): number | undefined {
-    const sortedValidPrices = TwapFetcher.getSortedValidPricesByTimestamp(historicalPrices);
-    const prices = TwapFetcher.aggregatePricesWithSameTimestamps(sortedValidPrices);
+    const sortedValidPrices =
+      TwapFetcher.getSortedValidPricesByTimestamp(historicalPrices);
+    const prices =
+      TwapFetcher.aggregatePricesWithSameTimestamps(sortedValidPrices);
 
     if (prices.length < 2) {
       return prices[0]?.value || undefined;
@@ -107,11 +115,17 @@ export class TwapFetcher extends BaseFetcher {
         prices[0].timestamp - prices[prices.length - 1].timestamp;
       let twapValue = 0;
 
-      for (let intervalIndex = 0; intervalIndex < prices.length - 1; intervalIndex++) {
+      for (
+        let intervalIndex = 0;
+        intervalIndex < prices.length - 1;
+        intervalIndex++
+      ) {
         const startPrice = prices[intervalIndex];
         const endPrice = prices[intervalIndex + 1];
-        const intervalLengthInMilliseconds = startPrice.timestamp - endPrice.timestamp;
-        const intervalWeight = intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
+        const intervalLengthInMilliseconds =
+          startPrice.timestamp - endPrice.timestamp;
+        const intervalWeight =
+          intervalLengthInMilliseconds / totalIntervalLengthInMilliseconds;
         const intervalAveraveValue = (startPrice.value + endPrice.value) / 2;
         twapValue += intervalAveraveValue * intervalWeight;
       }
@@ -122,7 +136,9 @@ export class TwapFetcher extends BaseFetcher {
 
   // This function groups price objects with the same timestamps
   // and replaces them with a single price object with avg value
-  static aggregatePricesWithSameTimestamps(sortedValidPrices: HistoricalPrice[]): ShortPrice[] {
+  static aggregatePricesWithSameTimestamps(
+    sortedValidPrices: HistoricalPrice[]
+  ): ShortPrice[] {
     const prev = {
       timestamp: -1,
       sum: 0,
@@ -158,7 +174,10 @@ export class TwapFetcher extends BaseFetcher {
     return aggregatedPricesWithUniqueTimestamps;
   }
 
-  static parseTwapAssetId(twapSymbol: string): { assetSymbol: string; millisecondsOffset: number } {
+  static parseTwapAssetId(twapSymbol: string): {
+    assetSymbol: string;
+    millisecondsOffset: number;
+  } {
     const chunks = twapSymbol.split("-");
     return {
       assetSymbol: chunks[0],
@@ -166,9 +185,11 @@ export class TwapFetcher extends BaseFetcher {
     };
   }
 
-  static getSortedValidPricesByTimestamp(prices: HistoricalPrice[]): HistoricalPrice[] {
-    const validHistoricalPrices = prices.filter(p => !isNaN(p.value));
+  static getSortedValidPricesByTimestamp(
+    prices: HistoricalPrice[]
+  ): HistoricalPrice[] {
+    const validHistoricalPrices = prices.filter((p) => !isNaN(p.value));
     validHistoricalPrices.sort((a, b) => a.timestamp - b.timestamp);
     return validHistoricalPrices;
   }
-};
+}

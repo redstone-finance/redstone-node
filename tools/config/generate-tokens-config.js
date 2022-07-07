@@ -5,20 +5,23 @@ const fetchers = require("../../src/config/sources.json");
 const ccxtSupportedExchanges = require("../../src/fetchers/ccxt/all-supported-exchanges.json");
 const predefinedTokensConfig = require("./predefined-configs/tokens.json");
 const { getStandardLists } = require("./standard-lists");
-const { getCcxtTokenList } = require("../../src/fetchers/ccxt/generate-list-for-all-ccxt-sources");
+const {
+  getCcxtTokenList,
+} = require("../../src/fetchers/ccxt/generate-list-for-all-ccxt-sources");
 const coingeckoSymbolToId = require("../../src/fetchers/coingecko/coingecko-symbol-to-id.json");
 const { default: axios } = require("axios");
 const providerToManifest = {
   "redstone-rapid": require("../../manifests/rapid.json"),
   "redstone-stocks": require("../../manifests/stocks.json"),
-  "redstone": require("../../manifests/main.json"),
+  redstone: require("../../manifests/main.json"),
 };
 
 // Note: Before running this script you should generate sources.json config
 // You can do this using tools/config/generate-sources-config.js script
 
 const OUTPUT_FILE = "./src/config/tokens.json";
-const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
+const IMG_URL_FOR_EMPTY_LOGO =
+  "https://cdn.redstone.finance/symbols/logo-not-found.png";
 const URL_PREFIX_FOR_EMPTY_URL = "https://www.google.com/search?q=";
 const TRY_TO_LOAD_FROM_COINGECKO_API = true;
 
@@ -62,7 +65,8 @@ async function generateTokensConfig() {
     tokensConfig[token] = await getAllDetailsForSymbol(
       token,
       standardLists,
-      coingeckoData);
+      coingeckoData
+    );
   }
 }
 
@@ -75,9 +79,9 @@ async function getAllDetailsForSymbol(symbol, standardLists, coingeckoData) {
   const tags = getTagsForSymbol(symbol);
   const details = getDetailsForSymbol(symbol, standardLists);
 
-  if (TRY_TO_LOAD_FROM_COINGECKO_API && !details.logoURI || !details.url) {
+  if ((TRY_TO_LOAD_FROM_COINGECKO_API && !details.logoURI) || !details.url) {
     const coingeckoDetails = getDetailsFromCoingecko(symbol, coingeckoData);
-    console.log({coingeckoDetails});
+    console.log({ coingeckoDetails });
     if (coingeckoDetails) {
       if (coingeckoDetails.image && !details.logoURI) {
         details.logoURI = coingeckoDetails.image.large;
@@ -117,7 +121,7 @@ function getDetailsForSymbol(symbol, standardLists) {
 
   // Searching for token details in popular standard token lists
   for (const standardList of standardLists) {
-    const symbolDetails = standardList.find(el => el.symbol === symbol);
+    const symbolDetails = standardList.find((el) => el.symbol === symbol);
     if (symbolDetails) {
       return symbolDetails;
     }
@@ -127,10 +131,10 @@ function getDetailsForSymbol(symbol, standardLists) {
   return {};
 }
 
-
 function getProvidersForSymbol(symbol) {
-  return Object.keys(providerToManifest)
-    .filter(p => symbol in providerToManifest[p].tokens);
+  return Object.keys(providerToManifest).filter(
+    (p) => symbol in providerToManifest[p].tokens
+  );
 }
 
 // This function can work based on manifests and predefined config
@@ -156,23 +160,24 @@ async function addAllTokensForCcxtSources() {
   console.log("Fetching tokens for all ccxt feetchers");
   const ccxtFetchersWithTokens = await getCcxtTokenList();
   for (const ccxtFetcher in ccxtFetchersWithTokens) {
-    addTokensToConfig(
-      ccxtFetchersWithTokens[ccxtFetcher],
-      ccxtFetcher);
+    addTokensToConfig(ccxtFetchersWithTokens[ccxtFetcher], ccxtFetcher);
   }
 }
 
 async function addAllTokensForSource(source) {
   console.log("Fetching supported tokens for: " + source);
-  const { getTokenList } = require(
-    `../../src/fetchers/${source}/generate-list`);
+  const {
+    getTokenList,
+  } = require(`../../src/fetchers/${source}/generate-list`);
   const tokens = await getTokenList();
   addTokensToConfig(tokens, source);
 }
 
 async function getAllTokensFromCoingecko() {
-  const pageSize = 250, allTokens = {};
-  let pageNr = 0, finished = false;
+  const pageSize = 250,
+    allTokens = {};
+  let pageNr = 0,
+    finished = false;
   while (!finished) {
     const response = await coingeckoClient.coins.all({
       per_page: pageSize,
@@ -187,7 +192,9 @@ async function getAllTokensFromCoingecko() {
       allTokens[token.id] = _.pick(token, ["name", "image"]);
     }
 
-    console.log(`Loading tokens from coingecko from page: ${pageNr}. Page size: ${response.data.length}`);
+    console.log(
+      `Loading tokens from coingecko from page: ${pageNr}. Page size: ${response.data.length}`
+    );
 
     pageNr++;
   }
@@ -231,5 +238,5 @@ function saveTokensConfigToFile() {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

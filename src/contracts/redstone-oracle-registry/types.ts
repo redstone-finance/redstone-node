@@ -39,25 +39,25 @@ export interface RedstoneOraclesAction {
 
 export interface RedstoneOraclesInput {
   function:
-  | "listNodes"
-  | "getNodeDetails"
-  | "registerNode"
-  | "updateNodeDetails"
-  | "removeNode"
-  | "listDataFeeds"
-  | "getDataFeedDetailsById"
-  | "createDataFeed"
-  | "updateDataFeed"
-  | "evolve";
+    | "listNodes"
+    | "getNodeDetails"
+    | "registerNode"
+    | "updateNodeDetails"
+    | "removeNode"
+    | "listDataFeeds"
+    | "getDataFeedDetailsById"
+    | "createDataFeed"
+    | "updateDataFeed"
+    | "evolve";
   data:
-  | ListInputData
-  | GetNodeDetailsInputData
-  | RegisterNodeInputData
-  | UpdateNodeDetailInputData
-  | GetDataFeedDetailsByIdInputData
-  | CreateDataFeedInputData
-  | UpdateDataFeedInputData
-  | EvolveInputData;
+    | ListInputData
+    | GetNodeDetailsInputData
+    | RegisterNodeInputData
+    | UpdateNodeDetailInputData
+    | GetDataFeedDetailsByIdInputData
+    | CreateDataFeedInputData
+    | UpdateDataFeedInputData
+    | EvolveInputData;
 }
 
 export interface ListInputData {
@@ -122,7 +122,7 @@ export type ContractResult =
 export type ContractErrorType = new (message: string) => any;
 
 export interface GetDetailsByIdInput {
-  identifier: string,
-  state: RedstoneOraclesState,
-  oraclesType: 'nodes' | 'dataFeeds',
+  identifier: string;
+  state: RedstoneOraclesState;
+  oraclesType: "nodes" | "dataFeeds";
 }

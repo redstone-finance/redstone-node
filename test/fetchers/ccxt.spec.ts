@@ -12,10 +12,10 @@ jest.mock("ccxt", () => {
         has: { fetchTickers: true },
         async fetchTickers() {
           return require("../../src/fetchers/ccxt/example-response.json");
-        }
+        },
       };
     });
-  };
+  }
 
   return {
     __esModule: true,
@@ -33,7 +33,7 @@ describe("ccxt fetcher", () => {
     // Then
     expect(result).toEqual([
       { symbol: "BTC", value: 32228.4 },
-      { symbol: "ETH", value: 2008.25 }
+      { symbol: "ETH", value: 2008.25 },
     ]);
   });
 });

@@ -15,25 +15,16 @@ describe("groupTokenBySource", () => {
     const manifest: Manifest = {
       ...baseManifest,
       tokens: {
-        "BTC": {
-          "source": [
-            "bitfinex",
-            "ftx"
-          ]
+        BTC: {
+          source: ["bitfinex", "ftx"],
         },
-        "ETH": {
-          "source": [
-            "binance",
-            "bitfinex"
-          ]
+        ETH: {
+          source: ["binance", "bitfinex"],
         },
-        "USDT": {
-          "source": [
-            "ftx",
-            "binance"
-          ]
-        }
-      }
+        USDT: {
+          source: ["ftx", "binance"],
+        },
+      },
     };
 
     // when
@@ -41,9 +32,9 @@ describe("groupTokenBySource", () => {
 
     // then
     expect(result).toEqual({
-      "bitfinex": ["BTC", "ETH"],
-      "ftx": ["BTC", "USDT"],
-      "binance": ["ETH", "USDT"]
+      bitfinex: ["BTC", "ETH"],
+      ftx: ["BTC", "USDT"],
+      binance: ["ETH", "USDT"],
     });
   });
 
@@ -53,19 +44,14 @@ describe("groupTokenBySource", () => {
       ...baseManifest,
       defaultSource: ["kraken"],
       tokens: {
-        "BTC": {
-          "source": [
-            "bitfinex",
-            "ftx"
-          ]
+        BTC: {
+          source: ["bitfinex", "ftx"],
         },
-        "ETH": {},
-        "USDT": {
-          "source": [
-            "ftx"
-          ]
-        }
-      }
+        ETH: {},
+        USDT: {
+          source: ["ftx"],
+        },
+      },
     };
 
     // when
@@ -73,9 +59,9 @@ describe("groupTokenBySource", () => {
 
     // then
     expect(result).toEqual({
-      "bitfinex": ["BTC"],
-      "kraken": ["ETH"],
-      "ftx": ["BTC", "USDT"]
+      bitfinex: ["BTC"],
+      kraken: ["ETH"],
+      ftx: ["BTC", "USDT"],
     });
   });
 
@@ -85,21 +71,16 @@ describe("groupTokenBySource", () => {
       ...baseManifest,
       defaultSource: ["kraken"],
       tokens: {
-        "BTC": {
-          "source": [
-            "bitfinex",
-            "ftx"
-          ]
+        BTC: {
+          source: ["bitfinex", "ftx"],
         },
-        "ETH": {
-          "source": []
+        ETH: {
+          source: [],
         },
-        "USDT": {
-          "source": [
-            "ftx"
-          ]
-        }
-      }
+        USDT: {
+          source: ["ftx"],
+        },
+      },
     };
 
     // when
@@ -107,9 +88,9 @@ describe("groupTokenBySource", () => {
 
     // then
     expect(result).toEqual({
-      "bitfinex": ["BTC"],
-      "kraken": ["ETH"],
-      "ftx": ["BTC", "USDT"]
+      bitfinex: ["BTC"],
+      kraken: ["ETH"],
+      ftx: ["BTC", "USDT"],
     });
   });
 
@@ -118,18 +99,18 @@ describe("groupTokenBySource", () => {
     const manifest: Manifest = {
       ...baseManifest,
       tokens: {
-        "ETH": {},
-        "USDT": {
-          "source": [
-            "ftx"
-          ]
-        }
-      }
+        ETH: {},
+        USDT: {
+          source: ["ftx"],
+        },
+      },
     };
     // when
 
     // then
-    expect(() => ManifestHelper.groupTokensBySource(manifest)).toThrow(/global source is not defined/);
+    expect(() => ManifestHelper.groupTokensBySource(manifest)).toThrow(
+      /global source is not defined/
+    );
   });
 });
 
@@ -140,14 +121,11 @@ describe("getTimeoutForSource", () => {
     maxPriceDeviationPercent: 25,
     evmChainId: 1,
     tokens: {
-      "BTC": {
-        "source": [
-          "bitfinex",
-          "ftx"
-        ]
-      }
-    }
-  }
+      BTC: {
+        source: ["bitfinex", "ftx"],
+      },
+    },
+  };
 
   it("should throw if source is empty", () => {
     // given
@@ -168,8 +146,12 @@ describe("getTimeoutForSource", () => {
 
     // then
     expect(ManifestHelper.getTimeoutForSource("ftx", manifest)).toEqual(5000);
-    expect(ManifestHelper.getTimeoutForSource("binance", manifest)).toEqual(5000);
-    expect(ManifestHelper.getTimeoutForSource("bitfinex", manifest)).toEqual(5000);
+    expect(ManifestHelper.getTimeoutForSource("binance", manifest)).toEqual(
+      5000
+    );
+    expect(ManifestHelper.getTimeoutForSource("bitfinex", manifest)).toEqual(
+      5000
+    );
   });
 
   it("should return null sourceTimeout is not a number", () => {
@@ -182,15 +164,14 @@ describe("getTimeoutForSource", () => {
     // then
     expect(ManifestHelper.getTimeoutForSource("ftx", manifest)).toBeNull();
   });
-
 });
 
 describe("getMaxDeviationForSymbol", () => {
   const baseManifest = {
     interval: 2000,
     priceAggregator: "median",
-    sourceTimeout: 5000
-  }
+    sourceTimeout: 5000,
+  };
 
   it("should get default value, if no value for token available", () => {
     // given
@@ -199,18 +180,24 @@ describe("getMaxDeviationForSymbol", () => {
       maxPriceDeviationPercent: 15,
       evmChainId: 1,
       tokens: {
-        "BTC": {},
-        "ETH": {},
-        "USDT": {
-          maxPriceDeviationPercent: 5
-        }
-      }
-    }
+        BTC: {},
+        ETH: {},
+        USDT: {
+          maxPriceDeviationPercent: 5,
+        },
+      },
+    };
 
     // then
-    expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(15);
-    expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(15);
-    expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(5);
+    expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(
+      15
+    );
+    expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(
+      15
+    );
+    expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(
+      5
+    );
   });
 
   it("should get value specific for token if available", () => {
@@ -220,22 +207,28 @@ describe("getMaxDeviationForSymbol", () => {
       maxPriceDeviationPercent: 15,
       evmChainId: 1,
       tokens: {
-        "BTC": {
-          maxPriceDeviationPercent: 34
+        BTC: {
+          maxPriceDeviationPercent: 34,
         },
-        "ETH": {
-          maxPriceDeviationPercent: 23
+        ETH: {
+          maxPriceDeviationPercent: 23,
         },
-        "USDT": {
-          maxPriceDeviationPercent: 5
-        }
-      }
-    }
+        USDT: {
+          maxPriceDeviationPercent: 5,
+        },
+      },
+    };
 
     // then
-    expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(34);
-    expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(23);
-    expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(5);
+    expect(ManifestHelper.getMaxDeviationForSymbol("BTC", manifest)).toEqual(
+      34
+    );
+    expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toEqual(
+      23
+    );
+    expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toEqual(
+      5
+    );
   });
 
   it("should return null if checking for unknown token", () => {
@@ -245,20 +238,22 @@ describe("getMaxDeviationForSymbol", () => {
       maxPriceDeviationPercent: 15,
       evmChainId: 1,
       tokens: {
-        "BTC": {
-          maxPriceDeviationPercent: 34
+        BTC: {
+          maxPriceDeviationPercent: 34,
         },
-        "ETH": {
-          maxPriceDeviationPercent: 23
+        ETH: {
+          maxPriceDeviationPercent: 23,
         },
-        "USDT": {
-          maxPriceDeviationPercent: 5
-        }
-      }
-    }
+        USDT: {
+          maxPriceDeviationPercent: 5,
+        },
+      },
+    };
 
     // then
-    expect(ManifestHelper.getMaxDeviationForSymbol("DOGE", manifest)).toBeNull();
+    expect(
+      ManifestHelper.getMaxDeviationForSymbol("DOGE", manifest)
+    ).toBeNull();
     expect(ManifestHelper.getMaxDeviationForSymbol("USD", manifest)).toBeNull();
     expect(ManifestHelper.getMaxDeviationForSymbol("UNI", manifest)).toBeNull();
   });
@@ -285,6 +280,8 @@ describe("getMaxDeviationForSymbol", () => {
 
     // then
     expect(ManifestHelper.getMaxDeviationForSymbol("ETH", manifest)).toBeNull();
-    expect(ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)).toBeNull();
+    expect(
+      ManifestHelper.getMaxDeviationForSymbol("USDT", manifest)
+    ).toBeNull();
   });
 });

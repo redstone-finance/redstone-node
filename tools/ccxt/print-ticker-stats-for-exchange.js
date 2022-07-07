@@ -5,7 +5,7 @@ const EXCHANGE_NAME = "currencycom";
 main();
 
 async function main() {
-  const exchange = new ccxt[EXCHANGE_NAME];
+  const exchange = new ccxt[EXCHANGE_NAME]();
   const tickers = Object.values(await exchange.fetchTickers());
   console.log({
     allTickersCount: tickers.length,

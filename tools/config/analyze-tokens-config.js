@@ -2,14 +2,14 @@ const tokensConfig = require("../../src/config/tokens.json");
 const manifests = {
   "redstone-rapid": require("../../manifests/rapid.json"),
   "redstone-stocks": require("../../manifests/stocks.json"),
-  "redstone": require("../../manifests/main.json"),
+  redstone: require("../../manifests/main.json"),
 };
 
-const IMG_URL_FOR_EMPTY_LOGO = "https://cdn.redstone.finance/symbols/logo-not-found.png";
+const IMG_URL_FOR_EMPTY_LOGO =
+  "https://cdn.redstone.finance/symbols/logo-not-found.png";
 const ONLY_ACTIVE_SYMBOLS = false;
 
 main();
-
 
 function main() {
   const report = {

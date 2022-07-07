@@ -15,7 +15,7 @@ async function getList(url) {
 }
 
 async function getStandardLists() {
-  const promises = standardListsURLs.map(async url => await getList(url));
+  const promises = standardListsURLs.map(async (url) => await getList(url));
   return await Promise.all(promises);
 }
 

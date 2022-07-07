@@ -15,7 +15,7 @@ export const evolve = (
     throw new ContractError("Contract cannot evolve");
   }
 
-  if (!state.contractAdmins.some(admin => admin === action.caller)) {
+  if (!state.contractAdmins.some((admin) => admin === action.caller)) {
     throw new ContractError("Only the admin can evolve a contract");
   }
 

@@ -5,35 +5,34 @@ import EvmPriceSigner from "../src/signers/EvmPriceSigner";
 const evmSigner = new EvmPriceSigner();
 const ethereumPrivateKey = ethers.Wallet.createRandom().privateKey;
 
-describe('evmSignPricesAndVerify', () => {
-  jest
-    .useFakeTimers("modern")
-    .setSystemTime(new Date("2021-09-01").getTime());
+describe("evmSignPricesAndVerify", () => {
+  jest.useFakeTimers("modern").setSystemTime(new Date("2021-09-01").getTime());
 
-  it('should sign price package', () => {
+  it("should sign price package", () => {
     // given
     const pricePackage: PricePackage = {
-      "prices": [
+      prices: [
         {
-          "symbol": "XXX",
-          "value": 0.0054,
+          symbol: "XXX",
+          value: 0.0054,
         },
         {
-          "symbol": "YYY",
-          "value": 100,
+          symbol: "YYY",
+          value: 100,
         },
         {
-          "symbol": "AAA",
-          "value": 20.003,
+          symbol: "AAA",
+          value: 20.003,
         },
       ],
-      "timestamp": Date.now(),
+      timestamp: Date.now(),
     };
 
     // when
     const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage,
-      ethereumPrivateKey);
+      ethereumPrivateKey
+    );
 
     // then
     expect(evmSigner.verifyLiteSignature(signedPricesData)).toEqual(true);
@@ -42,13 +41,13 @@ describe('evmSignPricesAndVerify', () => {
   it("should fail verifying wrong lite signature", () => {
     // given
     const pricePackage: PricePackage = {
-      "prices": [
+      prices: [
         {
-          "symbol": "XXX",
-          "value": 10,
+          symbol: "XXX",
+          value: 10,
         },
       ],
-      "timestamp": Date.now(),
+      timestamp: Date.now(),
     };
     const anotherPricesPackage = {
       ...pricePackage,
@@ -58,79 +57,87 @@ describe('evmSignPricesAndVerify', () => {
     // when
     const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage,
-      ethereumPrivateKey);
+      ethereumPrivateKey
+    );
 
     // then
-    expect(evmSigner.verifyLiteSignature({
-      ...signedPricesData,
-      pricePackage: anotherPricesPackage,
-    })).toEqual(false);
+    expect(
+      evmSigner.verifyLiteSignature({
+        ...signedPricesData,
+        pricePackage: anotherPricesPackage,
+      })
+    ).toEqual(false);
   });
 
   it("should fail verifying lite signature for wrong eth address", () => {
     // given
     const pricePackage: PricePackage = {
-      "prices": [
+      prices: [
         {
-          "symbol": "XXX",
-          "value": 10,
+          symbol: "XXX",
+          value: 10,
         },
       ],
-      "timestamp": Date.now(),
+      timestamp: Date.now(),
     };
 
     // when
     const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage,
-      ethereumPrivateKey);
+      ethereumPrivateKey
+    );
 
     // then
-    expect(evmSigner.verifyLiteSignature({
-      ...signedPricesData,
-      signerAddress: "0x1111111111111111111111111111111111111111",
-    })).toEqual(false);
+    expect(
+      evmSigner.verifyLiteSignature({
+        ...signedPricesData,
+        signerAddress: "0x1111111111111111111111111111111111111111",
+      })
+    ).toEqual(false);
   });
 
   it("should sign and verify lite signature even for packages with different price order", () => {
     // given
     const pricePackage1: PricePackage = {
-      "prices": [
+      prices: [
         {
-          "symbol": "FIRST",
-          "value": 1,
+          symbol: "FIRST",
+          value: 1,
         },
         {
-          "symbol": "SECOND",
-          "value": 2,
+          symbol: "SECOND",
+          value: 2,
         },
       ],
-      "timestamp": Date.now(),
+      timestamp: Date.now(),
     };
 
     const pricePackageWithDifferentOrder: PricePackage = {
-      "prices": [
+      prices: [
         {
-          "symbol": "SECOND",
-          "value": 2,
+          symbol: "SECOND",
+          value: 2,
         },
         {
-          "symbol": "FIRST",
-          "value": 1,
+          symbol: "FIRST",
+          value: 1,
         },
       ],
-      "timestamp": Date.now(),
+      timestamp: Date.now(),
     };
 
     // when
     const signedPricesData: SignedPricePackage = evmSigner.signPricePackage(
       pricePackage1,
-      ethereumPrivateKey);
+      ethereumPrivateKey
+    );
 
     // then
-    expect(evmSigner.verifyLiteSignature({
-      ...signedPricesData,
-      pricePackage: pricePackageWithDifferentOrder,
-    })).toEqual(true);
+    expect(
+      evmSigner.verifyLiteSignature({
+        ...signedPricesData,
+        pricePackage: pricePackageWithDifferentOrder,
+      })
+    ).toEqual(true);
   });
-
 });

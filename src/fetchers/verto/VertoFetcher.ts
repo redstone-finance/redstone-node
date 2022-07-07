@@ -15,8 +15,9 @@ export class VertoFetcher extends BaseFetcher {
   }
 
   async fetchData(ids: string[]): Promise<any> {
-    const tokenPromises = ids.map(s =>
-      axios.get(`${BASE_URL}/token/${vertoSymbolToId[s]}/price`));
+    const tokenPromises = ids.map((s) =>
+      axios.get(`${BASE_URL}/token/${vertoSymbolToId[s]}/price`)
+    );
 
     return await Promise.all(tokenPromises);
   }
@@ -35,4 +36,4 @@ export class VertoFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-};
+}

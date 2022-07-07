@@ -84,6 +84,6 @@ const SYMBOLS = [
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH, {
-  "interval": 60000,
-  "sourceTimeout": 30000,
+  interval: 60000,
+  sourceTimeout: 30000,
 });

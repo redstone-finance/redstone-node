@@ -4,7 +4,7 @@ import { BaseFetcher } from "./BaseFetcher";
 
 interface SymbolToPairId {
   [symbol: string]: string;
-};
+}
 
 export class DexFetcher extends BaseFetcher {
   protected retryForInvalidResponse: boolean = true;
@@ -12,14 +12,13 @@ export class DexFetcher extends BaseFetcher {
   constructor(
     name: string,
     private readonly subgraphUrl: string,
-    private readonly symbolToPairIdObj: SymbolToPairId) {
-      super(name);
-    }
+    private readonly symbolToPairIdObj: SymbolToPairId
+  ) {
+    super(name);
+  }
 
   async fetchData(ids: string[]) {
-    const pairIds = this.convertSymbolsToPairIds(
-      ids,
-      this.symbolToPairIdObj);
+    const pairIds = this.convertSymbolsToPairIds(ids, this.symbolToPairIdObj);
 
     const query = `{
       pairs(where: { id_in: ${JSON.stringify(pairIds)} }) {
@@ -36,9 +35,7 @@ export class DexFetcher extends BaseFetcher {
       }
     }`;
 
-    return await graphProxy.executeQuery(
-      this.subgraphUrl,
-      query);
+    return await graphProxy.executeQuery(this.subgraphUrl, query);
   }
 
   validateResponse(response: any): boolean {
@@ -54,7 +51,8 @@ export class DexFetcher extends BaseFetcher {
 
       if (!pair) {
         this.logger.warn(
-          `Pair is not in response. Id: ${pairId}. Symbol: ${currentAssetId}. Source: ${this.name}`);
+          `Pair is not in response. Id: ${pairId}. Symbol: ${currentAssetId}. Source: ${this.name}`
+        );
       } else {
         const symbol0 = pair.token0.symbol;
         const symbol1 = pair.token1.symbol;
@@ -75,19 +73,21 @@ export class DexFetcher extends BaseFetcher {
 
   private convertSymbolsToPairIds(
     symbols: string[],
-    symbolToPairId: SymbolToPairId): string[] {
-      const pairIds = [];
+    symbolToPairId: SymbolToPairId
+  ): string[] {
+    const pairIds = [];
 
-      for (const symbol of symbols) {
-        const pairId = symbolToPairId[symbol];
-        if (pairId === undefined) {
-          this.logger.warn(
-            `Source "${this.name}" does not support symbol: "${symbol}"`);
-        } else {
-          pairIds.push(pairId);
-        }
+    for (const symbol of symbols) {
+      const pairId = symbolToPairId[symbol];
+      if (pairId === undefined) {
+        this.logger.warn(
+          `Source "${this.name}" does not support symbol: "${symbol}"`
+        );
+      } else {
+        pairIds.push(pairId);
       }
-
-      return pairIds;
     }
-};
+
+    return pairIds;
+  }
+}

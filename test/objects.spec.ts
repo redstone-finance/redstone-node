@@ -1,68 +1,68 @@
 import { mergeObjects } from "../src/utils/objects";
 
-it('should merge array of objects into one object', () => {
+it("should merge array of objects into one object", () => {
   // given
   const prices = [
     {
-      "source1": [
+      source1: [
         {
-          "token1": 123,
-          "token2": 324
-        }
-      ]
-    },
-    {
-      "source2": [
-        {
-          "token3": 555,
-          "token4": 666
-        }
-      ]
-    },
-    {
-      "source3": [
-        {
-          "token5": 777,
-          "token6": 888
-        }
+          token1: 123,
+          token2: 324,
+        },
       ],
-      "source4": [
+    },
+    {
+      source2: [
         {
-          "token7": 999,
-          "token8": 232
-        }
-      ]
-    }
-  ]
+          token3: 555,
+          token4: 666,
+        },
+      ],
+    },
+    {
+      source3: [
+        {
+          token5: 777,
+          token6: 888,
+        },
+      ],
+      source4: [
+        {
+          token7: 999,
+          token8: 232,
+        },
+      ],
+    },
+  ];
 
   // when
   const result = mergeObjects(prices);
 
   // then
   expect(result).toEqual({
-    "source1": [
+    source1: [
       {
-        "token1": 123,
-        "token2": 324
-      }
+        token1: 123,
+        token2: 324,
+      },
     ],
-    "source2": [
+    source2: [
       {
-        "token3": 555,
-        "token4": 666
-      }
+        token3: 555,
+        token4: 666,
+      },
     ],
-    "source3": [
+    source3: [
       {
-        "token5": 777,
-        "token6": 888
-      }
+        token5: 777,
+        token6: 888,
+      },
     ],
-    "source4": [
+    source4: [
       {
-        "token7": 999,
-        "token8": 232
-      }
-    ]
+        token7: 999,
+        token8: 232,
+      },
+    ],
   });
 });

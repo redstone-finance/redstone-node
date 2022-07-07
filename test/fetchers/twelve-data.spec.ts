@@ -1,5 +1,5 @@
 import axios from "axios";
-import fetchers from "../../src/fetchers/index"
+import fetchers from "../../src/fetchers/index";
 import { mockFetcherResponse } from "./_helpers";
 
 jest.mock("axios");
@@ -19,46 +19,44 @@ describe("twelve-data fetcher", () => {
       manifest: {
         interval: 10000,
         priceAggregator: "median",
-        defaultSource: [
-          "twelve-data",
-        ],
+        defaultSource: ["twelve-data"],
         evmChainId: 1,
         sourceTimeout: 8000,
         maxPriceDeviationPercent: 25,
         tokens: {
-          "CHF": {},
-          "BGP": {},
-          "EUR": {},
-          "JPY": {},
-          "AUD": {},
-        }
+          CHF: {},
+          BGP: {},
+          EUR: {},
+          JPY: {},
+          AUD: {},
+        },
       },
       credentials: {
-        twelveDataRapidApiKey: ""
+        twelveDataRapidApiKey: "",
       },
     });
 
     // Then
     expect(result).toEqual([
       {
-        "symbol": "CHF",
-        "value": 1.0388,
+        symbol: "CHF",
+        value: 1.0388,
       },
       {
-        "symbol": "GBP",
-        "value": 1.24895,
+        symbol: "GBP",
+        value: 1.24895,
       },
       {
-        "symbol": "EUR",
-        "value": 1.0719,
+        symbol: "EUR",
+        value: 1.0719,
       },
       {
-        "symbol": "JPY",
-        "value": 0.764,
+        symbol: "JPY",
+        value: 0.764,
       },
       {
-        "symbol": "AUD",
-        "value": 0.7207,
+        symbol: "AUD",
+        value: 0.7207,
       },
     ]);
   });

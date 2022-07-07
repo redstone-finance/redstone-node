@@ -41,7 +41,8 @@ export class CcxtFetcher extends BaseFetcher {
   async fetchData(ids: string[]): Promise<any> {
     if (!this.exchange.has["fetchTickers"]) {
       throw new Error(
-        `Exchange ${this.name} doesn't support fetchTickers method`);
+        `Exchange ${this.name} doesn't support fetchTickers method`
+      );
     }
 
     // If we pass undefined as tickerSymbols then all available tickers will be loaded
@@ -67,4 +68,4 @@ export class CcxtFetcher extends BaseFetcher {
     }
     return pricesObj;
   }
-};
+}

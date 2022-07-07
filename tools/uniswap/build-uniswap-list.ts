@@ -3,7 +3,7 @@ import graphProxy from "../../src/utils/graph-proxy";
 interface Pair {
   id: string;
   symbol0: string;
-};
+}
 
 main();
 

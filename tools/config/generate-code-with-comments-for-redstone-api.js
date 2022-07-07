@@ -1,8 +1,6 @@
 const _ = require("lodash");
-const allSupportedConfig =
-  require("../../manifests/main.json");
-const coingeckoTokens =
-  require("../../src/fetchers/coingecko/coingecko-symbol-to-details.json");
+const allSupportedConfig = require("../../manifests/main.json");
+const coingeckoTokens = require("../../src/fetchers/coingecko/coingecko-symbol-to-details.json");
 
 const hardcodedNames = {
   SOL: "Solana",
@@ -33,8 +31,7 @@ function printTokensObj(tokens) {
     } else if (coingeckoTokens[token]) {
       comment = _.last(coingeckoTokens[token]).name;
     }
-    result +=
-`
+    result += `
   /**
    * ${comment}
    */

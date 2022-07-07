@@ -14,9 +14,7 @@ main();
 
 async function main() {
   const newTokens = getNewTokens();
-  console.log(
-    "New tokens have been found",
-    JSON.stringify(newTokens, null, 2));
+  console.log("New tokens have been found", JSON.stringify(newTokens, null, 2));
 
   // Download images for the new tokens
   if (DOWNLOAD_IMAGES_FOR_NEW_TOKENS) {
@@ -28,7 +26,10 @@ async function main() {
   for (const [symbol, details] of Object.entries(newTokens)) {
     newConfig[symbol] = details;
     if (USE_REDSTONE_CDN_URLS) {
-      newConfig[symbol].logoURI = cdnUtils.getSymbolLogoUrl(symbol, details.logoURI);
+      newConfig[symbol].logoURI = cdnUtils.getSymbolLogoUrl(
+        symbol,
+        details.logoURI
+      );
     }
   }
 
@@ -50,7 +51,7 @@ async function downloadImagesForTokens(newTokens) {
   // Folder creation
   const folder = OUTPUT_FOLDER_FOR_NEW_TOKEN_LOGOS;
   console.log(`Downloading token images to ${folder}`);
-  if (!fs.existsSync(folder)){
+  if (!fs.existsSync(folder)) {
     console.log(`Folder ${folder} does not exist. Creating...`);
     fs.mkdirSync(folder);
   } else {

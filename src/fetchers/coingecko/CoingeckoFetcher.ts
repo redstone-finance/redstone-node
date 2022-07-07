@@ -37,4 +37,4 @@ export class CoingeckoFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-};
+}

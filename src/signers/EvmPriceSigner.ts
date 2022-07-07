@@ -17,12 +17,12 @@ import _ from "lodash";
 interface MessageTypeProperty {
   name: string;
   type: string;
-};
+}
 interface PriceDataMessageType {
   EIP712Domain: MessageTypeProperty[];
   PriceData: MessageTypeProperty[];
   [additionalProperties: string]: MessageTypeProperty[];
-};
+}
 
 const PriceData = [
   { name: "symbols", type: "bytes32[]" },
@@ -33,23 +33,25 @@ const PriceData = [
 const EIP712Domain = [
   { name: "name", type: "string" },
   { name: "version", type: "string" },
-  { name: "chainId", type: "uint256" }
+  { name: "chainId", type: "uint256" },
 ];
 
-const serializePriceValue = (value: number) => Math.round(value * (10 ** 8));
+const serializePriceValue = (value: number) => Math.round(value * 10 ** 8);
 
 export default class EvmPriceSigner {
   private _domainData: object;
 
   constructor(version: string = "0.4", chainId: number = 1) {
-    this._domainData =  {
+    this._domainData = {
       name: "Redstone",
       version: version,
-      chainId : chainId,
+      chainId: chainId,
     };
   }
 
-  getDataToSign(priceData: SerializedPriceData): TypedMessage<PriceDataMessageType> {
+  getDataToSign(
+    priceData: SerializedPriceData
+  ): TypedMessage<PriceDataMessageType> {
     return {
       types: {
         EIP712Domain,
@@ -82,7 +84,10 @@ export default class EvmPriceSigner {
     return hash;
   }
 
-  calculateLiteEvmSignature(priceData: SerializedPriceData, privateKey: string): string {
+  calculateLiteEvmSignature(
+    priceData: SerializedPriceData,
+    privateKey: string
+  ): string {
     const data = this.getLiteDataToSign(priceData);
     return personalSign({ privateKey: toBuffer(privateKey), data });
   }
@@ -105,30 +110,41 @@ export default class EvmPriceSigner {
   serializeToMessage(pricePackage: PricePackage): SerializedPriceData {
     // We clean and sort prices to be sure that prices
     // always have the same format
-    const cleanPricesData = pricePackage.prices.map(
-      (p) => _.pick(p, ["symbol", "value"]));
+    const cleanPricesData = pricePackage.prices.map((p) =>
+      _.pick(p, ["symbol", "value"])
+    );
     const sortedPrices = sortDeepObjectArrays(cleanPricesData);
 
     return {
       symbols: sortedPrices.map((p: ShortSinglePrice) =>
-        EvmPriceSigner.convertStringToBytes32String(p.symbol)),
+        EvmPriceSigner.convertStringToBytes32String(p.symbol)
+      ),
       values: sortedPrices.map((p: ShortSinglePrice) =>
-        serializePriceValue(p.value)),
+        serializePriceValue(p.value)
+      ),
       timestamp: pricePackage.timestamp,
     };
   }
 
-  signPricePackage(pricePackage: PricePackage, privateKey: string): SignedPricePackage {
+  signPricePackage(
+    pricePackage: PricePackage,
+    privateKey: string
+  ): SignedPricePackage {
     const serializedPriceData = this.serializeToMessage(pricePackage);
     return {
       pricePackage,
-      signerAddress: (new ethers.Wallet(privateKey)).address,
-      liteSignature: this.calculateLiteEvmSignature(serializedPriceData, privateKey),
+      signerAddress: new ethers.Wallet(privateKey).address,
+      liteSignature: this.calculateLiteEvmSignature(
+        serializedPriceData,
+        privateKey
+      ),
     };
   }
 
   verifyLiteSignature(signedPricePackage: SignedPricePackage): boolean {
-    const serializedPriceData = this.serializeToMessage(signedPricePackage.pricePackage);
+    const serializedPriceData = this.serializeToMessage(
+      signedPricePackage.pricePackage
+    );
     const data = this.getLiteDataToSign(serializedPriceData);
 
     const signer = recoverPersonalSignature({

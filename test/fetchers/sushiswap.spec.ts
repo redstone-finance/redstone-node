@@ -1,16 +1,20 @@
-import fetchers from "../../src/fetchers/index"
-import { mockFetcherResponse, mockFetcherResponseWithFunction } from "./_helpers";
+import fetchers from "../../src/fetchers/index";
+import {
+  mockFetcherResponse,
+  mockFetcherResponseWithFunction,
+} from "./_helpers";
 
-const pathToExampleResponse = "../../src/fetchers/sushiswap/example-response.json";
+const pathToExampleResponse =
+  "../../src/fetchers/sushiswap/example-response.json";
 const expectedResult = [
   {
-    "symbol": "CREAM",
-    "value": 162.29924837765495
+    symbol: "CREAM",
+    value: 162.29924837765495,
   },
   {
-    "symbol": "UMA",
-    "value": 12.810977172957678
-  }
+    symbol: "UMA",
+    value: 12.810977172957678,
+  },
 ];
 
 jest.mock("axios");
@@ -29,7 +33,7 @@ describe("sushiswap fetcher", () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it ("should retry data fetching", async () => {
+  it("should retry data fetching", async () => {
     // Given
     const exampleResponse = require(pathToExampleResponse);
     let tryCounter = 0;
@@ -40,7 +44,7 @@ describe("sushiswap fetcher", () => {
       } else {
         return undefined;
       }
-    }
+    };
     mockFetcherResponseWithFunction(getResponse);
 
     // When

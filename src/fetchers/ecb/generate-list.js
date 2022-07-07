@@ -31,7 +31,7 @@ async function getTokenList() {
     "PHP",
     "SGD",
     "THB",
-    "ZAR"
+    "ZAR",
   ];
 
   return list;

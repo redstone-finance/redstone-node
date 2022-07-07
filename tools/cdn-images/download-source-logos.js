@@ -37,7 +37,7 @@ function getFilePathForSource(url, sourceName) {
 }
 
 function createTargetFolderIfNeeded() {
-  if (!fs.existsSync(TARGET_FOLDER)){
+  if (!fs.existsSync(TARGET_FOLDER)) {
     fs.mkdirSync(TARGET_FOLDER);
   }
 }
