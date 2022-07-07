@@ -8,7 +8,7 @@ import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
 import { BundlrService } from "./arweave/BundlrService";
 import { promiseTimeout, TimeoutError } from "./utils/promise-timeout";
-import { mergeObjects, readJSON } from "./utils/objects";
+import { mergeObjects } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {

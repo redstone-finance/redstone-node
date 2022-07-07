@@ -1,7 +1,7 @@
 export class TimeoutError extends Error {
   constructor() {
     super();
-    this.name = "ValidationError";
+    this.name = "TimeoutError";
     this.message = "TimeoutError";
   }
 }
@@ -16,12 +16,5 @@ export const promiseTimeout = async (
   promisesArray: () => Promise<any>,
   timeoutInMilliseconds: number
 ) => {
-  try {
-    return await Promise.race([
-      promisesArray(),
-      timeout(timeoutInMilliseconds),
-    ]);
-  } catch (error: any) {
-    throw error;
-  }
+  return await Promise.race([promisesArray(), timeout(timeoutInMilliseconds)]);
 };
