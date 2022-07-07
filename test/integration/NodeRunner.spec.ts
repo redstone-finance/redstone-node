@@ -6,7 +6,7 @@ import fetchers from "../../src/fetchers";
 import axios from "axios";
 import ArweaveService from "../../src/arweave/ArweaveService";
 import { any } from "jest-mock-extended";
-import { timeout } from "../../src/utils/objects";
+import { timeout } from "../../src/utils/promise-timeout";
 import { MOCK_NODE_CONFIG } from "../helpers";
 
 /****** MOCKS START ******/
@@ -357,6 +357,27 @@ describe("NodeRunner", () => {
       );
       arServiceSpy.mockClear();
       jest.useFakeTimers();
+    });
+
+    it("should continue working when update manifest fails", async () => {
+      // given
+      nodeConfigManifestFromAr.manifestRefreshInterval = 0;
+      let arServiceSpy = jest
+        .spyOn(ArweaveService.prototype, "getCurrentManifest")
+        .mockResolvedValueOnce(manifest)
+        .mockRejectedValue("timeout");
+
+      const sut = await NodeRunner.create(nodeConfigManifestFromAr);
+
+      await sut.run();
+
+      expect(sut).not.toBeNull();
+      expect(ArweaveService.prototype.getCurrentManifest).toHaveBeenCalledTimes(
+        2
+      );
+      expect(fetchers.uniswap.fetchAll).toHaveBeenCalled();
+      expect(mockBundlrProxy.prepareSignedTrasaction).toHaveBeenCalled();
+      arServiceSpy.mockClear();
     });
   });
 });

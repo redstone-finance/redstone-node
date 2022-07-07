@@ -13,10 +13,6 @@ export function readJSON(path: string): any {
   }
 }
 
-export function timeout(ms: number): Promise<any> {
-  return new Promise((resolve) => setTimeout(() => resolve("timeout"), ms));
-}
-
 export function getRequiredPropValue(obj: any, prop: string): any {
   if (obj[prop] === undefined) {
     throw new Error(

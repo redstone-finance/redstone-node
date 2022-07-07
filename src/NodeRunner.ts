@@ -1,9 +1,14 @@
+import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
+import git from "git-last-commit";
+import { ethers } from "ethers";
 import { Consola } from "consola";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
-import { mergeObjects, timeout } from "./utils/objects";
+import { BundlrService } from "./arweave/BundlrService";
+import { promiseTimeout, TimeoutError } from "./utils/promise-timeout";
+import { mergeObjects } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
@@ -27,10 +32,6 @@ import {
   PriceDataSigned,
   SignedPricePackage,
 } from "./types";
-import { BundlrService } from "./arweave/BundlrService";
-import BundlrTransaction from "@bundlr-network/client/build/common/transaction";
-import git from "git-last-commit";
-import { ethers } from "ethers";
 import { fetchIp } from "./utils/ip-fetcher";
 
 const logger = require("./utils/logger")("runner") as Consola;
@@ -379,28 +380,29 @@ export default class NodeRunner {
       timeDiff,
       manifestRefreshInterval: this.nodeConfig.manifestRefreshInterval,
     });
-
     if (timeDiff >= this.nodeConfig.manifestRefreshInterval) {
       this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
-      try {
-        // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
-        // block standard node processing for so long (especially for nodes with low "interval" value)
-        Promise.race([
-          this.arweaveService.getCurrentManifest(),
-          timeout(MANIFEST_LOAD_TIMEOUT_MS),
-        ]).then((value) => {
-          if (value === "timeout") {
+      // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
+      // block standard node processing for so long (especially for nodes with low "interval" value)
+      promiseTimeout(
+        () => this.arweaveService.getCurrentManifest(),
+        MANIFEST_LOAD_TIMEOUT_MS
+      )
+        .then((value) => {
+          this.handleLoadedManifest(value as Manifest);
+        })
+        .catch((error) => {
+          if (error == TimeoutError) {
             logger.warn("Manifest load promise timeout");
           } else {
-            this.handleLoadedManifest(value);
+            logger.info("Error while calling manifest load function");
           }
+        })
+        .finally(() => {
           trackEnd(manifestFetchTrackingId);
         });
-      } catch (e: any) {
-        logger.info("Error while calling manifest load function.");
-      }
     } else {
       logger.info("Skipping manifest download in this iteration run.");
     }
