@@ -1,9 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "ftx"
-  ],
+  "defaultSource": ["ftx"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -25,7 +23,6 @@
     "BVOL": {},
     "SHIB": {},
     "SUSHI": {},
-    "RUNE": {},
     "LINA": {},
     "OXY": {},
     "ETH": {},
@@ -96,7 +93,6 @@
     "DODO": {},
     "BADGER": {},
     "PERP": {},
-    "RAMP": {},
     "PUNDIX": {},
     "SLP": {},
     "CLV": {},

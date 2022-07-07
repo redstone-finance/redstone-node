@@ -1,9 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "ascendex"
-  ],
+  "defaultSource": ["ascendex"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -70,7 +68,6 @@
     "LINK": {},
     "1INCH": {},
     "QTUM": {},
-    "EXRD": {},
     "MAHA": {},
     "XLM": {},
     "MATIC": {},

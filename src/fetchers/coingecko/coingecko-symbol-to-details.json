@@ -28531,12 +28531,6 @@
       "name": "InvestDigital"
     }
   ],
-  "INVESTEL": [
-    {
-      "id": "investel",
-      "name": "Investel"
-    }
-  ],
   "IVN": [
     {
       "id": "investin",
@@ -39169,12 +39163,6 @@
     {
       "id": "orient",
       "name": "Orient"
-    }
-  ],
-  "HTDF": [
-    {
-      "id": "orient-walt",
-      "name": "Orient Walt"
     }
   ],
   "TUSC": [
