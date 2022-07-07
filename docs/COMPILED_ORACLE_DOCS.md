@@ -475,7 +475,7 @@ We've also implemented an automated monitoring system for nodes. It will be desc
 
 ### Configure in Docker
 
-Dockerfiles are used to build docker images, which are usually executed in Production environment. To configure production environment `ENV` instruction should be added to a Dockerfile.
+RedStone node relies on env variables, so please remember to pass correct env values to your Docker container.
 
 ```dockerfile
 ENV ENABLE_JSON_LOGS=true
