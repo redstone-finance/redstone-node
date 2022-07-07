@@ -1,9 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "binanceusdm"
-  ],
+  "defaultSource": ["binanceusdm"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -110,7 +108,6 @@
     "REEF": {},
     "LIT": {},
     "SFP": {},
-    "DODO": {},
     "ALICE": {},
     "TLM": {},
     "BAKE": {},

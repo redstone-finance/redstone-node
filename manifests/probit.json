@@ -1,9 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "probit"
-  ],
+  "defaultSource": ["probit"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -128,7 +126,6 @@
     "BBT": {},
     "BNF": {},
     "RWN": {},
-    "HTDF": {},
     "UCM": {},
     "TERN": {},
     "ARTEX": {},
@@ -153,7 +150,6 @@
     "HVE2": {},
     "KABOSU": {},
     "SAFELIGHT": {},
-    "INVESTEL": {},
     "EVY": {},
     "TORI": {},
     "SATOZ": {}
