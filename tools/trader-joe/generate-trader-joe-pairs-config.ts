@@ -3,7 +3,8 @@ import _ from "lodash";
 import graphProxy from "../../src/utils/graph-proxy";
 
 const OUTPUT_FILE = "./src/fetchers/trader-joe/trader-joe-pairs.json";
-const SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange";
+const SUBGRAPH_URL =
+  "https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange";
 const MIN_RESERVE_USD = 1;
 
 main();
@@ -13,7 +14,9 @@ async function main() {
   const pairs = await getAllPairs();
 
   // Filtering
-  const filteredPairs = pairs.filter(p => Number(p.reserveUSD) > MIN_RESERVE_USD);
+  const filteredPairs = pairs.filter(
+    (p) => Number(p.reserveUSD) > MIN_RESERVE_USD
+  );
 
   // Saving data to config file
   const path = OUTPUT_FILE;
@@ -24,13 +27,14 @@ async function main() {
 async function getAllPairs(): Promise<any[]> {
   const pageSize = 1000;
   let allPairsFetched = false,
-      pageNr = 0,
-      lastId = "",
-      allPairs: any[] = [];
+    pageNr = 0,
+    lastId = "",
+    allPairs: any[] = [];
 
   while (!allPairsFetched) {
     console.log(
-      `Getting ${pageSize} pairs on page ${pageNr}. Last id: ${lastId}`);
+      `Getting ${pageSize} pairs on page ${pageNr}. Last id: ${lastId}`
+    );
 
     const pairs = await getPairs(pageSize, lastId);
 

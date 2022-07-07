@@ -9,37 +9,37 @@ export const registerRedstoneNode = async () => {
       type: "text",
       name: "name",
       message: "Provide name of redstone node",
-      validate: value => !value ? "Name is required" : true
+      validate: (value) => (!value ? "Name is required" : true),
     },
     {
       type: "text",
       name: "logo",
       message: "Provide logo URL of redstone node",
-      validate: value => !value ? "Logo URL is required" : true
+      validate: (value) => (!value ? "Logo URL is required" : true),
     },
     {
       type: "text",
       name: "description",
       message: "Provide description of redstone node",
-      validate: value => !value ? "Description is required" : true
+      validate: (value) => (!value ? "Description is required" : true),
     },
     {
       type: "text",
       name: "dataFeedId",
       message: "Provide data feed id of redstone node",
-      validate: value => !value ? "Data feed id is required" : true
+      validate: (value) => (!value ? "Data feed id is required" : true),
     },
     {
       type: "text",
       name: "evmAddress",
       message: "Provide EVM address of redstone node",
-      validate: value => !value ? "EVM address is required" : true
+      validate: (value) => (!value ? "EVM address is required" : true),
     },
     {
       type: "text",
       name: "ipAddress",
       message: "Provide IP address of redstone node",
-      validate: value => !value ? "Ip address is required" : true
+      validate: (value) => (!value ? "Ip address is required" : true),
     },
     {
       type: "text",
@@ -50,13 +50,14 @@ export const registerRedstoneNode = async () => {
       type: "text",
       name: "walletFilePath",
       message: "Provide absolute path to wallet file",
-      validate: value => !value ? "Wallet file is required" : true
-    }
+      validate: (value) => (!value ? "Wallet file is required" : true),
+    },
   ]);
 
   const contract = getOracleRegistryContract(response.walletFilePath);
 
-  const { name, logo, description, dataFeedId, evmAddress, ipAddress, url } = response;
+  const { name, logo, description, dataFeedId, evmAddress, ipAddress, url } =
+    response;
   const nodeDetails = {
     name,
     logo,
@@ -64,12 +65,13 @@ export const registerRedstoneNode = async () => {
     dataFeedId,
     evmAddress,
     ipAddress,
-    ...(!!url && { url })
+    ...(!!url && { url }),
   };
-  const registerNodeTransaction = await contract.bundleInteraction<RedstoneOraclesInput>({
-    function: "registerNode",
-    data: nodeDetails
-  });
+  const registerNodeTransaction =
+    await contract.bundleInteraction<RedstoneOraclesInput>({
+      function: "registerNode",
+      data: nodeDetails,
+    });
   console.log(`Sent register redstone node transaction`);
   niceLogger.log(registerNodeTransaction);
 };

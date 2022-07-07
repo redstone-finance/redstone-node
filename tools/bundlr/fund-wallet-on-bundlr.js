@@ -22,10 +22,11 @@ async function main() {
   const bundlr = new Bundlr(
     bundlrDefaults.defaultUrl,
     bundlrDefaults.defaultCurrency,
-    jwk);
+    jwk
+  );
 
   // Final confirmation
-  const winstonsAmount = amountOfARs * (10 ** 12);
+  const winstonsAmount = amountOfARs * 10 ** 12;
   const { confirm } = await prompts({
     type: "confirm",
     name: "confirm",
@@ -41,5 +42,7 @@ async function main() {
   console.log(`Sending funding tx...`);
   const tx = await bundlr.fund(winstonsAmount);
   console.log(tx);
-  console.log(`Funding tx sent. Funding tx processing may take ~1 hour (sometimes even more)`);
+  console.log(
+    `Funding tx sent. Funding tx processing may take ~1 hour (sometimes even more)`
+  );
 }

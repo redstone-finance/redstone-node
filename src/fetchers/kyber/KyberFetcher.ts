@@ -30,5 +30,4 @@ export class KyberFetcher extends BaseFetcher {
 
     return pricesObj;
   }
-
-};
+}

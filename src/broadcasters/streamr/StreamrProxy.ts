@@ -1,8 +1,4 @@
-import {
-  StreamrClient,
-  StorageNode,
-  StreamOperation,
-} from "streamr-client";
+import { StreamrClient, StorageNode, StreamOperation } from "streamr-client";
 import { Consola } from "consola";
 
 const logger = require("../../utils/logger")("StreamrProxy") as Consola;
@@ -62,8 +58,14 @@ export class StreamrProxy {
     logger.info(`Stream created: ${stream.id}`);
     await stream.addToStorageNode(StorageNode.STREAMR_GERMANY);
     logger.info("Stream added to the storage node: STREAMR_GERMANY");
-    await stream.grantPermission(StreamOperation.STREAM_SUBSCRIBE, undefined /* anyone */);
-    await stream.grantPermission(StreamOperation.STREAM_GET, undefined /* anyone */);
+    await stream.grantPermission(
+      StreamOperation.STREAM_SUBSCRIBE,
+      undefined /* anyone */
+    );
+    await stream.grantPermission(
+      StreamOperation.STREAM_GET,
+      undefined /* anyone */
+    );
     logger.info(`Added permissions to the stream: ${stream.id}`);
 
     return stream.id;
@@ -81,5 +83,4 @@ export class StreamrProxy {
       }
     }
   }
-
 }

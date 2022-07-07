@@ -7,10 +7,10 @@ const LIMIT = 24 * 60;
 
 const arweave = Arweave.init({
   host: "arweave.net", // Hostname or IP address for a Arweave host
-  port: 443,           // Port
-  protocol: "https",   // Network protocol http or https
-  timeout: 60000,      // Network request timeouts in milliseconds
-  logging: false,      // Enable network request logging
+  port: 443, // Port
+  protocol: "https", // Network protocol http or https
+  timeout: 60000, // Network request timeouts in milliseconds
+  logging: false, // Enable network request logging
 });
 
 main();
@@ -49,6 +49,6 @@ async function loadLastTxIds(limit) {
   });
 
   const prices = response.data;
-  const txIds = prices.map(p => p.permawebTx);
+  const txIds = prices.map((p) => p.permawebTx);
   return txIds;
 }

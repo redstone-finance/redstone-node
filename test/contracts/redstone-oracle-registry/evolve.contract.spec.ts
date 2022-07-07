@@ -45,7 +45,10 @@ describe("Redstone oracle registry contract - evolve", () => {
     walletAddress = await arweave.wallets.jwkToAddress(wallet);
 
     contractSrc = fs.readFileSync(
-      path.join(__dirname, "../../../dist/contracts/redstone-oracle-registry.contract.js"),
+      path.join(
+        __dirname,
+        "../../../dist/contracts/redstone-oracle-registry.contract.js"
+      ),
       "utf8"
     );
 
@@ -73,11 +76,23 @@ describe("Redstone oracle registry contract - evolve", () => {
   });
 
   test("update contract source", async () => {
-    const newSource = fs.readFileSync(path.join(__dirname, 'helpers/redstone-oracle-registry-evolve.contract.js'), 'utf8');
-    const evolveContractTx = await arweave.createTransaction({ data: newSource }, wallet);
-    evolveContractTx.addTag(SmartWeaveTags.APP_NAME, 'SmartWeaveContractSource');
-    evolveContractTx.addTag(SmartWeaveTags.APP_VERSION, '0.3.0');
-    evolveContractTx.addTag('Content-Type', 'application/javascript');
+    const newSource = fs.readFileSync(
+      path.join(
+        __dirname,
+        "helpers/redstone-oracle-registry-evolve.contract.js"
+      ),
+      "utf8"
+    );
+    const evolveContractTx = await arweave.createTransaction(
+      { data: newSource },
+      wallet
+    );
+    evolveContractTx.addTag(
+      SmartWeaveTags.APP_NAME,
+      "SmartWeaveContractSource"
+    );
+    evolveContractTx.addTag(SmartWeaveTags.APP_VERSION, "0.3.0");
+    evolveContractTx.addTag("Content-Type", "application/javascript");
     await arweave.transactions.sign(evolveContractTx, wallet);
     await arweave.transactions.post(evolveContractTx);
     await mineBlock(arweave);
@@ -85,11 +100,11 @@ describe("Redstone oracle registry contract - evolve", () => {
     await contract.writeInteraction<RedstoneOraclesInput>({
       function: "evolve",
       data: {
-        evolveTransactionId: evolveContractTx.id
+        evolveTransactionId: evolveContractTx.id,
       },
     });
     await mineBlock(arweave);
-  
+
     const testId = "testId";
     const testDataFeedDetails = {
       id: testId,
@@ -108,26 +123,27 @@ describe("Redstone oracle registry contract - evolve", () => {
     expect(state.evolve).toEqual(evolveContractTx.id);
     expect(dataFeed).toEqual({
       ...{
-        name: 'evolveName',
-        manifestTxId: 'evolveManifestTxId',
-        logo: 'evolveLogo',
-        description: 'evolveDescription'
+        name: "evolveName",
+        manifestTxId: "evolveManifestTxId",
+        logo: "evolveLogo",
+        description: "evolveDescription",
       },
       admin: walletAddress,
     });
   });
 
   test("throw error if invalid address in input", async () => {
-    const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
-      function: "evolve",
-      data: {
-        address: "invalidNodeAddress",
+    const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>(
+      {
+        function: "evolve",
+        data: {
+          address: "invalidNodeAddress",
+        },
       },
-    }, "0x00");
-
-    expect(errorMessage).toBe(
-      "Only the admin can evolve a contract"
+      "0x00"
     );
+
+    expect(errorMessage).toBe("Only the admin can evolve a contract");
   });
 
   test("throw error if no address in input", async () => {
@@ -136,7 +152,7 @@ describe("Redstone oracle registry contract - evolve", () => {
       evolve: null,
       contractAdmins: [walletAddress],
       nodes: {},
-      dataFeeds: {}
+      dataFeeds: {},
     };
 
     const contractTxId = await smartweave.createContract.deploy({
@@ -148,16 +164,13 @@ describe("Redstone oracle registry contract - evolve", () => {
     contract = smartweave.contract(contractTxId);
     contract.connect(wallet);
     await mineBlock(arweave);
-  
+
     const { errorMessage } = await contract.dryWrite<RedstoneOraclesInput>({
       function: "evolve",
       data: {
-        evolveTransactionId: "testTransactionId"
+        evolveTransactionId: "testTransactionId",
       },
     });
     expect(errorMessage).toBe("Contract cannot evolve");
   });
 });
-
-
-

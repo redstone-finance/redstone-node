@@ -18,7 +18,7 @@ export const getDataFeedDetailsById = (
   const dataFeedDetails = getDetailsById({
     identifier: data?.id,
     state,
-    oraclesType: "dataFeeds"
+    oraclesType: "dataFeeds",
   }) as DataFeedWithId;
   return { result: dataFeedDetails };
 };

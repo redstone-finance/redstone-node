@@ -5,15 +5,21 @@
   var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __propIsEnum = Object.prototype.propertyIsEnumerable;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+  var __defNormalProp = (obj, key, value) =>
+    key in obj
+      ? __defProp(obj, key, {
+          enumerable: true,
+          configurable: true,
+          writable: true,
+          value,
+        })
+      : (obj[key] = value);
   var __spreadValues = (a, b) => {
     for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
+      if (__hasOwnProp.call(b, prop)) __defNormalProp(a, prop, b[prop]);
     if (__getOwnPropSymbols)
       for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
+        if (__propIsEnum.call(b, prop)) __defNormalProp(a, prop, b[prop]);
       }
     return a;
   };
@@ -46,29 +52,38 @@
           reject(e);
         }
       };
-      var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+      var step = (x) =>
+        x.done
+          ? resolve(x.value)
+          : Promise.resolve(x.value).then(fulfilled, rejected);
       step((generator = generator.apply(__this, __arguments)).next());
     });
   };
 
-
   // src/contracts/redstone-oracle-registry/data-feeds/write/createDataFeed.ts
   var createDataFeed = (state, action) => {
     const data = action.input.data;
-    const isValidData = data.id && data.name && data.logo && data.description && data.manifestTxId;
+    const isValidData =
+      data.id &&
+      data.name &&
+      data.logo &&
+      data.description &&
+      data.manifestTxId;
     if (!isValidData) {
       throw new ContractError("Invalid data feed data");
     }
-    const _a = data, { id } = _a, restData = __objRest(_a, ["id"]);
+    const _a = data,
+      { id } = _a,
+      restData = __objRest(_a, ["id"]);
     if (state.dataFeeds[id]) {
       throw new ContractError(`Data feed with id ${id} already exists`);
     }
-    restData.name = 'evolveName';
-    restData.manifestTxId = 'evolveManifestTxId';
-    restData.logo = 'evolveLogo';
-    restData.description = 'evolveDescription';
+    restData.name = "evolveName";
+    restData.manifestTxId = "evolveManifestTxId";
+    restData.logo = "evolveLogo";
+    restData.description = "evolveDescription";
     state.dataFeeds[id] = __spreadProps(__spreadValues({}, restData), {
-      admin: action.caller
+      admin: action.caller,
     });
     return { state };
   };
@@ -87,15 +102,18 @@
   };
 
   // src/contracts/redstone-oracle-registry/redstone-oracle-registry.contract.ts
-  var handle = (state, action) => __async(void 0, null, function* () {
-    const { input } = action;
-    switch (input.function) {
-      case "createDataFeed":
-        return createDataFeed(state, action);
-      case "evolve":
-        return handleEvolve(state, action);
-      default:
-        throw new ContractError(`No function supplied or function not recognized: "${input.function}"`);
-    }
-  });
+  var handle = (state, action) =>
+    __async(void 0, null, function* () {
+      const { input } = action;
+      switch (input.function) {
+        case "createDataFeed":
+          return createDataFeed(state, action);
+        case "evolve":
+          return handleEvolve(state, action);
+        default:
+          throw new ContractError(
+            `No function supplied or function not recognized: "${input.function}"`
+          );
+      }
+    });
 })();

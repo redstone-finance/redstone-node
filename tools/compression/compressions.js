@@ -19,7 +19,7 @@ const compressions = {
     decompress(data) {
       return gunzipSync(data);
     },
-  }
+  },
 };
 
 module.exports = compressions;

@@ -45,7 +45,10 @@ describe("Redstone oracle registry contract - nodes - read", () => {
     walletAddress = await arweave.wallets.jwkToAddress(wallet);
 
     contractSrc = fs.readFileSync(
-      path.join(__dirname, "../../../dist/contracts/redstone-oracle-registry.contract.js"),
+      path.join(
+        __dirname,
+        "../../../dist/contracts/redstone-oracle-registry.contract.js"
+      ),
       "utf8"
     );
 

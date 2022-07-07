@@ -17,9 +17,9 @@ import { uploadManifest } from "./upload-manifest";
       { title: "Register data feed", value: "registerDataFeed" },
       { title: "Update data feed manifest", value: "updateDataFeedManifest" },
       { title: "Register redstone node", value: "registerNode" },
-      { title: "Update redstone node", value: "updateNode" }
+      { title: "Update redstone node", value: "updateNode" },
     ],
-    initial: 0
+    initial: 0,
   });
 
   switch (response.action) {

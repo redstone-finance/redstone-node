@@ -1,5 +1,5 @@
 import axios from "axios";
-import fetchers from "../../src/fetchers/index"
+import fetchers from "../../src/fetchers/index";
 import { mockFetcherResponse, mockRedstoneApiPrice } from "./_helpers";
 
 jest.mock("axios");
@@ -21,9 +21,9 @@ describe("verto fetcher", () => {
     // Then
     expect(result).toEqual([
       {
-        "symbol": "XYZ",
-        "value": 2.5
-      }
+        symbol: "XYZ",
+        value: 2.5,
+      },
     ]);
   });
 });

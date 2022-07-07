@@ -1,13 +1,16 @@
-import {GetPriceOptions, PriceData} from "redstone-api/lib/types";
+import { GetPriceOptions, PriceData } from "redstone-api/lib/types";
 import RedstoneApi from "redstone-api";
-import {MockProxy} from "jest-mock-extended";
+import { MockProxy } from "jest-mock-extended";
 import axios from "axios";
 
-export type GetSinglePrice = (symbol: string, opts?: GetPriceOptions) => Promise<PriceData>;
+export type GetSinglePrice = (
+  symbol: string,
+  opts?: GetPriceOptions
+) => Promise<PriceData>;
 
-export function mockRedstoneApiPrice(value: number, symbol: string = "USDT", ) {
-  jest.mock('redstone-api');
-  const mockedApi = RedstoneApi as MockProxy<typeof RedstoneApi>
+export function mockRedstoneApiPrice(value: number, symbol: string = "USDT") {
+  jest.mock("redstone-api");
+  const mockedApi = RedstoneApi as MockProxy<typeof RedstoneApi>;
 
   (mockedApi.getPrice as GetSinglePrice) = jest.fn((symbol: string) => {
     return Promise.resolve({
@@ -15,7 +18,7 @@ export function mockRedstoneApiPrice(value: number, symbol: string = "USDT", ) {
       provider: "prov",
       value: value,
       permawebTx: "sdf",
-      timestamp: 111111
+      timestamp: 111111,
     });
   });
 }
@@ -23,8 +26,8 @@ export function mockRedstoneApiPrice(value: number, symbol: string = "USDT", ) {
 export function mockFetcherResponse(pathToResponseFile: string) {
   const mockedAxios = axios as jest.Mocked<typeof axios>;
   const exampleResponse = require(pathToResponseFile);
-  mockedAxios.get.mockResolvedValue({data: exampleResponse});
-  mockedAxios.post.mockResolvedValue({data: exampleResponse});
+  mockedAxios.get.mockResolvedValue({ data: exampleResponse });
+  mockedAxios.post.mockResolvedValue({ data: exampleResponse });
 }
 
 export function mockFetcherResponseWithFunction(getResponse: () => any) {
@@ -34,7 +37,10 @@ export function mockFetcherResponseWithFunction(getResponse: () => any) {
 }
 
 // TODO: find out why this does not work...
-export function mockFetcherProxy(proxyModule: string, pathToResponseFile: string) {
+export function mockFetcherProxy(
+  proxyModule: string,
+  pathToResponseFile: string
+) {
   jest.mock(proxyModule, () => {
     return jest.fn().mockImplementation(() => {
       return {
@@ -42,10 +48,10 @@ export function mockFetcherProxy(proxyModule: string, pathToResponseFile: string
           const exampleResponse = require(pathToResponseFile);
 
           return Promise.resolve({
-            data: exampleResponse
+            data: exampleResponse,
           });
-        }
-      }
+        },
+      };
     });
   });
 }

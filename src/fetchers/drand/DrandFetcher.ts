@@ -21,9 +21,11 @@ export class DrandFetcher extends BaseFetcher {
       throw new Error(`Only one symbol supported by drand: ${ENTROPY_SYMBOL}`);
     }
 
-    const entropy = JSON.parse(Number(
-      BigInt("0x" + response.data.randomness) % BigInt(MAX_ENTROPY_VALUE)
-    ).toString());
+    const entropy = JSON.parse(
+      Number(
+        BigInt("0x" + response.data.randomness) % BigInt(MAX_ENTROPY_VALUE)
+      ).toString()
+    );
 
     const result = {
       [ENTROPY_SYMBOL]: entropy,
@@ -31,4 +33,4 @@ export class DrandFetcher extends BaseFetcher {
 
     return result;
   }
-};
+}

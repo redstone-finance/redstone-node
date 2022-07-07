@@ -12,7 +12,7 @@ export abstract class BaseFetcher implements Fetcher {
   protected constructor(name: string) {
     this.name = name;
     this.logger = createLogger("fetchers/" + name);
-  };
+  }
 
   // All the abstract methods below must be implemented in fetchers
   abstract fetchData(ids: string[], opts?: FetcherOpts): Promise<any>;
@@ -37,14 +37,14 @@ export abstract class BaseFetcher implements Fetcher {
   ): Promise<PriceDataFetched[]> {
     // Fetching data
     const fetchStartTime = Date.now();
-    const ids = symbols.map(symbol => this.convertSymbolToId(symbol));
+    const ids = symbols.map((symbol) => this.convertSymbolToId(symbol));
     let response = await this.fetchData(ids, opts);
 
     // Retrying data fetching if needed
     const shouldRetry =
-      !this.validateResponse(response)
-      && this.retryForInvalidResponse
-      && Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
+      !this.validateResponse(response) &&
+      this.retryForInvalidResponse &&
+      Date.now() - fetchStartTime <= MAX_RESPONSE_TIME_TO_RETRY_FETCHING_MS;
     if (shouldRetry) {
       this.logger.info("Retrying to fetch data");
       response = await this.fetchData(ids, opts);
@@ -78,12 +78,14 @@ export abstract class BaseFetcher implements Fetcher {
 
   private convertPricesObjToResultPriceArray(
     pricesObj: PricesObj,
-    requiredIds: string[]): PriceDataFetched[] {
+    requiredIds: string[]
+  ): PriceDataFetched[] {
     const prices = [];
     for (const id of requiredIds) {
       if (pricesObj[id] === undefined) {
         this.logger.warn(
-          `Id ${id} is not included in response for: ${this.name}`);
+          `Id ${id} is not included in response for: ${this.name}`
+        );
       } else {
         prices.push({
           symbol: this.convertIdToSymbol(id),
@@ -92,5 +94,5 @@ export abstract class BaseFetcher implements Fetcher {
       }
     }
     return prices;
-  };
-};
+  }
+}

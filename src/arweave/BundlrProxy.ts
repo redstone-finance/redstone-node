@@ -8,8 +8,7 @@ import { gzip } from "zlib";
 
 const logger = require("../utils/logger")("BundlrProxy") as Consola;
 
-export default class BundlrProxy  {
-
+export default class BundlrProxy {
   private bundlrClient: Bundlr;
 
   constructor(jwk: JWKInterface) {

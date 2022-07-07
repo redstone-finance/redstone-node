@@ -30,7 +30,9 @@ async function main() {
   while (timestamp <= endTimestamp) {
     const exists = await doesPriceWithSameTimestampExist(timestamp);
     if (exists) {
-      console.warn(`[WARNING] Price with timestamp ${timestamp} already exists in DB`);
+      console.warn(
+        `[WARNING] Price with timestamp ${timestamp} already exists in DB`
+      );
     } else {
       const value = await getARPriceForDateFromCoingecko(timestamp);
       const price = await generateAndSignPriceObj({
@@ -54,10 +56,7 @@ async function getARPriceForDateFromCoingecko(timestamp) {
   return response.data.market_data.current_price.usd;
 }
 
-async function generateAndSignPriceObj({
-  value,
-  timestamp,
-}) {
+async function generateAndSignPriceObj({ value, timestamp }) {
   const priceObj = {
     symbol: "AR",
     value,
@@ -66,7 +65,7 @@ async function generateAndSignPriceObj({
     id: uuid(),
     permawebTx: "historical-ar-prices-migration-so-no-tx-id",
     version: "3",
-    source: {"coingecko": value},
+    source: { coingecko: value },
   };
 
   priceObj.signature = await signPrice(priceObj);

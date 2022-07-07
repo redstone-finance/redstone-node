@@ -2,7 +2,7 @@ const Arweave = require("arweave/node");
 const open = require("open");
 const _ = require("lodash");
 const { run } = require("ar-gql");
-const plotly = require('plotly')("hatskier", "vyujwn0zVNWbWR73W5Jh");
+const plotly = require("plotly")("hatskier", "vyujwn0zVNWbWR73W5Jh");
 
 const PROVIDER_ADDRESS = "I-5rWUehEv-MjdK9gFw09RxfSLQX9DIHxG614Wf8qo0";
 const LAST_BLOCKS_TO_CHECK = 10000;
@@ -10,10 +10,10 @@ const VERSION = "0.4";
 
 const arweave = Arweave.init({
   host: "arweave.net", // Hostname or IP address for a Arweave host
-  port: 443,           // Port
-  protocol: "https",   // Network protocol http or https
-  timeout: 60000,      // Network request timeouts in milliseconds
-  logging: false,      // Enable network request logging
+  port: 443, // Port
+  protocol: "https", // Network protocol http or https
+  timeout: 60000, // Network request timeouts in milliseconds
+  logging: false, // Enable network request logging
 });
 
 main();
@@ -22,11 +22,14 @@ async function main() {
   const transactions = await getTransactionWithPagination({ maxPages: 50 });
   // const { transactions } = await getRedstoneTransactions();
 
-  const minutesOfDelay = [], times = [];
+  const minutesOfDelay = [],
+    times = [];
 
   for (const transaction of transactions) {
     const blockTime = transaction.node.block.timestamp * 1000;
-    const timestampInTag = transaction.node.tags.find(t => t.name === "timestamp").value;
+    const timestampInTag = transaction.node.tags.find(
+      (t) => t.name === "timestamp"
+    ).value;
     const diff = blockTime - timestampInTag;
     const diffMinutes = Number((diff / 60000).toFixed(2));
 
@@ -42,7 +45,8 @@ async function main() {
   }
 
   const avg = Number(_.mean(minutesOfDelay).toFixed(2));
-  const median = _.sortBy(minutesOfDelay)[Math.round(minutesOfDelay.length / 2)];
+  const median =
+    _.sortBy(minutesOfDelay)[Math.round(minutesOfDelay.length / 2)];
   const max = _.max(minutesOfDelay);
   const min = _.min(minutesOfDelay);
 
@@ -61,10 +65,15 @@ async function main() {
 }
 
 async function getTransactionWithPagination({ maxPages }) {
-  let hasNextPage = true, allTransactions = [], after, pageNr = 0;
+  let hasNextPage = true,
+    allTransactions = [],
+    after,
+    pageNr = 0;
 
   while (hasNextPage && pageNr < maxPages) {
-    console.log(`Getting transactions from page nr ${pageNr}. Cursor: ${after}`);
+    console.log(
+      `Getting transactions from page nr ${pageNr}. Cursor: ${after}`
+    );
     const response = await getRedstoneTransactions(after);
     allTransactions = allTransactions.concat(response.transactions);
     after = _.last(response.transactions).cursor;
@@ -72,8 +81,10 @@ async function getTransactionWithPagination({ maxPages }) {
     pageNr++;
   }
 
-  return _.sortBy(allTransactions, (tx =>
-    tx.node.tags.find(t => t.name === "timestamp").value));
+  return _.sortBy(
+    allTransactions,
+    (tx) => tx.node.tags.find((t) => t.name === "timestamp").value
+  );
 }
 
 async function getRedstoneTransactions(after) {
@@ -90,7 +101,7 @@ async function getRedstoneTransactions(after) {
           ]
           block: { min: ${minBlock} }
           owners: ["${PROVIDER_ADDRESS}"]
-          ${after ? "after: \"" + after + "\""  : ""}
+          ${after ? 'after: "' + after + '"' : ""}
           first: 50
         ) {
           pageInfo {
@@ -122,14 +133,16 @@ async function getRedstoneTransactions(after) {
   };
 }
 
-function showChart({x, y}) {
-  const data = [{
-    x,
-    y,
-    type: 'bar',
-  }];
+function showChart({ x, y }) {
+  const data = [
+    {
+      x,
+      y,
+      type: "bar",
+    },
+  ];
   const layout = {
-    fileopt : "overwrite",
+    fileopt: "overwrite",
     filename: "transactions-report-" + Date.now(),
   };
 

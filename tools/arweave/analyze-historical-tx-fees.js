@@ -9,10 +9,10 @@ const STANDARD_OFFSET = 10 * 3600 * 1000; // 10 hours
 
 const arweave = Arweave.init({
   host: "arweave.net", // Hostname or IP address for a Arweave host
-  port: 443,           // Port
-  protocol: "https",   // Network protocol http or https
-  timeout: 60000,      // Network request timeouts in milliseconds
-  logging: false,      // Enable network request logging
+  port: 443, // Port
+  protocol: "https", // Network protocol http or https
+  timeout: 60000, // Network request timeouts in milliseconds
+  logging: false, // Enable network request logging
 });
 
 main();
@@ -25,13 +25,16 @@ async function main() {
       provider: "redstone",
     });
     const { permawebTx } = price;
-    console.log(`\n${counter} (${new Date(timestamp).toUTCString()}): ${permawebTx}`);
+    console.log(
+      `\n${counter} (${new Date(timestamp).toUTCString()}): ${permawebTx}`
+    );
     try {
       const txDetails = await arweave.transactions.get(permawebTx);
       console.log(_.pick(txDetails, ["reward", "data_size"]));
     } catch {
-      console.log(`=== !!! Failed to load tx details for: ${permawebTx} !!! ===`);
+      console.log(
+        `=== !!! Failed to load tx details for: ${permawebTx} !!! ===`
+      );
     }
-
   }
 }

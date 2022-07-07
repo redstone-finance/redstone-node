@@ -1,6 +1,7 @@
 import graphProxy from "../../src/utils/graph-proxy";
 
-const SUBGRAPH_URL = "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
+const SUBGRAPH_URL =
+  "https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex";
 const MIN_RESERVE_USD = 50;
 
 interface Pair {
@@ -8,7 +9,7 @@ interface Pair {
   symbol0: string;
   reserveUSD: any;
   volumeUSD: any;
-};
+}
 
 main();
 
@@ -17,12 +18,16 @@ async function main() {
 
   const symbolToPairId: { [symbol: string]: any } = {};
 
-  const filteredPairs = pairs.filter(p => Number(p.reserveUSD) > MIN_RESERVE_USD);
+  const filteredPairs = pairs.filter(
+    (p) => Number(p.reserveUSD) > MIN_RESERVE_USD
+  );
 
   for (const pair of filteredPairs) {
-    if (symbolToPairId[pair.symbol0] === undefined
-      || Number(symbolToPairId[pair.symbol0].reserveUSD) < Number(pair.reserveUSD)) {
-        symbolToPairId[pair.symbol0] = pair.id;
+    if (
+      symbolToPairId[pair.symbol0] === undefined ||
+      Number(symbolToPairId[pair.symbol0].reserveUSD) < Number(pair.reserveUSD)
+    ) {
+      symbolToPairId[pair.symbol0] = pair.id;
     }
   }
 
@@ -60,7 +65,6 @@ async function get1KMostPopularPairs(): Promise<Pair[]> {
     console.log("Error occured", e);
     throw "stop";
   }
-
 
   return response.data.pairs.map((pair: any) => {
     return {

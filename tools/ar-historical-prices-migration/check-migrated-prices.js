@@ -20,7 +20,9 @@ async function main() {
       verifySignature: true,
     });
     const diff = (timestamp - price.timestamp) / (60 * 1000);
-    console.log(`Got AR price for ${dateStr}: ${price.value}. Diff: ${diff} mins`);
+    console.log(
+      `Got AR price for ${dateStr}: ${price.value}. Diff: ${diff} mins`
+    );
     timestamp += 24 * 3600 * 1000;
   }
 }

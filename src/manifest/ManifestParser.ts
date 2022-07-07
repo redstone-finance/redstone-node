@@ -1,9 +1,8 @@
-import {Manifest, SourceTimeout} from "../types";
+import { Manifest, SourceTimeout } from "../types";
 
 export type TokensBySource = { [source: string]: string[] };
 
 export default class ManifestHelper {
-
   // This function converts tokens from manifest to object with the following
   // type: { <SourceName>: <Array of tokens to fetch from source> }
   static groupTokensBySource(manifest: Manifest): TokensBySource {
@@ -15,11 +14,11 @@ export default class ManifestHelper {
       let sourcesForToken: string[];
       // If no source is defined for token
       // we use default source from manifest
-      if (source === undefined || ! source.length) {
+      if (source === undefined || !source.length) {
         if (manifest.defaultSource === undefined) {
           const errMsg =
-            `Token source is not defined for "${token}"`
-            + ` and global source is not defined`;
+            `Token source is not defined for "${token}"` +
+            ` and global source is not defined`;
           throw new Error(errMsg);
         } else {
           sourcesForToken = manifest.defaultSource;
@@ -40,19 +39,25 @@ export default class ManifestHelper {
     return result;
   }
 
-  static getTimeoutForSource(source: string, manifest: Manifest): number | null {
+  static getTimeoutForSource(
+    source: string,
+    manifest: Manifest
+  ): number | null {
     if (!source.length) {
-      throw ('Source for timeout not defined');
+      throw "Source for timeout not defined";
     }
     const timeoutConfiguration = manifest.sourceTimeout;
-    if (!timeoutConfiguration || typeof(timeoutConfiguration) !== 'number') {
+    if (!timeoutConfiguration || typeof timeoutConfiguration !== "number") {
       return null;
     }
 
     return timeoutConfiguration;
   }
 
-  static getMaxDeviationForSymbol(symbol: string, manifest: Manifest): number | null {
+  static getMaxDeviationForSymbol(
+    symbol: string,
+    manifest: Manifest
+  ): number | null {
     if (manifest.tokens[symbol] === undefined) {
       return null;
     }
@@ -60,7 +65,7 @@ export default class ManifestHelper {
     if (result === undefined) {
       result = manifest.maxPriceDeviationPercent;
     }
-    if (typeof(result) !== 'number') {
+    if (typeof result !== "number") {
       return null;
     }
 

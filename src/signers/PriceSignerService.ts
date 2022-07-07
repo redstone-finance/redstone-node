@@ -1,7 +1,11 @@
 import { Consola } from "consola";
 import _ from "lodash";
 import EvmPriceSigner from "./EvmPriceSigner";
-import { PriceDataBeforeSigning, PriceDataSigned, SignedPricePackage } from "../types";
+import {
+  PriceDataBeforeSigning,
+  PriceDataSigned,
+  SignedPricePackage,
+} from "../types";
 import { trackStart, trackEnd } from "../utils/performance-tracker";
 
 const logger = require("../utils/logger")("ArweaveService") as Consola;
@@ -10,7 +14,7 @@ interface PriceSignerConfig {
   version: string;
   evmChainId: number;
   ethereumPrivateKey: string;
-};
+}
 
 // Business service that supplies signing operations required by Redstone-Node
 export default class PriceSignerService {
@@ -22,7 +26,9 @@ export default class PriceSignerService {
     this.ethereumPrivateKey = config.ethereumPrivateKey;
   }
 
-  async signPrices(prices: PriceDataBeforeSigning[],): Promise<PriceDataSigned[]> {
+  async signPrices(
+    prices: PriceDataBeforeSigning[]
+  ): Promise<PriceDataSigned[]> {
     const signingTrackingId = trackStart("signing");
     const signedPrices: PriceDataSigned[] = [];
 
@@ -38,18 +44,23 @@ export default class PriceSignerService {
     }
   }
 
-  async signSinglePrice(price: PriceDataBeforeSigning): Promise<PriceDataSigned> {
+  async signSinglePrice(
+    price: PriceDataBeforeSigning
+  ): Promise<PriceDataSigned> {
     logger.info(`Signing price with evm signer: ${price.id}`);
-    const packageWithSinglePrice = this.evmSigner.signPricePackage({
-      prices: [_.pick(price, ["symbol", "value"])],
-      timestamp: price.timestamp,
-    }, this.ethereumPrivateKey);
+    const packageWithSinglePrice = this.evmSigner.signPricePackage(
+      {
+        prices: [_.pick(price, ["symbol", "value"])],
+        timestamp: price.timestamp,
+      },
+      this.ethereumPrivateKey
+    );
 
     return {
       ...price,
       // evmSignature: packageWithSinglePrice.signature,
       liteEvmSignature: packageWithSinglePrice.liteSignature,
-    }
+    };
   }
 
   signPricePackage(prices: PriceDataSigned[]): SignedPricePackage {
@@ -59,11 +70,12 @@ export default class PriceSignerService {
 
     const pricePackage = {
       timestamp: prices[0].timestamp,
-      prices: prices.map(p => _.pick(p, ["symbol", "value"])),
+      prices: prices.map((p) => _.pick(p, ["symbol", "value"])),
     };
 
     return this.evmSigner.signPricePackage(
       pricePackage,
-      this.ethereumPrivateKey);
+      this.ethereumPrivateKey
+    );
   }
 }

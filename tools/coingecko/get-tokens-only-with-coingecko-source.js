@@ -1,5 +1,4 @@
-const allSupportedConfig =
-  require("../../manifests/main.json");
+const allSupportedConfig = require("../../manifests/main.json");
 
 main();
 

@@ -9,14 +9,15 @@ export const uploadManifest = async () => {
       type: "text",
       name: "manifestSourcePath",
       message: "Provide absolute path to manifest source file",
-      validate: value => !value ? "Manifest source path file is required" : true
+      validate: (value) =>
+        !value ? "Manifest source path file is required" : true,
     },
     {
       type: "text",
       name: "walletFilePath",
       message: "Provide absolute path to wallet file",
-      validate: value => !value ? "Wallet file is required" : true
-    }
+      validate: (value) => (!value ? "Wallet file is required" : true),
+    },
   ]);
 
   const newManifestSource = fs.readFileSync(
@@ -27,11 +28,19 @@ export const uploadManifest = async () => {
   const wallet = getWallet(response.walletFilePath);
   const arweave = initArweave();
 
-  const uploadManifestTransaction = await arweave.createTransaction({ data: newManifestSource }, wallet);
-  uploadManifestTransaction.addTag(SmartWeaveTags.APP_NAME, "SmartweaveManifestSource");
+  const uploadManifestTransaction = await arweave.createTransaction(
+    { data: newManifestSource },
+    wallet
+  );
+  uploadManifestTransaction.addTag(
+    SmartWeaveTags.APP_NAME,
+    "SmartweaveManifestSource"
+  );
   uploadManifestTransaction.addTag(SmartWeaveTags.APP_VERSION, "0.3.0");
   uploadManifestTransaction.addTag("Content-Type", "application/javascript");
   await arweave.transactions.sign(uploadManifestTransaction, wallet);
   await arweave.transactions.post(uploadManifestTransaction);
-  console.log(`Upload manifest transaction id: ${uploadManifestTransaction.id}`);
+  console.log(
+    `Upload manifest transaction id: ${uploadManifestTransaction.id}`
+  );
 };

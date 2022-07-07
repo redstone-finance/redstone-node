@@ -13,7 +13,7 @@ const SYMBOLS = [
   "XLM",
   "AR",
   "CELO",
-  "AVAX"
+  "AVAX",
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
