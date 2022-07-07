@@ -15,13 +15,10 @@ describe("promiseTimeout", () => {
     );
   });
 
-  test("should call onError if promise rejected", async () => {
+  test("should throw any error", async () => {
     const rejectPromise = () => Promise.reject(new Error("Rejected promise"));
-    let errorValue = "";
-    const onError = (error: Error) => {
-      errorValue = error.message;
-    };
-    await promiseTimeout(rejectPromise, 0, onError);
-    expect(errorValue).toBe("Rejected promise");
+    await expect(promiseTimeout(rejectPromise, 0)).rejects.toThrowError(
+      "Rejected promise"
+    );
   });
 });

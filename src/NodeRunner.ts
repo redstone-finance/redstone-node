@@ -386,20 +386,23 @@ export default class NodeRunner {
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
       // note: not using "await" here, as loading manifest's data takes about 6 seconds and we do not want to
       // block standard node processing for so long (especially for nodes with low "interval" value)
-      const getCurrentManifestOnError = () =>
-        logger.info("Error while calling manifest load function.");
       promiseTimeout(
         () => this.arweaveService.getCurrentManifest(),
-        MANIFEST_LOAD_TIMEOUT_MS,
-        getCurrentManifestOnError
-      ).then((value) => {
-        if (value == TimeoutError) {
-          logger.warn("Manifest load promise timeout");
-        } else {
+        MANIFEST_LOAD_TIMEOUT_MS
+      )
+        .then((value) => {
           this.handleLoadedManifest(value as Manifest);
-        }
-        trackEnd(manifestFetchTrackingId);
-      });
+        })
+        .catch((error) => {
+          if (error == TimeoutError) {
+            logger.warn("Manifest load promise timeout");
+          } else {
+            logger.info("Error while calling manifest load function");
+          }
+        })
+        .finally(() => {
+          trackEnd(manifestFetchTrackingId);
+        });
     } else {
       logger.info("Skipping manifest download in this iteration run.");
     }

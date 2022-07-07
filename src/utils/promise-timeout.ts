@@ -14,8 +14,7 @@ export const timeout = (ms: number): Promise<any> => {
 
 export const promiseTimeout = async (
   promisesArray: () => Promise<any>,
-  timeoutInMilliseconds: number,
-  onError?: (error: any) => void
+  timeoutInMilliseconds: number
 ) => {
   try {
     return await Promise.race([
@@ -23,9 +22,6 @@ export const promiseTimeout = async (
       timeout(timeoutInMilliseconds),
     ]);
   } catch (error: any) {
-    if (onError) {
-      return onError(error);
-    }
     throw error;
   }
 };
