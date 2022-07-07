@@ -1,14 +1,17 @@
-import { performance } from "perf_hooks";
 import axios from "axios";
+import { ethers } from "ethers";
+import { performance } from "perf_hooks";
 import { Consola } from "consola";
-import mode from "../../mode";
+import { config } from "../config";
 
 const logger = require("./logger")("utils/performance-tracker") as Consola;
 const URL = "https://api.redstone.finance/metrics";
-const tasks: { [trackingId: string]: {
-  label: string;
-  startTime: number;
-} } = {};
+const tasks: {
+  [trackingId: string]: {
+    label: string;
+    startTime: number;
+  };
+} = {};
 
 export function trackStart(label: string): string {
   if (label === "") {
@@ -19,7 +22,8 @@ export function trackStart(label: string): string {
 
   if (tasks[trackingId] !== undefined) {
     logger.warn(
-      `Tracking id "${trackingId}" is already being used. Label: "${label}"`);
+      `Tracking id "${trackingId}" is already being used. Label: "${label}"`
+    );
   } else {
     tasks[trackingId] = {
       label,
@@ -37,7 +41,8 @@ export function trackEnd(trackingId: string): void {
 
   if (tasks[trackingId] === undefined) {
     logger.warn(
-      `Cannot execute trackEnd for ${trackingId} without trackStart calling`);
+      `Cannot execute trackEnd for ${trackingId} without trackStart calling`
+    );
     return;
   }
 
@@ -59,10 +64,11 @@ export function printTrackingState() {
 }
 
 async function saveMetric(label: string, value: number): Promise<void> {
-  const prefix = process.env.PERFORMANCE_TRACKING_LABEL_PREFIX || "local";
-  const labelWithPrefix = `${prefix}-${label}`;
+  const evmPrivateKey = config.privateKeys.ethereumPrivateKey;
+  const evmAddress = new ethers.Wallet(evmPrivateKey).address;
+  const labelWithPrefix = `${evmAddress.slice(0, 14)}-${label}`;
 
-  if (mode.isProd) {
+  if (config.enablePerformanceTracking) {
     await axios.post(URL, {
       label: labelWithPrefix,
       value,

@@ -40,9 +40,7 @@ describe("custom URL fetcher", () => {
           },
         },
       },
-      credentials: {
-        ethereumPrivateKey: "",
-      },
+      credentials: {},
     });
 
     // Then

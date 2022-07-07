@@ -1,5 +1,5 @@
 import ManifestHelper from "../src/manifest/ManifestParser";
-import {Manifest} from "../src/types";
+import { Manifest } from "../src/types";
 
 describe("groupTokenBySource", () => {
   const baseManifest = {

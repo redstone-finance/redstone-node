@@ -19,10 +19,10 @@ async function main() {
 async function generateNewRandomNodeConfig() {
   const arweave = Arweave.init({
     host: "arweave.net", // Hostname or IP address for a Arweave host
-    port: 443,           // Port
-    protocol: "https",   // Network protocol http or https
-    timeout: 60000,      // Network request timeouts in milliseconds
-    logging: false,      // Enable network request logging
+    port: 443, // Port
+    protocol: "https", // Network protocol http or https
+    timeout: 60000, // Network request timeouts in milliseconds
+    logging: false, // Enable network request logging
   });
 
   const evmWallet = ethers.Wallet.createRandom();
@@ -33,19 +33,9 @@ async function generateNewRandomNodeConfig() {
   return {
     config: {
       arweaveKeysJWK: jwk,
-      minimumArBalance: 0,
-      useManifestFromSmartContract: true,
-      addEvmSignature: true,
-      enableStreamrBroadcaster: false,
-      omitSourcesInArweaveTx: true,
       credentials: {
         ethereumPrivateKey: evmWallet.privateKey,
       },
-      httpBroadcasterURLs: [
-        "https://api.redstone.finance",
-        "https://vwx3eni8c7.eu-west-1.awsapprunner.com",
-        "https://container-service-1.dv9sai71f4rsq.eu-central-1.cs.amazonlightsail.com"
-      ]
     },
     publicProviderDetails: {
       address: arweaveAddress,

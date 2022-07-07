@@ -2,4 +2,5 @@
 
 - Clone https://github.com/redstone-finance/redstone-node
 - Install dependencies using `yarn install` command
-- Run `yarn start:dev --config sample-config.json`
+- Populate `.env.local` file with env variables from `.env.example`
+- Run `yarn start:dev`

@@ -1,5 +1,4 @@
 import axios from "axios";
-import mode from "../../../mode";
 import { Broadcaster } from "../Broadcaster";
 import { PriceDataSigned, SignedPricePackage } from "../../types";
 import { Consola } from "consola";
@@ -11,8 +10,8 @@ const logger = require("../../utils/logger")("HttpBroadcaster") as Consola;
 
 export class HttpBroadcaster implements Broadcaster {
   constructor(
-    private readonly broadcasterURLs: string[] = [mode.broadcasterUrl]
-  ) {}
+    private readonly broadcasterURLs: string[]
+  ) { }
 
   async broadcast(prices: PriceDataSigned[]): Promise<void> {
     const promises = this.broadcasterURLs.map((url) => {

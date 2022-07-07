@@ -20,7 +20,7 @@ You can check the compiled oracle documentation [here.](docs/COMPILED_ORACLE_DOC
 ## 📜 Instructions
 
 - [Running a node](docs/RUN_REDSTONE_NODE.md)
-- [Prepare config file](docs/PREPARE_CONFIG.md)
+- [Prepare environment variables](docs/PREPARE_ENV_VARIABLES.md)
 - [Prepare manifest](docs/PREPARE_MANIFEST.md)
 - [Add new source](docs/ADD_NEW_SOURCE.md)
 - [Add new token](docs/ADD_NEW_TOKEN.md)

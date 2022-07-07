@@ -33,7 +33,7 @@
     - [Prepare](#prepare)
       - [1. Install dependencies](#1-install-dependencies)
       - [2. Prepare manifest](#2-prepare-manifest)
-      - [3. Prepare config file](#3-prepare-config-file)
+      - [3. Prepare environment variables file](#3-prepare-environment-variables)
     - [Run](#run)
       - [Local run](#local-run)
       - [Run in docker](#run-in-docker)
@@ -391,27 +391,34 @@ Here is the structure of the manifest file:
 | sourceTimeout | required | Number | Default timeout in milliseconds for sources |
 | maxPriceDeviationPercent | required | Number | Default maximum price deviation percent for tokens. It may also be set for each token separately |
 | evmChainId | required | Number | EVM chain id, that will be used during EVM price signing. Pass `1` if you're not sure, it will point to the Ethereum Mainnet. |
+| httpBroadcasterURLs | optional | ["http://localhost:9000"] | array of urls for broadcasters to which prices should be sent |
+| enableStreamrBroadcaster | optional | false | if set to true, single prices and prices packages will be sent to Streamr |
+| disableSinglePricesBroadcastingInStreamr | optional | true | if set to true, single prices will not be sent to Streamr |
 | tokens | required | Object | Object with tokens in the following format: `{ "TOKEN_SYMBOL": { "source": ["source-name-1", "source-name-2", ...], "maxPriceDeviationPercent": 25 }, ... }`. Note that `source` and `maxPriceDeviationPercent` params per token are optional. This is also a correct tokens configuration: `{ "TOKEN_SYMBOL_1": {}, "TOKEN_SYMBOL_2": {} }` |
 
 You can find a list of available sources along with its stability details in the RedStone Web app: [app.redstone.finance/#/app/sources.](https://app.redstone.finance/#/app/sources)
 
 <img alt="redstone image" src="https://github.com/redstone-finance/redstone-node/blob/main/docs/img/sources-screenshot.png?raw=true" width="800" />
 
-##### 3. Prepare config file
+##### 3. Prepare environment variables
 
-Config file is a **private** file created by a provider. It contains the following details required by the redstone-node:
+# How to prepare a ENV variables
 
-| Param                          | Optionality | Description                                                                                        |
-| ------------------------------ | :---------: | -------------------------------------------------------------------------------------------------- |
-| arweaveKeysFile                |  required   | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
-| minimumArBalance               |  required   | minimum AR balance required to run the node                                                        |
-| useManifestFromSmartContract   |  optional   | if set to true , manifest will be loaded from Arweave Smart Contracts                              |
-| manifestFile                   |  optional   | path to the manifest file                                                                          |
-| addEvmSignature                |  optional   | if set to true, EVM signature will be added to each price for each asset                           |
-| credentials                    |  required   | object with credentials for APIs and private keys                                                  |
-| credentials.ethereumPrivateKey |  required   | Ethereum private key that will be used for price data signing                                      |
+Env variables should be treated as **private**, especially all keys and JWKs. They should be structured as follows:
 
-You should place your config file inside the `.secrets` folder, which is included in `.gitignore`. You should **never publish this file.**
+| Param                        |                   Optionality                   | Default value | Description                                                                                        |
+| ---------------------------- | :---------------------------------------------: | ------------- | -------------------------------------------------------------------------------------------------- |
+| ENABLE_JSON_LOGS             |                    optional                     | true          | if set to true, logging in JSON format will be enabled                                             |
+| ENABLE_PERFORMANCE_TRACKING  |                    optional                     | true          | if set to true, performance data will be send to RedStone                                          |
+| PRINT_DIAGNOSTIC_INFO        |                    optional                     | true          | if set to true, additional info with diagnostics information will be logged                        |
+| ARWEAVE_KEYS_FILE_PATH       |    required if ARWEAVE_KEYS_JWK not provided    |               | path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
+| ARWEAVE_KEYS_JWK             | required if ARWEAVE_KEYS_FILE_PATH not provided |               | JWK of arweave wallet (helpful with Docker)                                                        |
+| OVERRIDE_MANIFEST_USING_FILE |                    optional                     |               | path to the manifest file, if not specified manifest is loaded from smart contract                 |
+| MANIFEST_REFRESH_INTERVAL    |                    optional                     | 120000        | if manifest is loaded from smart contracts it defines how often node will check for new manifest   |
+| ETHEREUM_PRIVATE_KEY         |                    required                     |               | Ethereum private key that will be used for price data signing                                      |
+| TWELVE_DATA_RAPID_API_KEY    |                    optional                     |               | Twelve data API key which will be used to fetch prices                                             |
+
+Check out the [.env.example](../.env.example)
 
 #### Run
 
@@ -421,20 +428,13 @@ Please note, the instruction below is for Unix operating systems (like Linux or 
 If you use Windows, we recommend running the redstone node in a Docker container.
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG
+yarn start
 ```
 
 We recommend redirecting output to some log file(s), for example:
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
-```
-
-You can also enable JSON mode for logs to simplify the log analysing later.
-To do this append `ENABLE_JSON_LOGS=true` to the node running command:
-
-```bash
-ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
+yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ##### Run in docker
@@ -473,40 +473,19 @@ You can simply open this URL [https://api.redstone.finance/prices?provider=YOUR_
 
 We've also implemented an automated monitoring system for nodes. It will be described below in the `Node monitoring tools` section.
 
-### Environments
+### Configure in Docker
 
-RedStone node environments (modes) help to differentiate node configuration for different purposes.
-
-There are 2 main environments, that are already created in the RedStone node:
-
-- **PROD** (should be used for real long-term node deployment)
-- **LOCAL** (should be used for tests, development and experiments)
-
-Production environment automatically enables services, that are not useful in local environment, such as:
-
-- error reporting
-- performance tracking
-- publishing on Arweave
-
-#### How to configure environments
-
-##### Using environment variables
-
-Environments can be configured using environment variable `MODE`. Set it to `PROD` to run redstone node in the production environment or to `LOCAL` to run redstone node locally.
-
-##### Other environment variables
-
-- **ENABLE_JSON_LOGS** - set this variable to `true` to enable logging in JSON format. It is recommended to set it to `true` if you run the node in the production environment.
-- **PERFORMANCE_TRACKING_LABEL_PREFIX** - human-friendly name that will be appended to the performance tracking labels. (Examples: `main` for `redstone` provider, `stocks` for `redstone-stocks`, `rapid` for `redstone-rapid` provider)
-
-##### Configure in Docker
-
-Dockerfiles are used to build docker images, which are usually executed in the Production environment. To configure the production environment, `ENV` instruction should be added to a Dockerfile.
+RedStone node relies on env variables, so please remember to pass correct env values to your Docker container.
 
 ```dockerfile
-ENV MODE=PROD
 ENV ENABLE_JSON_LOGS=true
-ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
+ENV PRINT_DIAGNOSTIC_INFO=true
+ENV MANIFEST_REFRESH_INTERVAL=120000
+ENV ARWEAVE_KEYS_FILE_PATH=
+ENV ARWEAVE_KEYS_JWK=
+ENV OVERRIDE_MANIFEST_USING_FILE=
+ENV ETHEREUM_PRIVATE_KEY=
+ENV TWELVE_DATA_RAPID_API_KEY=
 ```
 
 ### Performance tracking
@@ -518,7 +497,6 @@ Performance tracking is enabled in the production environment and tracks by defa
 We track performance for the following processes:
 
 - processing-all
-- balance-checking
 - fetching-all
 - fetching-[SOURCE_NAME]
 - signing
@@ -526,8 +504,6 @@ We track performance for the following processes:
 - package-broadcasting
 - transaction-preparing
 - arweave-keeping
-
-If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value will be appended to the performance tracking labels (for example: `rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`)
 
 ### Testing
 

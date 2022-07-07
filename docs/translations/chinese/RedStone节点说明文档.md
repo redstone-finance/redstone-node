@@ -528,15 +528,18 @@ Here is the structure of the manifest file:
 
 以下是 manifest 文件的结构：
 
-| 参数 Param               | 可选性 Optionality | 类型 Type       | 描述 Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------ | ------------------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| interval                 | 必须 required      | 数字 Number     | 毫秒表示的数据请求间隔 <br/>Data fetching interval in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| priceAggregator          | 必须 required      | 字符串 String   | 聚合器 ID。目前仅支持 `median` 聚合器 <br/>Aggregator id. Currently only `median` aggregator is supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| defaultSource            | 可选 optional      | 字符串 String[] | 获取器名称数组，默认情况下将用于没有指定来源的代币 <br/>Array of fetcher names that will be used by default for tokens that have no specified sources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| sourceTimeout            | 必须 required      | 数字 Number     | 以毫秒为单位的数据源默认超时时间<br/>Default timeout in milliseconds for sources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| maxPriceDeviationPercent | 必须 required      | 数字 Number     | 代币默认最大的价格偏差百分比。也可以为每个 token 单独设置<br/>Default maximum price deviation percent for tokens. It may also be set for each token separately                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| evmChainId               | 必须 required      | 数字 Number     | EVM 链 ID，将在 EVM 价格签名时使用。如果您不确定，请输入“1”，它将指向以太坊主网。<br/>EVM chain id, that will be used during EVM price signing. Pass `1` if you're not sure, it will point to the Ethereum Mainnet.                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| tokens                   | 必须 required      | 对象 Object     | 带有以下格式标记的对象：`{ "TOKEN_SYMBOL": { "source": ["source-name-1", "source-name-2", ...], "maxPriceDeviationPercent": 25 }, .. .}`。请注意，每个代币的 `source` 和 `maxPriceDeviationPercent` 参数都是可选的。这也是正确的代币配置：`{ "TOKEN_SYMBOL_1": {}, "TOKEN_SYMBOL_2": {} } <br/> `Object with tokens in the following format: `{ "TOKEN_SYMBOL": { "source": ["source-name-1", "source-name-2", ...], "maxPriceDeviationPercent": 25 }, ... }`. Note that `source` and `maxPriceDeviationPercent` params per token are optional. This is also a correct tokens configuration: `{ "TOKEN_SYMBOL_1": {}, "TOKEN_SYMBOL_2": {} }` |
+| 参数 Param                               | 可选性 Optionality | 类型 Type                 | 描述 Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------------- | ------------------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| interval                                 | 必须 required      | 数字 Number               | 毫秒表示的数据请求间隔 <br/>Data fetching interval in milliseconds                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| priceAggregator                          | 必须 required      | 字符串 String             | 聚合器 ID。目前仅支持 `median` 聚合器 <br/>Aggregator id. Currently only `median` aggregator is supported                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| defaultSource                            | 可选 optional      | 字符串 String[]           | 获取器名称数组，默认情况下将用于没有指定来源的代币 <br/>Array of fetcher names that will be used by default for tokens that have no specified sources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| sourceTimeout                            | 必须 required      | 数字 Number               | 以毫秒为单位的数据源默认超时时间<br/>Default timeout in milliseconds for sources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| maxPriceDeviationPercent                 | 必须 required      | 数字 Number               | 代币默认最大的价格偏差百分比。也可以为每个 token 单独设置<br/>Default maximum price deviation percent for tokens. It may also be set for each token separately                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| evmChainId                               | 必须 required      | 数字 Number               | EVM 链 ID，将在 EVM 价格签名时使用。如果您不确定，请输入“1”，它将指向以太坊主网。<br/>EVM chain id, that will be used during EVM price signing. Pass `1` if you're not sure, it will point to the Ethereum Mainnet.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| httpBroadcasterURLs                      | optional           | ["http://localhost:9000"] | array of urls for broadcasters to which prices should be sent                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| enableStreamrBroadcaster                 | optional           | false                     | if set to true, single prices and prices packages will be sent to Streamr                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| disableSinglePricesBroadcastingInStreamr | optional           | true                      | if set to true, single prices will not be sent to Streamr                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| tokens                                   | 必须 required      | 对象 Object               | 带有以下格式标记的对象：`{ "TOKEN_SYMBOL": { "source": ["source-name-1", "source-name-2", ...], "maxPriceDeviationPercent": 25 }, .. .}`。请注意，每个代币的 `source` 和 `maxPriceDeviationPercent` 参数都是可选的。这也是正确的代币配置：`{ "TOKEN_SYMBOL_1": {}, "TOKEN_SYMBOL_2": {} } <br/> `Object with tokens in the following format: `{ "TOKEN_SYMBOL": { "source": ["source-name-1", "source-name-2", ...], "maxPriceDeviationPercent": 25 }, ... }`. Note that `source` and `maxPriceDeviationPercent` params per token are optional. This is also a correct tokens configuration: `{ "TOKEN_SYMBOL_1": {}, "TOKEN_SYMBOL_2": {} }` |
 
 You can find a list of available sources along with its stability details in the RedStone Web app: [app.redstone.finance/#/app/sources.](https://app.redstone.finance/#/app/sources)
 
@@ -553,9 +556,6 @@ Config file is a **private** file created by a provider. It contains the followi
 | 参数 Param                          | 可选性 Optionality | 描述 Description                                                                                                                                                  |
 | ----------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | arweaveKeysFile                     | 必须 required      | arweave 钱包的路径（若是相对路径，则假定在项目根文件夹中）<br/>path to the arweave wallet (for relative paths it assumes that you are in the project root folder) |
-| minimumArBalance                    | 必须 required      | 运行节点最低需要的 AR 余额 <br/>minimum AR balance required to run the node                                                                                       |
-| useManifestFromSmartContract        | 可选 optional      | 如果设置为 true,manifest 会从 Arweave 的智能合约中调用 <br/>if set to true , manifest will be loaded from Arweave Smart Contracts                                 |
-| manifestFile                        | 可选 optional      | manifest 文件的路径<br/>path to the manifest file                                                                                                                 |
 | addEvmSignature                     | 可选 optional      | 如果设置为 itrue,EVM 签名将会被添加到每个资产的价格中<br/>if set to true, EVM signature will be added to each price for each asset                                |
 | credentials                         | 必须 required      | 具有 API 和私钥凭据的对象<br/>object with credentials for APIs and private keys                                                                                   |
 | credentials.ethereumPrivateKey      | 必须 required      | 将用于价格数据签名的以太坊私钥<br/>Ethereum private key that will be used for price data signing                                                                  |
@@ -585,16 +585,6 @@ We recommend redirecting output to some log file(s), for example:
 
 ```bash
 yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
-```
-
-You can also enable JSON mode for logs to simplify the log analysing later.
-To do this append `ENABLE_JSON_LOGS=true` to the node running command:
-
-您还可以为日志启用 JSON 模式，从而简化以后的日志分析。
-为此，将 `ENABLE_JSON_LOGS=true` 添加到节点运行命令：
-
-```bash
-ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ##### 在 docker 中运行 Run in docker
@@ -649,62 +639,22 @@ We've also implemented an automated monitoring system for nodes. It will be desc
 
 我们还为节点实施了自动监控系统。将在下面的“节点监控工具”部分详述。
 
-### 环境 Environments
-
-RedStone node environments (modes) help to differentiate node configuration for different purposes.
-
-RedStone 节点环境（模式）有助于区分不同目标的节点配置。
-
-There are 2 main environments, that are already created in the RedStone node:
-
-- **PROD** (should be used for real long-term node deployment)
-- **LOCAL** (should be used for tests, development and experiments)
-
-RedStone 节点中已经创建了 2 个主要环境：
-
-- **PROD**（应用于真正的长期节点部署）
-- **LOCAL**（应用于测试、开发和实验）
-
-Production environment automatically enables services, that are not useful in local environment, such as:
-
-- error reporting
-- performance tracking
-- publishing on Arweave
-
-生产环境会自动启用本地环境中没用的服务，例如：
-
-- 错误报告
-- 性能跟踪
-- 在 Arweave 上发布
-
-#### 如何配置环境 How to configure environments
-
-##### 使用环境变量 Using environment variables
-
-Environments can be configured using environment variable `MODE`. Set it to `PROD` to run redstone node in the production environment or to `LOCAL` to run redstone node locally.
-
-可以使用环境变量 MODE 配置环境。将其设置为 `PROD` 以在生产环境中运行红石节点或设置为 `LOCAL` 以在本地运行红石节点。
-
-##### 其他环境变量 Other environment variables
-
-- **ENABLE_JSON_LOGS** - set this variable to `true` to enable logging in JSON format. It is recommended to set it to `true` if you run the node in the production environment.
-
-  **ENABLE_JSON_LOGS** - 将此变量设置为 `true` 可启用 JSON 格式的日志记录。如果您在生产环境中运行节点，建议将其设置为 `true`。
-
-- **PERFORMANCE_TRACKING_LABEL_PREFIX** - human-friendly name that will be appended to the performance tracking labels. (Examples: `main` for `redstone` provider, `stocks` for `redstone-stocks`, `rapid` for `redstone-rapid` provider)
-
-  **PERFORMANCE_TRACKING_LABEL_PREFIX** - 将添加到性能跟踪标签的人性化名称。 （示例：`redstone` 供应者的`main`，`redstone-stocks` 的`stocks`，`redstone-rapid` 供应者的`rapid`）
-
-##### 在 Docker 中的设置 Configure in Docker
+### 在 Docker 中的设置 Configure in Docker
 
 Dockerfiles are used to build docker images, which are usually executed in the Production environment. To configure the production environment, `ENV` instruction should be added to a Dockerfile.
 
 Dockerfiles 用于构建 docker 镜像，通常在生产环境中执行。要配置生产环境，应在 Dockerfile 中添加 `ENV` 指令。
 
 ```dockerfile
-ENV MODE=PROD
 ENV ENABLE_JSON_LOGS=true
-ENV PERFORMANCE_TRACKING_LABEL_PREFIX=stocks
+ENV ENABLE_PERFORMANCE_TRACKING=true
+ENV PRINT_DIAGNOSTIC_INFO=true
+ENV MANIFEST_REFRESH_INTERVAL=120000
+ENV ARWEAVE_KEYS_FILE_PATH=
+ENV ARWEAVE_KEYS_JWK=
+ENV OVERRIDE_MANIFEST_USING_FILE=
+ENV ETHEREUM_PRIVATE_KEY=
+ENV TWELVE_DATA_RAPID_API_KEY=
 ```
 
 ### 表现追踪 Performance tracking
@@ -720,7 +670,6 @@ We track performance for the following processes:
 我们通过以下流程追踪表现：
 
 - processing-all 处理所有
-- balance-checking 余额检测
 - fetching-all 获取所有
 - fetching-[SOURCE_NAME] 获取特定数据源
 - signing 签名
@@ -728,10 +677,6 @@ We track performance for the following processes:
 - package-broadcasting 包广播
 - transaction-preparing 准备交易
 - arweave-keeping arweave 保存
-
-If you set `PERFORMANCE_TRACKING_LABEL_PREFIX` environment variable, its value will be appended to the performance tracking labels (for example: `rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`)
-
-如果您设置 `PERFORMANCE_TRACKING_LABEL_PREFIX` 环境变量，其值将添加到性能跟踪标签（例如：`rapid-processing-all` for `PERFORMANCE_TRACKING_LABEL_PREFIX=rapid`）
 
 ### 测试 Testing
 

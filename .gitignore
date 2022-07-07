@@ -26,3 +26,5 @@ yarn-error.log
 # Private dockerfiles
 Dockerfile
 Dockerfile.redstone-dev
+
+.env*

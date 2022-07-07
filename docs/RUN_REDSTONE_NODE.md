@@ -31,29 +31,22 @@ For example:
 
 If you want to create your own manifest [read this guide.](./PREPARE_MANIFEST.md)
 
-### 3. Prepare config file
+### 3. Prepare env variables
 
-Config file is a **private** file created by provider. You should create your config file and place it inside the `.secrets` folder. To read more about config file creation [read this guide](./PREPARE_CONFIG.md)
+Env variables should be prepared [following this guide](./PREPARE_ENV_VARIABLES.md)
 
 ## Run the node
 
 ### Local run
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG
+yarn start
 ```
 
 We recommend redirecting output to some log file(s), for example:
 
 ```bash
-yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
-```
-
-You can also enable JSON mode for logs to simplify the log analysing later.
-To do this append `ENABLE_JSON_LOGS=true` to the node running command:
-
-```bash
-ENABLE_JSON_LOGS=true yarn start --config PATH_TO_YOUR_CONFIG > my-redstone-node.logs 2> my-redstone-node.error.logs
+yarn start > my-redstone-node.logs 2> my-redstone-node.error.logs
 ```
 
 ### Run in docker

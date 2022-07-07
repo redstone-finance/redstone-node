@@ -9,6 +9,9 @@ export interface Manifest {
   maxPriceDeviationPercent: number;
   evmChainId: number;
   tokens: { [symbol: string]: TokenConfig };
+  httpBroadcasterURLs?: string[];
+  enableStreamrBroadcaster?: boolean;
+  disableSinglePricesBroadcastingInStreamr?: boolean;
   enableArweaveBackup?: boolean;
 }
 
@@ -18,11 +21,6 @@ export interface SourceTimeout {
 }
 
 export interface Credentials {
-  infuraProjectId?: string;
-  ethereumPrivateKey: string;
-  barchartApiKey?: string;
-  barchartUsername?: string;
-  barchartPassword?: string;
   twelveDataRapidApiKey?: string;
 }
 
@@ -122,16 +120,17 @@ export interface ArweaveTransactionTags {
   [tag: string]: string;
 }
 
+export interface PrivateKeys {
+  arweaveJwk: JWKInterface;
+  ethereumPrivateKey: string;
+}
+
 export interface NodeConfig {
-  arweaveKeysFile?: string;
-  arweaveKeysJWK?: JWKInterface; // it must be specified when we pass config through an env variable
-  useManifestFromSmartContract?: boolean;
-  addEvmSignature?: boolean;
-  manifestFile: string;
-  minimumArBalance: number;
+  enableJsonLogs: boolean;
+  enablePerformanceTracking: boolean;
+  printDiagnosticInfo: boolean;
+  manifestRefreshInterval: number;
   credentials: Credentials;
-  httpBroadcasterURLs?: string[];
-  enableStreamrBroadcaster: boolean;
-  disableSinglePricesBroadcastingInStreamr?: boolean;
-  omitSourcesInArweaveTx?: boolean;
+  privateKeys: PrivateKeys;
+  overrideManifestUsingFile?: Manifest;
 }

@@ -102,7 +102,7 @@ async function registerNewNode(
       url: DEFAULT_NODE_URL,
       ipAddress: DEFAULT_IP_ADDRESS,
       ecdsaPublicKey: evmPublicKey,
-      arweavePublicKey: arweavePublicKey
+      arweavePublicKey: arweavePublicKey,
     },
     jwk
   );
@@ -128,19 +128,9 @@ async function registerNewNodeInOracleRegistry(
 function prepareNewConfig(jwk: JWKInterface, ethereumPrivateKey: string) {
   return {
     arweaveKeysJWK: jwk,
-    minimumArBalance: 0,
-    useManifestFromSmartContract: true,
-    addEvmSignature: true,
-    enableStreamrBroadcaster: false,
-    omitSourcesInArweaveTx: true,
     credentials: {
       ethereumPrivateKey,
     },
-    httpBroadcasterURLs: [
-      "https://api.redstone.finance",
-      "https://vwx3eni8c7.eu-west-1.awsapprunner.com",
-      "https://container-service-1.dv9sai71f4rsq.eu-central-1.cs.amazonlightsail.com",
-    ],
   };
 }
 

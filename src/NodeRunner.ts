@@ -1,11 +1,9 @@
 import { Consola } from "consola";
-import { JWKInterface } from "arweave/node/lib/wallet";
 import aggregators from "./aggregators";
 import ArweaveProxy from "./arweave/ArweaveProxy";
-import mode from "../mode";
 import ManifestHelper, { TokensBySource } from "./manifest/ManifestParser";
 import ArweaveService from "./arweave/ArweaveService";
-import { mergeObjects, readJSON, timeout } from "./utils/objects";
+import { mergeObjects, timeout } from "./utils/objects";
 import PriceSignerService from "./signers/PriceSignerService";
 import { ExpressAppRunner } from "./ExpressAppRunner";
 import {
@@ -38,10 +36,6 @@ import { fetchIp } from "./utils/ip-fetcher";
 const logger = require("./utils/logger")("runner") as Consola;
 const pjson = require("../package.json") as any;
 
-const DEFAULT_MANIFEST_REFRESH_INTERVAL = 120 * 1000;
-export const MANIFEST_REFRESH_INTERVAL = process.env.MANIFEST_REFRESH_INTERVAL
-  ? Number(process.env.MANIFEST_REFRESH_INTERVAL)
-  : DEFAULT_MANIFEST_REFRESH_INTERVAL;
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
 
@@ -64,17 +58,18 @@ export default class NodeRunner {
     private readonly bundlrService: BundlrService,
     private readonly providerAddress: string,
     private readonly nodeConfig: NodeConfig,
-    initialManifest: Manifest,
+    initialManifest: Manifest
   ) {
     this.version = getVersionFromPackageJSON();
-    const minimumArBalance = this.nodeConfig.minimumArBalance;
-    if (this.nodeConfig.minimumArBalance === undefined || typeof (minimumArBalance) !== "number") {
-      throw new Error("minimumArBalance not defined in config file");
-    }
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
-    this.httpBroadcaster = new HttpBroadcaster(nodeConfig.httpBroadcasterURLs);
-    this.streamrBroadcaster = new StreamrBroadcaster(nodeConfig.credentials.ethereumPrivateKey);
+    const httpBroadcasterURLs = initialManifest?.httpBroadcasterURLs ?? [
+      "http://localhost:9000",
+    ];
+    this.httpBroadcaster = new HttpBroadcaster(httpBroadcasterURLs);
+    this.streamrBroadcaster = new StreamrBroadcaster(
+      nodeConfig.privateKeys.ethereumPrivateKey
+    );
 
     // https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/
     // alternatively use arrow functions...
@@ -82,22 +77,21 @@ export default class NodeRunner {
     this.handleLoadedManifest = this.handleLoadedManifest.bind(this);
   }
 
-  static async create(
-    jwk: JWKInterface,
-    nodeConfig: NodeConfig,
-  ): Promise<NodeRunner> {
+  static async create(nodeConfig: NodeConfig): Promise<NodeRunner> {
     // Running a simple web server
     // It should be called as early as possible
     // Otherwise App Runner crashes ¯\_(ツ)_/¯
     new ExpressAppRunner(nodeConfig).run();
 
-    const arweave = new ArweaveProxy(jwk);
+    const arweave = new ArweaveProxy(nodeConfig.privateKeys.arweaveJwk);
     const providerAddress = await arweave.getAddress();
     const arweaveService = new ArweaveService(arweave);
-    const bundlrService = new BundlrService(jwk, nodeConfig.minimumArBalance);
+    const bundlrService = new BundlrService(nodeConfig.privateKeys.arweaveJwk);
 
     let manifestData = null;
-    if (nodeConfig.useManifestFromSmartContract) {
+    if (nodeConfig.overrideManifestUsingFile) {
+      manifestData = nodeConfig.overrideManifestUsingFile;
+    } else {
       while (true) {
         logger.info("Fetching manifest data.");
         try {
@@ -106,12 +100,10 @@ export default class NodeRunner {
           logger.error("Initial manifest read failed.", e.stack || e);
         }
         if (manifestData !== null) {
-          logger.info("Fetched manifest", manifestData)
+          logger.info("Fetched manifest", manifestData);
           break;
         }
       }
-    } else {
-      manifestData = readJSON(nodeConfig.manifestFile!);
     }
 
     return new NodeRunner(
@@ -127,8 +119,6 @@ export default class NodeRunner {
     await this.printInitialNodeDetails();
     this.maybeRunDiagnosticInfoPrinting();
 
-    await this.warnIfARBalanceLow();
-
     try {
       await this.runIteration(); // Start immediately then repeat in manifest.interval
       setInterval(this.runIteration, this.currentManifest!.interval);
@@ -138,7 +128,7 @@ export default class NodeRunner {
   }
 
   private async printInitialNodeDetails() {
-    const evmPrivateKey = this.nodeConfig.credentials.ethereumPrivateKey;
+    const evmPrivateKey = this.nodeConfig.privateKeys.ethereumPrivateKey;
     const evmAddress = new ethers.Wallet(evmPrivateKey).address;
     const ipAddress = await fetchIp();
     logger.info(`Node evm address: ${evmAddress}`);
@@ -148,7 +138,8 @@ export default class NodeRunner {
     logger.info(
       `Initial node manifest:
       ${JSON.stringify(this.currentManifest)}
-    `);
+    `
+    );
 
     // Printing git details
     git.getLastCommit((err, commit) => {
@@ -156,23 +147,25 @@ export default class NodeRunner {
         logger.error(err);
       } else {
         logger.info(
-          `Git details: ${commit.hash} (latest commit), `
-          + `${commit.branch} (branch), `
-          + `${commit.subject} (latest commit message)`);
+          `Git details: ${commit.hash} (latest commit), ` +
+            `${commit.branch} (branch), ` +
+            `${commit.subject} (latest commit message)`
+        );
       }
     });
   }
 
   private maybeRunDiagnosticInfoPrinting() {
-    if (process.env.PRINT_DIAGNOSTIC_INFO) {
+    if (this.nodeConfig.printDiagnosticInfo) {
       const printDiagnosticInfo = () => {
         const memoryUsage = process.memoryUsage();
         const activeRequests = (process as any)._getActiveRequests();
         const activeHandles = (process as any)._getActiveHandles();
-        logger.info(`Diagnostic info: `
-          + `Active requests count: ${activeRequests.length}. `
-          + `Active handles count: ${activeHandles.length}. `
-          + `Memory usage: ${JSON.stringify(memoryUsage)}. `
+        logger.info(
+          `Diagnostic info: ` +
+            `Active requests count: ${activeRequests.length}. ` +
+            `Active handles count: ${activeHandles.length}. ` +
+            `Memory usage: ${JSON.stringify(memoryUsage)}. `
         );
         console.log({ activeRequests });
       };
@@ -187,15 +180,14 @@ export default class NodeRunner {
 
     if (this.newManifest !== null) {
       logger.info("Using new manifest: ", this.newManifest.txId);
-      this.useNewManifest(this.newManifest)
+      this.useNewManifest(this.newManifest);
     }
 
     this.maybeLoadManifestFromSmartContract();
     await this.safeProcessManifestTokens();
-    await this.warnIfARBalanceLow();
 
     printTrackingState();
-  };
+  }
 
   private async safeProcessManifestTokens() {
     const processingAllTrackingId = trackStart("processing-all");
@@ -208,32 +200,19 @@ export default class NodeRunner {
     }
   }
 
-  private async warnIfARBalanceLow() {
-    const balanceCheckingTrackingId = trackStart("balance-checking");
-    try {
-      const { balance, isBalanceLow } = await this.bundlrService.checkBalance();
-      if (isBalanceLow) {
-        logger.warn(`AR balance is quite low on bundlr wallet: ${balance}`);
-      }
-    } catch (e: any) {
-      logger.error("Balance checking failed", e.stack);
-    } finally {
-      trackEnd(balanceCheckingTrackingId);
-    }
-  }
-
   private async doProcessTokens(): Promise<void> {
     logger.info("Processing tokens");
 
     // Fetching and aggregating
-    const aggregatedPrices: PriceDataAfterAggregation[] = await this.fetchPrices();
-    const bundlrTx: BundlrTransaction = await this.bundlrService.prepareBundlrTransaction(
-      aggregatedPrices,
-      this.nodeConfig.omitSourcesInArweaveTx);
+    const aggregatedPrices: PriceDataAfterAggregation[] =
+      await this.fetchPrices();
+    const bundlrTx: BundlrTransaction =
+      await this.bundlrService.prepareBundlrTransaction(aggregatedPrices);
     const pricesReadyForSigning = this.pricesService!.preparePricesForSigning(
       aggregatedPrices,
       bundlrTx.id,
-      this.providerAddress);
+      this.providerAddress
+    );
 
     // Signing
     const signedPrices: PriceDataSigned[] =
@@ -251,22 +230,29 @@ export default class NodeRunner {
   }
 
   private shouldBackupOnArweave() {
-    return mode.isProd && this.currentManifest?.enableArweaveBackup;
+    return this.currentManifest?.enableArweaveBackup ?? false;
   }
 
   private async fetchPrices(): Promise<PriceDataAfterAggregation[]> {
     const fetchingAllTrackingId = trackStart("fetching-all");
 
     const fetchTimestamp = Date.now();
-    const fetchedPrices = await this.pricesService!.fetchInParallel(this.tokensBySource!)
+    const fetchedPrices = await this.pricesService!.fetchInParallel(
+      this.tokensBySource!
+    );
     const pricesData: PricesDataFetched = mergeObjects(fetchedPrices);
     const pricesBeforeAggregation: PricesBeforeAggregation =
-      PricesService.groupPricesByToken(fetchTimestamp, pricesData, this.version);
+      PricesService.groupPricesByToken(
+        fetchTimestamp,
+        pricesData,
+        this.version
+      );
 
-    const aggregatedPrices: PriceDataAfterAggregation[] = this.pricesService!.calculateAggregatedValues(
-      Object.values(pricesBeforeAggregation), // what is the advantage of using lodash.values?
-      aggregators[this.currentManifest!.priceAggregator]
-    );
+    const aggregatedPrices: PriceDataAfterAggregation[] =
+      this.pricesService!.calculateAggregatedValues(
+        Object.values(pricesBeforeAggregation), // what is the advantage of using lodash.values?
+        aggregators[this.currentManifest!.priceAggregator]
+      );
     NodeRunner.printAggregatedPrices(aggregatedPrices);
     trackEnd(fetchingAllTrackingId);
     return aggregatedPrices;
@@ -278,14 +264,22 @@ export default class NodeRunner {
     try {
       const promises = [];
       promises.push(this.httpBroadcaster.broadcast(signedPrices));
-      if (this.nodeConfig.enableStreamrBroadcaster && !this.nodeConfig.disableSinglePricesBroadcastingInStreamr) {
+      const enableStreamrBroadcaster =
+        this.currentManifest?.enableStreamrBroadcaster ?? false;
+      const disableSinglePricesBroadcastingInStreamr =
+        this.currentManifest?.disableSinglePricesBroadcastingInStreamr ?? true;
+      if (
+        enableStreamrBroadcaster &&
+        !disableSinglePricesBroadcastingInStreamr
+      ) {
         promises.push(this.streamrBroadcaster.broadcast(signedPrices));
       }
       const results = await Promise.allSettled(promises);
 
       // Check if all promises resolved
-      const failedBroadcastersCount =
-        results.filter(res => res.status === "rejected").length;
+      const failedBroadcastersCount = results.filter(
+        (res) => res.status === "rejected"
+      ).length;
       if (failedBroadcastersCount > 0) {
         throw new Error(`${failedBroadcastersCount} broadcasters failed`);
       }
@@ -302,11 +296,14 @@ export default class NodeRunner {
     }
   }
 
-  private static printAggregatedPrices(prices: PriceDataAfterAggregation[]): void {
+  private static printAggregatedPrices(
+    prices: PriceDataAfterAggregation[]
+  ): void {
     for (const price of prices) {
       const sourcesData = JSON.stringify(price.source);
       logger.info(
-        `Fetched price : ${price.symbol} : ${price.value} | ${sourcesData}`);
+        `Fetched price : ${price.symbol} : ${price.value} | ${sourcesData}`
+      );
     }
   }
 
@@ -314,7 +311,8 @@ export default class NodeRunner {
     logger.info("Broadcasting price package");
     const packageBroadcastingTrackingId = trackStart("package-broadcasting");
     try {
-      const signedPackage = this.priceSignerService!.signPricePackage(signedPrices);
+      const signedPackage =
+        this.priceSignerService!.signPricePackage(signedPrices);
       await this.broadcastSignedPricePackage(signedPackage);
       logger.info("Package broadcasting completed");
     } catch (e: any) {
@@ -325,24 +323,34 @@ export default class NodeRunner {
   }
 
   private async broadcastSignedPricePackage(signedPackage: SignedPricePackage) {
-    const signedPackageBroadcastingTrackingId =
-      trackStart("signed-package-broadcasting");
+    const signedPackageBroadcastingTrackingId = trackStart(
+      "signed-package-broadcasting"
+    );
     try {
       const promises = [];
-      promises.push(this.httpBroadcaster.broadcastPricePackage(
-        signedPackage,
-        this.providerAddress));
-      if (this.nodeConfig.enableStreamrBroadcaster) {
-        promises.push(this.streamrBroadcaster.broadcastPricePackage(
+      promises.push(
+        this.httpBroadcaster.broadcastPricePackage(
           signedPackage,
-          this.providerAddress));
+          this.providerAddress
+        )
+      );
+      const enableStreamrBroadcaster =
+        this.currentManifest?.enableStreamrBroadcaster ?? false;
+      if (enableStreamrBroadcaster) {
+        promises.push(
+          this.streamrBroadcaster.broadcastPricePackage(
+            signedPackage,
+            this.providerAddress
+          )
+        );
       }
       await Promise.all(promises);
     } catch (e: any) {
       if (e.response !== undefined) {
         logger.error(
           "Signed package broadcasting failed: " + e.response.data,
-          e.stack);
+          e.stack
+        );
       } else {
         logger.error("Signed package broadcasting failed", e.stack);
       }
@@ -361,7 +369,7 @@ export default class NodeRunner {
 
   // TODO: refactor to a separate service?
   private maybeLoadManifestFromSmartContract() {
-    if (!this.nodeConfig.useManifestFromSmartContract) {
+    if (this.nodeConfig.overrideManifestUsingFile) {
       return;
     }
 
@@ -369,10 +377,10 @@ export default class NodeRunner {
     const timeDiff = now - this.lastManifestLoadTimestamp!;
     logger.info("Checking time since last manifest load", {
       timeDiff,
-      "manifestRefreshInterval": MANIFEST_REFRESH_INTERVAL
-    })
+      manifestRefreshInterval: this.nodeConfig.manifestRefreshInterval,
+    });
 
-    if (timeDiff >= MANIFEST_REFRESH_INTERVAL) {
+    if (timeDiff >= this.nodeConfig.manifestRefreshInterval) {
       this.lastManifestLoadTimestamp = now;
       logger.info("Trying to fetch new manifest version.");
       const manifestFetchTrackingId = trackStart("Fetching manifest.");
@@ -381,7 +389,7 @@ export default class NodeRunner {
         // block standard node processing for so long (especially for nodes with low "interval" value)
         Promise.race([
           this.arweaveService.getCurrentManifest(),
-          timeout(MANIFEST_LOAD_TIMEOUT_MS)
+          timeout(MANIFEST_LOAD_TIMEOUT_MS),
         ]).then((value) => {
           if (value === "timeout") {
             logger.warn("Manifest load promise timeout");
@@ -390,12 +398,11 @@ export default class NodeRunner {
           }
           trackEnd(manifestFetchTrackingId);
         });
-
       } catch (e: any) {
-        logger.info("Error while calling manifest load function.")
+        logger.info("Error while calling manifest load function.");
       }
     } else {
-      logger.info("Skipping manifest download in this iteration run.")
+      logger.info("Skipping manifest download in this iteration run.");
     }
   }
 
@@ -404,11 +411,13 @@ export default class NodeRunner {
       return;
     }
     logger.info("Manifest successfully loaded", {
-      "loadedManifestTxId": loadedManifest.txId,
-      "currentTxId": this.currentManifest?.txId
+      loadedManifestTxId: loadedManifest.txId,
+      currentTxId: this.currentManifest?.txId,
     });
     if (loadedManifest.txId != this.currentManifest?.txId) {
-      logger.info("Loaded and current manifest differ, updating on next runIteration call.");
+      logger.info(
+        "Loaded and current manifest differ, updating on next runIteration call."
+      );
       // we're temporarily saving loaded manifest on a separate "newManifest" field
       // - calling "this.useNewManifest(this.newManifest)" here could cause that
       // that different manifests would be used by different services during given "runIteration" execution.
@@ -421,20 +430,21 @@ export default class NodeRunner {
 
   private useNewManifest(newManifest: Manifest) {
     this.currentManifest = newManifest;
-    this.pricesService = new PricesService(newManifest, this.nodeConfig.credentials);
+    this.pricesService = new PricesService(
+      newManifest,
+      this.nodeConfig.credentials
+    );
     this.tokensBySource = ManifestHelper.groupTokensBySource(newManifest);
     this.priceSignerService = new PriceSignerService({
-      ethereumPrivateKey: this.nodeConfig.credentials.ethereumPrivateKey,
+      ethereumPrivateKey: this.nodeConfig.privateKeys.ethereumPrivateKey,
       evmChainId: newManifest.evmChainId,
       version: this.version,
-      addEvmSignature: Boolean(this.nodeConfig.addEvmSignature),
     });
     this.newManifest = null;
   }
-
-};
+}
 
 function getVersionFromPackageJSON() {
   const [major, minor] = pjson.version.split(".");
-  return major + '.' + minor;
+  return major + "." + minor;
 }

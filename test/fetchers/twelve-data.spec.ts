@@ -34,7 +34,6 @@ describe("twelve-data fetcher", () => {
         }
       },
       credentials: {
-        ethereumPrivateKey: "",
         twelveDataRapidApiKey: ""
       },
     });

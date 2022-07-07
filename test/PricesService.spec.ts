@@ -15,17 +15,17 @@ describe("groupPricesByToken", () => {
     // Given
     const pricesData: PricesDataFetched = {
       "src1": [
-        {"symbol": "BTC", value: 444},
-        {"symbol": "ETH", value: 222},
-        {"symbol": "DOGE", value: 111}
+        { "symbol": "BTC", value: 444 },
+        { "symbol": "ETH", value: 222 },
+        { "symbol": "DOGE", value: 111 }
       ],
       "src2": [
-        {"symbol": "BTC", value: 444.2},
-        {"symbol": "ETH", value: 222.5}
+        { "symbol": "BTC", value: 444.2 },
+        { "symbol": "ETH", value: 222.5 }
       ],
       "src3": [
-        {"symbol": "DOGE", value: 107.4},
-        {"symbol": "ETH", value: "error"}
+        { "symbol": "DOGE", value: 107.4 },
+        { "symbol": "ETH", value: "error" }
       ]
     }
 
@@ -83,8 +83,7 @@ describe("fetchInParrallel", () => {
       evmChainId: 1,
       tokens: {}
     };
-    const credentials = { "ethereumPrivateKey": "0x0" };
-    const priceService = new PricesService(manifest, credentials);
+    const priceService = new PricesService(manifest, {});
     priceService.doFetchFromSource = async (source: string, tokens: string[]) => {
       if (source.includes("bad")) {
         throw new Error("test-error");
