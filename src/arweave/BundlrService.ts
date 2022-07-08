@@ -18,8 +18,6 @@ export interface PriceDataForPostingOnArweave {
   value: any;
 }
 
-export type BalanceCheckResult = { balance: number; isBalanceLow: boolean };
-
 export class BundlrService {
   private readonly bundlrProxy;
 
