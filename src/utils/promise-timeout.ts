@@ -13,8 +13,8 @@ export const timeout = (ms: number): Promise<any> => {
 };
 
 export const promiseTimeout = async (
-  promisesArray: () => Promise<any>,
+  promise: () => Promise<any>,
   timeoutInMilliseconds: number
 ) => {
-  return await Promise.race([promisesArray(), timeout(timeoutInMilliseconds)]);
+  return await Promise.race([promise(), timeout(timeoutInMilliseconds)]);
 };
