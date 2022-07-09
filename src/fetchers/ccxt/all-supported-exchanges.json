@@ -30,5 +30,8 @@
   "poloniex",
   "probit",
   "qtrade",
-  "stex"
+  "stex",
+  "mexc",
+  "latoken",
+  "wazirx"
 ]
