@@ -3160,6 +3160,16 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "CUSD": {
+      "source": [
+        "bittrex",
+        "coingecko",
+        "huobipro",
+        "kucoin",
+        "okcoin"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "ELA": {
       "source": [
         "bittrex",
@@ -4043,6 +4053,14 @@
       ],
       "maxPriceDeviationPercent": 80
     },
+    "GNT": {
+      "source": [
+        "bitfinex",
+        "bitfinex2",
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
     "LYM": {
       "source": [
         "bitfinex",
@@ -4192,14 +4210,6 @@
         "bittrex",
         "currencycom",
         "ftx"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
-    "CUSD": {
-      "source": [
-        "bittrex",
-        "kucoin",
-        "okcoin"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -5041,13 +5051,6 @@
       ],
       "maxPriceDeviationPercent": 80
     },
-    "GNT": {
-      "source": [
-        "bitfinex",
-        "bitfinex2"
-      ],
-      "maxPriceDeviationPercent": 80
-    },
     "BFT": {
       "source": [
         "bitfinex",
@@ -5647,6 +5650,13 @@
       "source": [
         "coingecko",
         "trader-joe"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "CEUR": {
+      "source": [
+        "coingecko",
+        "kucoin"
       ],
       "maxPriceDeviationPercent": 80
     },
@@ -7021,6 +7031,24 @@
       "maxPriceDeviationPercent": 80
     },
     "SOS": {
+      "source": [
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "UBE": {
+      "source": [
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "MOO": {
+      "source": [
+        "coingecko"
+      ],
+      "maxPriceDeviationPercent": 80
+    },
+    "PACT": {
       "source": [
         "coingecko"
       ],

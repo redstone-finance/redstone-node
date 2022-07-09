@@ -1,9 +1,7 @@
 {
   "interval": 60000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "kucoin"
-  ],
+  "defaultSource": ["kucoin"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -218,6 +216,7 @@
     "ENQ": {},
     "SUTER": {},
     "LAYER": {},
-    "GLMR": {}
+    "GLMR": {},
+    "CEUR": {}
   }
 }
