@@ -30,7 +30,5 @@
       "maxPriceDeviationPercent": 80
     }
   },
-  "defaultSource": [
-    "custom-urls"
-  ]
+  "defaultSource": ["custom-urls"]
 }

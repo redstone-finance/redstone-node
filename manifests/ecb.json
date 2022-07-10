@@ -1,9 +1,7 @@
 {
   "interval": 15000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "ecb"
-  ],
+  "defaultSource": ["ecb"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
