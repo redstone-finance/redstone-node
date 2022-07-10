@@ -52,17 +52,23 @@ export class CcxtFetcher extends BaseFetcher {
 
   async extractPrices(response: any): Promise<PricesObj> {
     const lastUsdtPrice = (await redstone.getPrice("USDT")).value;
+    const lastBusdPrice = (await redstone.getPrice("BUSD")).value;
 
     const pricesObj: PricesObj = {};
 
     for (const ticker of Object.values(response) as Ticker[]) {
       const pairSymbol = ticker.symbol;
       const lastPrice = ticker.last as number;
+      const isSymbolInUsdt = pairSymbol.endsWith("/USDT");
+      const isSymbolInBusd = pairSymbol.endsWith("/BUSD");
       if (pairSymbol.endsWith("/USD")) {
         pricesObj[pairSymbol] = lastPrice;
-      } else if (pairSymbol.endsWith("/USDT")) {
+      } else if (isSymbolInUsdt || isSymbolInBusd) {
         if (!pricesObj[pairSymbol]) {
-          pricesObj[pairSymbol] = lastPrice * lastUsdtPrice;
+          const lastUsdInStablePrice = isSymbolInUsdt
+            ? lastUsdtPrice
+            : lastBusdPrice;
+          pricesObj[pairSymbol] = lastPrice * lastUsdInStablePrice;
         }
       }
     }
