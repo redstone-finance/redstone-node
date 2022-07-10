@@ -1,9 +1,7 @@
 {
   "interval": 15000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "uniswap"
-  ],
+  "defaultSource": ["uniswap"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,

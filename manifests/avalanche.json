@@ -1,9 +1,7 @@
 {
   "interval": 10000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "coingecko"
-  ],
+  "defaultSource": ["coingecko"],
   "sourceTimeout": 7000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -62,11 +60,7 @@
       "maxPriceDeviationPercent": 25
     },
     "PNG": {
-      "source": [
-        "coingecko",
-        "pangolin-wavax",
-        "trader-joe"
-      ],
+      "source": ["coingecko", "pangolin-wavax", "trader-joe"],
       "maxPriceDeviationPercent": 80
     },
     "AVAX": {
@@ -87,11 +81,7 @@
       "maxPriceDeviationPercent": 25
     },
     "XAVA": {
-      "source": [
-        "kucoin",
-        "pangolin-wavax",
-        "trader-joe"
-      ],
+      "source": ["kucoin", "pangolin-wavax", "trader-joe"],
       "maxPriceDeviationPercent": 80
     },
     "LINK": {
@@ -165,28 +155,15 @@
       "maxPriceDeviationPercent": 25
     },
     "FRAX": {
-      "source": [
-        "coingecko",
-        "pangolin-wavax",
-        "sushiswap",
-        "uniswap"
-      ],
+      "source": ["coingecko", "pangolin-wavax", "sushiswap", "uniswap"],
       "maxPriceDeviationPercent": 25
     },
     "YAK": {
-      "source": [
-        "coingecko",
-        "pangolin-wavax",
-        "trader-joe"
-      ],
+      "source": ["coingecko", "pangolin-wavax", "trader-joe"],
       "maxPriceDeviationPercent": 80
     },
     "QI": {
-      "source": [
-        "coingecko",
-        "pangolin-wavax",
-        "trader-joe"
-      ],
+      "source": ["coingecko", "pangolin-wavax", "trader-joe"],
       "maxPriceDeviationPercent": 80
     },
     "USDC": {

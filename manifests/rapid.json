@@ -1,9 +1,7 @@
 {
   "interval": 10000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "coingecko"
-  ],
+  "defaultSource": ["coingecko"],
   "sourceTimeout": 7000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
@@ -269,22 +267,11 @@
       "maxPriceDeviationPercent": 25
     },
     "AR": {
-      "source": [
-        "binance",
-        "coingecko",
-        "hitbtc",
-        "huobipro"
-      ],
+      "source": ["binance", "coingecko", "hitbtc", "huobipro"],
       "maxPriceDeviationPercent": 25
     },
     "CELO": {
-      "source": [
-        "binance",
-        "bittrex",
-        "kucoin",
-        "okcoin",
-        "okex5"
-      ],
+      "source": ["binance", "bittrex", "kucoin", "okcoin", "okex5"],
       "maxPriceDeviationPercent": 80
     },
     "AVAX": {

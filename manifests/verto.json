@@ -1,9 +1,7 @@
 {
   "interval": 3000,
   "priceAggregator": "median",
-  "defaultSource": [
-    "verto"
-  ],
+  "defaultSource": ["verto"],
   "sourceTimeout": 50000,
   "maxPriceDeviationPercent": 25,
   "evmChainId": 1,
