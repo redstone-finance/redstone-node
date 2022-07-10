@@ -85,6 +85,6 @@ export const config: NodeConfig = Object.freeze({
   },
   privateKeys: {
     arweaveJwk: getArweaveWallet(),
-    ethereumPrivateKey: getFromEnv("ETHEREUM_PRIVATE_KEY", "string"),
+    ethereumPrivateKey: getFromEnv("ETHEREUM_PRIVATE_KEY"),
   },
 });
