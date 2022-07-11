@@ -1,3 +1,4 @@
+import { ethers } from "ethers";
 import { Fetcher } from "../types";
 import ccxtFetchers from "./ccxt/all-ccxt-fetchers";
 import pangolinFetchers from "./pangolin/all-pangolin-fetchers";
@@ -28,7 +29,10 @@ export default {
   verto: new VertoFetcher(),
   ecb: new EcbFetcher(),
   "avalanche-evm-fetcher": new AvalancheEvmFetcher(
-    "https://api.avax.network/ext/bc/C/rpc"
+    new ethers.providers.JsonRpcProvider(
+      "https://api.avax.network/ext/bc/C/rpc"
+    ),
+    "0x8755b94F88D120AB2Cc13b1f6582329b067C760d"
   ),
   ...ccxtFetchers,
   ...pangolinFetchers,

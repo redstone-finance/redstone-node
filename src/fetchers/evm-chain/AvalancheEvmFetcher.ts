@@ -1,13 +1,20 @@
 import redstone from "redstone-api";
-import { ethers } from "ethers";
-import { PricesObj } from "../../types";
+import { BigNumber, ethers, providers } from "ethers";
+import { Interface } from "ethers/lib/utils";
 import { EvmChainFetcher } from "./EvmChainFetcher";
+import { PricesObj } from "../../types";
 import { yieldYakContractDetails } from "./contracts-details/yield-yak";
 
 export class AvalancheEvmFetcher extends EvmChainFetcher {
-  constructor(connection: string) {
-    super("avalanche-evm-fetcher", connection, (_: any, ids: string[]) =>
-      this.extractPricesFromContract(_, ids)
+  constructor(
+    connection: providers.Provider,
+    multicallContractAddress: string
+  ) {
+    super(
+      "avalanche-evm-fetcher",
+      connection,
+      (_: any, ids: string[]) => this.extractPricesFromContract(_, ids),
+      multicallContractAddress
     );
   }
 
@@ -46,10 +53,20 @@ export class AvalancheEvmFetcher extends EvmChainFetcher {
   }
 
   async extractPriceForYieldYak() {
-    const { abi, address } = yieldYakContractDetails;
-    const contract = await this.getContractInstance(abi, address);
-    const totalDeposits = await contract.totalDeposits();
-    const totalSupply = await contract.totalSupply();
+    if (!this.multicallContractAddress) {
+      throw new Error(
+        `Invalid multicall contract address: ${this.multicallContractAddress}`
+      );
+    }
+
+    const { requests, dataToNameMap } = this.prepareYieldYakMulticallData();
+    const multicallResult = await this.performMulticall(
+      requests,
+      dataToNameMap
+    );
+
+    const totalDeposits = BigNumber.from(multicallResult.totalDeposits.value);
+    const totalSupply = BigNumber.from(multicallResult.totalSupply.value);
     const tokenValue = totalDeposits
       .mul(ethers.utils.parseUnits("1.0", 8))
       .div(totalSupply);
@@ -62,5 +79,30 @@ export class AvalancheEvmFetcher extends EvmChainFetcher {
       .div(ethers.utils.parseUnits("1.0", 8));
 
     return ethers.utils.formatEther(finalPrice);
+  }
+
+  prepareYieldYakMulticallData() {
+    const { abi, address } = yieldYakContractDetails;
+    const totalDepositsData = new Interface(abi).encodeFunctionData(
+      "totalDeposits"
+    );
+    const totalSupplyData = new Interface(abi).encodeFunctionData(
+      "totalSupply"
+    );
+    const dataToNameMap = {
+      [totalDepositsData]: "totalDeposits",
+      [totalSupplyData]: "totalSupply",
+    };
+    const requests = [
+      {
+        address,
+        data: totalDepositsData,
+      },
+      {
+        address,
+        data: totalSupplyData,
+      },
+    ];
+    return { requests, dataToNameMap };
   }
 }

@@ -1,39 +1,42 @@
 import axios from "axios";
-import { ethers, Contract, BigNumber } from "ethers";
-import { MockProvider } from "ethereum-waffle";
-import { deployMockContract } from "@ethereum-waffle/mock-contract";
+import { Contract } from "ethers";
+import { MockProvider, deployContract } from "ethereum-waffle";
 import { AvalancheEvmFetcher } from "../../src/fetchers/evm-chain/AvalancheEvmFetcher";
+import Multicall2 from "../../src/fetchers/evm-chain/contracts-details/common/Multicall2.json";
+import YYMock from "./mocks/YYMock.json";
+import { yieldYakContractDetails } from "../../src/fetchers/evm-chain/contracts-details/yield-yak";
 
 jest.setTimeout(10000);
-
-jest.spyOn(ethers, "Contract").mockReturnValue({
-  totalDeposits: () => BigNumber.from("0xa8d1e1eef9e3ae3cdc98"),
-  totalSupply: () => BigNumber.from("0xa6071196483bcebdeaf6"),
-} as unknown as Contract);
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Avalanche EVM fetcher", () => {
   let provider: MockProvider;
+  let multicallContract: Contract;
 
   beforeAll(async () => {
     provider = new MockProvider();
-    await provider.ready;
     const [wallet] = provider.getWallets();
-    const contract = await deployMockContract(wallet, []);
+    const Yycontract = await deployContract(wallet, {
+      bytecode: YYMock.bytecode,
+      abi: YYMock.abi,
+    });
 
-    jest.mock(
-      "../../src/fetchers/evm-chain/contracts-details/yield-yak/index.ts",
-      () => ({
-        address: contract.address,
-        abi: [],
-      })
-    );
+    multicallContract = await deployContract(wallet, {
+      bytecode: Multicall2.bytecode,
+      abi: Multicall2.abi,
+    });
+
+    yieldYakContractDetails.abi = YYMock.abi;
+    yieldYakContractDetails.address = Yycontract.address;
   });
 
   test("Should properly fetch data", async () => {
-    const fetcher = new AvalancheEvmFetcher(provider.connection.url);
+    const fetcher = new AvalancheEvmFetcher(
+      provider,
+      multicallContract.address
+    );
 
     mockedAxios.get.mockResolvedValueOnce({
       data: [{ value: 16.942986798458783 }],
