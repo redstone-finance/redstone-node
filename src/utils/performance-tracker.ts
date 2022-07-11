@@ -1,11 +1,9 @@
-import axios from "axios";
 import { ethers } from "ethers";
 import { performance } from "perf_hooks";
 import { Consola } from "consola";
 import { config } from "../config";
 
 const logger = require("./logger")("utils/performance-tracker") as Consola;
-const URL = "https://api.redstone.finance/metrics";
 const tasks: {
   [trackingId: string]: {
     label: string;
@@ -68,12 +66,5 @@ async function saveMetric(label: string, value: number): Promise<void> {
   const evmAddress = new ethers.Wallet(evmPrivateKey).address;
   const labelWithPrefix = `${evmAddress.slice(0, 14)}-${label}`;
 
-  if (config.enablePerformanceTracking) {
-    await axios.post(URL, {
-      label: labelWithPrefix,
-      value,
-    });
-  } else {
-    logger.info(`Metric: ${labelWithPrefix}. Value: ${value}`);
-  }
+  logger.info(`Metric: ${labelWithPrefix}. Value: ${value}`);
 }
