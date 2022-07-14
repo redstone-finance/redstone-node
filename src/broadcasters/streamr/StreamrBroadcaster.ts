@@ -18,8 +18,6 @@ export class StreamrBroadcaster implements Broadcaster {
 
   constructor(ethereumPrivateKey: string) {
     this.streamrProxy = new StreamrProxy(ethereumPrivateKey);
-    this.streamrProxy.tryCreateStream(PACKAGE_STREAM_NAME);
-    this.streamrProxy.tryCreateStream(PRICES_STREAM_NAME);
     this.lazyEnableTimer();
   }
 
