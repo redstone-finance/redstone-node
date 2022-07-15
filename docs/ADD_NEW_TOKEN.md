@@ -6,6 +6,6 @@ Tokens config file, which is located in `src/config/tokens.json`, is used in Red
 ## How to add a token
 - Add token details to `tools/config/predefined-configs/tokens.json`
 - Run `node tools/config/add-new-tokens-from-predefined-config.js`
-- Upload the token logo to RedStone CDN, so it is publicly accessible at `https://cdn.redstone.finance/symbols/<TOKEN_NAME_LOWER_CASE>.<IMG_EXTENSION></IMG_EXTENSION>`
-- Run `node tools/cdn-images/update-tokens-config.js` to replace logo urls in tokens config with redstone CDN urls
+- Upload the token logo to RedStone Images [repository](https://github.com/redstone-finance/redstone-images), so it is publicly accessible at `https://raw.githubusercontent.com/redstone-finance/redstone-images/main/symbols/<TOKEN_NAME_LOWER_CASE>.<IMG_EXTENSION></IMG_EXTENSION>`
+- Run `node tools/cdn-images/update-tokens-config.js` to replace logo urls in tokens config with redstone images repository urls
 - Update `redstone-node` dependency in `redstone-api`, `redstone-app` and other packages where `tokens.json` is used.
