@@ -2,6 +2,7 @@ import "dotenv/config";
 import { JWKInterface } from "arweave/node/lib/wallet";
 import { Manifest, NodeConfig } from "./types";
 import { readJSON } from "./utils/objects";
+import { ethers } from "ethers";
 
 const DEFAULT_ENABLE_PERFORMANCE_TRACKING = "true";
 const DEFAULT_ENABLE_JSON_LOGS = "true";
@@ -33,6 +34,13 @@ const parserFromString = {
       throw new Error(`Invalid boolean value: ${value}`);
     }
     return value === "true";
+  },
+  hex(value: string): string {
+    const hexValue = value.startsWith("0x") ? value : `0x${value}`;
+    if (!ethers.utils.isHexString(hexValue)) {
+      throw new Error(`Invalid hex value: ${hexValue}`);
+    }
+    return hexValue;
   },
 };
 
@@ -85,6 +93,6 @@ export const config: NodeConfig = Object.freeze({
   },
   privateKeys: {
     arweaveJwk: getArweaveWallet(),
-    ethereumPrivateKey: getFromEnv("ETHEREUM_PRIVATE_KEY"),
+    ethereumPrivateKey: parserFromString.hex(getFromEnv("ECDSA_PRIVATE_KEY")),
   },
 });

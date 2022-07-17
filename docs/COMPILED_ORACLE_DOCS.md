@@ -415,7 +415,7 @@ Env variables should be treated as **private**, especially all keys and JWKs. Th
 | ARWEAVE_KEYS_JWK             | required if ARWEAVE_KEYS_FILE_PATH not provided |               | JWK of arweave wallet (helpful with Docker)                                                        |
 | OVERRIDE_MANIFEST_USING_FILE |                    optional                     |               | path to the manifest file, if not specified manifest is loaded from smart contract                 |
 | MANIFEST_REFRESH_INTERVAL    |                    optional                     | 120000        | if manifest is loaded from smart contracts it defines how often node will check for new manifest   |
-| ETHEREUM_PRIVATE_KEY         |                    required                     |               | Ethereum private key that will be used for price data signing                                      |
+| ECDSA_PRIVATE_KEY            |                    required                     |               | Ethereum private key that will be used for price data signing                                      |
 | TWELVE_DATA_RAPID_API_KEY    |                    optional                     |               | Twelve data API key which will be used to fetch prices                                             |
 
 Check out the [.env.example](../.env.example)
@@ -484,7 +484,7 @@ ENV MANIFEST_REFRESH_INTERVAL=120000
 ENV ARWEAVE_KEYS_FILE_PATH=
 ENV ARWEAVE_KEYS_JWK=
 ENV OVERRIDE_MANIFEST_USING_FILE=
-ENV ETHEREUM_PRIVATE_KEY=
+ENV ECDSA_PRIVATE_KEY=
 ENV TWELVE_DATA_RAPID_API_KEY=
 ```
 
