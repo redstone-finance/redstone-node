@@ -39,6 +39,11 @@ const pjson = require("../package.json") as any;
 
 const MANIFEST_LOAD_TIMEOUT_MS = 25 * 1000;
 const DIAGNOSTIC_INFO_PRINTING_INTERVAL = 60 * 1000;
+const DEFAULT_HTTP_BROADCASTER_URLS = [
+  "https://api.redstone.finance",
+  "https://vwx3eni8c7.eu-west-1.awsapprunner.com",
+  "https://container-service-1.dv9sai71f4rsq.eu-central-1.cs.amazonlightsail.com",
+];
 
 export default class NodeRunner {
   private readonly version: string;
@@ -64,9 +69,8 @@ export default class NodeRunner {
     this.version = getVersionFromPackageJSON();
     this.useNewManifest(initialManifest);
     this.lastManifestLoadTimestamp = Date.now();
-    const httpBroadcasterURLs = initialManifest?.httpBroadcasterURLs ?? [
-      "http://localhost:9000",
-    ];
+    const httpBroadcasterURLs =
+      initialManifest?.httpBroadcasterURLs ?? DEFAULT_HTTP_BROADCASTER_URLS;
     this.httpBroadcaster = new HttpBroadcaster(httpBroadcasterURLs);
     this.streamrBroadcaster = new StreamrBroadcaster(
       nodeConfig.privateKeys.ethereumPrivateKey
