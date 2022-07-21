@@ -6,7 +6,7 @@ import Multicall2 from "../../src/fetchers/evm-chain/contracts-details/common/Mu
 import YYMock from "./mocks/YYMock.json";
 import { yieldYakContractDetails } from "../../src/fetchers/evm-chain/contracts-details/yield-yak";
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;

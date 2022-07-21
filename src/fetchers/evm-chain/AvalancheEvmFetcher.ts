@@ -1,38 +1,65 @@
 import redstone from "redstone-api";
 import { BigNumber, ethers, providers } from "ethers";
 import { Interface } from "ethers/lib/utils";
-import { EvmChainFetcher } from "./EvmChainFetcher";
-import { PricesObj } from "../../types";
+import { BaseFetcher } from "../BaseFetcher";
+import { EvmMulticallService } from "./EvmMulticallService";
 import { yieldYakContractDetails } from "./contracts-details/yield-yak";
+import { MulticallParsedResponses, PricesObj } from "../../types";
 
-export class AvalancheEvmFetcher extends EvmChainFetcher {
+const MUTLICALL_CONTRACT_ADDRESS = "0x8755b94F88D120AB2Cc13b1f6582329b067C760d";
+
+export class AvalancheEvmFetcher extends BaseFetcher {
+  private evmMulticallService: EvmMulticallService;
+
   constructor(
-    connection: providers.Provider,
-    multicallContractAddress: string
+    provider: providers.Provider,
+    multicallContractAddress: string = MUTLICALL_CONTRACT_ADDRESS
   ) {
-    super(
-      "avalanche-evm-fetcher",
-      connection,
-      (_: any, ids: string[]) => this.extractPricesFromContract(_, ids),
+    super("avalanche-evm-fetcher");
+    this.evmMulticallService = new EvmMulticallService(
+      provider,
       multicallContractAddress
     );
   }
 
   async fetchData() {
-    return null;
+    const requests = this.prepareYieldYakMulticallRequests();
+    return await this.evmMulticallService.performMulticall(requests);
   }
 
-  validateResponse(): boolean {
-    return true;
+  prepareYieldYakMulticallRequests() {
+    const { abi, address } = yieldYakContractDetails;
+    const totalDepositsData = new Interface(abi).encodeFunctionData(
+      "totalDeposits"
+    );
+    const totalSupplyData = new Interface(abi).encodeFunctionData(
+      "totalSupply"
+    );
+    const requests = [
+      {
+        address,
+        data: totalDepositsData,
+        name: "totalDeposits",
+      },
+      {
+        address,
+        data: totalSupplyData,
+        name: "totalSupply",
+      },
+    ];
+    return requests;
   }
 
-  async extractPricesFromContract(_: any, ids: string[]): Promise<PricesObj> {
+  async extractPrices(
+    response: MulticallParsedResponses,
+    ids: string[]
+  ): Promise<PricesObj> {
     const pricesObject: PricesObj = {};
     for (const id of ids) {
       switch (id) {
         case "$YYAV3SA1": {
-          const price = await this.extractPriceForYieldYak();
-          this.populatePricesObject(pricesObject, id, price);
+          const price = await this.extractPriceForYieldYak(response);
+          pricesObject[id] = Number(price);
           break;
         }
         default:
@@ -42,67 +69,24 @@ export class AvalancheEvmFetcher extends EvmChainFetcher {
     return pricesObject;
   }
 
-  async populatePricesObject(
-    pricesObject: PricesObj,
-    id: string,
-    price: string | number
-  ) {
-    const symbol = this.convertIdToSymbol(id);
-    pricesObject[symbol] = Number(price);
-    return pricesObject;
-  }
-
-  async extractPriceForYieldYak() {
-    if (!this.multicallContractAddress) {
-      throw new Error(
-        `Invalid multicall contract address: ${this.multicallContractAddress}`
-      );
-    }
-
-    const { requests, dataToNameMap } = this.prepareYieldYakMulticallData();
-    const multicallResult = await this.performMulticall(
-      requests,
-      dataToNameMap
-    );
-
+  async extractPriceForYieldYak(multicallResult: MulticallParsedResponses) {
     const totalDeposits = BigNumber.from(multicallResult.totalDeposits.value);
     const totalSupply = BigNumber.from(multicallResult.totalSupply.value);
     const tokenValue = totalDeposits
       .mul(ethers.utils.parseUnits("1.0", 8))
       .div(totalSupply);
 
-    const priceFromApi = await redstone.getPrice("AVAX");
-    const priceValue = priceFromApi.value.toString();
-    const priceAsBigNumber = ethers.utils.parseUnits(priceValue, 18);
-    const finalPrice = tokenValue
-      .mul(priceAsBigNumber)
+    const avaxPrice = await this.fetchAvaxPrice();
+    const yieldYakPrice = tokenValue
+      .mul(avaxPrice)
       .div(ethers.utils.parseUnits("1.0", 8));
 
-    return ethers.utils.formatEther(finalPrice);
+    return ethers.utils.formatEther(yieldYakPrice);
   }
 
-  prepareYieldYakMulticallData() {
-    const { abi, address } = yieldYakContractDetails;
-    const totalDepositsData = new Interface(abi).encodeFunctionData(
-      "totalDeposits"
-    );
-    const totalSupplyData = new Interface(abi).encodeFunctionData(
-      "totalSupply"
-    );
-    const dataToNameMap = {
-      [totalDepositsData]: "totalDeposits",
-      [totalSupplyData]: "totalSupply",
-    };
-    const requests = [
-      {
-        address,
-        data: totalDepositsData,
-      },
-      {
-        address,
-        data: totalSupplyData,
-      },
-    ];
-    return { requests, dataToNameMap };
+  async fetchAvaxPrice() {
+    const avaxPriceObjectFromApi = await redstone.getPrice("AVAX");
+    const avaxPriceAsString = avaxPriceObjectFromApi.value.toString();
+    return ethers.utils.parseUnits(avaxPriceAsString, 18);
   }
 }

@@ -1,19 +1,13 @@
 import { Contract } from "ethers";
 import { Interface } from "ethers/lib/utils";
 import { deployContract, MockProvider } from "ethereum-waffle";
-import { EvmChainFetcher } from "../../src/fetchers/evm-chain/EvmChainFetcher";
+import { EvmMulticallService } from "../../src/fetchers/evm-chain/EvmMulticallService";
 import Multicall2 from "../../src/fetchers/evm-chain/contracts-details/common/Multicall2.json";
 
 jest.setTimeout(10000);
 
-class MockEvmChainFetcher extends EvmChainFetcher {
-  async fetchData() {
-    return;
-  }
-}
-
-describe("EVM chain fetcher", () => {
-  let fetcher: EvmChainFetcher;
+describe("EVM chain multicall service", () => {
+  let multicallService: EvmMulticallService;
   let multicallContract: Contract;
 
   beforeEach(async () => {
@@ -23,36 +17,24 @@ describe("EVM chain fetcher", () => {
       bytecode: Multicall2.bytecode,
       abi: Multicall2.abi,
     });
-    fetcher = new MockEvmChainFetcher(
-      "test-evm-fetcher",
+    multicallService = new EvmMulticallService(
       provider,
-      async () => ({ test: 11 }),
       multicallContract.address
     );
-  });
-
-  test("Should properly fetch contract", async () => {
-    const result = fetcher.getContractInstance(
-      Multicall2.abi,
-      multicallContract.address
-    );
-    expect(result.address).toEqual(multicallContract.address);
   });
 
   test("Should perform multcall", async () => {
     const blockNumberData = new Interface(Multicall2.abi).encodeFunctionData(
       "getBlockNumber"
     );
-    const dataToNameMap = {
-      [blockNumberData]: "getBlockNumber",
-    };
     const requests = [
       {
         address: multicallContract.address,
         data: blockNumberData,
+        name: "getBlockNumber",
       },
     ];
-    const result = await fetcher.performMulticall(requests, dataToNameMap);
+    const result = await multicallService.performMulticall(requests);
     expect(result).toEqual({
       getBlockNumber: {
         success: true,

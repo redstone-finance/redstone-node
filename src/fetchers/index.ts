@@ -31,8 +31,7 @@ export default {
   "avalanche-evm-fetcher": new AvalancheEvmFetcher(
     new ethers.providers.JsonRpcProvider(
       "https://api.avax.network/ext/bc/C/rpc"
-    ),
-    "0x8755b94F88D120AB2Cc13b1f6582329b067C760d"
+    )
   ),
   ...ccxtFetchers,
   ...pangolinFetchers,
