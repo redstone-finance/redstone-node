@@ -1,0 +1,31 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "totalDeposits",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "608060405269a8d1e1eef9e3ae3cdc9860005569a6071196483bcebdeaf660015534801561002c57600080fd5b5060b88061003b6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806318160ddd1460375780637d882097146053575b600080fd5b603d606f565b6040518082815260200191505060405180910390f35b60596079565b6040518082815260200191505060405180910390f35b6000600154905090565b6000805490509056fea2646970667358221220271c8d365c0642e5f0c334e6fb6537e64f667a666d8551b7329dfb18cda7eb3e64736f6c63430007030033"
+}

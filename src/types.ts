@@ -134,3 +134,13 @@ export interface NodeConfig {
   privateKeys: PrivateKeys;
   overrideManifestUsingFile?: Manifest;
 }
+
+export interface MulticallRequest {
+  address: string;
+  data: string;
+  name: string;
+}
+
+export type MulticallParsedResponses = {
+  [x in string]: { success: boolean; value: string };
+};
