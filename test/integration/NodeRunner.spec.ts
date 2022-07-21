@@ -104,6 +104,7 @@ describe("NodeRunner", () => {
         },
         ETH: {},
       },
+      httpBroadcasterURLs: ["http://localhost:9000"],
     };
   });
 
