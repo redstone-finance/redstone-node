@@ -1,16 +1,28 @@
+import prompts from "prompts";
 import {
   StreamrClient,
   StreamPermission,
   STREAMR_STORAGE_NODE_GERMANY,
 } from "streamr-client";
 
-const privateKey = "";
+/* A small amount of MATIC (around 0.1) is needed for gas to create stream */
+
 const streamPath = "/redstone-oracle/";
 
 (async () => {
+  const response = await prompts([
+    {
+      type: "text",
+      name: "privateKey",
+      message: "Provide private key",
+      validate: (value) => (!value ? "Private key is required" : true),
+    },
+  ]);
+
+  const privateKey = response.privateKey;
   try {
     const streamrClient = new StreamrClient({
-      auth: { privateKey: privateKey },
+      auth: { privateKey },
     });
     const publicAddress = await streamrClient.getAddress();
     const path = streamPath;
