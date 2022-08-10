@@ -57,7 +57,7 @@ export class AvalancheEvmFetcher extends BaseFetcher {
     const pricesObject: PricesObj = {};
     for (const id of ids) {
       switch (id) {
-        case "$YYAV3SA1": {
+        case "YYAV3SA1": {
           const price = await this.extractPriceForYieldYak(response);
           pricesObject[id] = Number(price);
           break;

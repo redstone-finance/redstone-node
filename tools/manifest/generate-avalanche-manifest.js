@@ -13,7 +13,7 @@ const SYMBOLS = [
   "YAK",
   "QI",
   "USDC",
-  "$YYAV3SA1",
+  "YYAV3SA1",
 ];
 
 generateSubManifest(SYMBOLS, OUTPUT_FILE_PATH);
