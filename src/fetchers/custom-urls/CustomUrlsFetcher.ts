@@ -50,8 +50,19 @@ export class CustomUrlsFetcher extends BaseFetcher {
     const pricesObj: PricesObj = {};
     for (const [id, response] of Object.entries(responses)) {
       const jsonpath = opts.manifest.tokens[id].customUrlDetails!.jsonpath;
-      const extractedValue = jp.query(response, jsonpath);
-      pricesObj[id] = extractedValue[0];
+      const [extractedValue] = jp.query(response, jsonpath);
+      const extractedValueAsNumber = Number(extractedValue);
+      const isEmptyString =
+        typeof extractedValue === "string" && extractedValue.length === 0;
+      if (isNaN(extractedValueAsNumber) || isEmptyString) {
+        this.logger.error(
+          `Request to ${
+            opts.manifest.tokens[id].customUrlDetails!.url
+          } returned non-numeric value`
+        );
+      } else {
+        pricesObj[id] = extractedValue;
+      }
     }
     return pricesObj;
   }
