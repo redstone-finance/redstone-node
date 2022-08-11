@@ -41,9 +41,7 @@ describe("Avalanche EVM fetcher", () => {
     mockedAxios.get.mockResolvedValueOnce({
       data: [{ value: 16.942986798458783 }],
     });
-    const result = await fetcher.fetchAll(["$YYAV3SA1"]);
-    expect(result).toEqual([
-      { symbol: "$YYAV3SA1", value: 17.227932764426185 },
-    ]);
+    const result = await fetcher.fetchAll(["YYAV3SA1"]);
+    expect(result).toEqual([{ symbol: "YYAV3SA1", value: 17.227932764426185 }]);
   });
 });

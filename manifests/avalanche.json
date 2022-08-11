@@ -200,7 +200,7 @@
       ],
       "maxPriceDeviationPercent": 25
     },
-    "$YYAV3SA1": {
+    "YYAV3SA1": {
       "source": ["avalanche-evm-fetcher"]
     }
   }
