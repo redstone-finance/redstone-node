@@ -59842,5 +59842,11 @@
       "id": "moonbeam",
       "name": "Moonbeam"
     }
+  ],
+  "EVMOS": [
+    {
+      "id": "evmos",
+      "name": "Evmos"
+    }
   ]
 }

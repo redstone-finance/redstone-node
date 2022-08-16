@@ -495,5 +495,6 @@
   "WBTC": "WBTC/USDT",
   "IDEX": "IDEX/USDT",
   "CAW": "CAW/USDT",
-  "CUSD": "CUSD/USDT"
+  "CUSD": "CUSD/USDT",
+  "EVMOS": "EVMOS/USDT"
 }
