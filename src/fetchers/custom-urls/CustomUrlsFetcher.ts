@@ -51,9 +51,14 @@ export class CustomUrlsFetcher extends BaseFetcher {
     for (const [id, response] of Object.entries(responses)) {
       const jsonpath = opts.manifest.tokens[id].customUrlDetails!.jsonpath;
       const [extractedValue] = jp.query(response, jsonpath);
-      const extractedValueAsNumber = Number(extractedValue);
+      let valueWithoutCommas = extractedValue;
+      if (typeof extractedValue === "string") {
+        valueWithoutCommas = extractedValue.replace(/,/g, "");
+      }
+      const extractedValueAsNumber = Number(valueWithoutCommas);
       const isEmptyString =
-        typeof extractedValue === "string" && extractedValue.length === 0;
+        typeof valueWithoutCommas === "string" &&
+        valueWithoutCommas.length === 0;
       if (isNaN(extractedValueAsNumber) || isEmptyString) {
         this.logger.error(
           `Request to ${
