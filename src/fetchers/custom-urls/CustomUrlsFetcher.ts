@@ -66,7 +66,7 @@ export class CustomUrlsFetcher extends BaseFetcher {
           } returned non-numeric value`
         );
       } else {
-        pricesObj[id] = extractedValue;
+        pricesObj[id] = extractedValueAsNumber;
       }
     }
     return pricesObj;
